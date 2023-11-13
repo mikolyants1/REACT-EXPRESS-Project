@@ -17,7 +17,7 @@ interface props{
 
 export function NavSett({set,call}:props):JSX.Element{
   const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)]
-  const {user,val} = useContext<Context>(Theme)
+  const {user,val,hide} = useContext<Context>(Theme)
   const [idx,setIdx] = useState<number>(-1)
   const {data,isError,isLoading} = useGetUserQuery<query>(user)
     const toggle=():void=>{
@@ -28,7 +28,7 @@ export function NavSett({set,call}:props):JSX.Element{
     if (isError) return <Error back={val} />
     return (
          <>
-          <Link to={`/page/set/Profile`}>
+          <Link to={`/page/set/Profile`} onClick={hide}>
             <ContactBlock fill={`${idx==0}`}
              back={val} onClick={()=>setIdx(0)}>
               <ContactLogo left={one} right={two}>
@@ -44,7 +44,7 @@ export function NavSett({set,call}:props):JSX.Element{
               </ContactText>
             </ContactBlock>
           </Link>
-          <Link to={`/page/main/${user}`}>
+          <Link to={`/page/main/${user}`} onClick={hide}>
             <SetBlock back={val} 
              onClick={toggle}>
               <SetLogo>
@@ -55,7 +55,7 @@ export function NavSett({set,call}:props):JSX.Element{
               </SetText>
             </SetBlock>
           </Link>
-          <Link to={`/page/set/Theme`}>
+          <Link to={`/page/set/Theme`} onClick={hide}>
             <SetBlock fill={`${idx==1}`}
              back={val} onClick={()=>setIdx(1)}>
               <ThemeLogo>

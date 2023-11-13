@@ -1,6 +1,7 @@
 import { ContactBlock, ContactInput, ContactLogo,
 ContactName, ContactText, ContactTime, styleObj,
- avatar } from "../style/style.js"
+ avatar, 
+ BlockInput} from "../style/style.js"
 import { useContext, useEffect, useReducer, useState,
  Dispatch,SetStateAction } from "react"
 import axios, { AxiosResponse } from "axios"
@@ -23,7 +24,7 @@ interface state{
 type action = Record<string,any|boolean>
 
 export function NavChats({set,id,call,caller}:props):JSX.Element{
-    const {user,val} = useContext<Context>(Theme)
+    const {user,val,hide} = useContext<Context>(Theme)
     const [data,setData] = useState<Type<data>>(null!)
     const [idx,setIdx] = useState<Null<number>>(call?call:null)
     const [text,setText] = useState<string>('')
@@ -73,6 +74,7 @@ export function NavChats({set,id,call,caller}:props):JSX.Element{
   if (state.err) return <Error back={val} />
     return (
         <>
+        <BlockInput>
         <ContactInput
          back={val}
          type="text"
@@ -80,9 +82,10 @@ export function NavChats({set,id,call,caller}:props):JSX.Element{
          onKeyUp={sort}
          placeholder="search"
          />
+         </BlockInput>
          <>
           {!id ? (
-          <Link to={`/page/main/${user}`}>
+          <Link to={`/page/main/${user}`} onClick={hide}>
             <ContactBlock fill={`${idx==-1}`}
              back={val} onClick={()=>setIdx(-1)}>
               <ContactLogo left='rgb(56, 231, 120)'
@@ -104,7 +107,8 @@ export function NavChats({set,id,call,caller}:props):JSX.Element{
         const exclude:boolean = phone == user
          if (id) {
         return !exclude ? (
-          <Link to={`/page/main/${phone}`} key={phone}>
+          <Link to={`/page/main/${phone}`}
+           key={phone} onClick={hide}>
             <ContactBlock back={val} 
              onClick={()=>toggle(i)}>
               <ContactLogo left={one} right={two}>
@@ -124,7 +128,8 @@ export function NavChats({set,id,call,caller}:props):JSX.Element{
          } else {
            const show:Type<message> = getUser(phone)
             return show&&!exclude ? (
-                <Link to={`/page/main/${phone}`} key={phone}>
+                <Link to={`/page/main/${phone}`}
+                 key={phone} onClick={hide}>
                 <ContactBlock back={val} fill={`${i==idx}`}
                  onClick={()=>setIdx(i)}>
                   <ContactLogo left={one} right={two}>

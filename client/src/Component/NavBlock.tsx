@@ -80,7 +80,7 @@ export default function NavBlock({show}:prop):JSX.Element{
          <NavMenu>
           {arr.map((item:string,i:number):JSX.Element=>(
             <NavMenuBlock key={i}
-             press={state[item]}
+             press={`${state[item]}`}
              onClick={()=>dispatch({type:i})}>
                 {item}
             </NavMenuBlock>

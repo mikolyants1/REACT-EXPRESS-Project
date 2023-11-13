@@ -142,7 +142,7 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
            {color.map((i:string):JSX.Element=>(
               <ThemeBlock>
                 <ThemeInput
-                 key={i}
+                 key={`${i}s`}
                  onChange={toogle}
                  checked={val==i}
                  value={i}

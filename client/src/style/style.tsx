@@ -92,24 +92,36 @@ color:${({back}:back)=>back=='black'
  ? 'white' : 'black'};
 width:100%;
 height:700px;
-min-width:600px
+min-width:300px;
+@media(max-width:600px){
+    height:600px
+}
 `
 export const MainContent:IStyledComponent<'web',BaseObject> = styled.div`
 width:100%;
 height:100%;
 display:flex;
+@media(max-width:600px){
+ position:relative
+}
 `
 export const Container:IStyledComponent<'web',Omit<contProp,'val'>> = styled.div`
 width:100%;
 display:grid;
+height:100%;
 background-color:
 rgb(${({back}:Omit<contProp,'val'>)=>back=='black'?
 '25,25,25':'240,240,240'});
-grid-template-rows: minmax(50px,auto) 1fr minmax(50px,auto);
+grid-template-rows: minmax(50px,auto) 1fr minmax(80px,auto);
 grid-template-areas:
  'header'
  'main'
  'footer';
+ position:relative;
+ @media(max-width:600px){
+    position:absolute;
+    min-width:300px
+ }
 `
 type back1 = {
     back:string,
@@ -131,9 +143,13 @@ border:1px ;
 border-style:solid;
 border-color:rgb(240, 240, 240);
 transition:transform 1s;
+position:relative;
 @media(max-width:600px){
 display:${({show}:back1)=>show=='true'
- ? 'grid' : 'none'}
+ ? 'grid' : 'none'};
+ position:absolute;
+ z-index:100;
+ width:100%;
 }
 `
 export const NavMain:IStyledComponent<'web',BaseObject> = styled.div`
@@ -183,8 +199,8 @@ margin-left:2px
 `
 export const MainBlock:IStyledComponent<'web',BaseObject> = styled.div`
 grid-area:main;
-position:relative;
 overflow-y:scroll;
+position:relative;
 ::-webkit-scrollbar{
     display: none;
    }
@@ -202,6 +218,7 @@ width:100%;
 margin-top:20px;
 margin-bottom:10px;
 display:flex;
+
 justify-content:center;
 align-items:center;
 grid-area:footer;
@@ -229,19 +246,7 @@ padding:0px 8px;
 border-radius:20px;
 box-shadow:0px 0.5px 0.5px 0.5px grey;
 `
-export const MainFooter:IStyledComponent<'web',back> = styled.div`
-width:100%;
-display:none;
-justify-content:space-between;
-background-color:${
-({back}:back)=>back=='black'
-? 'black' : 'white'};
-color:${({back}:back)=>back=='black'
-? 'white' : 'black'};
- @media (max-width:600px){
-  display:flex
- }
-`
+
 export const Name:IStyledComponent<'web',BaseObject> = styled.div`
 font-size:20px;
 margin-left:6px
@@ -263,7 +268,7 @@ height:50px;
 border-top:1px solid rgb(240, 240, 240);
 `
 type mess1= {
-    press:boolean,
+    press:string,
     key:number,
     onClick:()=>void,
     children:string
@@ -271,7 +276,7 @@ type mess1= {
 export const NavMenuBlock:IStyledComponent<'web',mess1> = styled.div`
 width:80px;
 text-align:center;
-color:${({press}:mess1)=>press
+color:${({press}:mess1)=>press=='true'
  ? 'rgb(48, 240, 48)' :'grey'}
 `
 type mess2 = {
@@ -392,11 +397,15 @@ interface inputProp{
     onKeyUp:(e:KeyboardEvent<HTMLInputElement>)=>void
     placeholder:string
 }
+export const BlockInput:IStyledComponent<'web',{}> = styled.div`
+display:flex;
+margin-top:20px;
+width:100%;
+justify-content:center;
+align-items:center;
+`
 export const ContactInput:IStyledComponent<'web',inputProp> = styled.input`
 width:240px;
-margin-left:10px;
-margin-right:10px;
-margin-top:20px;
 background-color:${
 ({back}:inputProp)=>back=='black'
  ? 'rgb(80,80,80)'
@@ -405,7 +414,11 @@ border-radius:20px;
 border:none;
 padding:0 10px;
 font-size:16px;
-height:35px
+height:35px;
+@media(max-width:600px){
+    width:90%;
+}
+
 `
 export const SetBlock:IStyledComponent<'web',{
  back:string,

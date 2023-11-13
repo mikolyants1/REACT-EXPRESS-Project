@@ -128,7 +128,7 @@ export default function Main({children}:props):JSX.Element {
                      {day} {month}
                    </MessDate>
                   }
-                  <MessBlock key={i}
+                  <MessBlock key={`${i}s`}
                    col={`${id!==d2.id}`}>
                     <MessContent back={val}
                      col={`${id!==d2.id}`}>

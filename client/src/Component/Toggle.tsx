@@ -6,7 +6,7 @@ import { outlet } from "./Main.js";
 export default function ToogleMenu():JSX.Element{
  const {val,show} = useOutletContext<outlet>()
     const press=():void=>{
-      show((prev:boolean)=>!prev)
+      show(true)
     }
     return (
         <HeaderMenu back={val}>
