@@ -1,25 +1,23 @@
 import { Outlet } from "react-router-dom";
 import NavBlock from "./NavBlock.js";
 import { Wrapper,MainContent } from "../style/style.js";
-import { bind, useAction,useAppSelector } from "../store/store.js";
-import { useState,createContext,Dispatch,SetStateAction } from "react";
-import { Redux } from "../store/slice.js";
+import { bind, getCurrent, getTheme, useAction,
+useAppSelector } from "../store/store.js";
+import { useState,createContext } from "react";
 import {ActionCreatorWithPayload} from '@reduxjs/toolkit'
 
-export interface state{
-  mess:Redux
-}
 export interface Context{
   val:string,
   set:ActionCreatorWithPayload<string,`messanger/setTheme`>|string,
   user:string,
   hide:()=>void
 }
-export const Theme = createContext<Context>({val:'',set:'',user:''})
+export const Theme = createContext<Context>(
+{val:'',set:'',user:'',hide:()=>{}})
 
 export default function Page():JSX.Element{
- const theme = useAppSelector(({mess}:state)=>mess.theme)
- const current = useAppSelector(({mess}:state)=>mess.current)
+ const theme = useAppSelector(getTheme)
+ const current = useAppSelector(getCurrent)
  const [show,setShow] = useState<boolean>(true)
  const {setTheme}:bind = useAction()
  const hideMenu=():void=>{

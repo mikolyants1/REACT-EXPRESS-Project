@@ -7,7 +7,9 @@ import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import MessApi from "./Api";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
-
+ interface state{
+    mess:Redux
+  }
 interface store{
     key:string,
     storage:WebStorage
@@ -34,6 +36,8 @@ type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const getTheme=({mess}:state)=>mess.theme
+export const getCurrent=({mess}:state)=>mess.current
 setupListeners(store.dispatch)
 export const useAction=():bind=>bindActionCreators(action,useAppDispatch())
 export const catched:Persistor=persistStore(store)

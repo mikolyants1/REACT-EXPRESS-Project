@@ -282,7 +282,7 @@ color:${({press}:mess1)=>press=='true'
 type mess2 = {
     col:string,
     children:JSX.Element,
-    key:number
+    key:string
 }
 export const MessBlock:IStyledComponent<'web',mess2> = styled.div`
 width:100%;

@@ -6,17 +6,18 @@ import { PersistGate } from 'redux-persist/lib/integration/react'
 import './index.css'
 import {createBrowserRouter,RouterProvider,Outlet,
  Navigate, useOutletContext} from 'react-router-dom'
-import Page, { state } from './Component/Page.js'
+import Page from './Component/Page.js'
 import Setting from './Component/Setting.js'
-import { bind, catched, store, useAction,useAppSelector} from './store/store.js'
+import { bind, catched, getCurrent, getTheme, store,
+ useAction,useAppSelector} from './store/store.js'
 import { Dispatch, SetStateAction } from 'react'
 import ToogleMenu from './Component/Toggle.js'
 
 
 const Rout=():JSX.Element=>{
   const set:Dispatch<SetStateAction<boolean>> = useOutletContext()
-  const theme = useAppSelector(({mess}:state)=>mess.theme)
-  const current = useAppSelector(({mess}:state)=>mess.current)
+  const theme = useAppSelector(getTheme)
+  const current = useAppSelector(getCurrent)
   const {setTheme}:bind = useAction()
   return (
     <Outlet
