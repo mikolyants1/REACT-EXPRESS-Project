@@ -14,6 +14,7 @@ export type Str<T> = string|T
 export type Null<T> = null|T
 export type EvtC = ChangeEvent<HTMLInputElement>
 export type EvtK = KeyboardEvent<HTMLInputElement>
+export type union = string|null|ArrayBuffer
 
 export interface mess{
   text:string,
@@ -123,11 +124,11 @@ export default function Main({children}:props):JSX.Element {
              const right:Null<boolean> = i==0 ? null : showTime(mess,i)
              return (
                 <>
-                  {right||i==0&&
+                  {right||i==0&&(
                    <MessDate>
                      {day} {month}
                    </MessDate>
-                  }
+                  )}
                   <MessBlock key={`${i}s`}
                    col={`${id!==d2.id}`}>
                     <MessContent back={val}

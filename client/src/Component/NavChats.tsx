@@ -1,7 +1,6 @@
 import { ContactBlock, ContactInput, ContactLogo,
 ContactName, ContactText, ContactTime, styleObj,
- avatar, 
- BlockInput} from "../style/style.js"
+ avatar, BlockInput} from "../style/style.js"
 import { useContext, useEffect, useReducer, useState,
  Dispatch,SetStateAction } from "react"
 import axios, { AxiosResponse } from "axios"
@@ -75,13 +74,13 @@ export function NavChats({set,id,call,caller}:props):JSX.Element{
     return (
         <>
         <BlockInput>
-        <ContactInput
-         back={val}
-         type="text"
-         onChange={change}
-         onKeyUp={sort}
-         placeholder="search"
-         />
+          <ContactInput
+           back={val}
+           type="text"
+           onChange={change}
+           onKeyUp={sort}
+           placeholder="search"
+            />
          </BlockInput>
          <>
           {!id ? (

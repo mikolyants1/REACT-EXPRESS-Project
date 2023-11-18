@@ -24,8 +24,8 @@ export default function Regist():JSX.Element{
     }
   }
   const handler=(e:EvtK):void=>{
-    if (e.key==='Enter') check()
-   }
+   if (e.key==='Enter') check()
+  }
 
   if (auth){
     return <Navigate to={`/page/main/${id}`} />

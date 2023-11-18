@@ -1,18 +1,21 @@
-import { Navigate, Params, useOutletContext, useParams } from "react-router-dom";
-import {  HeaderBlock, LogoText, ProfileBlock, ProfileBut, ProfileChan,
-ProfileDel, ProfileDis, ProfileInput, ProfileLogo, ProfileName,ProfilePhone,
-ProfileText, SetContain, SetMain, SetTitle, ThemeBlock, ThemeInput,
-ThemeText, avatar, styleObj } from "../style/style.js";
-import { NamedExoticComponent, memo, useCallback, useState} from "react";
+import { Navigate, Params, useOutletContext,
+ useParams } from "react-router-dom";
+import {  HeaderBlock, LogoText, ProfileBlock,
+ ProfileChan,ProfileDel, ProfileDis, ProfileLogo,
+ ProfileName,ProfilePhone,ProfileText, SetContain, SetMain,
+ SetTitle, ThemeBlock, ThemeInput,ThemeText, 
+ avatar, styleObj } from "../style/style.js";
+import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../store/Api.js";
 import { bind, useAction } from "../store/store.js";
 import {  EvtC, EvtK, data, outlet } from "./Main.js";
 import { Loader, Error } from "./Loader.js";
+import { SetUser } from "./SettInform.js";
 
 interface state{
   name:string,
-  phone:string
+  phone:string,
 }
 
 export interface query{
@@ -52,14 +55,14 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
           chanData({
             id:data.id,
             name:name,
-            phone:data.phone
+            phone:data.phone,
           })
      }
     if (e.currentTarget.name=='phone'&&phone!==''){
         chanData({
           id:data.id,
           name:data.name,
-          phone:phone
+          phone:phone,
         })
        setId(phone)
       }
@@ -67,9 +70,7 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
   }
   },[data])
   
- if (auth){
-  return <Navigate to='/' />
- }
+ if (auth) return <Navigate to='/' />
  if (isLoading) return <Loader back={val} />
  if (isError) return <Error back={val} />
     return (
@@ -84,7 +85,8 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
         {id=='Profile'? (
         <>
          <ProfileBlock>
-           <ProfileLogo start={one} two={two}>
+           <ProfileLogo two={two}
+            start={one}>
             <LogoText>
               {data?.name.slice(0,1).toUpperCase()}
             </LogoText>
@@ -161,38 +163,3 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
       </SetContain>
     )
 }
-interface props{
-  set:(e:EvtC)=>void,
-  name:string,
-  val:string|undefined,
-  click:(e:EvtK)=>void
-}
-
-const SetUser:NamedExoticComponent<props> = memo(
-  ({name,set,val,click}:props):JSX.Element=>{
- const [show,setShow] = useState<boolean>(false)
-    return (
-       <ProfilePhone>
-         <ProfileChan>
-           <ProfileBut
-            onClick={()=>setShow(true)}>
-              change {name}
-           </ProfileBut>
-          {show&&(
-           <ProfileBut
-            onClick={()=>setShow(false)}>
-              close
-           </ProfileBut>
-           )}
-         </ProfileChan>
-         {show&&(
-         <ProfileInput
-          name={name}
-          onChange={set}
-          defaultValue={val}
-          onKeyUp={click}
-          />
-         )}
-       </ProfilePhone>
-    )
-})

@@ -20,8 +20,8 @@ export default function Entry():JSX.Element{
   const [reg,setReg] = useState<boolean>(false)
   const { setId }:bind = useAction()
   const [state,dispatch] = useReducer(
-    (prev:state,next:action)=>({...prev,...next}),
-    {data:null,err:false,load:true}
+  (prev:state,next:action)=>({...prev,...next}),
+  {data:null,err:false,load:true}
   )
   const change=(e:EvtC):void=>{
     setText(e.target.value)
