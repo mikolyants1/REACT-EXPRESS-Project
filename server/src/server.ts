@@ -2,7 +2,6 @@ import express, { Request,Response,Express } from 'express'
 import cors from 'cors'
 import UserRouter from './UserRouter.js'
 import DialogRouter from './DialogRouter.js'
-
 export type Type<T> = undefined|T
 export const Base:string = 'src/users.json'
 export interface mess{
