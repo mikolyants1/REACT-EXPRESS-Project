@@ -3,15 +3,14 @@ import { Navigate, Params, useOutletContext,
 import {  HeaderBlock, LogoText, ProfileBlock,
  ProfileChan,ProfileDel, ProfileDis, ProfileLogo,
  ProfileName,ProfilePhone,ProfileText, SetContain, SetMain,
- SetTitle, ThemeBlock, ThemeInput,ThemeText, 
- avatar, styleObj } from "../style/style.js";
+ SetTitle, avatar, styleObj } from "../style/style.js";
 import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../store/Api.js";
 import { bind, useAction } from "../store/store.js";
 import {  EvtC, EvtK, data, outlet } from "./Main.js";
 import { Loader, Error } from "./Loader.js";
-import { SetUser } from "./SettInform.js";
+import { SetTheme, SetUser } from "./SettInform.js";
 
 interface state{
   name:string,
@@ -142,19 +141,12 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
             Theme
           </ProfileName>
            {color.map((i:string):JSX.Element=>(
-              <ThemeBlock>
-                <ThemeInput
-                 key={`${i}s`}
-                 onChange={toogle}
-                 checked={val==i}
-                 value={i}
-                 type="radio"
-                 name="theme" 
-                  />
-                <ThemeText>
-                  {i}
-                </ThemeText>
-              </ThemeBlock>
+             <SetTheme
+              key={i}
+              onChange={toogle}
+              value={i}
+              checked={val==i}
+             />
               ))}
             </ProfilePhone>
           </>

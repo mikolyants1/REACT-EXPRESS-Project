@@ -106,10 +106,8 @@ export function NavChats({set,id,call,caller}:props):JSX.Element{
         const exclude:boolean = phone == user
          if (id) {
         return !exclude ? (
-          <Link to={`/page/main/${phone}`}
-           key={phone} onClick={hide}>
-            <ContactBlock back={val} 
-             onClick={()=>toggle(i)}>
+          <Link to={`/page/main/${phone}`} key={phone} onClick={hide}>
+            <ContactBlock back={val} onClick={()=>toggle(i)}>
               <ContactLogo left={one} right={two}>
                 {name.slice(0,1).toUpperCase()}
               </ContactLogo>

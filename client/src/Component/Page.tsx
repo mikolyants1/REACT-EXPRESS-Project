@@ -16,13 +16,13 @@ export const Theme = createContext<Context>(
 {val:'',set:'',user:'',hide:()=>{}})
 
 export default function Page():JSX.Element{
- const theme = useAppSelector(getTheme)
- const current = useAppSelector(getCurrent)
+ const theme:string = useAppSelector(getTheme)
+ const current:string = useAppSelector(getCurrent)
  const [show,setShow] = useState<boolean>(true)
  const {setTheme}:bind = useAction()
  const hideMenu=():void=>{
    setShow(false)
-}
+  }
  const context:Context = {
   val:theme,
   set:setTheme,

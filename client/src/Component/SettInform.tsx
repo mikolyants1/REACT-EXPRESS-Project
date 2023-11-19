@@ -1,6 +1,7 @@
-import { ProfileBut, ProfileChan, ProfileInput, ProfilePhone } from "../style/style"
+import { ProfileBut, ProfileChan, ProfileInput, ProfilePhone,
+ ThemeBlock, ThemeInput, ThemeText } from "../style/style"
 import { EvtC, EvtK, Type } from "./Main"
-import {memo,NamedExoticComponent,useState} from 'react'
+import { memo,NamedExoticComponent,useState} from 'react'
 
 interface props {
     set:(e:EvtC)=>void,
@@ -36,3 +37,23 @@ interface props {
       )
   })
   
+  interface themeProp{
+    key:string,
+    checked:boolean,
+    onChange:(e:EvtC)=>void,
+    value:string
+  }
+  export const SetTheme=(props:themeProp):JSX.Element=>{
+    return (
+        <ThemeBlock>
+          <ThemeInput
+           {...props}
+           type="radio"
+           name="theme" 
+            />
+          <ThemeText>
+            {props.value}
+          </ThemeText>
+        </ThemeBlock>
+    )
+  }

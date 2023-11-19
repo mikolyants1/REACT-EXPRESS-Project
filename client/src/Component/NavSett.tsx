@@ -45,8 +45,7 @@ export function NavSett({set,call}:props):JSX.Element{
             </ContactBlock>
           </Link>
           <Link to={`/page/main/${user}`} onClick={hide}>
-            <SetBlock back={val} 
-             onClick={toggle}>
+            <SetBlock back={val}  onClick={toggle}>
               <SetLogo>
                 &#9733;
               </SetLogo>
@@ -56,8 +55,8 @@ export function NavSett({set,call}:props):JSX.Element{
             </SetBlock>
           </Link>
           <Link to={`/page/set/Theme`} onClick={hide}>
-            <SetBlock fill={`${idx==1}`}
-             back={val} onClick={()=>setIdx(1)}>
+            <SetBlock fill={`${idx==1}`} back={val}
+             onClick={()=>setIdx(1)}>
               <ThemeLogo>
                 &diams;
               </ThemeLogo>
