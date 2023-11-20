@@ -10,12 +10,12 @@ import { Null } from "./Main.js"
 import { query } from "./Setting.js"
 import { Loader, Error } from "./Loader.js"
 
-interface props{
+export interface SettProps{
   set:Dispatch<action>,
   call:Dispatch<SetStateAction<Null<number>>>
 }
 
-export function NavSett({set,call}:props):JSX.Element{
+export default function NavSett({set,call}:SettProps):JSX.Element{
   const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)]
   const {user,val,hide} = useContext<Context>(Theme)
   const [idx,setIdx] = useState<number>(-1)

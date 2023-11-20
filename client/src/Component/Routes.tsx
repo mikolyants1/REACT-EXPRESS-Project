@@ -5,7 +5,7 @@ import Main from "./Main.js"
 import ToogleMenu from "./Toggle.js"
 import Setting from "./Setting.js"
 
-export const Rout=():JSX.Element=>{
+export const Rout:FC=():JSX.Element=>{
     const set:Dispatch<SetStateAction<boolean>> = useOutletContext()
     const theme:string = useAppSelector(getTheme)
     const current:string = useAppSelector(getCurrent)

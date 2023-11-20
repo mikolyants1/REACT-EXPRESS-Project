@@ -9,7 +9,7 @@ import { Context, Theme } from "./Page.js"
 import { EvtC, EvtK, Null, Type, data, message } from "./Main.js"
 import { Loader, Error } from "./Loader.js"
 
-interface props{
+export interface chatProps{
   set:Dispatch<{type:number}>,
   id:boolean,
   call:Null<number>,
@@ -22,7 +22,7 @@ interface state{
 }
 type action = Record<string,any|boolean>
 
-export function NavChats({set,id,call,caller}:props):JSX.Element{
+export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,hide} = useContext<Context>(Theme)
     const [data,setData] = useState<Type<data>>(null!)
     const [idx,setIdx] = useState<Null<number>>(call?call:null)

@@ -84,8 +84,7 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
         {id=='Profile'? (
         <>
          <ProfileBlock>
-           <ProfileLogo two={two}
-            start={one}>
+           <ProfileLogo two={two} start={one}>
             <LogoText>
               {data?.name.slice(0,1).toUpperCase()}
             </LogoText>
@@ -122,36 +121,26 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
           name='phone'
           />
          <ProfilePhone>
-          <ProfileChan>
-            <ProfileDel
-             onClick={()=>setAuth(true)}>
-              Exit
-            </ProfileDel>
-            <ProfileDel
-             onClick={()=>delData(data?.id)}>
-              Delete account
-            </ProfileDel>
-          </ProfileChan>
-        </ProfilePhone>
-      </>
-      ):(
-      <>
-        <ProfilePhone>
-          <ProfileName>
-            Theme
-          </ProfileName>
-           {color.map((i:string):JSX.Element=>(
-             <SetTheme
-              key={i}
-              onChange={toogle}
-              value={i}
-              checked={val==i}
-             />
-              ))}
-            </ProfilePhone>
-          </>
-          )}
-        </SetMain>
-      </SetContain>
-    )
+           <ProfileChan>
+             <ProfileDel
+              onClick={()=>setAuth(true)}>
+               Exit
+             </ProfileDel>
+             <ProfileDel
+               onClick={()=>delData(data?.id)}>
+               Delete account
+             </ProfileDel>
+           </ProfileChan>
+         </ProfilePhone>
+       </>
+       ):(
+       <SetTheme
+        arr={color}
+        change={toogle}
+        back={val}
+          />    
+         )}
+       </SetMain>
+     </SetContain>
+  )
 }
