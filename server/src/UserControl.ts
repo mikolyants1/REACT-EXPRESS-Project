@@ -20,10 +20,8 @@ class User {
         if (!user){
          emitter.test()
          return res.status(404)
-         } else {
-         emitter.test(data)
+         } 
          return res.status(200).json(user)
-         }
       }
     addUser(req:Request,res:Response){
         if (!req.body) return res.status(404)
@@ -46,7 +44,6 @@ class User {
           emitter.test()
           return res.status(404)
         }
-        emitter.test(newJson)
         writeFileSync(Base,newJson)
         res.status(200).json(newJson)
       }

@@ -24,10 +24,8 @@ const emitter = new Emitter('dialogCheck')
     if (!user){
       emitter.test()
       return res.status(404)
-    } else {
-      emitter.test(data)
+    } 
       return res.status(200).json(user)
-    }
   }
   addMess(req:Request,res:Response){
     if (!req.body) return res.status(404)
@@ -64,7 +62,6 @@ const emitter = new Emitter('dialogCheck')
       emitter.test()
       return res.status(404)
       } 
-    emitter.test(newJson)
     writeFileSync(Base,newJson)
     res.status(200).json(newJson)
   }
