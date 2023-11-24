@@ -42,7 +42,7 @@ class User {
         }
         const newArr:data[] = [ ...users,user]
         const newJson:string = JSON.stringify(newArr)
-        if (newJson){
+        if (!newJson){
           emitter.test()
           return res.status(404)
         }
@@ -84,7 +84,7 @@ class User {
         }
         const newArr:data|data[] = [ ...left, user, ...right]
         const newJson:string = JSON.stringify(newArr)
-        if (newJson){
+        if (!newJson){
           emitter.test()
           return res.status(404)
         }
