@@ -56,11 +56,10 @@ class User {
         const users:data[] = JSON.parse(data)
         const newArr:data[] = users.filter((i:data)=>i.id!==id)
         const newJson:string = JSON.stringify(newArr)
-        if (newJson){
+        if (!newJson){
           emitter.test()
           return res.status(404)
         }
-        emitter.test(newJson)
         writeFileSync(Base,newJson)
         res.status(200).json(newJson)
       }
@@ -88,7 +87,6 @@ class User {
           emitter.test()
           return res.status(404)
         }
-        emitter.test(newJson)
         writeFileSync(Base,newJson)
         res.status(200).json(newJson)
       }
