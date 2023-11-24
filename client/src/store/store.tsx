@@ -1,7 +1,9 @@
 import slice,{Pay, action,Redux} from "./slice";
 import storage from 'redux-persist/lib/storage'
-import {Persistor, WebStorage, persistReducer,persistStore} from 'redux-persist'
-import {combineReducers,configureStore,bindActionCreators,CaseReducerActions} from '@reduxjs/toolkit'
+import {Persistor, WebStorage, persistReducer,
+persistStore} from 'redux-persist'
+import {combineReducers,configureStore,bindActionCreators,
+CaseReducerActions} from '@reduxjs/toolkit'
 import {useDispatch,useSelector,TypedUseSelectorHook} from 'react-redux'
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import MessApi from "./Api";
@@ -21,23 +23,32 @@ const config:store={
 const combine=combineReducers({
     mess:slice,
     [MessApi.reducerPath]:MessApi.reducer
-})
-const persist=persistReducer(config,combine)
+});
+const persist=persistReducer(config,combine);
+
 export const store:ToolkitStore=configureStore({
     reducer:persist,
     middleware:(getDefaultMiddleware:CurriedGetDefaultMiddleware)=>
     getDefaultMiddleware().concat(MessApi.middleware)
-}) 
+}) ;
+
 export type bind=CaseReducerActions<{
     setTheme:(state:Redux,action:Pay)=>void,
     setId:(state:Redux,action:Pay)=>void,
-},"messanger">
-type RootState = ReturnType<typeof store.getState>
-type AppDispatch = typeof store.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-export const getTheme=({mess}:state)=>mess.theme
-export const getCurrent=({mess}:state)=>mess.current
-setupListeners(store.dispatch)
-export const useAction=():bind=>bindActionCreators(action,useAppDispatch())
-export const catched:Persistor=persistStore(store)
+},"messanger">;
+
+type RootState = ReturnType<typeof store.getState>;
+
+type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export const getTheme=({mess}:state)=>mess.theme;
+
+export const getCurrent=({mess}:state)=>mess.current;
+
+setupListeners(store.dispatch);
+export const useAction=():bind=>bindActionCreators(action,useAppDispatch());
+export const catched:Persistor=persistStore(store);

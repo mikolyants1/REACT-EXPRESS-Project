@@ -1,55 +1,6 @@
 import {createApi,fetchBaseQuery,BaseQueryFn} from '@reduxjs/toolkit/query/react'
 import { EndpointBuilder } from '@reduxjs/toolkit/dist/query/endpointDefinitions'
-import { Type } from '../Component/Main'
-
-export interface mess{
-  text:string,
-  date:string,
-  now:number,
-  day:number,
-  month:string
-}
-interface query1{
-  id:number,
-  name:string,
-  phone:string
-}
-interface query2{
-  id1:string,
-  id2:string,
-  text:string,
-  date:string,
-  now:number,
-  day:number,
-  month:string
-}
-interface user{
- name:string,
- phone:string
-}
-export interface message{
-  id:number,
-  mess:mess[]
-}
-export interface data{
-  id:number,
-  name:string,
-  phone:string,
-  message:message[]
-}
-interface body{
-  text:string,
-  date:string,
-  now:number,
-  day:number,
-  month:string,
-  id:string
-}
-interface res<T> {
-  url:string,
-  method:string,
-  body?:T
-}
+import { Type, body, data, query1, query2, res, user } from '../types/type'
 
 const MessApi = createApi({
     reducerPath:'Mess',
@@ -80,7 +31,7 @@ const MessApi = createApi({
         }),
       getUsers:build.query<data[],unknown>({
           query:():string=>'user',
-          providesTags:['user']
+          providesTags:['user'],
         }),
       delUser:build.mutation<data[],Type<number>>({
         query:(id):res<unknown>=>({

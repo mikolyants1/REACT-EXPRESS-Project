@@ -469,15 +469,20 @@ display:flex;
 align-items:center;
 height:80px;
 `
-export const ProfileLogo:IStyledComponent<'web',{
+interface logoProf{
     start:string,
     two:string,
     children:JSX.Element
-}> = styled(Logo)`
+}
+export const ProfileLogo:IStyledComponent<'web',logoProf> = styled(Logo)`
 padding:0;
 width:60px;
 height:60px;
 font-size:26px;
+background-size:100% 100%;
+background:${({start,two}:logoProf)=>(
+ `linear-gradient(90deg,${start},${two})`
+)}
 `
 export const ProfileText:IStyledComponent<'web',BaseObject> = styled.div`
 margin-left:10px;
@@ -509,12 +514,15 @@ color:grey;
     color:red
 }
 `
-export const ProfileInput:IStyledComponent<'web',{
+interface ProfileProp {
     onChange:(e:EvtC)=>void,
     onKeyUp:(e:EvtK)=>void,
     defaultValue:Type<string>,
-    name:string
-}> = styled.input`
+    name:string,
+    type:string,
+    accept:string
+}
+export const ProfileInput:IStyledComponent<'web',Partial<ProfileProp>> = styled.input`
  margin-top:5px;
  width:200px;
  background-color:rgb(240,240,240);

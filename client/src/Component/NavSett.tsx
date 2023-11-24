@@ -1,29 +1,23 @@
 import { ContactBlock, ContactLogo, ContactName,
 ContactText,ContactTime,SetBlock, SetLogo, SetText,
  ThemeLogo, styleObj,avatar } from "../style/style.js"
-import { useContext, useState,Dispatch,SetStateAction } from "react"
+import { useContext, useState } from "react"
 import { Link} from "react-router-dom"
-import { Context, Theme } from "./Page.js"
+import { Theme } from "./Page.js"
 import { useGetUserQuery } from "../store/Api.js"
-import { action } from "./NavBlock.js"
-import { Null } from "./Main.js"
 import { query } from "./Setting.js"
 import { Loader, Error } from "./Loader.js"
-
-export interface SettProps{
-  set:Dispatch<action>,
-  call:Dispatch<SetStateAction<Null<number>>>
-}
+import { Context, SettProps } from "../types/type.js"
 
 export default function NavSett({set,call}:SettProps):JSX.Element{
-  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)]
-  const {user,val,hide} = useContext<Context>(Theme)
-  const [idx,setIdx] = useState<number>(-1)
-  const {data,isError,isLoading} = useGetUserQuery<query>(user)
+  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
+  const {user,val,hide} = useContext<Context>(Theme);
+  const [idx,setIdx] = useState<number>(-1);
+  const {data,isError,isLoading} = useGetUserQuery<query>(user);
     const toggle=():void=>{
-      call(-1)
-      set({type:1})
-    }
+      call(-1);
+      set({type:1});
+    };
     if (isLoading) return <Loader back={val} />
     if (isError) return <Error back={val} />
     return (
@@ -66,5 +60,5 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
             </SetBlock>
           </Link>
         </>
-    )
-}
+    );
+};

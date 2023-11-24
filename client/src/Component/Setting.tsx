@@ -8,7 +8,7 @@ import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../store/Api.js";
 import { bind, useAction } from "../store/store.js";
-import {  EvtC, EvtK, data, outlet } from "./Main.js";
+import {  EvtC, EvtK, data, outlet } from "../types/type.js";
 import { Loader, Error } from "./Loader.js";
 import { SetTheme, SetUser } from "./SettInform.js";
 
@@ -27,47 +27,47 @@ interface Props{
 }
 
 export default function Setting({children}:Props):JSX.Element{
- const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)]
- const color:string[] = ['white','black']
- const {val,user,set} = useOutletContext<outlet>()
- const {id}:Readonly<Params<string>> = useParams()
- const [auth,setAuth] = useState<boolean>(false)
- const [state,setState] = useState<state>({name:'',phone:''})
-const {data,isError,isLoading} = useGetUserQuery<query>(user)
- const [chanData] = useChanUserMutation()
- const [delData] = useDelUserMutation()
- const {setId}:bind = useAction()
+ const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
+ const color:string[] = ['white','black'];
+ const {val,user,set} = useOutletContext<outlet>();
+ const {id}:Readonly<Params<string>> = useParams();
+ const [auth,setAuth] = useState<boolean>(false);
+ const [state,setState] = useState<state>({name:'',phone:''});
+const {data,isError,isLoading} = useGetUserQuery<query>(user);
+ const [chanData] = useChanUserMutation();
+ const [delData] = useDelUserMutation();
+ const {setId}:bind = useAction();
 
  const toogle=(e:EvtC):void=>{
-   set(e.target.value)
- }
+   set(e.target.value);
+ };
  const change=useCallback((e:EvtC):void=>{
   setState((prev:state)=>({
    ...prev,[e.target.name]:e.target.value
-    }))
- },[data])
+    }));
+ },[data]);
  const press=useCallback((e:EvtK):void=>{
    if (e.key==='Enter'){
-    const {name,phone}:state = state
+    const {name,phone}:state = state;
     if (typeof data!=='undefined'){
     if (e.currentTarget.name=='name'&&name!==''){
-          chanData({
-            id:data.id,
-            name:name,
-            phone:data.phone,
-          })
-     }
+        chanData({
+          id:data.id,
+          name:name,
+          phone:data.phone,
+        });
+     };
     if (e.currentTarget.name=='phone'&&phone!==''){
         chanData({
           id:data.id,
           name:data.name,
           phone:phone,
-        })
-       setId(phone)
-      }
-    }
-  }
-  },[data])
+        });
+       setId(phone);
+      };
+    };
+  };
+  },[data]);
   
  if (auth) return <Navigate to='/' />
  if (isLoading) return <Loader back={val} />
@@ -127,7 +127,7 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
                Exit
              </ProfileDel>
              <ProfileDel
-               onClick={()=>delData(data?.id)}>
+              onClick={()=>delData(data?.id)}>
                Delete account
              </ProfileDel>
            </ProfileChan>
@@ -139,8 +139,8 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user)
         change={toogle}
         back={val}
           />    
-         )}
+         )};
        </SetMain>
      </SetContain>
-  )
-}
+  );
+};

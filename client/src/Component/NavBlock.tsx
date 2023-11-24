@@ -2,11 +2,10 @@ import { useContext, useReducer, useState,Suspense,
 LazyExoticComponent,ComponentType,lazy} from "react";
 import { NavBar, NavMain, NavMenu, NavMenuBlock,
  NavTitle } from "../style/style.js";
-import { Context, Theme } from "./Page.js";
-import { Null } from "./Main.js";
+import { Theme } from "./Page.js";
 import { Loader } from "./Loader.js";
-import { chatProps } from "./NavChats.js";
-import { SettProps } from "./NavSett.js";
+import { Context, Null, SettProps, action1,
+   chatProps } from "../types/type.js";
 
 const NavChats:LazyExoticComponent<
 ComponentType<chatProps>> = lazy(()=>import("./NavChats.js"));
@@ -18,19 +17,15 @@ interface prop{
 }
 type state = Record<string,boolean>
 
-export interface action{
-  type:number
-}
-
 export default function NavBlock({show}:prop):JSX.Element{
- const {val} = useContext<Context>(Theme)
- const [call,setCall] = useState<Null<number>>(null)
- const arr:string[] = ['Contacts','Chats','Settings']
- const [title,setTitle] = useState<string>('Contacts')
+ const {val} = useContext<Context>(Theme);
+ const [call,setCall] = useState<Null<number>>(null);
+ const arr:string[] = ['Contacts','Chats','Settings'];
+ const [title,setTitle] = useState<string>('Contacts');
  const [state,dispatch] = useReducer(reducer, 
- {Contacts:true,Chats:false,Settings:false})
- function reducer(state:state,action:action):state{
-  setTitle(arr[action.type])
+ {Contacts:true,Chats:false,Settings:false});
+ function reducer(state:state,action:action1):state{
+  setTitle(arr[action.type]);
    switch (action.type) {
     case 0:
       return {
@@ -52,9 +47,9 @@ export default function NavBlock({show}:prop):JSX.Element{
       };
     default:
       return state
-   }
- }
- const {Contacts,Chats,Settings}:state = state
+   };
+ };
+ const {Contacts,Chats,Settings}:state = state;
     return (
        <NavBar back={val}
         show={`${show}`}>
@@ -90,11 +85,11 @@ export default function NavBlock({show}:prop):JSX.Element{
          <NavMenu>
           {arr.map((item:string,i:number):JSX.Element=>(
            <NavMenuBlock key={i} press={`${state[item]}`}
-            onClick={()=>dispatch({type:i})}>
+             onClick={()=>dispatch({type:i})}>
               {item}
            </NavMenuBlock>
-           ))}
+           ))};
          </NavMenu>
        </NavBar>
-    )
-}
+    );
+};

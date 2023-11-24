@@ -1,6 +1,6 @@
 import { ProfileBut, ProfileChan, ProfileInput, ProfileName, ProfilePhone,
  ThemeBlock, ThemeInput, ThemeText } from "../style/style"
-import { EvtC, EvtK, Type } from "./Main"
+import { EvtC, EvtK, Type } from "../types/type.js"
 import { memo,NamedExoticComponent,useState} from 'react'
 
 interface props {
@@ -8,11 +8,11 @@ interface props {
     name:string,
     val?:Type<string>,
     click:(e:EvtK)=>void
-  }
+  };
   
  export const SetUser:NamedExoticComponent<props> = memo(
  ({name,set,val,click}:props):JSX.Element=>{
-   const [show,setShow] = useState<boolean>(false)
+   const [show,setShow] = useState<boolean>(false);
       return (
          <ProfilePhone>
            <ProfileChan>
@@ -34,14 +34,14 @@ interface props {
             />
            )}
          </ProfilePhone>
-      )
-  })
+      );
+  });
   
   interface themeProp{
     change:(e:EvtC)=>void,
     back:string,
     arr:string[]
-  }
+  };
   
   export const SetTheme=({arr,change,back}:themeProp):JSX.Element=>{
     return (
@@ -65,5 +65,5 @@ interface props {
            </ThemeBlock>
             ))}
         </ProfilePhone>
-    )
-  }
+    );
+  };

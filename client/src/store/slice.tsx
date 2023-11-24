@@ -14,7 +14,7 @@ export type actions = CaseReducerActions<{
 const initialState:Redux = {
     current:'',
     theme:'white'
-}
+};
 
 const slice:Slice<Redux,{
     setTheme:(state:Redux,action:Pay)=>void,
@@ -30,6 +30,6 @@ const slice:Slice<Redux,{
         state.current = action.payload
        }
     }
-})
-export const action:bind = slice.actions
-export default slice.reducer
+});
+export const action:bind = slice.actions;
+export default slice.reducer;

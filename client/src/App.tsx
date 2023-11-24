@@ -1,49 +1,14 @@
-import Main from './Component/Main.js'
 import Entry from './Component/Entry.js'
 import Regist from './Component/Regist.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import './index.css'
-import {createBrowserRouter,RouterProvider,Outlet,
- Navigate, useOutletContext} from 'react-router-dom'
+import {createBrowserRouter,RouterProvider,
+Outlet,Navigate} from 'react-router-dom'
 import Page from './Component/Page.js'
-import Setting from './Component/Setting.js'
-import { bind, catched, getCurrent, getTheme, store,
- useAction,useAppSelector} from './store/store.js'
-import { Dispatch, SetStateAction } from 'react'
-import ToogleMenu from './Component/Toggle.js'
+import { catched, store} from './store/store.js'
+import { MainPage, Rout, SettPage } from './Component/Routes.js'
 
-
-const Rout=():JSX.Element=>{
-  const set:Dispatch<SetStateAction<boolean>> = useOutletContext()
-  const theme = useAppSelector(getTheme)
-  const current = useAppSelector(getCurrent)
-  const {setTheme}:bind = useAction()
-  return (
-    <Outlet
-     context={{
-      val:theme,
-      set:setTheme,
-      user:current,
-      show:set
-    }}
-     />
-  )
-}
-const MainPage=():JSX.Element=>{
-  return (
-    <Main>
-      <ToogleMenu />
-    </Main>
-  )
-}
-const SettPage=():JSX.Element=>{
-  return (
-    <Setting>
-      <ToogleMenu />
-    </Setting>
-  )
-}
 const router = createBrowserRouter([
   {
     path:'/',
@@ -103,7 +68,7 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
   export default function App():JSX.Element{
     return (
@@ -112,6 +77,6 @@ const router = createBrowserRouter([
         <RouterProvider router={router} />
       </PersistGate>
     </Provider>
-    )
-  }
+    );
+  };
 
