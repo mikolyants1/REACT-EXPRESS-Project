@@ -9,6 +9,7 @@ import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import MessApi from "./Api";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
+
  interface state{
     mess:Redux
   }

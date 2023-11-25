@@ -88,7 +88,7 @@ export default function NavBlock({show}:prop):JSX.Element{
              onClick={()=>dispatch({type:i})}>
               {item}
            </NavMenuBlock>
-           ))};
+           ))}
          </NavMenu>
        </NavBar>
     );

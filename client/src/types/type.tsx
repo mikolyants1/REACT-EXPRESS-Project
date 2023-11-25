@@ -103,7 +103,11 @@ export interface Context{
  export interface action2{
     type:number
   }
-  
+  export interface query<T>{
+    data:T,
+    isError:boolean,
+    isLoading:boolean
+  }
   export interface chatProps{
     set:Dispatch<action2>,
     id:boolean,

@@ -5,15 +5,14 @@ import { useContext, useState } from "react"
 import { Link} from "react-router-dom"
 import { Theme } from "./Page.js"
 import { useGetUserQuery } from "../store/Api.js"
-import { query } from "./Setting.js"
 import { Loader, Error } from "./Loader.js"
-import { Context, SettProps } from "../types/type.js"
+import { Context, SettProps, data, query } from "../types/type.js"
 
 export default function NavSett({set,call}:SettProps):JSX.Element{
   const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
   const {user,val,hide} = useContext<Context>(Theme);
   const [idx,setIdx] = useState<number>(-1);
-  const {data,isError,isLoading} = useGetUserQuery<query>(user);
+  const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
     const toggle=():void=>{
       call(-1);
       set({type:1});
@@ -39,7 +38,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
             </ContactBlock>
           </Link>
           <Link to={`/page/main/${user}`} onClick={hide}>
-            <SetBlock back={val}  onClick={toggle}>
+            <SetBlock back={val} onClick={toggle}>
               <SetLogo>
                 &#9733;
               </SetLogo>

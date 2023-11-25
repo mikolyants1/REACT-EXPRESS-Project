@@ -17,7 +17,7 @@ export default function Regist():JSX.Element{
     setName(e.target.value);
   };
   const check=():void=>{
-    if (name&&typeof id!=='undefined'){
+   if (name&&typeof id!=='undefined'){
       setAuth(true);
       setId(id);
       addUser({name:name,phone:id});

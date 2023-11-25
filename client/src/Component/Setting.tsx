@@ -8,7 +8,7 @@ import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../store/Api.js";
 import { bind, useAction } from "../store/store.js";
-import {  EvtC, EvtK, data, outlet } from "../types/type.js";
+import {  EvtC, EvtK, data, outlet, query } from "../types/type.js";
 import { Loader, Error } from "./Loader.js";
 import { SetTheme, SetUser } from "./SettInform.js";
 
@@ -17,11 +17,6 @@ interface state{
   phone:string,
 }
 
-export interface query{
-  data:data,
-  isError:boolean,
-  isLoading:boolean
-}
 interface Props{
   children:JSX.Element
 }
@@ -33,7 +28,7 @@ export default function Setting({children}:Props):JSX.Element{
  const {id}:Readonly<Params<string>> = useParams();
  const [auth,setAuth] = useState<boolean>(false);
  const [state,setState] = useState<state>({name:'',phone:''});
-const {data,isError,isLoading} = useGetUserQuery<query>(user);
+const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
  const {setId}:bind = useAction();
@@ -139,7 +134,7 @@ const {data,isError,isLoading} = useGetUserQuery<query>(user);
         change={toogle}
         back={val}
           />    
-         )};
+         )}
        </SetMain>
      </SetContain>
   );

@@ -4,9 +4,9 @@ import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
  MessTime,Message,Name,Span,avatar, styleObj} from '../style/style.js'
 import { Params, useOutletContext, useParams } from 'react-router-dom'
 import { useGetUserQuery, useSetMessMutation } from '../store/Api.js'
-import { query } from './Setting.js'
 import { Loader, Error } from './Loader.js'
-import { EvtC, EvtK, Null, Type, data, mess, message, newMess, outlet } from '../types/type.js'
+import { EvtC, EvtK, Null, Type, data, mess, message,
+ newMess, outlet, query } from '../types/type.js'
 
 interface props{
   children:JSX.Element
@@ -19,9 +19,9 @@ export default function Main({children}:props):JSX.Element {
  const [text,setText] = useState<string>('');
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
  const [addMess] = useSetMessMutation();
- const result:query[] = [
-  useGetUserQuery<query>(id),
-  useGetUserQuery<query>(user),
+ const result:query<data>[] = [
+  useGetUserQuery<query<data>>(id),
+  useGetUserQuery<query<data>>(user),
   ];
  const getMessage=(d1:data,d2:data):newMess[]=>{
   const user1:Type<message> = d1.message.find((i:message)=>i.id==d2.id);
@@ -60,7 +60,7 @@ export default function Main({children}:props):JSX.Element {
  };
  if (result.some(({isLoading})=>isLoading)) return <Loader back={val} />
  if (result.some(({isError})=>isError)) return <Error back={val} />
- const [{data:d1},{data:d2}]:query[] = result;
+ const [{data:d1},{data:d2}]:query<data>[] = result;
  if (!d1||!d2) return <Error back={val} />
  const mess:newMess[] = getMessage(d1,d2);
  const isMine:boolean = d1.id == d2.id;
