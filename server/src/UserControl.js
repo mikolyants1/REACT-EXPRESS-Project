@@ -6,23 +6,26 @@ class User {
     getUsers(req, res) {
         const data = readFileSync(Base, 'utf-8');
         const newData = JSON.parse(data);
-        emitter.test(data);
+        if (!data) {
+            emitter.test('getUsers');
+            return res.status(404);
+        }
+        ;
         res.status(200).json(newData);
     }
+    ;
     getUser(req, res) {
         const data = readFileSync(Base, 'utf-8');
         const users = JSON.parse(data);
         const id = req.params.id;
         const user = users.find((i) => i.phone == id);
         if (!user) {
-            emitter.test();
+            emitter.test('getUser');
             return res.status(404);
         }
-        else {
-            emitter.test(data);
-            return res.status(200).json(user);
-        }
+        return res.status(200).json(user);
     }
+    ;
     addUser(req, res) {
         if (!req.body)
             return res.status(404);
@@ -41,28 +44,30 @@ class User {
         };
         const newArr = [...users, user];
         const newJson = JSON.stringify(newArr);
-        if (newJson) {
-            emitter.test();
+        if (!newJson) {
+            emitter.test('addUser');
             return res.status(404);
         }
-        emitter.test(newJson);
+        ;
         writeFileSync(Base, newJson);
         res.status(200).json(newJson);
     }
+    ;
     delUser(req, res) {
         const id = Number(req.params.id);
         const data = readFileSync(Base, 'utf-8');
         const users = JSON.parse(data);
         const newArr = users.filter((i) => i.id !== id);
         const newJson = JSON.stringify(newArr);
-        if (newJson) {
-            emitter.test();
+        if (!newJson) {
+            emitter.test('delUser');
             return res.status(404);
         }
-        emitter.test(newJson);
+        ;
         writeFileSync(Base, newJson);
         res.status(200).json(newJson);
     }
+    ;
     chanUser(req, res) {
         if (!req.body)
             return res.status(404);
@@ -80,13 +85,15 @@ class User {
         const user = Object.assign(Object.assign({}, item), { id: id, name: name, phone: phone });
         const newArr = [...left, user, ...right];
         const newJson = JSON.stringify(newArr);
-        if (newJson) {
-            emitter.test();
+        if (!newJson) {
+            emitter.test('chanUser');
             return res.status(404);
         }
-        emitter.test(newJson);
+        ;
         writeFileSync(Base, newJson);
         res.status(200).json(newJson);
     }
+    ;
 }
+;
 export const { getUser, getUsers, chanUser, delUser, addUser } = new User();

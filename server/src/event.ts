@@ -7,14 +7,10 @@ import { EventEmitter } from 'events'
       this.evt = evt
     }
     test(data?:string):void{
-      this.on(this.evt,()=>{
-        if (data){
-         console.log(`success:`,data)
-        } else {
-         console.error(`${this.evt} error`)
-         }
-      })
-      this.emit(this.evt)
+     this.on(this.evt,()=>{
+      console.error(`${this.evt} error : ${data}`)
+      }) 
+     this.emit(this.evt)
     }
 }
 export default Emitter

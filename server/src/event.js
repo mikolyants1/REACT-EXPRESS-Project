@@ -6,12 +6,7 @@ class Emitter extends EventEmitter {
     }
     test(data) {
         this.on(this.evt, () => {
-            if (data) {
-                console.log(`success:`, data);
-            }
-            else {
-                console.error(`${this.evt} error`);
-            }
+            console.error(`${this.evt} error : ${data}`);
         });
         this.emit(this.evt);
     }
