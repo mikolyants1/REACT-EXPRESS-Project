@@ -1,17 +1,14 @@
-import { ContactBlock, ContactInput, ContactLogo,
-ContactName, ContactText, ContactTime, styleObj,
- avatar, BlockInput} from "../style/style.js"
-import { useContext, useEffect, useReducer,
- useState } from "react"
+import { BlockInput, ContactInput, ContactTime} from "../style/style.js"
+import { useCallback, useContext, useEffect, useReducer, useState } from "react"
 import axios, { AxiosResponse } from "axios"
-import { Link} from "react-router-dom"
 import { Theme } from "./Page.js"
 import { Context, EvtC, EvtK, Null, Type,action1,
 chatProps,data, message, state } from "../types/type.js"
 import { Loader, Error } from "./Loader.js"
+import Profile from "./Profile.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
-    const {user,val,hide} = useContext<Context>(Theme);
+    const {user,val} = useContext<Context>(Theme);
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call?call:null);
     const [text,setText] = useState<string>('');
@@ -22,10 +19,13 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       const change=(e:EvtC):void=>{
         setText(e.target.value);
       };
-      const toggle=(i:number):void=>{
+      const toggle=useCallback((i:number):void=>{
         caller(i);
         set({type:1});
-      };
+      },[]);
+      const setIndex=useCallback((i:number):void=>{
+        setIdx(i);
+      },[])
      const sort=(e:EvtK):void=>{
         if (e.key==='Enter'){
       const val:string = text.trim().toLocaleLowerCase()
@@ -69,63 +69,39 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
            onKeyUp={sort}
            placeholder="search"
             />
-         </BlockInput>
+        </BlockInput>
          <>
-          {!id ? (
-          <Link to={`/page/main/${user}`} onClick={hide}>
-            <ContactBlock fill={`${idx==-1}`}
-             back={val} onClick={()=>setIdx(-1)}>
-              <ContactLogo left='rgb(56, 231, 120)'
-               right='rgb(177, 248, 177)'>
-                 &#9733;
-              </ContactLogo>
-              <ContactText>
-                <ContactName>
-                    Main
-                </ContactName>
-              </ContactText>
-            </ContactBlock>
-          </Link>
-          ) : null}
+          {!id&&(
+            <Profile
+             path={user}
+             fill={`${idx==-1}`}
+             click={()=>setIndex(-1)}
+             logo=""
+             name="Main"
+            />
+           )}
          </>
         {state.data.map(({name,phone}:data,i:number):Null<JSX.Element>=>{
-        const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
-        const exclude:boolean = phone == user;
-         if (id) {
-        return !exclude ? (
-          <Link to={`/page/main/${phone}`} key={phone} onClick={hide}>
-            <ContactBlock back={val} onClick={()=>toggle(i)}>
-              <ContactLogo left={one} right={two}>
-                {name.slice(0,1).toUpperCase()}
-              </ContactLogo>
-              <ContactText>
-                <ContactName>
-                    {name}
-                </ContactName>
-                <ContactTime>
-                   offline
-                </ContactTime>
-              </ContactText>
-            </ContactBlock>
-          </Link>
+        if (id) {
+        return phone!==user ? (   
+            <Profile click={()=>toggle(i)} name={name} path={phone}
+             logo={name.slice(0,1).toUpperCase()} key={phone}>
+              <ContactTime>
+                 offline
+              </ContactTime>
+            </Profile>
           ) : null
          } else {
            const show:Type<message> = getUser(phone)
-            return show&&!exclude ? (
-              <Link to={`/page/main/${phone}`}
-                 key={phone} onClick={hide}>
-                <ContactBlock back={val} fill={`${i==idx}`}
-                 onClick={()=>setIdx(i)}>
-                  <ContactLogo left={one} right={two}>
-                    {name.slice(0,1).toUpperCase()}
-                  </ContactLogo>
-                  <ContactText>
-                    <ContactName>
-                        {name}
-                    </ContactName>
-                  </ContactText>
-                </ContactBlock>
-              </Link>
+            return show&&(phone!==user) ? (
+              <Profile
+               key={phone}
+               path={phone}
+               fill={`${idx==i}`}
+               click={()=>setIndex(i)}
+               logo={name.slice(0,1).toUpperCase()}
+               name={name}
+                />
              ) : null
          }})}
         </>

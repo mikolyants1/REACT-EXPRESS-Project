@@ -18,8 +18,8 @@ export const Rout:FC=():JSX.Element=>{
         set:setTheme,
         user:current,
         show:set
-      }}
-       />
+       }}
+      />
     );
   };
 export const MainPage:FC=():JSX.Element=>{

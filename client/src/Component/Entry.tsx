@@ -22,7 +22,7 @@ export default function Entry():JSX.Element{
   const { setId }:bind = useAction();
 
   const change=(e:EvtC):void=>{
-    dispatch({text:e.target.value});
+   dispatch({text:e.target.value});
   };
   const check=():void=>{
    if (typeof data !== "undefined"){
@@ -30,7 +30,7 @@ export default function Entry():JSX.Element{
       dispatch({auth:true});
       setId(state.text);
      }else{
-     dispatch({reg:true});
+      dispatch({reg:true});
       };
     };
   };

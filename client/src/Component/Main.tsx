@@ -1,24 +1,35 @@
-import { useState,useRef } from 'react'
+import { useRef,useReducer, useCallback } from 'react'
 import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
- MainInput,MessBlock,MessContent,MessDate,MessSpan,MessText,
- MessTime,Message,Name,Span,avatar, styleObj} from '../style/style.js'
+ MainInput,MessDate,Message,Name,Span,avatar, styleObj} from '../style/style.js'
 import { Params, useOutletContext, useParams } from 'react-router-dom'
-import { useGetUserQuery, useSetMessMutation } from '../store/Api.js'
+import { useChanMessMutation, useGetUserQuery, useSetMessMutation } from '../store/Api.js'
 import { Loader, Error } from './Loader.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../types/type.js'
+import Messages from './Message.js'
 
 interface props{
   children:JSX.Element
 }
+interface state{
+  now:number,
+  text:string,
+  status:boolean
+}
+type action = Record<string,string|boolean|number>
 
 export default function Main({children}:props):JSX.Element {
+ const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
  const {id}:Readonly<Params<string>> = useParams();
+ const [addMess] = useSetMessMutation();
+ const [chanMess] = useChanMessMutation();
  const ref = useRef<HTMLInputElement>(null!);
  const {val,user} = useOutletContext<outlet>();
- const [text,setText] = useState<string>('');
- const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
- const [addMess] = useSetMessMutation();
+ const [state,dispatch] = useReducer(
+  (prv:state,nxt:action)=>({...prv,...nxt}),
+  {now:0,text:"",status:false}
+ )
+
  const result:query<data>[] = [
   useGetUserQuery<query<data>>(id),
   useGetUserQuery<query<data>>(user),
@@ -37,10 +48,11 @@ export default function Main({children}:props):JSX.Element {
   return arg[i].day!==arg[i-1].day;
  };
  const change=(e:EvtC):void=>{
-   setText(e.target.value);
+   dispatch({text:e.target.value});
  };
  const press=(e:EvtK):void=>{
    if (e.key==='Enter'&&typeof id!=='undefined'){
+    if (!state.status){
      const date:Date = new Date();
      const our:number = date.getHours();
      const min:number = date.getMinutes();
@@ -49,15 +61,28 @@ export default function Main({children}:props):JSX.Element {
      addMess({
       id1:id,
       id2:user,
-      text:text,
+      text:state.text,
       date:`${Our}:${Min}`,
       now:Date.now(),
       day:date.getDate(),
       month:date.toLocaleString('default',{month:'long'})
      });
+    } else {
+      chanMess({
+        id1:id,
+        id2:user,
+        text:state.text,
+        now:state.now,
+       });
+       dispatch({status:false});
+    };
      ref.current.value='';
    };
  };
+ const updateDioalog=useCallback((time:number):void=>{
+   dispatch({status:true,now:time});
+ },[]);
+
  if (result.some(({isLoading})=>isLoading)) return <Loader back={val} />
  if (result.some(({isError})=>isError)) return <Error back={val} />
  const [{data:d1},{data:d2}]:query<data>[] = result;
@@ -80,8 +105,8 @@ export default function Main({children}:props):JSX.Element {
           </HeaderBlock>
           <MainBlock>
             <Message>
-            {mess.map((props:newMess,i:number):JSX.Element=>{
-             const {id,text,date,day,month}:newMess = props
+            {mess.map((item:newMess,i:number):JSX.Element=>{
+             const {id,day,month}:newMess = item
              const right:Null<boolean> = i==0 ? null : showTime(mess,i)
              return (
                 <>
@@ -90,23 +115,14 @@ export default function Main({children}:props):JSX.Element {
                      {day} {month}
                    </MessDate>
                   )}
-                  <MessBlock key={`${i}`}
-                   col={`${id!==d2.id}`}>
-                    <MessContent back={val}
-                     col={`${id!==d2.id}`}>
-                      <MessText>
-                        <MessSpan>
-                          {text}
-                        </MessSpan>
-                      </MessText>
-                      <MessTime>
-                       {date}
-                      </MessTime>
-                    </MessContent>
-                  </MessBlock>
+                  <Messages
+                   key={`${i}`}
+                   data={item}
+                   col={`${id!==d2.id}`}
+                   update={updateDioalog}
+                   />
                 </>
-                 )
-               })}
+                 )})}
             </Message>
           </MainBlock>
           <FootBlock>

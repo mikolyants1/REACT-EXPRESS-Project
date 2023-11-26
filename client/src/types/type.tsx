@@ -51,6 +51,11 @@ export interface mess{
     month:string,
     id:string
   }
+  export interface body1{
+    text:string,
+    id:string,
+    now:number
+  }
  export interface res<T> {
     url:string,
     method:string,
@@ -99,7 +104,8 @@ export interface Context{
     load:boolean
   }
  export type action1 = Record<string,any|boolean>
-
+ 
+ export type query3 = Omit<query2,"day"|"date"|"month">
  export interface action2{
     type:number
   }

@@ -1,6 +1,6 @@
 import {createApi,fetchBaseQuery,BaseQueryFn} from '@reduxjs/toolkit/query/react'
 import { EndpointBuilder } from '@reduxjs/toolkit/dist/query/endpointDefinitions'
-import { Type, body, data, query1, query2, res, user } from '../types/type'
+import { Type, body, body1, data, query1, query2, query3, res, user } from '../types/type'
 
 const MessApi = createApi({
     reducerPath:'Mess',
@@ -25,6 +25,17 @@ const MessApi = createApi({
             },
            invalidatesTags:['dialog'] 
         }),
+        chanMess:build.mutation<data[],query3>({
+          query:(obj):res<body1>=>{
+           const {id1,id2,...body}:query3 = obj
+              return {
+                url:`dialog/${id1}`,
+                method:'PUT',
+                body: {id:id2,...body}
+                 }    
+              },
+             invalidatesTags:['dialog'] 
+          }),
       getUser:build.query<data,Type<string>>({
          query:(id):string=>`user/${id}`,
           providesTags:['user']
@@ -61,7 +72,7 @@ const MessApi = createApi({
       })
     })
  }) 
- 
+
 export const {
     useAddUserMutation,
     useChanUserMutation,
@@ -69,7 +80,8 @@ export const {
     useGetMessQuery,
     useGetUserQuery,
     useGetUsersQuery,
-    useSetMessMutation
+    useSetMessMutation,
+    useChanMessMutation
   } = MessApi
 
- export default MessApi
+ export default MessApi;

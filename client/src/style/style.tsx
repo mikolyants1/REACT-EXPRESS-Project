@@ -1,7 +1,7 @@
 import { ChangeEvent,KeyboardEvent,MutableRefObject } from 'react'
 import styled, { IStyledComponent } from 'styled-components'
 import { BaseObject } from 'styled-components/dist/types'
-import { EvtC, EvtK,Type } from '../Component/Main'
+import { EvtC, EvtK, Type } from '../types/type'
 
 export interface styleObj{
     one:string,
@@ -282,7 +282,7 @@ color:${({press}:mess1)=>press=='true'
 type mess2 = {
     col:string,
     children:JSX.Element,
-    key:string
+    
 }
 export const MessBlock:IStyledComponent<'web',mess2> = styled.div`
 width:100%;
@@ -306,7 +306,8 @@ function Back(bool:string,back:string):string{
 interface MessProp{
     col:string,
     back:string,
-    children:JSX.Element[]
+    children:JSX.Element[],
+    onClick:()=>void
 }
 export const MessContent:IStyledComponent<'web',MessProp> = styled.div`
  display:flex;
