@@ -1,8 +1,10 @@
 import { useRef,useReducer } from 'react'
 import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
- MainInput,MessDate,Message,Name,Span,avatar, styleObj} from '../../../style/style.js'
+ MainInput,MessDate,Message,Name,Span,avatar,
+  styleObj} from '../../../style/style.js'
 import { Params, useOutletContext, useParams } from 'react-router-dom'
-import { useChanMessMutation, useGetUserQuery, useSetMessMutation } from '../../../store/Api.js'
+import { useChanMessMutation, useGetUserQuery,
+ useSetMessMutation } from '../../../store/Api.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../../../types/type.js'
 import {useTranslation} from 'react-i18next';
@@ -82,8 +84,8 @@ export default function Main({children}:props):JSX.Element {
      ref.current.value='';
    };
  };
- const updateDioalog=(time:number):void=>{
-   dispatch({status:true,now:time});
+ const updateDioalog=(time:number,up:string):void=>{
+  if (up=="false") dispatch({status:true,now:time});
  };
 
  if (result.some(({isLoading})=>isLoading)) return <Loader back={val} />

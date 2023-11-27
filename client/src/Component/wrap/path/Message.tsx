@@ -7,7 +7,7 @@ interface props {
     key:string,
     col:string,
     data:newMess,
-    update:(i:number)=>void,
+    update:(i:number,up:string)=>void,
 }
 
 export default function Messages(props:props):JSX.Element {
@@ -16,7 +16,7 @@ export default function Messages(props:props):JSX.Element {
     return (
         <MessBlock col={`${col}`}>
           <MessContent back={val} col={`${col}`}
-           onClick={()=>update(data.now)}>
+           onClick={()=>update(data.now,col)}>
             <MessText>
               <MessSpan>
                 {data.text}
