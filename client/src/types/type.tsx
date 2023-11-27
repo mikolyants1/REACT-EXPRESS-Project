@@ -1,11 +1,13 @@
 import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction} from 'react'
 import {TFunction} from 'i18next'
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
+
 export type Type<T> = undefined|T
 export type Str<T> = string|T
 export type Null<T> = null|T
 export type EvtC = ChangeEvent<HTMLInputElement>
 export type EvtK = KeyboardEvent<HTMLInputElement>
-export type union = string|null|ArrayBuffer
+export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
 
 export interface mess{
     text:string,

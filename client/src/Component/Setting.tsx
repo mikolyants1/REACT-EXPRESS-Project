@@ -8,7 +8,7 @@ import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../store/Api.js";
 import { bind, useAction } from "../store/store.js";
-import {  EvtC, EvtK, data, outlet, query } from "../types/type.js";
+import {  EvtC, EvtK, data, outlet, query, union } from "../types/type.js";
 import { Loader, Error } from "./Loader.js";
 import { SetTheme, SetUser } from "./SettInform.js";
 
@@ -34,13 +34,9 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  const [delData] = useDelUserMutation();
  const {setId,setLang,setTheme}:bind = useAction();
 
- const toogle=(e:EvtC):void=>{
-   setTheme(e.target.value);
+ const toogle=(set:union)=>(e:EvtC)=>{
+   set(e.target.value);
  };
- const updateLang=(e:EvtC)=>{
-   setLang(e.target.value)
-   console.log(lang)
- }
  const change=useCallback((e:EvtC):void=>{
   setState((prev:state)=>({
    ...prev,[e.target.name]:e.target.value
@@ -88,26 +84,26 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
             <LogoText>
               {data?.name.slice(0,1).toUpperCase()}
             </LogoText>
-           </ProfileLogo>
-           <ProfileText>
-             <ProfileDis>
-                 {translate("name")}
-             </ProfileDis>
-             <ProfileName>
-               {data?.name}
-             </ProfileName>
-           </ProfileText>
-         </ProfileBlock>  
-         <ProfilePhone>
-           <ProfileText>
-             <ProfileDis>
-                 {translate("phone")}
-             </ProfileDis>
-             <ProfileName>
-               {data?.phone}
-             </ProfileName>
-           </ProfileText>
-         </ProfilePhone>
+          </ProfileLogo>
+          <ProfileText>
+            <ProfileDis>
+            {translate("name")}
+            </ProfileDis>
+            <ProfileName>
+             {data?.name}
+            </ProfileName>
+          </ProfileText>
+        </ProfileBlock>  
+        <ProfilePhone>
+          <ProfileText>
+            <ProfileDis>
+              {translate("phone")}
+            </ProfileDis>
+            <ProfileName>
+             {data?.phone}
+            </ProfileName>
+          </ProfileText>
+        </ProfilePhone>
          <SetUser
           set={change}
           val={data?.name}
@@ -120,34 +116,34 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
           click={press}
           name='phone'
           />
-         <ProfilePhone>
-           <ProfileChan>
-             <ProfileDel
-              onClick={()=>setAuth(true)}>
-               {translate('Exit')}
-             </ProfileDel>
-             <ProfileDel
-              onClick={()=>delData(data?.id)}>
-               {translate('Delete account')}
-             </ProfileDel>
-           </ProfileChan>
-         </ProfilePhone>
-       </>
+        <ProfilePhone>
+          <ProfileChan>
+            <ProfileDel 
+             onClick={()=>setAuth(true)}>
+              {translate('Exit')}
+            </ProfileDel>
+            <ProfileDel
+             onClick={()=>delData(data?.id)}>
+              {translate('Delete account')}
+            </ProfileDel>
+          </ProfileChan>
+        </ProfilePhone>
+      </>
        ):(
         <>
          <SetTheme
           arr={color}
-          change={toogle}
+          change={toogle(setTheme)}
           back={val}
           name="theme"
           />  
-        <SetTheme
+         <SetTheme
           arr={langaues}
-          change={updateLang}
+          change={toogle(setLang)}
           back={lang}
           name="language"
           />  
-       </>  
+        </>  
          )}
        </SetMain>
      </SetContain>
