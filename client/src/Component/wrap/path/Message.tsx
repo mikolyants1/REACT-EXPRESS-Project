@@ -1,8 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { MessBlock, MessContent, MessSpan,
- MessText, MessTime } from "../style/style";
-import { newMess, outlet } from "../types/type";
-import { memo } from "react";
+ MessText, MessTime } from "../../../style/style";
+import { newMess, outlet } from "../../../types/type";
 
 interface props {
     key:string,
@@ -11,7 +10,7 @@ interface props {
     update:(i:number)=>void,
 }
 
- function Messages(props:props):JSX.Element {
+export default function Messages(props:props):JSX.Element {
   const {val} = useOutletContext<outlet>();
   const {update,data,col}:props = props;
     return (
@@ -30,5 +29,3 @@ interface props {
         </MessBlock>
     )
 }
-
-export default memo(Messages)

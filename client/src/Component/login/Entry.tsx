@@ -1,11 +1,11 @@
 import { EntryBlock, EntryBut, EntryInput, EntrySub,
- EntryTitle, InputBlock } from "../style/style.js";
-import { useReducer} from "react";
+ EntryTitle, InputBlock } from "../../style/style.js";
+import { useReducer } from "react";
 import { Navigate } from "react-router-dom";
-import { bind, useAction } from "../store/store.js";
-import { Error, Loader } from "./Loader.js";
-import { EvtC, EvtK,Str,data, query} from "../types/type.js";
-import { useGetUsersQuery } from "../store/Api.js";
+import { bind, useAction } from "../../store/store.js";
+import { Error, Loader } from "../Loader.js";
+import { EvtC, EvtK,Str,data, query} from "../../types/type.js";
+import { useGetUsersQuery } from "../../store/Api.js";
 
  interface state {
   text:string,

@@ -3,14 +3,14 @@ import { Navigate, Params, useOutletContext,
 import {  HeaderBlock, LogoText, ProfileBlock,
  ProfileChan,ProfileDel, ProfileDis, ProfileLogo,
  ProfileName,ProfilePhone,ProfileText, SetContain, SetMain,
- SetTitle, avatar, styleObj } from "../style/style.js";
+ SetTitle, avatar, styleObj } from "../../../style/style.js";
 import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
- useGetUserQuery } from "../store/Api.js";
-import { bind, useAction } from "../store/store.js";
-import {  EvtC, EvtK, data, outlet, query, union } from "../types/type.js";
-import { Loader, Error } from "./Loader.js";
+ useGetUserQuery } from "../../../store/Api.js";
+import { bind, useAction } from "../../../store/store.js";
+import {  EvtC, EvtK, data, outlet, query, union } from "../../../types/type.js";
 import { SetTheme, SetUser } from "./SettInform.js";
+import { Error, Loader } from "../../Loader.js";
 
 interface state{
   name:string,

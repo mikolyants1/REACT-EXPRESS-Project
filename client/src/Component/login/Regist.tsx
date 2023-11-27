@@ -1,10 +1,10 @@
 import { Navigate, Params, useParams } from "react-router-dom"
 import {  useState } from "react"
 import { EntryBlock,EntryTitle,EntryInput,EntrySub,
-EntryBut,InputBlock } from '../style/style.js'
-import { bind, useAction } from "../store/store.js"
-import { useAddUserMutation } from "../store/Api.js"
-import { EvtC, EvtK } from "../types/type.js"
+EntryBut,InputBlock } from '../../style/style.js'
+import { bind, useAction } from "../../store/store.js"
+import { useAddUserMutation } from "../../store/Api.js"
+import { EvtC, EvtK } from "../../types/type.js"
 
 export default function Regist():JSX.Element{
   const {id}:Readonly<Params<string>> = useParams();

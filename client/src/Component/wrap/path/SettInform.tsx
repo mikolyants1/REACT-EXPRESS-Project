@@ -1,9 +1,9 @@
 import { ProfileBut, ProfileChan, ProfileInput, ProfileName, ProfilePhone,
- ThemeBlock, ThemeInput, ThemeText } from "../style/style"
-import { Context, EvtC, EvtK, Null, Type, outlet } from "../types/type.js"
+ ThemeBlock, ThemeInput, ThemeText } from "../../../style/style.js"
+import { Context, EvtC, EvtK, Null, Type, outlet } from "../../../types/type.js"
 import { memo,NamedExoticComponent,useState,useContext} from 'react'
-import { Theme } from "./Page.js";
 import { useOutletContext } from "react-router-dom";
+import { Theme } from "../Page.js";
 
 interface props {
     set:(e:EvtC)=>void,

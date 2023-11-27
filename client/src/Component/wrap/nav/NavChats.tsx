@@ -1,11 +1,11 @@
-import { BlockInput, ContactInput, ContactTime} from "../style/style.js"
+import { BlockInput, ContactInput, ContactTime} from "../../../style/style.js"
 import { useCallback, useContext, useEffect, useReducer, useState } from "react"
 import axios, { AxiosResponse } from "axios"
-import { Theme } from "./Page.js"
+import { Theme } from "../Page.js"
 import { Context, EvtC, EvtK, Null, Type,action1,
-chatProps,data, message, state } from "../types/type.js"
-import { Loader, Error } from "./Loader.js"
-import Profile from "./Profile.js"
+chatProps,data, message, state } from "../../../types/type.js"
+import { Loader, Error } from "../../Loader.js"
+import Profile from "./NavProfile.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):Null<JSX.Element>{
     const {user,val,translate} = useContext<Context>(Theme);

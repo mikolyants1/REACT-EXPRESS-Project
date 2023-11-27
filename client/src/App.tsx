@@ -1,11 +1,11 @@
-import Entry from './Component/Entry.js'
-import Regist from './Component/Regist.js'
+import Entry from './Component/login/Entry.js'
+import Regist from './Component/login/Regist.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import './index.css'
 import {createBrowserRouter,RouterProvider,
 Outlet,Navigate} from 'react-router-dom'
-import Page from './Component/Page.js'
+import Page from './Component/wrap/Page.js'
 import { catched, store} from './store/store.js'
 import { MainPage, Rout, SettPage } from './Component/Routes.js'
 

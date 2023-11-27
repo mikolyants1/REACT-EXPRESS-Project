@@ -1,8 +1,8 @@
 import { ContactBlock, ContactLogo, ContactName,
-ContactText, avatar, styleObj } from "../style/style";
+ContactText, avatar, styleObj } from "../../../style/style";
 import {memo,useContext} from 'react'
-import { Theme } from "./Page";
-import { Context } from "../types/type";
+import { Theme } from "../Page";
+import { Context } from "../../../types/type";
 import { Link } from "react-router-dom";
 
  interface props {
@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
     children?:JSX.Element
  }
 
-function Profiles({fill,name,click,children,logo,path}:props):JSX.Element {
+function NavProfile({fill,name,click,children,logo,path}:props):JSX.Element {
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)]
  const left:string = name == "Main" ? 'rgb(56, 231, 120)' : one ;
  const right:string = name == "Main" ? 'rgb(177, 248, 177)' : two ;
@@ -37,4 +37,4 @@ function Profiles({fill,name,click,children,logo,path}:props):JSX.Element {
     )
 }
 
-export default memo(Profiles)
+export default memo(NavProfile);

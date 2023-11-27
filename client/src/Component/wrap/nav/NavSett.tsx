@@ -1,12 +1,12 @@
 import { ContactBlock, ContactLogo, ContactName,
 ContactText,ContactTime,SetBlock, SetLogo, SetText,
- ThemeLogo, styleObj,avatar } from "../style/style.js"
+ ThemeLogo, styleObj,avatar } from "../../../style/style.js"
 import { useContext, useState } from "react"
 import { Link} from "react-router-dom"
-import { Theme } from "./Page.js"
-import { useGetUserQuery } from "../store/Api.js"
-import { Loader, Error } from "./Loader.js"
-import { Context, Null, SettProps, data, query } from "../types/type.js"
+import { Theme } from "../Page.js"
+import { useGetUserQuery } from "../../../store/Api.js"
+import { Loader, Error } from "../../Loader.js"
+import { Context, Null, SettProps, data, query } from "../../../types/type.js"
 
 export default function NavSett({set,call}:SettProps):Null<JSX.Element>{
   const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];

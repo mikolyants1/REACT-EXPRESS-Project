@@ -2,10 +2,10 @@ import { Dispatch, FC, SetStateAction } from "react"
 import { getCurrent, getLang, getTheme,
  useAppSelector } from "../store/store"
 import { Outlet, useOutletContext } from "react-router-dom"
-import Main from "./Main.js"
 import ToogleMenu from "./Toggle.js"
-import Setting from "./Setting.js"
 import {useTranslation} from 'react-i18next'
+import Main from "./wrap/path/Main.js"
+import Setting from "./wrap/path/Setting.js"
 
 export const Rout:FC=():JSX.Element=>{
     const set:Dispatch<SetStateAction<boolean>> = useOutletContext();
