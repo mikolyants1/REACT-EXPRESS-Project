@@ -145,7 +145,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
           arr={langaues}
           change={updateLang}
           back={lang}
-          name="langaue"
+          name="language"
           />  
        </>  
          )}

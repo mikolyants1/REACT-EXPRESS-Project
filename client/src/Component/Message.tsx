@@ -14,7 +14,6 @@ interface props {
  function Messages(props:props):JSX.Element {
   const {val} = useOutletContext<outlet>();
   const {update,data,col}:props = props;
-  console.log(9)
     return (
         <MessBlock col={`${col}`}>
           <MessContent back={val} col={`${col}`}
