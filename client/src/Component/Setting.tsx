@@ -24,18 +24,23 @@ interface Props{
 export default function Setting({children}:Props):JSX.Element{
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
  const color:string[] = ['white','black'];
- const {val,user,set} = useOutletContext<outlet>();
+ const langaues:string[] = ["en","ru"];
+ const {val,user,lang,translate} = useOutletContext<outlet>();
  const {id}:Readonly<Params<string>> = useParams();
  const [auth,setAuth] = useState<boolean>(false);
  const [state,setState] = useState<state>({name:'',phone:''});
 const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
- const {setId}:bind = useAction();
+ const {setId,setLang,setTheme}:bind = useAction();
 
  const toogle=(e:EvtC):void=>{
-   set(e.target.value);
+   setTheme(e.target.value);
  };
+ const updateLang=(e:EvtC)=>{
+   setLang(e.target.value)
+   console.log(lang)
+ }
  const change=useCallback((e:EvtC):void=>{
   setState((prev:state)=>({
    ...prev,[e.target.name]:e.target.value
@@ -71,7 +76,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
       <SetContain val={val}>
         <HeaderBlock back={val}>
           <SetTitle>
-            {id}
+            {translate&&translate(`${id}`)}
           </SetTitle>
           {children}
         </HeaderBlock>
@@ -86,7 +91,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
            </ProfileLogo>
            <ProfileText>
              <ProfileDis>
-                 name
+                 {translate("name")}
              </ProfileDis>
              <ProfileName>
                {data?.name}
@@ -96,7 +101,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
          <ProfilePhone>
            <ProfileText>
              <ProfileDis>
-                 phone
+                 {translate("phone")}
              </ProfileDis>
              <ProfileName>
                {data?.phone}
@@ -119,21 +124,30 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
            <ProfileChan>
              <ProfileDel
               onClick={()=>setAuth(true)}>
-               Exit
+               {translate('Exit')}
              </ProfileDel>
              <ProfileDel
               onClick={()=>delData(data?.id)}>
-               Delete account
+               {translate('Delete account')}
              </ProfileDel>
            </ProfileChan>
          </ProfilePhone>
        </>
        ):(
-       <SetTheme
-        arr={color}
-        change={toogle}
-        back={val}
-          />    
+        <>
+         <SetTheme
+          arr={color}
+          change={toogle}
+          back={val}
+          name="theme"
+          />  
+        <SetTheme
+          arr={langaues}
+          change={updateLang}
+          back={lang}
+          name="langaue"
+          />  
+       </>  
          )}
        </SetMain>
      </SetContain>

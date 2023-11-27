@@ -5,7 +5,8 @@ import { NavBar, NavMain, NavMenu, NavMenuBlock,
 import { Theme } from "./Page.js";
 import { Loader } from "./Loader.js";
 import { Context, Null, SettProps, action1,
-   chatProps } from "../types/type.js";
+chatProps } from "../types/type.js";
+import {useTranslation} from 'react-i18next'
 
 const NavChats:LazyExoticComponent<
 ComponentType<chatProps>> = lazy(()=>import("./NavChats.js"));
@@ -20,8 +21,9 @@ type state = Record<string,boolean>
 export default function NavBlock({show}:prop):JSX.Element{
  const {val} = useContext<Context>(Theme);
  const [call,setCall] = useState<Null<number>>(null);
+ const [translate] = useTranslation();
  const arr:string[] = ['Contacts','Chats','Settings'];
- const [title,setTitle] = useState<string>('Contacts');
+ const [title,setTitle] = useState<string>(translate('Contacts'));
  const [state,dispatch] = useReducer(reducer, 
  {Contacts:true,Chats:false,Settings:false});
  function reducer(state:state,action:action1):state{
@@ -54,7 +56,7 @@ export default function NavBlock({show}:prop):JSX.Element{
        <NavBar back={val}
         show={`${show}`}>
          <NavTitle>
-           {title}
+           {translate(title)}
          </NavTitle>
          <NavMain>
            <Suspense fallback={<Loader back={val} />}>
@@ -86,7 +88,7 @@ export default function NavBlock({show}:prop):JSX.Element{
           {arr.map((item:string,i:number):JSX.Element=>(
            <NavMenuBlock key={i} press={`${state[item]}`}
              onClick={()=>dispatch({type:i})}>
-              {item}
+              {translate(item)}
            </NavMenuBlock>
            ))}
          </NavMenu>

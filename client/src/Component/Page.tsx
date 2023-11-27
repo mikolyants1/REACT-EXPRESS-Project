@@ -1,26 +1,33 @@
 import { Outlet } from "react-router-dom";
 import NavBlock from "./NavBlock.js";
 import { Wrapper,MainContent } from "../style/style.js";
-import { bind, getCurrent, getTheme, useAction,
+import { getCurrent, getLang, getTheme,
 useAppSelector } from "../store/store.js";
-import { useState,createContext } from "react";
+import { useState,createContext, useEffect } from "react";
 import { Context } from "../types/type.js";
+import i18n from "../Translate.js";
+import {useTranslation} from 'react-i18next'
 
 export const Theme = createContext<Context>(
-{val:'',set:'',user:'',hide:()=>{}});
+{val:'',user:'',translate:null,hide:()=>{}});
 
 export default function Page():JSX.Element{
  const theme:string = useAppSelector(getTheme);
  const current:string = useAppSelector(getCurrent);
+ const lang:string = useAppSelector(getLang);
+ const [translate] = useTranslation();
  const [show,setShow] = useState<boolean>(true);
- const {setTheme}:bind = useAction();
+ useEffect(():void=>{
+  i18n.changeLanguage(lang);
+  console.log(lang)
+ },[lang])
  const hideMenu=():void=>{
    setShow(false);
   };
  const context:Context = {
   val:theme,
-  set:setTheme,
   user:current,
+  translate:translate,
   hide:hideMenu
    };
     return (

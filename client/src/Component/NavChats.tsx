@@ -7,8 +7,9 @@ chatProps,data, message, state } from "../types/type.js"
 import { Loader, Error } from "./Loader.js"
 import Profile from "./Profile.js"
 
-export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
-    const {user,val} = useContext<Context>(Theme);
+export default function NavChats({set,id,call,caller}:chatProps):Null<JSX.Element>{
+    const {user,val,translate} = useContext<Context>(Theme);
+    if (!translate) return null;
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call?call:null);
     const [text,setText] = useState<string>('');
@@ -67,7 +68,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
            type="text"
            onChange={change}
            onKeyUp={sort}
-           placeholder="search"
+           placeholder={translate('search')}
             />
         </BlockInput>
          <>
@@ -77,7 +78,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
              fill={`${idx==-1}`}
              click={()=>setIndex(-1)}
              logo=""
-             name="Main"
+             name={translate("Main")}
             />
            )}
          </>

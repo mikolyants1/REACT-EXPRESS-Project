@@ -6,7 +6,9 @@ import { useChanMessMutation, useGetUserQuery, useSetMessMutation } from '../sto
 import { Loader, Error } from './Loader.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../types/type.js'
+import {useTranslation} from 'react-i18next';
 import Messages from './Message.js'
+import Month from './Month.js'
 
 interface props{
   children:JSX.Element
@@ -20,6 +22,7 @@ type action = Record<string,string|boolean|number>
 
 export default function Main({children}:props):JSX.Element {
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
+ const [translate] = useTranslation();
  const {id}:Readonly<Params<string>> = useParams();
  const [addMess] = useSetMessMutation();
  const [chanMess] = useChanMessMutation();
@@ -99,7 +102,7 @@ export default function Main({children}:props):JSX.Element {
               {isMine&&<Span>&#9733;</Span>}
             </Logo>
             <Name>
-             {isMine ? 'Main' : d1.name}
+             {translate(isMine ? 'Main' : d1.name)}
             </Name>
             {children}
           </HeaderBlock>
@@ -112,11 +115,11 @@ export default function Main({children}:props):JSX.Element {
                 <>
                   {right||i==0&&(
                    <MessDate>
-                     {day} {month}
+                     {translate(Month(month))} {day}
                    </MessDate>
                   )}
                   <Messages
-                   key={`${i}`}
+                   key={`s`}
                    data={item}
                    col={`${id!==d2.id}`}
                    update={updateDioalog}
@@ -128,7 +131,7 @@ export default function Main({children}:props):JSX.Element {
           <FootBlock>
             <MainInput 
              back={val}
-             placeholder='your message'
+             placeholder={translate('your message')}
              onChange={change}
              onKeyUp={press}
              ref={ref}

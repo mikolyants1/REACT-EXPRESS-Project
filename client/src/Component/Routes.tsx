@@ -1,22 +1,25 @@
 import { Dispatch, FC, SetStateAction } from "react"
-import { bind, getCurrent, getTheme, useAction,
+import { getCurrent, getLang, getTheme,
  useAppSelector } from "../store/store"
 import { Outlet, useOutletContext } from "react-router-dom"
 import Main from "./Main.js"
 import ToogleMenu from "./Toggle.js"
 import Setting from "./Setting.js"
+import {useTranslation} from 'react-i18next'
 
 export const Rout:FC=():JSX.Element=>{
     const set:Dispatch<SetStateAction<boolean>> = useOutletContext();
     const theme:string = useAppSelector(getTheme);
     const current:string = useAppSelector(getCurrent);
-    const {setTheme}:bind = useAction();
+    const lang:string = useAppSelector(getLang);
+    const [translate] = useTranslation<"translation",string>();
     return (
       <Outlet
        context={{
         val:theme,
-        set:setTheme,
         user:current,
+        lang:lang,
+        translate:translate,
         show:set
        }}
       />

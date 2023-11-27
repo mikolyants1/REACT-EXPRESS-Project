@@ -1,7 +1,9 @@
 import { ProfileBut, ProfileChan, ProfileInput, ProfileName, ProfilePhone,
  ThemeBlock, ThemeInput, ThemeText } from "../style/style"
-import { EvtC, EvtK, Type } from "../types/type.js"
-import { memo,NamedExoticComponent,useState} from 'react'
+import { Context, EvtC, EvtK, Null, Type, outlet } from "../types/type.js"
+import { memo,NamedExoticComponent,useState,useContext} from 'react'
+import { Theme } from "./Page.js";
+import { useOutletContext } from "react-router-dom";
 
 interface props {
     set:(e:EvtC)=>void,
@@ -11,17 +13,18 @@ interface props {
   };
   
  export const SetUser:NamedExoticComponent<props> = memo(
- ({name,set,val,click}:props):JSX.Element=>{
+ ({name,set,val,click}:props):Null<JSX.Element>=>{
    const [show,setShow] = useState<boolean>(false);
+   const {translate} = useOutletContext<outlet>();
       return (
          <ProfilePhone>
            <ProfileChan>
              <ProfileBut onClick={()=>setShow(true)}>
-                change {name}
+                {translate('change')} {translate('name')}
              </ProfileBut>
             {show&&(
              <ProfileBut onClick={()=>setShow(false)}>
-                close
+                {translate('close')}
              </ProfileBut>
              )}
            </ProfileChan>
@@ -40,14 +43,19 @@ interface props {
   interface themeProp{
     change:(e:EvtC)=>void,
     back:string,
-    arr:string[]
+    arr:string[],
+    name:string
   };
   
-  export const SetTheme=({arr,change,back}:themeProp):JSX.Element=>{
+  export const SetTheme=({arr,change,back,name}:themeProp):JSX.Element=>{
+    const {translate} = useContext<Context>(Theme);
+    const first:string = name.slice(0,1).toUpperCase();
+    const second:string = name.slice(1);
+    const Name:string = [first,second].join('');
     return (
         <ProfilePhone>
           <ProfileName>
-            Theme
+            {translate&&translate(Name)}
           </ProfileName>
           {arr.map((i:string):JSX.Element=>(
             <ThemeBlock>
@@ -57,7 +65,7 @@ interface props {
                value={i}
                checked={back==i}
                type="radio"
-               name="theme" 
+               name={name} 
                 />
               <ThemeText>
                  {i}

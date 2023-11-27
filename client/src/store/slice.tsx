@@ -4,21 +4,25 @@ import { bind } from './store'
 
 export interface Redux{
     current:string,
-    theme:string
+    theme:string,
+    lang:string
 }
 export type Pay = PayloadAction<string>
 export type actions = CaseReducerActions<{
     setTheme:ActionCreatorWithPayload<string,`messanger/setTheme`>,
     setId:ActionCreatorWithPayload<string,`messanger/setId`>,
+    setLang:ActionCreatorWithPayload<string,`messanger/setLang`>
 },'messanger'>
 const initialState:Redux = {
     current:'',
-    theme:'white'
+    theme:'white',
+    lang:"en"
 };
 
 const slice:Slice<Redux,{
     setTheme:(state:Redux,action:Pay)=>void,
     setId:(state:Redux,action:Pay)=>void,
+    setLang:(state:Redux,actopn:Pay)=>void
 },'messanger'> = createSlice({
     name:'messanger',
     initialState,
@@ -28,6 +32,9 @@ const slice:Slice<Redux,{
        },
        setId:(state:Redux,action:Pay):void=>{
         state.current = action.payload
+       },
+       setLang:(state:Redux,action:Pay):void=>{
+         state.lang = action.payload
        }
     }
 });

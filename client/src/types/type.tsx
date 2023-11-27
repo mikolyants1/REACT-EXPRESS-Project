@@ -1,6 +1,5 @@
 import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction} from 'react'
-import {ActionCreatorWithPayload} from '@reduxjs/toolkit'
-
+import {TFunction} from 'i18next'
 export type Type<T> = undefined|T
 export type Str<T> = string|T
 export type Null<T> = null|T
@@ -89,13 +88,14 @@ export interface data{
 export interface outlet{
   val:string,
   user:string,
-  show:Dispatch<SetStateAction<boolean>>,
-  set:ActionCreatorWithPayload<string,`messanger/setTheme`>
+  lang:string,
+  translate:TFunction<"translation",string>,
+  show:Dispatch<SetStateAction<boolean>>
 }
 export interface Context{
     val:string,
-    set:ActionCreatorWithPayload<string,`messanger/setTheme`>|string,
     user:string,
+    translate:Null<TFunction<"translation",string>>,
     hide:()=>void
   };
   export interface state{

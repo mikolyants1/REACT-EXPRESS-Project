@@ -36,6 +36,7 @@ export const store:ToolkitStore=configureStore({
 export type bind=CaseReducerActions<{
     setTheme:(state:Redux,action:Pay)=>void,
     setId:(state:Redux,action:Pay)=>void,
+    setLang:(state:Redux,action:Pay)=>void
 },"messanger">;
 
 type RootState = ReturnType<typeof store.getState>;
@@ -49,6 +50,8 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const getTheme=({mess}:state)=>mess.theme;
 
 export const getCurrent=({mess}:state)=>mess.current;
+
+export const getLang=({mess}:state)=>mess.lang;
 
 setupListeners(store.dispatch);
 export const useAction=():bind=>bindActionCreators(action,useAppDispatch());

@@ -6,11 +6,12 @@ import { Link} from "react-router-dom"
 import { Theme } from "./Page.js"
 import { useGetUserQuery } from "../store/Api.js"
 import { Loader, Error } from "./Loader.js"
-import { Context, SettProps, data, query } from "../types/type.js"
+import { Context, Null, SettProps, data, query } from "../types/type.js"
 
-export default function NavSett({set,call}:SettProps):JSX.Element{
+export default function NavSett({set,call}:SettProps):Null<JSX.Element>{
   const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
-  const {user,val,hide} = useContext<Context>(Theme);
+  const {user,val,hide,translate} = useContext<Context>(Theme);
+  if (!translate) return null;
   const [idx,setIdx] = useState<number>(-1);
   const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
     const toggle=():void=>{
@@ -32,7 +33,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
                     {data?.name}
                 </ContactName>
                 <ContactTime>
-                   update
+                   {translate("update")}
                 </ContactTime>
               </ContactText>
             </ContactBlock>
@@ -43,7 +44,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
                 &#9733;
               </SetLogo>
               <SetText>
-                Main   
+                {translate("Main")}  
               </SetText>
             </SetBlock>
           </Link>
@@ -54,7 +55,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
                 &diams;
               </ThemeLogo>
               <SetText>
-                Theme 
+                {translate("Theme")}
               </SetText>
             </SetBlock>
           </Link>
