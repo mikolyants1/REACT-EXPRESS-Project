@@ -3,25 +3,26 @@ ActionCreatorWithPayload} from '@reduxjs/toolkit'
 import { bind } from './store'
 
 export interface Redux{
-    current:string,
+    current:number,
     theme:string,
     lang:string
 }
 export type Pay = PayloadAction<string>
+export type Pay1 = PayloadAction<number>
 export type actions = CaseReducerActions<{
     setTheme:ActionCreatorWithPayload<string,`messanger/setTheme`>,
     setId:ActionCreatorWithPayload<string,`messanger/setId`>,
     setLang:ActionCreatorWithPayload<string,`messanger/setLang`>
 },'messanger'>
 const initialState:Redux = {
-    current:'',
+    current:0,
     theme:'white',
     lang:"en"
 };
 
 const slice:Slice<Redux,{
     setTheme:(state:Redux,action:Pay)=>void,
-    setId:(state:Redux,action:Pay)=>void,
+    setId:(state:Redux,action:Pay1)=>void,
     setLang:(state:Redux,actopn:Pay)=>void
 },'messanger'> = createSlice({
     name:'messanger',
@@ -30,7 +31,7 @@ const slice:Slice<Redux,{
        setTheme:(state:Redux,action:Pay):void=>{
         state.theme = action.payload
        },
-       setId:(state:Redux,action:Pay):void=>{
+       setId:(state:Redux,action:Pay1):void=>{
         state.current = action.payload
        },
        setLang:(state:Redux,action:Pay):void=>{

@@ -2,7 +2,7 @@ import { Navigate, Params, useOutletContext,
  useParams } from "react-router-dom";
 import {  HeaderBlock, LogoText, ProfileBlock,
  ProfileChan,ProfileDel, ProfileDis, ProfileLogo,
- ProfileName,ProfilePhone,ProfileText, SetContain, SetMain,
+ ProfileName,ProfilePass,ProfileText, SetContain, SetMain,
  SetTitle, avatar, styleObj } from "../../../style/style.js";
 import { useCallback,useState} from "react";
 import { useChanUserMutation, useDelUserMutation,
@@ -14,7 +14,7 @@ import { Error, Loader } from "../../Loader.js";
 
 interface state{
   name:string,
-  phone:string,
+  pass:string,
 }
 
 interface Props{
@@ -28,11 +28,11 @@ export default function Setting({children}:Props):JSX.Element{
  const {val,user,lang,translate} = useOutletContext<outlet>();
  const {id}:Readonly<Params<string>> = useParams();
  const [auth,setAuth] = useState<boolean>(false);
- const [state,setState] = useState<state>({name:'',phone:''});
+ const [state,setState] = useState<state>({name:'',pass:''});
 const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
- const {setId,setLang,setTheme}:bind = useAction();
+ const {setLang,setTheme}:bind = useAction();
 
  const toogle=(set:union)=>(e:EvtC)=>{
    set(e.target.value);
@@ -44,22 +44,21 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  },[data]);
  const press=useCallback((e:EvtK):void=>{
    if (e.key==='Enter'){
-    const {name,phone}:state = state;
+    const {name,pass}:state = state;
     if (typeof data!=='undefined'){
     if (e.currentTarget.name=='name'&&name!==''){
         chanData({
           id:data.id,
           name:name,
-          phone:data.phone,
+          pass:data.pass,
         });
      };
-    if (e.currentTarget.name=='phone'&&phone!==''){
+    if (e.currentTarget.name=='pass'&&pass!==''){
         chanData({
           id:data.id,
           name:data.name,
-          phone:phone,
+          pass:pass,
         });
-       setId(phone);
       };
     };
   };
@@ -94,16 +93,16 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
             </ProfileName>
           </ProfileText>
         </ProfileBlock>  
-        <ProfilePhone>
+        <ProfilePass>
           <ProfileText>
             <ProfileDis>
-              {translate("phone")}
+              {translate("password")}
             </ProfileDis>
             <ProfileName>
-             {data?.phone}
+             {data?.pass}
             </ProfileName>
           </ProfileText>
-        </ProfilePhone>
+        </ProfilePass>
          <SetUser
           set={change}
           val={data?.name}
@@ -112,11 +111,11 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
           />
          <SetUser
           set={change}
-          val={data?.phone}
+          val={data?.pass}
           click={press}
-          name='phone'
+          name='pass'
           />
-        <ProfilePhone>
+        <ProfilePass>
           <ProfileChan>
             <ProfileDel 
              onClick={()=>setAuth(true)}>
@@ -127,7 +126,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
               {translate('Delete account')}
             </ProfileDel>
           </ProfileChan>
-        </ProfilePhone>
+        </ProfilePass>
       </>
        ):(
         <>

@@ -18,8 +18,8 @@ class User {
     getUser(req:Request,res:Response){
         const data:string = readFileSync(Base,'utf-8');
         const users:data[] = JSON.parse(data);
-        const id:string = req.params.id;
-        const user:Type<data> = users.find((i:data)=>i.phone==id);
+        const id:number = Number(req.params.id);
+        const user:Type<data> = users.find((i:data)=>i.id==id);
         if (!user){
          emitter.test('getUser');
          return res.status(404);
@@ -30,7 +30,7 @@ class User {
         if (!req.body) return res.status(404);
         const data:string = readFileSync(Base,'utf-8');
         const name:string = req.body.name;
-        const phone:string = req.body.phone;
+        const pass:string = req.body.pass;
         const users:data[] = JSON.parse(data);
         const sortId:number = [...users]
         .sort((x:data,y:data)=>y.id-x.id)[0].id;
@@ -38,7 +38,7 @@ class User {
         const user:data = {
             id:id+1,
             name:name,
-            phone:phone,
+            pass:pass,
             message:[]
         };
         const newArr:data[] = [ ...users,user];
@@ -67,7 +67,7 @@ class User {
         if (!req.body) return res.status(404);
         const id:number = Number(req.params.id);
         const name:string = req.body.name;
-        const phone:string = req.body.phone;
+        const pass:string = req.body.pass;
         const data:string = readFileSync(Base,'utf-8');
         const users:data[] = JSON.parse(data);
         const index:number = users.findIndex((i:data)=>i.id==id);
@@ -79,7 +79,7 @@ class User {
           ...item,
           id:id,
           name:name,
-          phone:phone,
+          pass:pass,
         };
         const newArr:data|data[] = [ ...left, user, ...right];
         const newJson:string = JSON.stringify(newArr);

@@ -9,6 +9,11 @@ export type EvtC = ChangeEvent<HTMLInputElement>
 export type EvtK = KeyboardEvent<HTMLInputElement>
 export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
 
+export interface stateUser {
+    name:string,
+    pass:string,
+    auth:boolean
+   }
 export interface mess{
     text:string,
     date:string,
@@ -19,11 +24,11 @@ export interface mess{
  export interface query1{
     id:number,
     name:string,
-    phone:string,
+    pass:string,
   }
  export interface query2{
     id1:string,
-    id2:string,
+    id2:number,
     text:string,
     date:string,
     now:number,
@@ -32,7 +37,7 @@ export interface mess{
   }
  export interface user{
    name:string,
-   phone:string,
+   pass:string,
   }
   export interface message{
     id:number,
@@ -41,7 +46,7 @@ export interface mess{
   export interface data{
     id:number,
     name:string,
-    phone:string,
+    pass:string,
     message:message[]
   }
  export interface body{
@@ -50,11 +55,11 @@ export interface mess{
     now:number,
     day:number,
     month:string,
-    id:string
+    id:number
   }
   export interface body1{
     text?:string,
-    id:string,
+    id:number,
     now:number
   }
  export interface res<T> {
@@ -84,19 +89,19 @@ export interface message{
 export interface data{
   id:number,
   name:string,
-  phone:string,
+  pass:string,
   message:message[]
 }
 export interface outlet{
   val:string,
-  user:string,
+  user:number,
   lang:string,
   translate:TFunction<"translation",string>,
   show:Dispatch<SetStateAction<boolean>>
 }
 export interface Context{
     val:string,
-    user:string,
+    user:number,
     translate:Null<TFunction<"translation",string>>,
     hide:()=>void
   };

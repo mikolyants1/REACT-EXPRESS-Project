@@ -38,9 +38,9 @@ export default function NavChats({set,id,call,caller}:chatProps):Null<JSX.Elemen
         dispatch({data:newData});
       };
      };
-     const getUser=(arg:string):Type<message>=>{
+     const getUser=(arg:number):Type<message>=>{
       if (!data) return undefined;
-      const {id,message}:data = state.data.find((i:data)=>i.phone==arg);
+      const {id,message}:data = state.data.find((i:data)=>i.id==arg);
       const item1:Type<message> = data.message.find((i:message)=>i.id==id);
       const item2:Type<message> = message.find((i:message)=>i.id==data.id);
       return item1||item2;
@@ -49,7 +49,7 @@ export default function NavChats({set,id,call,caller}:chatProps):Null<JSX.Elemen
        async function Prom():Promise<void>{
         return await axios.get('http://localhost:5000/user')
         .then(({data}:AxiosResponse<data[]>):void=>{
-          const date:Type<data> = data.find((i:data)=>i.phone==user);
+          const date:Type<data> = data.find((i:data)=>i.id==user);
           dispatch({data:data});
           setData(date);
         })
@@ -82,22 +82,22 @@ export default function NavChats({set,id,call,caller}:chatProps):Null<JSX.Elemen
             />
            )}
          </>
-        {state.data.map(({name,phone}:data,i:number):Null<JSX.Element>=>{
+        {state.data.map(({name,id:userId}:data,i:number):Null<JSX.Element>=>{
         if (id) {
-        return phone!==user ? (   
-            <Profile click={()=>toggle(i)} name={name} path={phone}
-             logo={name.slice(0,1).toUpperCase()} key={phone}>
+        return userId!==user ? (   
+            <Profile click={()=>toggle(i)} name={name} path={userId}
+             logo={name.slice(0,1).toUpperCase()} key={userId}>
               <ContactTime>
                  offline
               </ContactTime>
             </Profile>
           ) : null
          } else {
-           const show:Type<message> = getUser(phone)
-            return show&&(phone!==user) ? (
+           const show:Type<message> = getUser(userId)
+            return show&&(userId!==user) ? (
               <Profile
-               key={phone}
-               path={phone}
+               key={userId}
+               path={userId}
                fill={`${idx==i}`}
                click={()=>setIndex(i)}
                logo={name.slice(0,1).toUpperCase()}

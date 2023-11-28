@@ -1,10 +1,10 @@
 import express, { Router } from 'express'
 import {getUser,getUsers,addUser,chanUser, delUser} from './UserControl.js'
-import  {validUser,check, validPhone} from './valid.js'
+import  {validUser,check, validPass} from './valid.js'
 
 const router:Router = express.Router()
  
- router.put('/:id',validPhone,check,chanUser)
+ router.put('/:id',validPass,check,chanUser)
 
  router.delete('/:id',delUser)
  

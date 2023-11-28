@@ -4,10 +4,11 @@ import { Request,Response,NextFunction } from 'express'
 
 export const validUser:ValidationChain[] = [
   body('name').notEmpty(),
-  body('phone').isLength({min:3})
+  body('pass').isLength({min:3})
    ]
-export const validPhone:ValidationChain[] = [
-  body('name').notEmpty()
+export const validPass:ValidationChain[] = [
+  body('name').notEmpty(),
+  body("pass").notEmpty()
 ]
 export const validMess:ValidationChain[] = [
   body('text').notEmpty(),

@@ -9,11 +9,11 @@ import i18n from "../../translate/Translate.js";
 import {useTranslation} from 'react-i18next'
 
 export const Theme = createContext<Context>(
-{val:'',user:'',translate:null,hide:()=>{}});
+{val:'',user:0,translate:null,hide:()=>{}});
 
 export default function Page():JSX.Element{
  const theme:string = useAppSelector(getTheme);
- const current:string = useAppSelector(getCurrent);
+ const current:number = useAppSelector(getCurrent);
  const lang:string = useAppSelector(getLang);
  const [translate] = useTranslation();
  const [show,setShow] = useState<boolean>(true);

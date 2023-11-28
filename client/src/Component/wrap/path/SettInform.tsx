@@ -1,4 +1,4 @@
-import { ProfileBut, ProfileChan, ProfileInput, ProfileName, ProfilePhone,
+import { ProfileBut, ProfileChan, ProfileInput, ProfileName, ProfilePass,
  ThemeBlock, ThemeInput, ThemeText } from "../../../style/style.js"
 import { Context, EvtC, EvtK, Null, Type, outlet } from "../../../types/type.js"
 import { memo,NamedExoticComponent,useState,useContext} from 'react'
@@ -17,10 +17,10 @@ interface props {
    const [show,setShow] = useState<boolean>(false);
    const {translate} = useOutletContext<outlet>();
       return (
-         <ProfilePhone>
+         <ProfilePass>
            <ProfileChan>
              <ProfileBut onClick={()=>setShow(true)}>
-                {translate('change')} {translate('name')}
+                {translate('change')} {translate(name)}
              </ProfileBut>
             {show&&(
              <ProfileBut onClick={()=>setShow(false)}>
@@ -36,7 +36,7 @@ interface props {
             onKeyUp={click}
             />
            )}
-         </ProfilePhone>
+         </ProfilePass>
       );
   });
   
@@ -53,7 +53,7 @@ interface props {
     const second:string = name.slice(1);
     const Name:string = [first,second].join('');
     return (
-        <ProfilePhone>
+        <ProfilePass>
           <ProfileName>
             {translate&&translate(Name)}
           </ProfileName>
@@ -72,6 +72,6 @@ interface props {
              </ThemeText>
            </ThemeBlock>
             ))}
-        </ProfilePhone>
+        </ProfilePass>
     );
   };

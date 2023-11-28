@@ -10,7 +10,7 @@ import Setting from "./wrap/path/Setting.js"
 export const Rout:FC=():JSX.Element=>{
     const set:Dispatch<SetStateAction<boolean>> = useOutletContext();
     const theme:string = useAppSelector(getTheme);
-    const current:string = useAppSelector(getCurrent);
+    const current:number = useAppSelector(getCurrent);
     const lang:string = useAppSelector(getLang);
     const [translate] = useTranslation<"translation",string>();
     return (

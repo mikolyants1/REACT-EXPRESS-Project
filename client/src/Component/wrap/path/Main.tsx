@@ -29,12 +29,13 @@ export default function Main({children}:props):JSX.Element {
  const [delMess] = useDelMessMutation();
  const ref = useRef<HTMLInputElement>(null!);
  const {val,user,translate} = useOutletContext<outlet>();
+ if (!id) return <Error back={val} />
  const [state,dispatch] = useReducer(
   (prv:state,nxt:action)=>({...prv,...nxt}),
   {now:0,text:"",status:false}
  )
  const result:query<data>[] = [
-  useGetUserQuery<query<data>>(id),
+  useGetUserQuery<query<data>>(Number(id)),
   useGetUserQuery<query<data>>(user),
   ];
  const getMessage=(d1:data,d2:data):newMess[]=>{
@@ -85,7 +86,7 @@ export default function Main({children}:props):JSX.Element {
  };
  const deleteMess=(now:number):void=>{
   if (typeof id!=="undefined"){
-    console.log(now)
+
     delMess({
       id1:id,
       id2:user,

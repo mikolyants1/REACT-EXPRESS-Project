@@ -1,36 +1,37 @@
 import { EntryBlock, EntryBut, EntryInput, EntrySub,
- EntryTitle, InputBlock } from "../../style/style.js";
-import { useReducer } from "react";
+ EntryTitle, InputBlock, LoginError, RegistLink } from "../../style/style.js";
+import { useReducer, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { bind, useAction } from "../../store/store.js";
 import { Error, Loader } from "../Loader.js";
-import { EvtC, EvtK,Str,data, query} from "../../types/type.js";
+import { EvtC, EvtK,Str,Type,data, query, stateUser} from "../../types/type.js";
 import { useGetUsersQuery } from "../../store/Api.js";
+import { Link } from "react-router-dom";
 
- interface state {
-  text:string,
-  auth:boolean,
-  reg:boolean
- }
  type action = Record<string,Str<boolean>>
 
 export default function Entry():JSX.Element{
   const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('')
   const [state,dispatch] = useReducer(
-  (prev:state,next:action)=>({...prev,...next}),
-  {text:"",auth:false,reg:false});
+  (prev:stateUser,next:action)=>({...prev,...next}),
+  {name:"",pass:"",auth:false});
+  const [error,setError] = useState<boolean>(false);
   const { setId }:bind = useAction();
 
-  const change=(e:EvtC):void=>{
-   dispatch({text:e.target.value});
+  const change=({target}:EvtC):void=>{
+   dispatch({[target.name]:target.value});
   };
   const check=():void=>{
    if (typeof data !== "undefined"){
-    if (data.some(({phone}:data)=>phone==state.text)){
+    const {name,pass}:stateUser = state;
+    const user:Type<data> = data.find((i:data)=>(
+      i.name == name && i.pass == pass
+    ));
+    if (user){
       dispatch({auth:true});
-      setId(state.text);
+      setId(user.id);
      }else{
-      dispatch({reg:true});
+      setError(true);
       };
     };
   };
@@ -39,10 +40,7 @@ export default function Entry():JSX.Element{
   };
   
   if (state.auth){
-    return <Navigate to={`/page/main/${state.text}`} />
-  };
-  if (state.reg){
-    return <Navigate to={`/reg/${state.text}`} />
+    return <Navigate to={`/page/main/${state.pass}`} />
   };
     return (
         <EntryBlock>
@@ -53,22 +51,41 @@ export default function Entry():JSX.Element{
             ) : (
          <>
           <EntryTitle>
-             Phone
+             Entrance
           </EntryTitle>
           <EntrySub>
-             Enter your phone number
+             Enter your username
           </EntrySub>
           <InputBlock>
             <EntryInput
              onChange={change}
              onKeyUp={handler}
+             name="name"
                />
-            </InputBlock>
-            <EntryBut onClick={check}>
-              login
-            </EntryBut>
-          </>
-          )}
-        </EntryBlock>
+          </InputBlock>
+          <EntrySub>
+             Enter your password
+          </EntrySub>
+          <InputBlock>
+            <EntryInput
+             onChange={change}
+             onKeyUp={handler}
+             name="pass"
+               />
+          </InputBlock>
+          {error&&<LoginError>
+            user not found
+          </LoginError>}
+          <EntryBut onClick={check}>
+            login
+          </EntryBut>
+          <RegistLink>
+            <Link to={`/reg`}>
+              registration
+            </Link>
+          </RegistLink>
+        </>
+        )}
+      </EntryBlock>
        );
 };

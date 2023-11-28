@@ -6,8 +6,8 @@ import { Context } from "../../../types/type";
 import { Link } from "react-router-dom";
 
  interface props {
-    key?:string,
-    path:string,
+    key?:number,
+    path:number,
     fill?:string,
     name:string,
     logo:string,

@@ -27,9 +27,19 @@ export const avatar:styleObj[]=[
     }
 ]
 export const EntryBlock:IStyledComponent<'web',BaseObject> = styled.div`
-margin:250px auto;
+margin:200px auto;
 width:300px;
 text-align:center;
+`
+export const LoginError:IStyledComponent<'web',BaseObject> = styled.div`
+width:100%;
+text-align:center;
+color:red;
+font-size:16px;
+margin-top:5px;
+`
+export const RegistLink:IStyledComponent<"web",BaseObject> = styled(LoginError)`
+color:black;
 `
 export const EntryTitle:IStyledComponent<'web',BaseObject> = styled.div`
 width:100%;
@@ -40,7 +50,7 @@ font-weight:bold
 export const EntrySub:IStyledComponent<'web',BaseObject> = styled.div`
 width:80%;
 text-align:center;
-margin:20px auto;
+margin:10px auto;
 font-size:20px
 `
 export const InputBlock:IStyledComponent<'web',BaseObject> = styled.div`
@@ -51,7 +61,8 @@ export const InputBlock:IStyledComponent<'web',BaseObject> = styled.div`
 `
 export const EntryInput:IStyledComponent<'web',{
   onChange:(e:EvtC)=>void,
-  onKeyUp:(e:EvtK)=>void
+  onKeyUp:(e:EvtK)=>void,
+  name:string
 }> = styled.input`
  width:260px;
  height:40px;
@@ -72,7 +83,7 @@ export const EntryBut:IStyledComponent<'web',{
 width:120px;
 height:40px;
 background-color:rgb(25, 222, 64);
-margin:30px auto;
+margin:10px auto;
 border-radius:20px;
 color:white;
 font-size:20px;
@@ -524,7 +535,7 @@ margin-top:10px
 export const ProfileDis:IStyledComponent<'web',BaseObject> = styled.div`
 color:grey
 `
-export const ProfilePhone:IStyledComponent<'web',BaseObject> = styled(ProfileBlock)`
+export const ProfilePass:IStyledComponent<'web',BaseObject> = styled(ProfileBlock)`
 display:block
 `
 export const ProfileChan:IStyledComponent<'web',BaseObject> = styled.div`

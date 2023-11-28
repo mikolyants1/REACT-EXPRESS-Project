@@ -3,7 +3,7 @@ import cors from 'cors'
 import UserRouter from './UserRouter.js'
 import DialogRouter from './DialogRouter.js'
 export type Type<T> = undefined|T
-export const Base:string = 'src/users.json'
+export const Base:string = 'users.json'
 export interface mess{
     text:string,
     date:string,
@@ -26,7 +26,7 @@ export interface mess{
   export interface data{
     id:number,
     name:string,
-    phone:string,
+    pass:string,
     message:message[]
   }
 

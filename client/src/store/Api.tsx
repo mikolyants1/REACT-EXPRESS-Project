@@ -47,7 +47,7 @@ const MessApi = createApi({
                 },
                invalidatesTags:['dialog'] 
             }),
-      getUser:build.query<data,Type<string>>({
+      getUser:build.query<data,number>({
          query:(id):string=>`user/${id}`,
           providesTags:['user']
         }),

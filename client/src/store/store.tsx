@@ -1,4 +1,4 @@
-import slice,{Pay, action,Redux} from "./slice";
+import slice,{Pay, action,Redux, Pay1} from "./slice";
 import storage from 'redux-persist/lib/storage'
 import {Persistor, WebStorage, persistReducer,
 persistStore} from 'redux-persist'
@@ -35,7 +35,7 @@ export const store:ToolkitStore=configureStore({
 
 export type bind=CaseReducerActions<{
     setTheme:(state:Redux,action:Pay)=>void,
-    setId:(state:Redux,action:Pay)=>void,
+    setId:(state:Redux,action:Pay1)=>void,
     setLang:(state:Redux,action:Pay)=>void
 },"messanger">;
 
