@@ -105,7 +105,7 @@ const emitter = new Emitter('dialogCheck');
     dialog?.mess.splice(idx,1);
     const newJson:string = JSON.stringify(users);
     if (!newJson){
-      emitter.test("chanMess");
+      emitter.test("delMess");
       return res.status(404);
       } ;
     writeFileSync(Base,newJson);
