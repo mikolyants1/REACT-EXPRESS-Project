@@ -88,9 +88,33 @@ const emitter = new Emitter('dialogCheck');
    writeFileSync(Base,newJson);
    res.status(200).json(newJson);
   };
+  delMess(req:Request,res:Response){
+    if (!req.body) return res.status(404);
+    const data:string = readFileSync(Base,"utf-8");
+    const {now}:body = req.body;
+    const id1:string = req.params.id;
+    const id2:string = req.body.id;
+    const users:data[] = JSON.parse(data);
+    const item:Type<data> = users.find((i:data)=>i.phone==id2);
+    const mess:Type<data> = users.find((i:data)=>i.phone==id1);
+    if (!item||!mess) return res.status(404);
+    const dialog:Type<message> = mess.message
+    .find((i:message)=>i.id==item.id);
+    const idx = dialog?.mess.findIndex((i:mess)=>i.now == now);
+    if (!idx) return res.status(404);
+    dialog?.mess.splice(idx,1);
+    const newJson:string = JSON.stringify(users);
+    if (!newJson){
+      emitter.test("chanMess");
+      return res.status(404);
+      } ;
+    writeFileSync(Base,newJson);
+    res.status(200).json(newJson);
+   };
 };
 export const {
     addMess,
     getMess,
-    chanMess
+    chanMess,
+    delMess
  } = new Dialog()

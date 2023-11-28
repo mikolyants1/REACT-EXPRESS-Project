@@ -281,7 +281,7 @@ color:${({press}:mess1)=>press=='true'
 `
 type mess2 = {
     col:string,
-    children:JSX.Element,
+    children:JSX.Element[],
     
 }
 export const MessBlock:IStyledComponent<'web',mess2> = styled.div`
@@ -319,6 +319,32 @@ export const MessContent:IStyledComponent<'web',MessProp> = styled.div`
 ({col,back}:MessProp)=>Back(col,back)
 };
  box-shadow:0 1px 1px 0 grey
+`
+interface actionAProp{
+    back:string,
+    children:JSX.Element[]
+}
+export const MessAction:IStyledComponent<'web',actionAProp> = styled(MessContent)`
+background-color:white;
+box-shadow:0 1px 1px 0 ${({back})=>back!=="black"?"grey":back};
+justify-content:space-between;
+align-items:center;
+margin-right:10px;
+height:12px;
+min-width:70px;
+`
+interface buttProp{
+    onClick:()=>void,
+    children:string
+}
+export const ChanButton:IStyledComponent<'web',buttProp> = styled.button`
+ border:none;
+ background:transparent;
+ font-size:14px;
+`
+export const DelButton:IStyledComponent<"web",buttProp> = styled(ChanButton)`
+ border-left:1px solid black;
+ color:red
 `
 export const MessDate:IStyledComponent<'web',BaseObject> = styled.div`
 width:100%;

@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
  }
 
 function NavProfile({fill,name,click,children,logo,path}:props):JSX.Element {
- const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)]
+ const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)] ;
  const left:string = name == "Main" ? 'rgb(56, 231, 120)' : one ;
  const right:string = name == "Main" ? 'rgb(177, 248, 177)' : two ;
  const {val,hide} = useContext<Context>(Theme);

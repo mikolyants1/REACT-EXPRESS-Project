@@ -53,7 +53,7 @@ export interface mess{
     id:string
   }
   export interface body1{
-    text:string,
+    text?:string,
     id:string,
     now:number
   }
@@ -108,6 +108,7 @@ export interface Context{
  export type action1 = Record<string,any|boolean>
  
  export type query3 = Omit<query2,"day"|"date"|"month">
+ export type query4 = Omit<query3,"text">
  export interface action2{
     type:number
   }

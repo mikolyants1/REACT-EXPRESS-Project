@@ -36,7 +36,7 @@ export default function Page():JSX.Element{
           <MainContent>
             <NavBlock
              show={show}
-            />
+             />
             <Outlet
              context={setShow}
             />

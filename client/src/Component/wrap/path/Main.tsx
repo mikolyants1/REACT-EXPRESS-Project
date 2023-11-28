@@ -3,11 +3,10 @@ import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
  MainInput,MessDate,Message,Name,Span,avatar,
   styleObj} from '../../../style/style.js'
 import { Params, useOutletContext, useParams } from 'react-router-dom'
-import { useChanMessMutation, useGetUserQuery,
+import { useChanMessMutation, useDelMessMutation, useGetUserQuery,
  useSetMessMutation } from '../../../store/Api.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
- newMess, outlet, query } from '../../../types/type.js'
-import {useTranslation} from 'react-i18next';
+ newMess, outlet, query } from '../../../types/type.js';
 import Messages from './Message.js'
 import Month from './Month.js'
 import { Error, Loader } from '../../Loader.js'
@@ -24,17 +23,16 @@ type action = Record<string,string|boolean|number>
 
 export default function Main({children}:props):JSX.Element {
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
- const [translate] = useTranslation();
  const {id}:Readonly<Params<string>> = useParams();
  const [addMess] = useSetMessMutation();
  const [chanMess] = useChanMessMutation();
+ const [delMess] = useDelMessMutation();
  const ref = useRef<HTMLInputElement>(null!);
- const {val,user} = useOutletContext<outlet>();
+ const {val,user,translate} = useOutletContext<outlet>();
  const [state,dispatch] = useReducer(
   (prv:state,nxt:action)=>({...prv,...nxt}),
   {now:0,text:"",status:false}
  )
-
  const result:query<data>[] = [
   useGetUserQuery<query<data>>(id),
   useGetUserQuery<query<data>>(user),
@@ -82,14 +80,30 @@ export default function Main({children}:props):JSX.Element {
        dispatch({status:false});
     };
      ref.current.value='';
+     ref.current.blur();
    };
  };
- const updateDioalog=(time:number,up:string):void=>{
-  if (up=="false") dispatch({status:true,now:time});
+ const deleteMess=(now:number):void=>{
+  if (typeof id!=="undefined"){
+    console.log(now)
+    delMess({
+      id1:id,
+      id2:user,
+      now:now
+     });
+   };
  };
-
- if (result.some(({isLoading})=>isLoading)) return <Loader back={val} />
- if (result.some(({isError})=>isError)) return <Error back={val} />
+ const updateDioalog=(time:number):void=>{
+    dispatch({status:true,now:time});
+    ref.current.focus();
+ };
+ 
+ if (result.some(({isLoading})=>isLoading)){
+   return <Loader back={val} />;
+ };
+ if (result.some(({isError})=>isError)){
+   return <Error back={val} />;
+ };
  const [{data:d1},{data:d2}]:query<data>[] = result;
  if (!d1||!d2) return <Error back={val} />
  const mess:newMess[] = getMessage(d1,d2);
@@ -125,6 +139,7 @@ export default function Main({children}:props):JSX.Element {
                    data={item}
                    col={`${id!==d2.id}`}
                    update={updateDioalog}
+                   del={deleteMess}
                    />
                 </>
                  )})}

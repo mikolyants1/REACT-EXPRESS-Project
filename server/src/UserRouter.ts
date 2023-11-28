@@ -12,6 +12,8 @@ const router:Router = express.Router()
 
  router.post('/',validUser,check,addUser)
 
+router.post('/')
+
  router.get('/',getUsers)
 
 export default router
