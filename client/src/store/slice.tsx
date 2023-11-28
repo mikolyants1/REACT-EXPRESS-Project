@@ -7,8 +7,7 @@ export interface Redux{
     theme:string,
     lang:string
 }
-export type Pay = PayloadAction<string>
-export type Pay1 = PayloadAction<number>
+export type Pay<T> = PayloadAction<T>
 export type actions = CaseReducerActions<{
     setTheme:ActionCreatorWithPayload<string,`messanger/setTheme`>,
     setId:ActionCreatorWithPayload<string,`messanger/setId`>,
@@ -21,20 +20,20 @@ const initialState:Redux = {
 };
 
 const slice:Slice<Redux,{
-    setTheme:(state:Redux,action:Pay)=>void,
-    setId:(state:Redux,action:Pay1)=>void,
-    setLang:(state:Redux,actopn:Pay)=>void
+    setTheme:(state:Redux,action:Pay<string>)=>void,
+    setId:(state:Redux,action:Pay<number>)=>void,
+    setLang:(state:Redux,actopn:Pay<string>)=>void
 },'messanger'> = createSlice({
     name:'messanger',
     initialState,
     reducers:{
-       setTheme:(state:Redux,action:Pay):void=>{
+       setTheme:(state:Redux,action:Pay<string>):void=>{
         state.theme = action.payload
        },
-       setId:(state:Redux,action:Pay1):void=>{
+       setId:(state:Redux,action:Pay<number>):void=>{
         state.current = action.payload
        },
-       setLang:(state:Redux,action:Pay):void=>{
+       setLang:(state:Redux,action:Pay<string>):void=>{
          state.lang = action.payload
        }
     }

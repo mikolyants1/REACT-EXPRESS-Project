@@ -1,4 +1,4 @@
-import slice,{Pay, action,Redux, Pay1} from "./slice";
+import slice,{Pay,action,Redux} from "./slice";
 import storage from 'redux-persist/lib/storage'
 import {Persistor, WebStorage, persistReducer,
 persistStore} from 'redux-persist'
@@ -34,9 +34,9 @@ export const store:ToolkitStore=configureStore({
 }) ;
 
 export type bind=CaseReducerActions<{
-    setTheme:(state:Redux,action:Pay)=>void,
-    setId:(state:Redux,action:Pay1)=>void,
-    setLang:(state:Redux,action:Pay)=>void
+    setTheme:(state:Redux,action:Pay<string>)=>void,
+    setId:(state:Redux,action:Pay<number>)=>void,
+    setLang:(state:Redux,action:Pay<string>)=>void
 },"messanger">;
 
 type RootState = ReturnType<typeof store.getState>;
