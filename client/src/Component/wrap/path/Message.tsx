@@ -36,7 +36,7 @@ export default function Messages(props:props):JSX.Element {
             </DelButton>
           </MessAction>}
           </>
-          <MessContent back={val} col={`${col}`}
+          <MessContent back={val} col={col}
            onClick={showUpdate}>
             <MessText>
               <MessSpan>

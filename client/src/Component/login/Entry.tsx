@@ -2,16 +2,17 @@ import { EntryBlock, EntryBut, EntryInput, EntrySub,
  EntryTitle, InputBlock, LoginError, RegistLink } from "../../style/style.js";
 import { useReducer, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { bind, useAction } from "../../store/store.js";
+import { bind, getCurrent, useAction, useAppSelector } from "../../store/store.js";
 import { Error, Loader } from "../Loader.js";
 import { EvtC, EvtK,Str,Type,data, query, stateUser} from "../../types/type.js";
-import { useGetUsersQuery } from "../../store/Api.js";
+import { useGetUsersQuery } from "../../store/endpoints.js";
 import { Link } from "react-router-dom";
 
  type action = Record<string,Str<boolean>>
 
 export default function Entry():JSX.Element{
-  const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('')
+  const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('');
+  const current:number = useAppSelector(getCurrent);
   const [state,dispatch] = useReducer(
   (prev:stateUser,next:action)=>({...prev,...next}),
   {name:"",pass:"",auth:false});
@@ -40,7 +41,7 @@ export default function Entry():JSX.Element{
   };
   
   if (state.auth){
-    return <Navigate to={`/page/main/${state.pass}`} />
+    return <Navigate to={`/page/main/${current}`} />
   };
     return (
         <EntryBlock>

@@ -27,7 +27,7 @@ export interface mess{
     pass:string,
   }
  export interface query2{
-    id1:string,
+    id1:number,
     id2:number,
     text:string,
     date:string,

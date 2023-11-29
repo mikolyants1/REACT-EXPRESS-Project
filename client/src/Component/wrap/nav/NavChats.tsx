@@ -7,9 +7,9 @@ chatProps,data, message, state } from "../../../types/type.js"
 import { Loader, Error } from "../../Loader.js"
 import Profile from "./NavProfile.js"
 
-export default function NavChats({set,id,call,caller}:chatProps):Null<JSX.Element>{
+export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
-    if (!translate) return null;
+    if (!translate) return <Error back={val} />;
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call?call:null);
     const [text,setText] = useState<string>('');

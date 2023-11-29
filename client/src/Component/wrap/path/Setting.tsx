@@ -5,12 +5,12 @@ import {  HeaderBlock, LogoText, ProfileBlock,
  ProfileName,ProfilePass,ProfileText, SetContain, SetMain,
  SetTitle, avatar, styleObj } from "../../../style/style.js";
 import { useCallback,useState} from "react";
-import { useChanUserMutation, useDelUserMutation,
- useGetUserQuery } from "../../../store/Api.js";
 import { bind, useAction } from "../../../store/store.js";
 import {  EvtC, EvtK, data, outlet, query, union } from "../../../types/type.js";
 import { SetTheme, SetUser } from "./SettInform.js";
 import { Error, Loader } from "../../Loader.js";
+import { useChanUserMutation, useDelUserMutation,
+ useGetUserQuery } from "../../../store/endpoints.js";
 
 interface state{
   name:string,
@@ -46,18 +46,20 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
    if (e.key==='Enter'){
     const {name,pass}:state = state;
     if (typeof data!=='undefined'){
+      console.log(name)
     if (e.currentTarget.name=='name'&&name!==''){
+      console.log(999)
         chanData({
           id:data.id,
           name:name,
-          pass:data.pass,
+          pass:data.pass
         });
      };
     if (e.currentTarget.name=='pass'&&pass!==''){
         chanData({
           id:data.id,
           name:data.name,
-          pass:pass,
+          pass:pass
         });
       };
     };
@@ -67,6 +69,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  if (auth) return <Navigate to='/' />
  if (isLoading) return <Loader back={val} />
  if (isError) return <Error back={val} />
+ console.log(data)
     return (
       <SetContain val={val}>
         <HeaderBlock back={val}>

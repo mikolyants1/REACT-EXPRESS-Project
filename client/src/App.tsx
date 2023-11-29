@@ -66,7 +66,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-  export default function App():JSX.Element{
+ function App():JSX.Element{
     return (
     <Provider store={store}>
       <PersistGate persistor={catched}>
@@ -76,3 +76,4 @@ const router = createBrowserRouter([
     );
   };
 
+export default App

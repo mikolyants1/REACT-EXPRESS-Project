@@ -1,7 +1,7 @@
 import slice,{Pay,action,Redux} from "./slice";
 import storage from 'redux-persist/lib/storage'
 import {Persistor, WebStorage, persistReducer,
-persistStore} from 'redux-persist'
+persistStore } from 'redux-persist'
 import {combineReducers,configureStore,bindActionCreators,
 CaseReducerActions} from '@reduxjs/toolkit'
 import {useDispatch,useSelector,TypedUseSelectorHook} from 'react-redux'
@@ -10,10 +10,10 @@ import MessApi from "./Api";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
 
- interface state{
+ interface state {
     mess:Redux
   }
-interface store{
+interface store {
     key:string,
     storage:WebStorage
 }
@@ -21,13 +21,13 @@ const config:store={
     key:'message',
     storage
 }
-const combine=combineReducers({
+const combine = combineReducers({
     mess:slice,
     [MessApi.reducerPath]:MessApi.reducer
 });
-const persist=persistReducer(config,combine);
+const persist = persistReducer(config,combine);
 
-export const store:ToolkitStore=configureStore({
+export const store:ToolkitStore = configureStore({
     reducer:persist,
     middleware:(getDefaultMiddleware:CurriedGetDefaultMiddleware)=>
     getDefaultMiddleware().concat(MessApi.middleware)
@@ -54,5 +54,7 @@ export const getCurrent=({mess}:state)=>mess.current;
 export const getLang=({mess}:state)=>mess.lang;
 
 setupListeners(store.dispatch);
+
 export const useAction=():bind=>bindActionCreators(action,useAppDispatch());
+
 export const catched:Persistor=persistStore(store);

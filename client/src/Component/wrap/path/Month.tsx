@@ -2,30 +2,30 @@
 export default (month:string):string=>{
    switch (month) {
     case "январь":
-    return "January";
+      return "January";
     case "февраль":
-    return "February";
+      return "February";
     case "март":
-    return "March";
+      return "March";
     case "апрель":
-    return "April";
+      return "April";
     case "май":
-    return "May";
+      return "May";
     case "июнь":
-    return "June";
+      return "June";
     case "июль":
-    return "July";
+      return "July";
     case "август":
-    return "August";
+      return "August";
     case "сентябрь":
-    return "September";
+      return "September";
     case "октябрь":
-    return "October";
+      return "October";
     case "ноябрь":
-    return "November";
+      return "November";
     case "декабрь":
-    return "December";
+      return "December";
     default:
-    return "";
+      return "";
    }
 }

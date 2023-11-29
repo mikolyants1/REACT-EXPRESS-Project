@@ -2,9 +2,9 @@ import { useRef,useReducer } from 'react'
 import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
  MainInput,MessDate,Message,Name,Span,avatar,
   styleObj} from '../../../style/style.js'
-import { Params, useOutletContext, useParams } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import { useChanMessMutation, useDelMessMutation, useGetUserQuery,
- useSetMessMutation } from '../../../store/Api.js'
+ useSetMessMutation } from '../../../store/endpoints.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../../../types/type.js';
 import Messages from './Message.js'
@@ -23,7 +23,7 @@ type action = Record<string,string|boolean|number>
 
 export default function Main({children}:props):JSX.Element {
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
- const {id}:Readonly<Params<string>> = useParams();
+ const id:number = Number(useParams().id);
  const [addMess] = useSetMessMutation();
  const [chanMess] = useChanMessMutation();
  const [delMess] = useDelMessMutation();
@@ -42,10 +42,11 @@ export default function Main({children}:props):JSX.Element {
   const user1:Type<message> = d1.message.find((i:message)=>i.id==d2.id);
   const user2:Type<message> = d2.message.find((i:message)=>i.id==d1.id);
   const newUser1:Type<newMess[]> = user1?.mess.map((i:mess)=>({id:d2.id,...i}));
-  const newUser2:Type<newMess[]> = user2?.mess.map((i:mess)=>({id:d2.id,...i}));
+  const newUser2:Type<newMess[]> = user2?.mess.map((i:mess)=>({id:d1.id,...i}));
   const item1:newMess[] = typeof newUser1!=='undefined' ? newUser1 : [];
   const item2:newMess[] = typeof newUser2!=='undefined' ? newUser2 : [];
   const arr:newMess[] = d2.id==d1.id ? [...item1] : [...item1,...item2];
+  console.log(arr)
   return arr.sort((x:newMess,y:newMess)=>x.now-y.now);
   }
  const showTime=(arg:mess[],i:number):boolean=>{
@@ -86,12 +87,7 @@ export default function Main({children}:props):JSX.Element {
  };
  const deleteMess=(now:number):void=>{
   if (typeof id!=="undefined"){
-
-    delMess({
-      id1:id,
-      id2:user,
-      now:now
-     });
+    delMess({id1:id,id2:user,now:now});
    };
  };
  const updateDioalog=(time:number):void=>{
@@ -126,7 +122,7 @@ export default function Main({children}:props):JSX.Element {
           <MainBlock>
             <Message>
             {mess.map((item:newMess,i:number):JSX.Element=>{
-             const {id,day,month}:newMess = item
+             const {id:userId,day,month}:newMess = item
              const right:Null<boolean> = i==0 ? null : showTime(mess,i)
              return (
                 <>
@@ -138,7 +134,7 @@ export default function Main({children}:props):JSX.Element {
                   <Messages
                    key={`s`}
                    data={item}
-                   col={`${id!==d2.id}`}
+                   col={`${userId!==user}`}
                    update={updateDioalog}
                    del={deleteMess}
                    />

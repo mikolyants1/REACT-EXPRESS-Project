@@ -3,7 +3,7 @@ import {  useState } from "react"
 import { EntryBlock,EntryTitle,EntryInput,EntrySub,
 EntryBut,InputBlock,LoginError } from '../../style/style.js'
 import { bind, getCurrent, useAction, useAppSelector } from "../../store/store.js"
-import { useAddUserMutation, useGetUsersQuery } from "../../store/Api.js"
+import { useAddUserMutation, useGetUsersQuery } from "../../store/endpoints.js"
 import { EvtC, EvtK, Type, data, query, stateUser } from "../../types/type.js"
 import { Loader ,Error } from "../Loader.js"
  
@@ -33,7 +33,7 @@ export default function Regist():JSX.Element{
     ));
    if (name&&pass){
     if (already){
-     setError({show:true,mess:" user is already exists"});
+     setError({show:true,mess:"user is already exists"});
       return;
     }
     const sortId:number = [...data].sort(

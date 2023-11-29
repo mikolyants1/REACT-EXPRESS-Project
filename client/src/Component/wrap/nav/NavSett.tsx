@@ -4,7 +4,7 @@ ContactText,ContactTime,SetBlock, SetLogo, SetText,
 import { useContext, useState } from "react"
 import { Link} from "react-router-dom"
 import { Theme } from "../Page.js"
-import { useGetUserQuery } from "../../../store/Api.js"
+import { useGetUserQuery } from "../../../store/endpoints.js"
 import { Loader, Error } from "../../Loader.js"
 import { Context, Null, SettProps, data, query } from "../../../types/type.js"
 

@@ -28,7 +28,7 @@ export default function NavBlock({show}:prop):JSX.Element{
  {Contacts:true,Chats:false,Settings:false});
  function reducer(state:state,action:action1):state{
   setTitle(arr[action.type]);
-   switch (action.type) {
+   switch (action.type){
     case 0:
       return {
         Contacts:true,
@@ -48,7 +48,7 @@ export default function NavBlock({show}:prop):JSX.Element{
         Settings:true
       };
     default:
-      return state
+      return state;
    };
  };
  const {Contacts,Chats,Settings}:state = state;

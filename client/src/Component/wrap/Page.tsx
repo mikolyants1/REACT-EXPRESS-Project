@@ -19,7 +19,6 @@ export default function Page():JSX.Element{
  const [show,setShow] = useState<boolean>(true);
  useEffect(():void=>{
   i18n.changeLanguage(lang);
-  console.log(lang)
  },[lang])
  const hideMenu=():void=>{
    setShow(false);
