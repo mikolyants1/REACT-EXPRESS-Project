@@ -106,11 +106,11 @@ export interface Context{
     hide:()=>void
   };
   export interface state{
-    data:any,
+    data:unknown,
     err:boolean,
     load:boolean
   }
- export type action1 = Record<string,any|boolean>
+ export type action1 = Record<string,unknown|boolean>
  
  export type query3 = Omit<query2,"day"|"date"|"month">
  export type query4 = Omit<query3,"text">
@@ -129,7 +129,7 @@ export interface Context{
     caller:Dispatch<SetStateAction<Null<number>>>
   }
   export interface SettProps{
-    set:Dispatch<action1>,
+    set:Dispatch<action2>,
     call:Dispatch<SetStateAction<Null<number>>>
   }
   

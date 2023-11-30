@@ -1,4 +1,4 @@
-import { useRef,useReducer } from 'react'
+import { useRef,useReducer, useCallback, useMemo } from 'react'
 import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
  MainInput,MessDate,Message,Name,Span,avatar,
   styleObj} from '../../../style/style.js'
@@ -46,7 +46,6 @@ export default function Main({children}:props):JSX.Element {
   const item1:newMess[] = typeof newUser1!=='undefined' ? newUser1 : [];
   const item2:newMess[] = typeof newUser2!=='undefined' ? newUser2 : [];
   const arr:newMess[] = d2.id==d1.id ? [...item1] : [...item1,...item2];
-  console.log(arr)
   return arr.sort((x:newMess,y:newMess)=>x.now-y.now);
   }
  const showTime=(arg:mess[],i:number):boolean=>{
@@ -85,15 +84,15 @@ export default function Main({children}:props):JSX.Element {
      ref.current.blur();
    };
  };
- const deleteMess=(now:number):void=>{
+ const deleteMess=useCallback((now:number):void=>{
   if (typeof id!=="undefined"){
     delMess({id1:id,id2:user,now:now});
    };
- };
- const updateDioalog=(time:number):void=>{
+ },[]);
+ const updateDioalog=useCallback((time:number):void=>{
     dispatch({status:true,now:time});
     ref.current.focus();
- };
+ },[]);
  
  if (result.some(({isLoading})=>isLoading)){
    return <Loader back={val} />;
@@ -121,25 +120,26 @@ export default function Main({children}:props):JSX.Element {
           </HeaderBlock>
           <MainBlock>
             <Message>
-            {mess.map((item:newMess,i:number):JSX.Element=>{
-             const {id:userId,day,month}:newMess = item
-             const right:Null<boolean> = i==0 ? null : showTime(mess,i)
-             return (
-                <>
+             {mess.map((item:newMess,i:number):JSX.Element=>{
+              const {id:userId,day,month,now}:newMess = item;
+              const right:Null<boolean> = i==0 ? null : showTime(mess,i);
+              const Item:newMess = useMemo(():newMess=>item,[]);
+               return (
+                 <>
                   {right||i==0&&(
                    <MessDate>
                      {translate(Month(month))} {day}
                    </MessDate>
                   )}
                   <Messages
-                   key={`s`}
-                   data={item}
+                   key={`${now}`}
+                   data={Item}
                    col={`${userId!==user}`}
                    update={updateDioalog}
                    del={deleteMess}
                    />
                 </>
-                 )})}
+               )})}
             </Message>
           </MainBlock>
           <FootBlock>

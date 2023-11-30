@@ -4,7 +4,7 @@ import { NavBar, NavMain, NavMenu, NavMenuBlock,
  NavTitle } from "../../../style/style.js";
 import { Theme } from "../Page.js";
 import { Loader } from "../../Loader.js";
-import { Context, Null, SettProps, action1,
+import { Context, Null, SettProps,action2,
 chatProps } from "../../../types/type.js";
 import {useTranslation} from 'react-i18next'
 
@@ -26,7 +26,7 @@ export default function NavBlock({show}:prop):JSX.Element{
  const [title,setTitle] = useState<string>(translate('Contacts'));
  const [state,dispatch] = useReducer(reducer, 
  {Contacts:true,Chats:false,Settings:false});
- function reducer(state:state,action:action1):state{
+ function reducer(state:state,action:action2):state{
   setTitle(arr[action.type]);
    switch (action.type){
     case 0:

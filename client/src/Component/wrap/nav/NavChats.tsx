@@ -28,7 +28,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         setIdx(i);
       },[])
      const sort=(e:EvtK):void=>{
-        if (e.key==='Enter'){
+        if (e.key==='Enter'&&Array.isArray(state.data)){
       const val:string = text.trim().toLocaleLowerCase()
       const newData:data[] = state.data.filter((i:data):Type<data>=>{
         if (i.name.toLocaleLowerCase().indexOf(val)!==-1){
@@ -39,7 +39,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       };
      };
      const getUser=(arg:number):Type<message>=>{
-      if (!data) return undefined;
+      if (!data||!Array.isArray(state.data)) return undefined;
       const {id,message}:data = state.data.find((i:data)=>i.id==arg);
       const item1:Type<message> = data.message.find((i:message)=>i.id==id);
       const item2:Type<message> = message.find((i:message)=>i.id==data.id);
@@ -49,9 +49,11 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        async function Prom():Promise<void>{
         return await axios.get('http://localhost:5000/user')
         .then(({data}:AxiosResponse<data[]>):void=>{
+        if (Array.isArray(data)){
           const date:Type<data> = data.find((i:data)=>i.id==user);
           dispatch({data:data});
           setData(date);
+          }
         })
         .catch(()=>dispatch({err:true}))
         .finally(()=>dispatch({load:false}))
@@ -60,6 +62,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       },[]);
   if (state.load) return <Loader back={val} />
   if (state.err) return <Error back={val} />
+
     return (
         <>
         <BlockInput>
@@ -82,7 +85,8 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
             />
            )}
          </>
-        {state.data.map(({name,id:userId}:data,i:number):Null<JSX.Element>=>{
+        {Array.isArray(state.data)&&state.data.map(
+        ({name,id:userId}:data,i:number):Null<JSX.Element>=>{
         if (id) {
         return userId!==user ? (   
             <Profile click={()=>toggle(i)} name={name} path={userId}

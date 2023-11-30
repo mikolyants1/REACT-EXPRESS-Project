@@ -69,7 +69,6 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  if (auth) return <Navigate to='/' />
  if (isLoading) return <Loader back={val} />
  if (isError) return <Error back={val} />
- console.log(data)
     return (
       <SetContain val={val}>
         <HeaderBlock back={val}>

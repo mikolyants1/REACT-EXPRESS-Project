@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import { ChanButton, DelButton, MessAction, MessBlock, MessContent,
  MessSpan,MessText, MessTime } from "../../../style/style";
 import { newMess, outlet } from "../../../types/type";
-import {useState} from 'react';
+import {memo, useState} from 'react';
 
 interface props {
     key:string,
@@ -12,10 +12,11 @@ interface props {
     del:(now:number)=>void
 }
 
-export default function Messages(props:props):JSX.Element {
+function Messages(props:props):JSX.Element {
   const {val,translate} = useOutletContext<outlet>();
   const {update,del,data,col}:props = props;
-  const [show,setShow] = useState(false);
+  const [show,setShow] = useState<boolean>(false);
+  console.log(3)
   const showUpdate=()=>{
     setShow((prev:boolean)=>!prev);
   };
@@ -24,7 +25,7 @@ export default function Messages(props:props):JSX.Element {
     setShow(false);
   };
     return (
-        <MessBlock col={`${col}`}>
+        <MessBlock col={col}>
           <>
           {show&&col=="false"&&
           <MessAction back={val}>
@@ -50,3 +51,5 @@ export default function Messages(props:props):JSX.Element {
         </MessBlock>
     )
 }
+
+export default memo(Messages)
