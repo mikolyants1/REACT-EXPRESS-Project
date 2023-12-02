@@ -55,7 +55,7 @@ export default function Main({children}:props):JSX.Element {
    dispatch({text:e.target.value});
  };
  const press=(e:EvtK):void=>{
-   if (e.key==='Enter'&&typeof id!=='undefined'){
+  if (e.key==='Enter'&&typeof id!=='undefined'){
     if (!state.status){
      const date:Date = new Date();
      const our:number = date.getHours();
@@ -78,7 +78,7 @@ export default function Main({children}:props):JSX.Element {
         text:state.text,
         now:state.now,
        });
-       dispatch({status:false});
+      dispatch({status:false});
     };
      ref.current.value='';
      ref.current.blur();
@@ -126,7 +126,7 @@ export default function Main({children}:props):JSX.Element {
               const Item:newMess = useMemo(():newMess=>item,[]);
                return (
                  <>
-                  {right||i==0&&(
+                  {(right||i==0)&&(
                    <MessDate>
                      {translate(Month(month))} {day}
                    </MessDate>
