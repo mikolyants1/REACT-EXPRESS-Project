@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom"
 import {  useState } from "react"
 import { EntryBlock,EntryTitle,EntryInput,EntrySub,
-EntryBut,InputBlock,LoginError } from '../../style/style.js'
-import { bind, getCurrent, useAction, useAppSelector } from "../../store/store.js"
-import { useAddUserMutation, useGetUsersQuery } from "../../store/endpoints.js"
-import { EvtC, EvtK, Type, data, query, stateUser } from "../../types/type.js"
-import { Loader ,Error } from "../Loader.js"
+EntryBut,InputBlock,LoginError } from '../../../style/style.js'
+import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js"
+import { useAddUserMutation, useGetUsersQuery } from "../../../store/api/endpoints.js"
+import { EvtC, EvtK, Type, data, query, stateUser } from "../../../types/type.js"
+import { Loader ,Error } from "../../ui/Loader.js"
  
 type state = Omit<stateUser,"auth">
 interface err{

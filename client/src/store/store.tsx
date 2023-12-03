@@ -1,4 +1,4 @@
-import slice,{Pay,action,Redux} from "./slice";
+import slice,{Pay,action,Redux} from "./slices/slice";
 import storage from 'redux-persist/lib/storage'
 import {Persistor, WebStorage, persistReducer,
 persistStore } from 'redux-persist'
@@ -6,7 +6,7 @@ import {combineReducers,configureStore,bindActionCreators,
 CaseReducerActions} from '@reduxjs/toolkit'
 import {useDispatch,useSelector,TypedUseSelectorHook} from 'react-redux'
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
-import MessApi from "./Api";
+import MessApi from "./api/Api";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
 

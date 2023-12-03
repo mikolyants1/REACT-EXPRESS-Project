@@ -1,11 +1,11 @@
 import { EntryBlock, EntryBut, EntryInput, EntrySub,
- EntryTitle, InputBlock, LoginError, RegistLink } from "../../style/style.js";
+ EntryTitle, InputBlock, LoginError, RegistLink } from "../../../style/style.js";
 import { useReducer, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { bind, getCurrent, useAction, useAppSelector } from "../../store/store.js";
-import { Error, Loader } from "../Loader.js";
-import { EvtC, EvtK,Str,Type,data, query, stateUser} from "../../types/type.js";
-import { useGetUsersQuery } from "../../store/endpoints.js";
+import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
+import { Error, Loader } from "../../ui/Loader.js";
+import { EvtC, EvtK,Str,Type,data, query, stateUser} from "../../../types/type.js";
+import { useGetUsersQuery } from "../../../store/api/endpoints.js";
 import { Link } from "react-router-dom";
 
  type action = Record<string,Str<boolean>>

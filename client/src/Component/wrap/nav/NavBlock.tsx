@@ -3,15 +3,15 @@ LazyExoticComponent,ComponentType,lazy} from "react";
 import { NavBar, NavMain, NavMenu, NavMenuBlock,
  NavTitle } from "../../../style/style.js";
 import { Theme } from "../Page.js";
-import { Loader } from "../../Loader.js";
+import { Loader } from "../../ui/Loader.js";
 import { Context, Null, SettProps,action2,
 chatProps } from "../../../types/type.js";
 import {useTranslation} from 'react-i18next'
 
 const NavChats:LazyExoticComponent<
-ComponentType<chatProps>> = lazy(()=>import("./NavChats.js"));
+ComponentType<chatProps>> = lazy(()=>import("./pages/NavChats.js"));
 const NavSett:LazyExoticComponent<
-ComponentType<SettProps>> = lazy(()=>import("./NavSett.js"));
+ComponentType<SettProps>> = lazy(()=>import("./pages/NavSett.js"));
 
 interface prop{
  show:boolean

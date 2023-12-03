@@ -1,6 +1,6 @@
-import { HeaderMenu, MenuButton } from "../style/style.js";
+import { HeaderMenu, MenuButton } from "../../../style/style.js";
 import { useOutletContext } from "react-router-dom";
-import { outlet } from "../types/type.js";
+import { outlet } from "../../../types/type.js";
 
 export default function ToogleMenu():JSX.Element{
  const {val,show,translate} = useOutletContext<outlet>();

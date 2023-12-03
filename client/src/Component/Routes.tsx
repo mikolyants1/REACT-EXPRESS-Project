@@ -2,7 +2,7 @@ import { Dispatch, FC, SetStateAction } from "react"
 import { getCurrent, getLang, getTheme,
  useAppSelector } from "../store/store"
 import { Outlet, useOutletContext } from "react-router-dom"
-import ToogleMenu from "./Toggle.js"
+import ToogleMenu from "./ui/buttons/Toggle.js"
 import {useTranslation} from 'react-i18next'
 import Main from "./wrap/path/Main.js"
 import Setting from "./wrap/path/Setting.js"

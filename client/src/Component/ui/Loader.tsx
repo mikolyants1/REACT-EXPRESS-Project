@@ -1,8 +1,10 @@
-import { Block ,Spin } from '../style/style.js';
+import { Block ,Spin } from '../../style/style.js';
 import { useState,useEffect } from 'react';
+
 interface load{
-    back:string
-}
+  back:string
+};
+
 export function Loader({back}:load):JSX.Element{
  const [spin,setSpin]=useState<number>(0);
   useEffect(():void=>{

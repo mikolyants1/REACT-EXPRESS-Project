@@ -1,5 +1,5 @@
-import Entry from './Component/login/Entry.js'
-import Regist from './Component/login/Regist.js'
+import Entry from './Component/wrap/login/Entry.js'
+import Regist from './Component/wrap/login/Regist.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import './index.css'
@@ -66,8 +66,8 @@ const router = createBrowserRouter([
   }
 ]);
 
- function App():JSX.Element{
-    return (
+function App():JSX.Element{
+  return (
     <Provider store={store}>
       <PersistGate persistor={catched}>
         <RouterProvider router={router} />

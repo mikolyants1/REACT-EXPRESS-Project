@@ -1,8 +1,8 @@
 import { ContactBlock, ContactLogo, ContactName,
-ContactText, avatar, styleObj } from "../../../style/style";
+ContactText, avatar, styleObj } from "../../../../../style/style";
 import {memo,useContext} from 'react'
-import { Theme } from "../Page";
-import { Context } from "../../../types/type";
+import { Theme } from "../../../Page";
+import { Context } from "../../../../../types/type";
 import { Link } from "react-router-dom";
 
  interface props {

@@ -1,9 +1,9 @@
 import { ProfileBut, ProfileChan, ProfileInput, ProfileName, ProfilePass,
- ThemeBlock, ThemeInput, ThemeText } from "../../../style/style.js"
-import { Context, EvtC, EvtK, Null, Type, outlet } from "../../../types/type.js"
+ThemeBlock, ThemeInput, ThemeText } from "../../../../style/style.js"
+import { Context, EvtC, EvtK, Null, Type, outlet } from "../../../../types/type.js"
 import { memo,NamedExoticComponent,useState,useContext} from 'react'
 import { useOutletContext } from "react-router-dom";
-import { Theme } from "../Page.js";
+import { Theme } from "../../Page.js";
 
 interface props {
     set:(e:EvtC)=>void,
@@ -12,7 +12,7 @@ interface props {
     click:(e:EvtK)=>void
   };
   
- export const SetUser:NamedExoticComponent<props> = memo(
+export const SetUser:NamedExoticComponent<props> = memo(
  ({name,set,val,click}:props):Null<JSX.Element>=>{
    const [show,setShow] = useState<boolean>(false);
    const {translate} = useOutletContext<outlet>();

@@ -1,11 +1,11 @@
-import { BlockInput, ContactInput, ContactTime} from "../../../style/style.js"
+import { BlockInput, ContactInput, ContactTime} from "../../../../style/style.js"
 import { useCallback, useContext, useEffect, useReducer, useState } from "react"
 import axios, { AxiosResponse } from "axios"
-import { Theme } from "../Page.js"
+import { Theme } from "../../Page.js"
 import { Context, EvtC, EvtK, Null, Type,action1,
-chatProps,data, message, state } from "../../../types/type.js"
-import { Loader, Error } from "../../Loader.js"
-import Profile from "./NavProfile.js"
+chatProps,data, message, state } from "../../../../types/type.js"
+import { Loader, Error } from "../../../ui/Loader.js"
+import Profile from "./children/NavProfile.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
@@ -16,7 +16,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const [state,dispatch] = useReducer(
     (prev:state,next:action1)=>({...prev,...next}),
     {data:null,err:false,load:true}
-      );
+    );
       const change=(e:EvtC):void=>{
         setText(e.target.value);
       };
@@ -24,18 +24,15 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         caller(i);
         set({type:1});
       },[]);
-      const setIndex=useCallback((i:number):void=>{
-        setIdx(i);
-      },[])
+     const setIndex=useCallback((i:number):void=>setIdx(i),[])
+     
      const sort=(e:EvtK):void=>{
-        if (e.key==='Enter'&&Array.isArray(state.data)){
+      if (e.key==='Enter'&&Array.isArray(state.data)){
       const val:string = text.trim().toLocaleLowerCase()
       const newData:data[] = state.data.filter((i:data):Type<data>=>{
-        if (i.name.toLocaleLowerCase().indexOf(val)!==-1){
-               return i;
-           };
-        });
-        dispatch({data:newData});
+       if (i.name.toLocaleLowerCase().indexOf(val)!==-1) return i;
+       });
+       dispatch({data:newData});
       };
      };
      const getUser=(arg:number):Type<message>=>{
@@ -60,9 +57,8 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        };
        Prom();
       },[]);
-  if (state.load) return <Loader back={val} />
-  if (state.err) return <Error back={val} />
-
+  if (state.load) return <Loader back={val} />;
+  if (state.err) return <Error back={val} />;
     return (
         <>
         <BlockInput>

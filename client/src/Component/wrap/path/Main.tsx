@@ -1,15 +1,15 @@
-import { useRef,useReducer, useCallback, useMemo } from 'react'
+import { useRef,useReducer } from 'react'
 import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
  MainInput,MessDate,Message,Name,Span,avatar,
   styleObj} from '../../../style/style.js'
 import { useOutletContext, useParams } from 'react-router-dom'
 import { useChanMessMutation, useDelMessMutation, useGetUserQuery,
- useSetMessMutation } from '../../../store/endpoints.js'
+ useSetMessMutation } from '../../../store/api/endpoints.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../../../types/type.js';
-import Messages from './Message.js'
-import Month from './Month.js'
-import { Error, Loader } from '../../Loader.js'
+import Messages from './children/Message.js'
+import Month from './helpers/Month.js'
+import { Error, Loader } from '../../ui/Loader.js'
 
 interface props{
   children:JSX.Element
@@ -84,15 +84,15 @@ export default function Main({children}:props):JSX.Element {
      ref.current.blur();
    };
  };
- const deleteMess=useCallback((now:number):void=>{
+ const deleteMess=(now:number):void=>{
   if (typeof id!=="undefined"){
     delMess({id1:id,id2:user,now:now});
    };
- },[]);
- const updateDioalog=useCallback((time:number):void=>{
+ };
+ const updateDioalog=(time:number):void=>{
     dispatch({status:true,now:time});
     ref.current.focus();
- },[]);
+ };
  
  if (result.some(({isLoading})=>isLoading)){
    return <Loader back={val} />;
@@ -123,7 +123,6 @@ export default function Main({children}:props):JSX.Element {
              {mess.map((item:newMess,i:number):JSX.Element=>{
               const {id:userId,day,month,now}:newMess = item;
               const right:Null<boolean> = i==0 ? null : showTime(mess,i);
-              const Item:newMess = useMemo(():newMess=>item,[]);
                return (
                  <>
                   {(right||i==0)&&(
@@ -133,7 +132,7 @@ export default function Main({children}:props):JSX.Element {
                   )}
                   <Messages
                    key={`${now}`}
-                   data={Item}
+                   data={item}
                    col={`${userId!==user}`}
                    update={updateDioalog}
                    del={deleteMess}

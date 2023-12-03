@@ -1,6 +1,6 @@
 import {createSlice,Slice,PayloadAction,CaseReducerActions,
 ActionCreatorWithPayload} from '@reduxjs/toolkit'
-import { bind } from './store'
+import { bind } from '../store'
 
 export interface Redux{
     current:number,

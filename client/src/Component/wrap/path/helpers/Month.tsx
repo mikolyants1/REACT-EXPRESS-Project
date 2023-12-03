@@ -27,5 +27,5 @@ export default (month:string):string=>{
       return "December";
     default:
       return "";
-   }
-}
+   };
+};
