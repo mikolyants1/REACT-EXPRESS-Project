@@ -1,13 +1,13 @@
 import { useRef,useReducer } from 'react'
-import { Container, FootBlock, HeaderBlock, Logo, MainBlock,
- MainInput,MessDate,Message,Name,Span,avatar,
-  styleObj} from '../../../style/style.js'
+import { Container, FootBlock, HeaderBlock, Logo,
+ MainBlock,MainInput,MessDate,Message,Name,Span,
+ avatar,styleObj} from '../../../style/style.js'
 import { useOutletContext, useParams } from 'react-router-dom'
 import { useChanMessMutation, useDelMessMutation, useGetUserQuery,
  useSetMessMutation } from '../../../store/api/endpoints.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../../../types/type.js';
-import Messages from './children/Message.js'
+import MessageCard from '../../ui/cards/Message.js'
 import Month from './helpers/Month.js'
 import { Error, Loader } from '../../ui/Loader.js'
 
@@ -101,8 +101,7 @@ export default function Main({children}:props):JSX.Element {
    return <Error back={val} />;
  };
  const [{data:d1},{data:d2}]:query<data>[] = result;
- if (!d1||!d2) return <Error back={val} />
- console.log(d1)
+ if (!d1||!d2) return <Error back={val} />;
  const mess:newMess[] = getMessage(d1,d2);
  const isMine:boolean = d1.id == d2.id;
  const color1:string = isMine ? 'rgb(56, 231, 120)' : one;
@@ -131,7 +130,7 @@ export default function Main({children}:props):JSX.Element {
                      {translate(Month(month))} {day}
                    </MessDate>
                   )}
-                  <Messages
+                  <MessageCard
                    key={`${now}`}
                    data={item}
                    col={`${userId!==user}`}

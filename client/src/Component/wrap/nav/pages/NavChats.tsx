@@ -5,7 +5,7 @@ import { Theme } from "../../Page.js"
 import { Context, EvtC, EvtK, Null, Type,action1,
 chatProps,data, message, state } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
-import Profile from "./children/NavProfile.js"
+import ProfileCard from "../../../ui/cards/Profile.js"
 import {io} from 'socket.io-client';
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
@@ -63,13 +63,13 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       },[]);
       useEffect(():void=>{
         socket?.emit("join",user);
-        socket?.on("online",(users:number[])=>{
-          setOnline(users)
-        })
+        socket?.on("online",(users:number[]):void=>{
+          setOnline(users);
+        });
       },[socket])
+
   if (state.load) return <Loader back={val} />;
   if (state.err) return <Error back={val} />;
-  console.log(idx,user)
     return (
         <>
         <BlockInput>
@@ -83,7 +83,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         </BlockInput>
          <>
           {!id&&(
-            <Profile
+            <ProfileCard
              path={user}
              fill={`${idx==user}`}
              click={()=>setIndex(user)}
@@ -97,17 +97,17 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         if (id) {
          const isOnline:Type<number> = online?.find((i:number)=>i==userId);
         return userId!==user ? (   
-            <Profile click={()=>toggle(userId)} name={name} path={userId}
+            <ProfileCard click={()=>toggle(userId)} name={name} path={userId}
              logo={name.slice(0,1).toUpperCase()} key={userId}>
               <ContactTime online={`${isOnline}`}>
                 {isOnline ? "online" : "offline"}
               </ContactTime>
-            </Profile>
+            </ProfileCard>
           ) : null
          } else {
            const show:Type<message> = getUser(userId)
             return show&&(userId!==user) ? (
-              <Profile
+              <ProfileCard
                key={userId}
                path={userId}
                fill={`${idx==userId}`}

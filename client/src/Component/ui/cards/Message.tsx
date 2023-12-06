@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { ChanButton, DelButton, MessAction, MessBlock, MessContent,
- MessSpan,MessText, MessTime } from "../../../../style/style";
-import { newMess, outlet } from "../../../../types/type";
+ MessSpan,MessText, MessTime } from "../../../style/style";
+import { newMess, outlet } from "../../../types/type";
 import { useState} from 'react';
 
 interface props {
@@ -12,29 +12,29 @@ interface props {
     del:(now:number)=>void
 }
 
-function Messages(props:props):JSX.Element {
+function MessageCard(props:props):JSX.Element {
   const {val,translate} = useOutletContext<outlet>();
   const {update,del,data,col}:props = props;
   const [show,setShow] = useState<boolean>(false);
-  const showUpdate=()=>{
+  const showUpdate=():void=>{
     setShow((prev:boolean)=>!prev);
   };
-  const remove=()=>{
+  const remove=():void=>{
     del(data.now);
     setShow(false);
   };
     return (
         <MessBlock col={col}>
           <>
-          {show&&col=="false"&&
-          <MessAction back={val}>
-            <ChanButton onClick={()=>update(data.now)}>
-               {translate("change")}
-            </ChanButton>
-            <DelButton onClick={remove}>
-               {translate("delete")}
-            </DelButton>
-          </MessAction>}
+            {show&&col=="false"&&
+            <MessAction back={val}>
+              <ChanButton onClick={()=>update(data.now)}>
+                {translate("change")}
+              </ChanButton>
+              <DelButton onClick={remove}>
+                {translate("delete")}
+              </DelButton>
+            </MessAction>}
           </>
           <MessContent back={val} col={col}
            onClick={showUpdate}>
@@ -51,4 +51,4 @@ function Messages(props:props):JSX.Element {
     )
 }
 
-export default Messages
+export default MessageCard

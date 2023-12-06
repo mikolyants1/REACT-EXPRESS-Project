@@ -13,6 +13,7 @@ export type actions = CaseReducerActions<{
     setId:ActionCreatorWithPayload<string,`messanger/setId`>,
     setLang:ActionCreatorWithPayload<string,`messanger/setLang`>
 },'messanger'>
+
 const initialState:Redux = {
     current:0,
     theme:'white',
