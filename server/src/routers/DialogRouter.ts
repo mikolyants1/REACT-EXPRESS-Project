@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
-import {addMess,chanMess,delMess,
-getMess} from '../controllers/DialogControl.js'
+import {addMess,chanMess,delMess,getMess
+} from '../controllers/DialogControl.js'
 import { check,validMess } from '../valid.js'
 
 const router:Router = express.Router();

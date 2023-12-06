@@ -14,7 +14,7 @@ interface body{
     month:string
   }
 
-const emitter = new Emitter('dialogCheck');
+const emitter:Emitter = new Emitter('dialogCheck');
 
 class Dialog {
   getMess(req:Request,res:Response){
@@ -99,7 +99,7 @@ class Dialog {
     if (!newJson){
       emitter.test("chanMess");
       return res.status(404);
-      } ;
+      };
     writeFileSync(Base,newJson);
     res.status(200).json(newJson);
    };
