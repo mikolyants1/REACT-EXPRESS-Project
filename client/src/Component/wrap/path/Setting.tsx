@@ -43,6 +43,10 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
    ...prev,[e.target.name]:e.target.value
     }));
  },[data]);
+ const deleteUser=():void=>{
+  delData(data?.id);
+  setAuth(true);
+ };
  const press=useCallback((e:EvtK):void=>{
    if (e.key==='Enter'){
     const {name,pass}:state = state;
@@ -118,12 +122,10 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
           />
         <ProfilePass>
           <ProfileChan>
-            <ProfileDel 
-             onClick={()=>setAuth(true)}>
+            <ProfileDel onClick={()=>setAuth(true)}>
               {translate('Exit')}
             </ProfileDel>
-            <ProfileDel
-             onClick={()=>delData(data?.id)}>
+            <ProfileDel onClick={deleteUser}>
               {translate('Delete account')}
             </ProfileDel>
           </ProfileChan>

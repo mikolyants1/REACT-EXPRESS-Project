@@ -287,6 +287,7 @@ type mess1= {
 export const NavMenuBlock:IStyledComponent<'web',mess1> = styled.div`
 width:80px;
 text-align:center;
+transition:color 0.3s;
 color:${({press}:mess1)=>press=='true'
  ? 'rgb(48, 240, 48)' :'grey'}
 `
@@ -295,6 +296,7 @@ type mess2 = {
     children:JSX.Element[],
     
 }
+
 export const MessBlock:IStyledComponent<'web',mess2> = styled.div`
 width:100%;
 display:flex;
@@ -395,6 +397,7 @@ margin-top:10px;
 display:flex;
 height:70px;
 align-items:center;
+transition:background-color 0.3s;
 background-color:${
 ({fill,back}:contactProp)=>fill=='true'
 ?'rgb(73, 221, 113)'
@@ -423,8 +426,12 @@ font-size:25px;
 export const ContactName:IStyledComponent<'web',BaseObject> = styled.div`
 font-size:20px;
 `
-export const ContactTime:IStyledComponent<'web',BaseObject> = styled.div`
-color:grey;
+interface contactTime {
+    children:string,
+    online:string
+}
+export const ContactTime:IStyledComponent<'web',contactTime> = styled.div`
+color:${({online}:contactTime)=>online!=="undefined"?"rgb(48,240,48)":"grey"};
 font-size:15px;
 margin-top:-1px
 `

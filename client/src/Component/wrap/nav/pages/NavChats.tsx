@@ -6,6 +6,7 @@ import { Context, EvtC, EvtK, Null, Type,action1,
 chatProps,data, message, state } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
 import Profile from "./children/NavProfile.js"
+import {io} from 'socket.io-client';
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
@@ -13,6 +14,8 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call?call:null);
     const [text,setText] = useState<string>('');
+    const [socket,setSocket] = useState<any>(null);
+    const [online,setOnline] = useState<number[]>();
     const [state,dispatch] = useReducer(
     (prev:state,next:action1)=>({...prev,...next}),
     {data:null,err:false,load:true}
@@ -43,6 +46,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       return item1||item2;
      }
       useEffect(():void=>{
+       setSocket(io("http://localhost:5001"));
        async function Prom():Promise<void>{
         return await axios.get('http://localhost:5000/user')
         .then(({data}:AxiosResponse<data[]>):void=>{
@@ -57,8 +61,15 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        };
        Prom();
       },[]);
+      useEffect(():void=>{
+        socket?.emit("join",user);
+        socket?.on("online",(users:number[])=>{
+          setOnline(users)
+        })
+      },[socket])
   if (state.load) return <Loader back={val} />;
   if (state.err) return <Error back={val} />;
+  console.log(idx,user)
     return (
         <>
         <BlockInput>
@@ -74,21 +85,22 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
           {!id&&(
             <Profile
              path={user}
-             fill={`${idx==-1}`}
-             click={()=>setIndex(-1)}
+             fill={`${idx==user}`}
+             click={()=>setIndex(user)}
              logo=""
              name={translate("Main")}
             />
            )}
          </>
         {Array.isArray(state.data)&&state.data.map(
-        ({name,id:userId}:data,i:number):Null<JSX.Element>=>{
+        ({name,id:userId}:data):Null<JSX.Element>=>{
         if (id) {
+         const isOnline:Type<number> = online?.find((i:number)=>i==userId);
         return userId!==user ? (   
-            <Profile click={()=>toggle(i)} name={name} path={userId}
+            <Profile click={()=>toggle(userId)} name={name} path={userId}
              logo={name.slice(0,1).toUpperCase()} key={userId}>
-              <ContactTime>
-                 offline
+              <ContactTime online={`${isOnline}`}>
+                {isOnline ? "online" : "offline"}
               </ContactTime>
             </Profile>
           ) : null
@@ -98,8 +110,8 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
               <Profile
                key={userId}
                path={userId}
-               fill={`${idx==i}`}
-               click={()=>setIndex(i)}
+               fill={`${idx==userId}`}
+               click={()=>setIndex(userId)}
                logo={name.slice(0,1).toUpperCase()}
                name={name}
                 />

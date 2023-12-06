@@ -35,7 +35,7 @@ export default function Main({children}:props):JSX.Element {
   {now:0,text:"",status:false}
  )
  const result:query<data>[] = [
-  useGetUserQuery<query<data>>(Number(id)),
+  useGetUserQuery<query<data>>(id),
   useGetUserQuery<query<data>>(user),
   ];
  const getMessage=(d1:data,d2:data):newMess[]=>{
@@ -102,6 +102,7 @@ export default function Main({children}:props):JSX.Element {
  };
  const [{data:d1},{data:d2}]:query<data>[] = result;
  if (!d1||!d2) return <Error back={val} />
+ console.log(d1)
  const mess:newMess[] = getMessage(d1,d2);
  const isMine:boolean = d1.id == d2.id;
  const color1:string = isMine ? 'rgb(56, 231, 120)' : one;

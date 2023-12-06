@@ -15,7 +15,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
   const [idx,setIdx] = useState<number>(-1);
   const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
     const toggle=():void=>{
-      call(-1);
+      call(user);
       set({type:1});
     };
     if (isLoading) return <Loader back={val} />
@@ -32,7 +32,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
                 <ContactName>
                     {data?.name}
                 </ContactName>
-                <ContactTime>
+                <ContactTime online="undefined">
                    {translate("update")}
                 </ContactTime>
               </ContactText>
