@@ -1,4 +1,4 @@
-import { useRef,useReducer } from 'react'
+import { useRef,useReducer, useCallback } from 'react'
 import { Container, FootBlock, HeaderBlock, Logo,
  MainBlock,MainInput,MessDate,Message,Name,Span,
  avatar,styleObj} from '../../../style/style.js'
@@ -7,7 +7,7 @@ import { useChanMessMutation, useDelMessMutation, useGetUserQuery,
  useSetMessMutation } from '../../../store/api/endpoints.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../../../types/type.js';
-import MessageCard from '../../ui/cards/Message.js'
+import MessageCard from '../../ui/cards/MessageCard.js'
 import Month from './helpers/Month.js'
 import { Error, Loader } from '../../ui/Loader.js'
 
@@ -84,15 +84,15 @@ export default function Main({children}:props):JSX.Element {
      ref.current.blur();
    };
  };
- const deleteMess=(now:number):void=>{
+ const deleteMess=useCallback((now:number):void=>{
   if (typeof id!=="undefined"){
     delMess({id1:id,id2:user,now:now});
    };
- };
- const updateDioalog=(time:number):void=>{
+ },[]);
+ const updateDioalog=useCallback((time:number):void=>{
     dispatch({status:true,now:time});
     ref.current.focus();
- };
+ },[]);
  
  if (result.some(({isLoading})=>isLoading)){
    return <Loader back={val} />;
@@ -121,7 +121,7 @@ export default function Main({children}:props):JSX.Element {
           <MainBlock>
             <Message>
              {mess.map((item:newMess,i:number):JSX.Element=>{
-              const {id:userId,day,month,now}:newMess = item;
+              const {id:userId,day,month,now,text,date}:newMess = item;
               const right:Null<boolean> = i==0 ? null : showTime(mess,i);
                return (
                  <>
@@ -132,7 +132,9 @@ export default function Main({children}:props):JSX.Element {
                   )}
                   <MessageCard
                    key={`${now}`}
-                   data={item}
+                   now={now}
+                   text={text}
+                   date={date}
                    col={`${userId!==user}`}
                    update={updateDioalog}
                    del={deleteMess}

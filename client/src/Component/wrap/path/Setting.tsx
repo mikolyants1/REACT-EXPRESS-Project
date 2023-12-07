@@ -11,8 +11,8 @@ import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../../../store/api/endpoints.js";
 import UserSetBlock from "../../ui/inputs/User.js";
 import ThemeSetBlock from "../../ui/inputs/Theme.js";
-import ProfileLogoCard from "../../ui/cards/Logo.js";
-import PassCard from "../../ui/cards/Pass.js";
+import ProfileLogoCard from "../../ui/cards/ProfileLogoCard.js";
+import PassCard from "../../ui/cards/PassCard.js";
 import AccButton from "../../ui/buttons/Account.js";
 
 interface state{

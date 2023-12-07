@@ -5,7 +5,7 @@ import { Theme } from "../../Page.js"
 import { Context, EvtC, EvtK, Null, Type,action1,
 chatProps,data, message, state } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
-import ProfileCard from "../../../ui/cards/Profile.js"
+import ProfileCard from "../../../ui/cards/ProfileCard.js"
 import {io} from 'socket.io-client';
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
