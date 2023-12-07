@@ -25,8 +25,6 @@ interface Props{
 }
 
 export default function Setting({children}:Props):JSX.Element{
- const colors:string[] = ['white','black'];
- const langaues:string[] = ["en","ru"];
  const {val,user,lang,translate} = useOutletContext<outlet>();
  const {id}:Readonly<Params<string>> = useParams();
  const [auth,setAuth] = useState<boolean>(false);
@@ -117,13 +115,13 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
        ):(
         <>
          <ThemeSetBlock
-          arr={colors}
+          idx={0}
           change={toogle(setTheme)}
           back={val}
           name="theme"
           />  
          <ThemeSetBlock
-          arr={langaues}
+          idx={1}
           change={toogle(setLang)}
           back={lang}
           name="language"

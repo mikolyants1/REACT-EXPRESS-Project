@@ -1,7 +1,8 @@
 import { ChangeEvent,KeyboardEvent,MutableRefObject } from 'react'
-import styled, { IStyledComponent } from 'styled-components'
+import styled, { IStyledComponent,keyframes } from 'styled-components'
 import { BaseObject } from 'styled-components/dist/types'
 import { EvtC, EvtK, Type } from '../types/type'
+import Keyframes from 'styled-components/dist/models/Keyframes'
 
 export interface styleObj{
     one:string,
@@ -26,69 +27,68 @@ export const avatar:styleObj[]=[
         two:'rgb(254, 149, 1)'
     }
 ]
-export const EntryBlock:IStyledComponent<'web',BaseObject> = styled.div`
-margin:200px auto;
-width:300px;
-text-align:center;
-`
-export const LoginError:IStyledComponent<'web',BaseObject> = styled.div`
-width:100%;
-text-align:center;
-color:red;
-font-size:16px;
-margin-top:5px;
-`
-export const RegistLink:IStyledComponent<"web",BaseObject> = styled(LoginError)`
-color:black;
-`
-export const EntryTitle:IStyledComponent<'web',BaseObject> = styled.div`
-width:100%;
-text-align:center;
-font-size:28px;
-font-weight:bold
-`
-export const EntrySub:IStyledComponent<'web',BaseObject> = styled.div`
-width:80%;
-text-align:center;
-margin:10px auto;
-font-size:20px
-`
-export const InputBlock:IStyledComponent<'web',BaseObject> = styled.div`
- justify-content:center;
- align-items:center;
- display:flex;
- width:100%
-`
+export const EntryBlock:IStyledComponent<'web',BaseObject> = styled.div({
+margin:'200px auto',
+width:300,
+textAlign:'center',
+})
+export const LoginError:IStyledComponent<'web',BaseObject> = styled.div({
+width:'100%',
+textAlign:'center',
+color:'red',
+fontSize:16,
+marginTop:5
+})
+export const RegistLink:IStyledComponent<"web",BaseObject> = styled(LoginError)({color:"black"})
+
+export const EntryTitle:IStyledComponent<'web',BaseObject> = styled.div({
+width:'100%',
+textAlign:'center',
+fontSize:28,
+fontWeight:'bold'
+})
+export const EntrySub:IStyledComponent<'web',BaseObject> = styled.div({
+width:'80%',
+textAlign:'center',
+margin:'10px auto',
+fontSize:20
+})
+export const InputBlock:IStyledComponent<'web',BaseObject> = styled.div({
+ justifyContent:'center',
+ alignItems:'center',
+ display:'flex',
+ width:'100%'
+})
 export const EntryInput:IStyledComponent<'web',{
   onChange:(e:EvtC)=>void,
   onKeyUp:(e:EvtK)=>void,
   name:string
-}> = styled.input`
- width:260px;
- height:40px;
- border-radius:20px;
- background-color:white;
- font-size:20px;
- box-shadow:1px 3px 2px 0px grey;
- border:none
-`
-export const Span:IStyledComponent<'web',BaseObject> = styled.div`
-font-size:25px;
-margin-top:-4px
-`
+}> = styled.input({
+ width:260,
+ height:40,
+ borderRadius:20,
+ backgroundColor:'white',
+ fontSize:20,
+ boxShadow:'1px 3px 2px 0px grey',
+ border:'none'
+})
+export const Span:IStyledComponent<'web',BaseObject> = styled.div({
+fontSize:25,
+marginTop:'-4px'
+})
 export const EntryBut:IStyledComponent<'web',{
     children:string,
     onClick:()=>void
-}> = styled.button`
-width:120px;
-height:40px;
-background-color:rgb(25, 222, 64);
-margin:10px auto;
-border-radius:20px;
-color:white;
-font-size:20px;
-border:none
-`
+}> = styled.button({
+width:120,
+height:40,
+backgroundColor:'rgb(25, 222, 64)',
+margin:'10px auto',
+borderRadius:20,
+color:'white',
+fontSize:20,
+border:'none'
+})
 interface contProp{
     back:string,
     val:string,
@@ -188,6 +188,20 @@ border:1px ;
 border-style:solid;
 border-color:rgb(240, 240, 240);
 `
+
+ const show:Keyframes = keyframes`
+  from {
+    opacity:0;
+  };
+  to {
+    opacity:1;
+  }
+ `
+export const NavMainWrapper:IStyledComponent<"web",BaseObject> = styled.div`
+    width:100%;
+    height:100%;
+    animation:${show} 0.3s linear;
+`
 interface logoProp{
     start?:string,
     two?:string,
@@ -208,33 +222,31 @@ ${({start}:logoProp)=>start},${({two}:logoProp)=>two});
 font-weight:bold;
 margin-left:2px
 `
-export const MainBlock:IStyledComponent<'web',BaseObject> = styled.div`
-grid-area:main;
-overflow-y:scroll;
-position:relative;
-::-webkit-scrollbar{
-    display: none;
+export const MainBlock:IStyledComponent<'web',BaseObject> = styled("div")({
+gridArea:'main',
+overflowY:'scroll',
+position:'relative',
+"::-webkit-scrollbar":{
+    display: 'none'
    }
-`
-export const Message:IStyledComponent<'web',BaseObject> = styled.div`
-width:90%;
-margin:0 auto 10px auto;
-left:0;
-right:0;
-position:absolute;
-bottom:0;
-`
-export const FootBlock:IStyledComponent<'web',BaseObject> = styled.div`
-width:100%;
-margin-top:20px;
-margin-bottom:10px;
-display:flex;
-
-justify-content:center;
-align-items:center;
-grid-area:footer;
-
-`
+})
+export const Message:IStyledComponent<'web',BaseObject> = styled("div")({
+width:'90%',
+margin:'0 auto 10px auto',
+left:0,
+right:0,
+position:'absolute',
+bottom:0,
+})
+export const FootBlock:IStyledComponent<'web',BaseObject> = styled("div")({
+width:'100%',
+marginTop:20,
+marginBottom:10,
+display:'flex',
+justifyContent:'center',
+alignItems:'center',
+gridArea:'footer',
+})
 interface input{
     back:string,
     placeholder:string,
@@ -258,26 +270,26 @@ border-radius:20px;
 box-shadow:0px 0.5px 0.5px 0.5px grey;
 `
 
-export const Name:IStyledComponent<'web',BaseObject> = styled.div`
-font-size:20px;
-margin-left:6px
-`
-export const NavTitle:IStyledComponent<'web',BaseObject> = styled.div`
-margin-top:10px;
-text-align:center;
-font-weight:bold;
-width:100%;
-font-size:20px;
-border-bottom:1px solid rgb(240, 240, 240);
-`
-export const NavMenu:IStyledComponent<'web',BaseObject> = styled.div`
-display:flex;
-justify-content:space-between;
-align-items:center;
-width:100%;
-height:50px;
-border-top:1px solid rgb(240, 240, 240);
-`
+export const Name:IStyledComponent<'web',BaseObject> = styled("div")({
+fontSize:20,
+marginLeft:6
+})
+export const NavTitle:IStyledComponent<'web',BaseObject> = styled("div")({
+marginTop:10,
+textAlign:'center',
+fontWeight:'bold',
+width:'100%',
+fontSize:20,
+borderBottom:'1px solid rgb(240, 240, 240)'
+})
+export const NavMenu:IStyledComponent<'web',BaseObject> = styled("div")({
+display:'flex',
+justifyContent:'space-between',
+alignItems:'center',
+width:'100%',
+height:'50px',
+borderTop:'1px solid rgb(240, 240, 240)'
+})
 type mess1= {
     press:string,
     key:number,
@@ -288,6 +300,7 @@ export const NavMenuBlock:IStyledComponent<'web',mess1> = styled.div`
 width:80px;
 text-align:center;
 transition:color 0.3s;
+cursor:pointer;
 color:${({press}:mess1)=>press=='true'
  ? 'rgb(48, 240, 48)' :'grey'}
 `
@@ -350,36 +363,36 @@ interface buttProp{
     onClick:()=>void,
     children:string
 }
-export const ChanButton:IStyledComponent<'web',buttProp> = styled.button`
- border:none;
- background:transparent;
- font-size:14px;
-`
-export const DelButton:IStyledComponent<"web",buttProp> = styled(ChanButton)`
- border-left:1px solid black;
- color:red
-`
-export const MessDate:IStyledComponent<'web',BaseObject> = styled.div`
-width:100%;
-text-align:center;
-margin-top:5px;
-margin-bottom:5px
-`
-export const MessText:IStyledComponent<'web',BaseObject> = styled.div`
- font-size:18px;
- min-width:80px;
- padding: 0px 5px ;
-`
-export const MessSpan:IStyledComponent<'web',BaseObject> = styled.div`
-margin-left:2px;
-margin-top:-4px;
-`
-export const MessTime:IStyledComponent<'web',BaseObject> = styled.div`
-font-size:13px;
-text-align:center;
-color:grey;
-width:40px;
-`
+export const ChanButton:IStyledComponent<'web',buttProp> = styled("button")({
+ border:'none',
+ background:'transparent',
+ fontSize:14
+})
+export const DelButton:IStyledComponent<"web",buttProp> = styled(ChanButton)({
+ borderLeft:'1px solid black',
+ color:'red'
+})
+export const MessDate:IStyledComponent<'web',BaseObject> = styled("div")({
+width:'100%',
+textAlign:'center',
+marginTop:5,
+marginBottom:5
+})
+export const MessText:IStyledComponent<'web',BaseObject> = styled.div({
+ fontSize:18,
+ minWidth:80,
+ padding:'0px 5px'
+})
+export const MessSpan:IStyledComponent<'web',BaseObject> = styled.div({
+marginLeft:2,
+marginTop:-4
+})
+export const MessTime:IStyledComponent<'web',BaseObject> = styled.div({
+fontSize:13,
+textAlign:'center',
+color:'grey',
+width:40
+})
 function Mess(back:string):string{
   return back=='black'
   ? 'rgb(50,50,50)'
@@ -405,9 +418,8 @@ background-color:${
 color:${({back}:contactProp)=>back=='black'
 ? 'white' : 'black'}
 `
-export const ContactText = styled.div`
-margin-left:6px;
-`
+export const ContactText:IStyledComponent<"web",BaseObject> = styled.div({marginLeft:"6px"})
+
 interface logoProp{
     left?:string,
     right?:string,
@@ -423,9 +435,7 @@ margin-left:20px;
 height:40px;
 font-size:25px;
 `
-export const ContactName:IStyledComponent<'web',BaseObject> = styled.div`
-font-size:20px;
-`
+export const ContactName:IStyledComponent<'web',BaseObject> = styled.div({fontSize:'20px'})
 interface contactTime {
     children:string,
     online:string
@@ -442,13 +452,13 @@ interface inputProp{
     onKeyUp:(e:KeyboardEvent<HTMLInputElement>)=>void
     placeholder:string
 }
-export const BlockInput:IStyledComponent<'web',{}> = styled.div`
-display:flex;
-margin-top:20px;
-width:100%;
-justify-content:center;
-align-items:center;
-`
+export const BlockInput:IStyledComponent<'web',BaseObject> = styled.div({
+display:'flex',
+marginTop:20,
+width:'100%',
+justifyContent:'center',
+alignItems:'center'
+})
 export const ContactInput:IStyledComponent<'web',inputProp> = styled.input`
 width:240px;
 background-color:${
@@ -470,22 +480,20 @@ export const SetBlock:IStyledComponent<'web',{
  children:JSX.Element[],
  onClick:()=>void,
  fill?:string
-}> = styled(ContactBlock)`
-height:50px;
-`
-export const SetLogo:IStyledComponent<'web',BaseObject> = styled.div`
- font-size:26px;
- margin-left:30px;
- text-align:center;
- color:gold
-`
-export const ThemeLogo:IStyledComponent<'web',BaseObject> = styled(SetLogo)`
-color:blue;
-`
-export const SetText:IStyledComponent<'web',BaseObject> = styled.div`
-margin-left:10px;
-font-size:18px
-`
+}> = styled(ContactBlock)({height:"50px"})
+
+export const SetLogo:IStyledComponent<'web',BaseObject> = styled.div({
+ fontSize:26,
+ marginLeft:30,
+ textAlign:'center',
+ color:'gold'
+})
+export const ThemeLogo:IStyledComponent<'web',BaseObject> = styled(SetLogo)({color:"blue"})
+
+export const SetText:IStyledComponent<'web',BaseObject> = styled.div({
+marginLeft:10,
+fontSize:18
+})
 interface contain{
     val:string,
     children:JSX.Element[]
@@ -498,22 +506,21 @@ grid-template-rows: minmax(50px,auto) 1fr ;
  'header'
  'main';
 `
-export const SetMain:IStyledComponent<'web',BaseObject> = styled.div`
-grid-area:main;
-`
-export const SetTitle:IStyledComponent<'web',BaseObject> = styled.div`
-text-align:center;
-width:100%;
-font-weight:bold;
-font-size:23px
-`
-export const ProfileBlock:IStyledComponent<'web',BaseObject> = styled.div`
-width:95%;
-margin:10px auto;
-display:flex;
-align-items:center;
-height:80px;
-`
+export const SetMain:IStyledComponent<'web',BaseObject> = styled.div({gridArea:"main"})
+
+export const SetTitle:IStyledComponent<'web',BaseObject> = styled.div({
+textAlign:'center',
+width:'100%',
+fontWeight:'bold',
+fontSize:23
+})
+export const ProfileBlock:IStyledComponent<'web',BaseObject> = styled.div({
+width:'95%',
+margin:'10px auto',
+display:'flex',
+alignItems:'center',
+height:80
+})
 interface logoProf{
     start:string,
     two:string,
@@ -529,27 +536,25 @@ background:${({start,two}:logoProf)=>(
  `linear-gradient(90deg,${start},${two})`
 )}
 `
-export const ProfileText:IStyledComponent<'web',BaseObject> = styled.div`
-margin-left:10px;
-`
-export const ProfileName:IStyledComponent<'web',BaseObject> = styled.div`
-font-size:20px;
-margin-top:-7pxж
-`
-export const LogoText:IStyledComponent<'web',BaseObject> = styled.div`
-margin-top:10px
-`
-export const ProfileDis:IStyledComponent<'web',BaseObject> = styled.div`
-color:grey
-`
-export const ProfilePass:IStyledComponent<'web',BaseObject> = styled(ProfileBlock)`
-display:block
-`
-export const ProfileChan:IStyledComponent<'web',BaseObject> = styled.div`
- display:flex;
- justify-content:space-between;
- width:200px;
-`
+export const ProfileText:IStyledComponent<'web',BaseObject> = styled.div({marginLeft:"10px"})
+
+export const ProfileName:IStyledComponent<'web',BaseObject> = styled.div({
+fontSize:20,
+marginTop:-7
+})
+export const LogoText:IStyledComponent<'web',BaseObject> = styled.div({marginTop:"10px"})
+
+export const ProfileDis:IStyledComponent<'web',BaseObject> = styled.div({color:"grey"})
+
+export const ProfilePass:IStyledComponent<'web',BaseObject> = styled(ProfileBlock)({
+    display:"block"
+})
+
+export const ProfileChan:IStyledComponent<'web',BaseObject> = styled.div({
+ display:'flex',
+ justifyContent:'space-between',
+ width:200
+})
 export const ProfileBut:IStyledComponent<'web',{
     children:string[]|string,
     onClick:()=>void
@@ -567,22 +572,20 @@ interface ProfileProp {
     type:string,
     accept:string
 }
-export const ProfileInput:IStyledComponent<'web',Partial<ProfileProp>> = styled.input`
- margin-top:5px;
- width:200px;
- background-color:rgb(240,240,240);
- border:none;
- height:35px;
- border-radius:15px;
- font-size:18px;
- padding:0 5px;
-`
+export const ProfileInput:IStyledComponent<'web',Partial<ProfileProp>> = styled.input({
+ marginTop:5,
+ width:200,
+ backgroundColor:'rgb(240,240,240)',
+ border:'none',
+ height:35,
+ borderRadius:15,
+ fontSize:18,
+ padding:'0 5px'
+})
 export const ProfileDel:IStyledComponent<'web',{
     children:string,
     onClick:()=>void
-}> = styled(ProfileBut)`
-color:red
-`
+}> = styled(ProfileBut)({color:'red'})
 export const ThemeInput:IStyledComponent<'web',{
     key:string,
     onChange:(e:EvtC)=>void,
@@ -591,19 +594,17 @@ export const ThemeInput:IStyledComponent<'web',{
     value:string,
     name:string
 
-}> = styled.input`
-width:20px;
-height:20px;
-`
-export const ThemeBlock:IStyledComponent<'web',BaseObject> = styled.div`
-display:flex;
-align-items:center;
- width:100%;
- font-size:20px
-`
-export const ThemeText:IStyledComponent<'web',BaseObject> = styled.div`
-margin-left:10px
-`
+}> = styled("input")({
+width:20,
+height:20
+})
+export const ThemeBlock:IStyledComponent<'web',BaseObject> = styled("div")({
+display:'flex',
+alignItems:'center',
+ width:'100%',
+ fontSize:20
+})
+export const ThemeText:IStyledComponent<'web',BaseObject> = styled.div({marginLeft:10})
 interface MenuProp{
     children:JSX.Element,
     back:string
@@ -622,10 +623,8 @@ width:90%;
 export const MenuButton:IStyledComponent<'web',{
     onClick:()=>void,
     children:string
-}> = styled.div`
-font-size:20px;
-font-weight:600
-`
+}> = styled.div({fontSize:20,fontWeight:600})
+
 interface LoadProp{
     spin:number,
     back:string

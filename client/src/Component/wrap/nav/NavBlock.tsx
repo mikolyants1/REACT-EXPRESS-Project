@@ -1,6 +1,6 @@
 import { useContext, useReducer, useState,Suspense,
 LazyExoticComponent,ComponentType,lazy} from "react";
-import { NavBar, NavMain, NavMenu, NavMenuBlock,
+import { NavBar, NavMain, NavMainWrapper, NavMenu, NavMenuBlock,
  NavTitle } from "../../../style/style.js";
 import { Theme } from "../Page.js";
 import { Loader } from "../../ui/Loader.js";
@@ -61,26 +61,32 @@ export default function NavBlock({show}:prop):JSX.Element{
          <NavMain>
            <Suspense fallback={<Loader back={val} />}>
             {Contacts&&(
-             <NavChats
-              set={dispatch}
-              call={call}
-              caller={setCall}
-              id={true}
-               />
+              <NavMainWrapper>
+                <NavChats
+                 set={dispatch}
+                 call={call}
+                 caller={setCall}
+                 id={true}
+                />
+              </NavMainWrapper>
               )}
             {Chats&&(
-             <NavChats
-              set={dispatch}
-              call={call}
-              caller={setCall}
-              id={false}
-              />
+              <NavMainWrapper>
+                <NavChats
+                 set={dispatch}
+                 call={call}
+                 caller={setCall}
+                 id={false}
+                 />
+              </NavMainWrapper>
              )}
             {Settings&&(
-             <NavSett
-              set={dispatch}
-              call={setCall} 
-              />
+              <NavMainWrapper>
+                <NavSett
+                 set={dispatch}
+                 call={setCall} 
+                 />
+              </NavMainWrapper>
              )}    
            </Suspense>
          </NavMain>

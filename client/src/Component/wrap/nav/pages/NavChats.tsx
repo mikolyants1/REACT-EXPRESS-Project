@@ -61,6 +61,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        };
        Prom();
       },[]);
+      
       useEffect(():void=>{
         socket?.emit("join",user);
         socket?.on("online",(users:number[]):void=>{

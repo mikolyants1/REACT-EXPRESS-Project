@@ -15,7 +15,7 @@ export default function Page():JSX.Element{
  const theme:string = useAppSelector(getTheme);
  const current:number = useAppSelector(getCurrent);
  const lang:string = useAppSelector(getLang);
- const [translate] = useTranslation();
+ const [translate] = useTranslation<"translation",string>();
  const [show,setShow] = useState<boolean>(true);
  useEffect(():void=>{
   i18n.changeLanguage(lang);
