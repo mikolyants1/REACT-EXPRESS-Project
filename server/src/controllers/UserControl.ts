@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'
 import {readFileSync,writeFileSync} from 'fs'
 import { Base } from '../server.js'
-import Emitter from '../event.js'
+import Emitter from '../classes/event.js'
 import { Type, data } from '../types.js'
 
 const emitter:Emitter = new Emitter('userCheck')
 
 class User {
-    getUsers(req:Request,res:Response){
+    getUsers(_:Request,res:Response){
       const data:string = readFileSync(Base,'utf-8');
       const newData:data[] = JSON.parse(data);
       if (!data){

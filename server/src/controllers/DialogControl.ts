@@ -1,7 +1,7 @@
 import { Request,Response } from 'express'
 import {readFileSync,writeFileSync} from 'fs'
 import { Base} from '../server.js'
-import Emitter from '../event.js'
+import Emitter from '../classes/event.js'
 import { Type, data, mess, message } from '../types.js'
 
 interface body{
