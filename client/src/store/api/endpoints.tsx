@@ -12,7 +12,7 @@ const endpoints = MessApi.injectEndpoints({
        }),
       setMess:build.mutation<data[],query2>({
         query:(obj):res<body>=>{
-         const {id1,id2,...body}:query2 = obj
+         const {id1,id2,...body}:query2 = obj;
             return {
               url:`dialog/${id1}`,
               method:'POST',

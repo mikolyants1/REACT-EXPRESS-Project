@@ -363,7 +363,7 @@ interface buttProp{
     onClick:()=>void,
     children:string
 }
-export const ChanButton:IStyledComponent<'web',buttProp> = styled("button")({
+export const ChanButton:IStyledComponent<'web',buttProp> = styled.button({
  border:'none',
  background:'transparent',
  fontSize:14
@@ -372,7 +372,7 @@ export const DelButton:IStyledComponent<"web",buttProp> = styled(ChanButton)({
  borderLeft:'1px solid black',
  color:'red'
 })
-export const MessDate:IStyledComponent<'web',BaseObject> = styled("div")({
+export const MessDate:IStyledComponent<'web',BaseObject> = styled.div({
 width:'100%',
 textAlign:'center',
 marginTop:5,

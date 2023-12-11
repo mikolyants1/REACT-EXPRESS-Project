@@ -1,8 +1,9 @@
 import { HeaderMenu, MenuButton } from "../../../style/style.js";
 import { useOutletContext } from "react-router-dom";
 import { outlet } from "../../../types/type.js";
+import { memo } from "react";
 
-export default function ToogleMenu():JSX.Element{
+function ToogleMenu():JSX.Element{
  const {val,show,translate} = useOutletContext<outlet>();
     const press=():void=>{
       show(true);
@@ -10,8 +11,10 @@ export default function ToogleMenu():JSX.Element{
     return (
         <HeaderMenu back={val}>
           <MenuButton onClick={press}>
-              {translate("Menu")}
+            {translate("Menu")}
           </MenuButton>
         </HeaderMenu>
     );
 };
+
+export default memo(ToogleMenu)

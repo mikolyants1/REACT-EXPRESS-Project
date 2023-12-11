@@ -68,6 +68,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
         });
       };
     };
+    setAuth(true);
   };
   },[data]);
   

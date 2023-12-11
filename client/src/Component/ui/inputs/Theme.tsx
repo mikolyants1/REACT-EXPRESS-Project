@@ -1,7 +1,7 @@
 import { ProfileName, ProfilePass,ThemeBlock,
  ThemeInput, ThemeText } from "../../../style/style.js"
 import { Context, EvtC} from "../../../types/type.js"
-import { useContext} from 'react'
+import { FC, useContext} from 'react'
 import { Theme } from "../../wrap/Page.js";
   
   interface themeProp{
@@ -11,7 +11,7 @@ import { Theme } from "../../wrap/Page.js";
     name:string
   };
   
-const ThemeSetBlock=({idx,change,back,name}:themeProp):JSX.Element=>{
+const ThemeSetBlock:FC<themeProp>=({idx,change,back,name}):JSX.Element=>{
     const arrays:string[][] =[['white','black'],["en","ru"]]
     const {translate} = useContext<Context>(Theme);
     const first:string = name.slice(0,1).toUpperCase();

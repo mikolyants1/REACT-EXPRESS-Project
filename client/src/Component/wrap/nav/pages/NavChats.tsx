@@ -46,7 +46,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       return item1||item2;
      }
       useEffect(():void=>{
-       setSocket(io("http://localhost:5001"));
+       setSocket(io("http://localhost:5000"));
        async function Prom():Promise<void>{
         return await axios.get('http://localhost:5000/user')
         .then(({data}:AxiosResponse<data[]>):void=>{
@@ -61,7 +61,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        };
        Prom();
       },[]);
-      
+
       useEffect(():void=>{
         socket?.emit("join",user);
         socket?.on("online",(users:number[]):void=>{
@@ -88,7 +88,6 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
              path={user}
              fill={`${idx==user}`}
              click={()=>setIndex(user)}
-             logo=""
              name={translate("Main")}
             />
            )}

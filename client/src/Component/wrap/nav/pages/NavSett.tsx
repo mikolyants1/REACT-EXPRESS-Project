@@ -1,64 +1,39 @@
-import { ContactBlock, ContactLogo, ContactName,
-ContactText,ContactTime,SetBlock, SetLogo, SetText,
- ThemeLogo, styleObj,avatar } from "../../../../style/style.js"
-import { useContext, useState } from "react"
-import { Link} from "react-router-dom"
+import { useCallback, useContext, useState } from "react"
 import { Theme } from "../../Page.js"
 import { useGetUserQuery } from "../../../../store/api/endpoints.js"
 import { Loader, Error } from "../../../ui/Loader.js"
 import { Context, SettProps, data, query } from "../../../../types/type.js"
+import UpdateCard from "../../../ui/cards/UpdateCard.js"
+import LinkCard from "../../../ui/cards/LinkCard.js"
 
 export default function NavSett({set,call}:SettProps):JSX.Element{
-  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
-  const {user,val,hide,translate} = useContext<Context>(Theme);
-  if (!translate) return <Error back={val} />;
+  const {user,val} = useContext<Context>(Theme);
   const [idx,setIdx] = useState<number>(-1);
   const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
-    const toggle=():void=>{
+    const toggle=useCallback(():void=>{
       call(user);
       set({type:1});
-    };
+    },[]);
+   const navigate=useCallback((id:number)=>():void=>{
+    setIdx(id);
+   },[])
     if (isLoading) return <Loader back={val} />
     if (isError) return <Error back={val} />
     return (
          <>
-          <Link to={`/page/set/Profile`} onClick={hide}>
-            <ContactBlock fill={`${idx==0}`}
-             back={val} onClick={()=>setIdx(0)}>
-              <ContactLogo left={one} right={two}>
-                {data?.name.slice(0,1).toUpperCase()}
-              </ContactLogo>
-              <ContactText>
-                <ContactName>
-                    {data?.name}
-                </ContactName>
-                <ContactTime online="undefined">
-                   {translate("update")}
-                </ContactTime>
-              </ContactText>
-            </ContactBlock>
-          </Link>
-          <Link to={`/page/main/${user}`} onClick={hide}>
-            <SetBlock back={val} onClick={toggle}>
-              <SetLogo>
-                &#9733;
-              </SetLogo>
-              <SetText>
-                {translate("Main")}  
-              </SetText>
-            </SetBlock>
-          </Link>
-          <Link to={`/page/set/Theme`} onClick={hide}>
-            <SetBlock fill={`${idx==1}`} back={val}
-             onClick={()=>setIdx(1)}>
-              <ThemeLogo>
-                &diams;
-              </ThemeLogo>
-              <SetText>
-                {translate("Theme")}
-              </SetText>
-            </SetBlock>
-          </Link>
+          <UpdateCard
+            navigate={navigate(0)}
+            fill={idx==0}
+            name={data.name}
+            />
+          <LinkCard path={`main/${user}`}
+           navigate={toggle} text="Main">
+              &#9733;
+          </LinkCard>
+          <LinkCard path="set/Theme" fill={idx==1}
+           navigate={navigate(1)} text="Theme">
+              &diams;
+          </LinkCard>
         </>
     );
 };

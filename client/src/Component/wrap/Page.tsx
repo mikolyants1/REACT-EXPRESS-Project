@@ -19,16 +19,19 @@ export default function Page():JSX.Element{
  const [show,setShow] = useState<boolean>(true);
  useEffect(():void=>{
   i18n.changeLanguage(lang);
- },[lang])
+ },[lang]);
+ 
  const hideMenu=():void=>{
    setShow(false);
   };
+
  const context:Context = {
   val:theme,
   user:current,
   translate:translate,
   hide:hideMenu
    };
+
     return (
       <Theme.Provider value={context}>
         <Wrapper back={theme}>

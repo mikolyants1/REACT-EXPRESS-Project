@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
     path:number,
     fill?:string,
     name:string,
-    logo:string,
+    logo?:string,
     click:()=>void,
     children?:JSX.Element
  }
@@ -24,7 +24,7 @@ function ProfileCard({fill,name,click,children,logo,path}:props):JSX.Element {
       <Link to={`/page/main/${path}`} onClick={hide}>
         <ContactBlock fill={fill} back={val} onClick={click}>
           <ContactLogo left={left} right={right}>
-            {logo == "" ? <>&#9733;</> : logo}
+            {!logo ? <>&#9733;</> : logo}
           </ContactLogo>
           <ContactText>
             <ContactName>
