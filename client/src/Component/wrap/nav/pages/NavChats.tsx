@@ -5,7 +5,7 @@ import { Theme } from "../../Page.js"
 import { Context, EvtC, EvtK, Null, Type,action1,
 chatProps,data, message, state } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
-import ProfileCard from "../../../ui/cards/ProfileCard.js"
+import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io} from 'socket.io-client';
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
@@ -97,15 +97,16 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         if (id) {
          const isOnline:Type<number> = online?.find((i:number)=>i==userId);
         return userId!==user ? (   
-            <ProfileCard click={()=>toggle(userId)} name={name} path={userId}
-             logo={name.slice(0,1).toUpperCase()} key={userId}>
+            <ProfileCard click={()=>toggle(userId)}
+             name={name} path={userId} key={userId}
+             logo={name.slice(0,1).toUpperCase()}>
               <ContactTime online={`${isOnline}`}>
                 {isOnline ? "online" : "offline"}
               </ContactTime>
             </ProfileCard>
           ) : null
          } else {
-           const show:Type<message> = getUser(userId)
+           const show:Type<message> = getUser(userId);
             return show&&(userId!==user) ? (
               <ProfileCard
                key={userId}

@@ -12,7 +12,6 @@ export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
 export interface stateUser {
     name:string,
     pass:string,
-    auth:boolean
    }
 export interface mess{
     text:string,

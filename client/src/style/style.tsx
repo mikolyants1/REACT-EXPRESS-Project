@@ -61,7 +61,6 @@ export const InputBlock:IStyledComponent<'web',BaseObject> = styled.div({
 })
 export const EntryInput:IStyledComponent<'web',{
   onChange:(e:EvtC)=>void,
-  onKeyUp:(e:EvtK)=>void,
   name:string
 }> = styled.input({
  width:260,

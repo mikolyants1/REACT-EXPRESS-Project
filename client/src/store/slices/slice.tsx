@@ -9,9 +9,9 @@ export interface Redux{
 }
 export type Pay<T> = PayloadAction<T>
 export type actions = CaseReducerActions<{
-    setTheme:ActionCreatorWithPayload<string,`messanger/setTheme`>,
-    setId:ActionCreatorWithPayload<string,`messanger/setId`>,
-    setLang:ActionCreatorWithPayload<string,`messanger/setLang`>
+  setTheme:ActionCreatorWithPayload<string,`messanger/setTheme`>,
+  setId:ActionCreatorWithPayload<string,`messanger/setId`>,
+  setLang:ActionCreatorWithPayload<string,`messanger/setLang`>
 },'messanger'>
 
 const initialState:Redux = {
