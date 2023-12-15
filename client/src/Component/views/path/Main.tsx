@@ -3,13 +3,14 @@ import { Container, FootBlock, HeaderBlock, Logo,
  MainBlock,MainInput,MessDate,Message,Name,Span,
  avatar,styleObj} from '../../../style/style.js'
 import { useOutletContext, useParams } from 'react-router-dom'
-import { useChanMessMutation, useDelMessMutation, useGetUserQuery,
- useSetMessMutation } from '../../../store/api/endpoints.js'
+import { useChanMessMutation, useDelMessMutation, 
+ useSetMessMutation } from '../../../store/api/endpoints/DialogEndpoints.js'
 import { EvtC, EvtK, Null, Type, data, mess, message,
  newMess, outlet, query } from '../../../types/type.js';
-import MessageCard from '../../ui/cards/MessageCard.js'
+import MessageCard from '../../ui/cards/maincards/MessageCard.js'
 import Month from './helpers/Month.js'
 import { Error, Loader } from '../../ui/Loader.js'
+import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
 
 interface props{
   children:JSX.Element

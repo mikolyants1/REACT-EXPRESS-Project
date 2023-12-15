@@ -8,7 +8,7 @@ import {  EvtC, EvtK, data, outlet, query,
  union } from "../../../types/type.js";
 import { Error, Loader } from "../../ui/Loader.js";
 import { useChanUserMutation, useDelUserMutation,
- useGetUserQuery } from "../../../store/api/endpoints.js";
+ useGetUserQuery } from "../../../store/api/endpoints/UserEndpoints.js";
 import UserSetBlock from "../../ui/inputs/User.js";
 import ThemeSetBlock from "../../ui/inputs/Theme.js";
 import ProfileLogoCard from "../../ui/cards/setcards/ProfileLogoCard.js";

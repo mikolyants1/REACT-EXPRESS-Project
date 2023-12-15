@@ -1,13 +1,10 @@
 import { Dispatch, FC, SetStateAction } from "react"
 import { getCurrent, getLang, getTheme,
- useAppSelector } from "../store/store"
+ useAppSelector } from "../../store/store.js"
 import { Outlet, useOutletContext } from "react-router-dom"
-import ToogleMenu from "./ui/buttons/Toggle.js"
 import {useTranslation} from 'react-i18next'
-import Main from "./wrap/path/Main.js"
-import Setting from "./wrap/path/Setting.js"
 
-export const Rout:FC=():JSX.Element=>{
+ const WrapRout:FC=():JSX.Element=>{
     const set:Dispatch<SetStateAction<boolean>> = useOutletContext();
     const theme:string = useAppSelector(getTheme);
     const current:number = useAppSelector(getCurrent);
@@ -25,17 +22,5 @@ export const Rout:FC=():JSX.Element=>{
       />
     );
   };
-export const MainPage:FC=():JSX.Element=>{
-    return (
-      <Main>
-        <ToogleMenu />
-      </Main>
-    );
-  };
-export const SettPage:FC=():JSX.Element=>{
-    return (
-      <Setting>
-        <ToogleMenu />
-      </Setting>
-    );
-  };
+
+export default WrapRout

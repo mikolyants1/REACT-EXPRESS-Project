@@ -95,7 +95,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         {Array.isArray(state.data)&&state.data.map(
         ({name,id:userId}:data):Null<JSX.Element>=>{
         if (id) {
-         const isOnline:Type<number> = online?.find((i:number)=>i==userId);
+        const isOnline:Type<number> = online?.find((i:number)=>i==userId);
         return userId!==user ? (   
             <ProfileCard click={()=>toggle(userId)}
              name={name} path={userId} key={userId}

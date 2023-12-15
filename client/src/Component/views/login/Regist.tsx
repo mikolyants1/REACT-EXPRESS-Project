@@ -2,7 +2,7 @@ import { useNavigate,NavigateFunction } from "react-router-dom"
 import {  useState } from "react"
 import { EntryBlock,EntryTitle,EntryBut,LoginError } from '../../../style/style.js'
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js"
-import { useAddUserMutation, useGetUsersQuery } from "../../../store/api/endpoints.js"
+import { useAddUserMutation, useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js"
 import {  Type, data, query, stateUser } from "../../../types/type.js"
 import { Loader ,Error } from "../../ui/Loader.js"
  import {useForm,FormProvider,SubmitHandler} from 'react-hook-form';
@@ -22,7 +22,7 @@ export default function Regist():JSX.Element{
   const {setId}:bind = useAction();
   const [addUser] = useAddUserMutation();
 
-  const check:SubmitHandler<stateUser>=(date):any=>{
+  const check:SubmitHandler<stateUser>=(date):void=>{
     const {name,pass}:stateUser = date;
     const already:Type<data> = data.find((i:data)=>(
       i.name == name && i.pass == pass

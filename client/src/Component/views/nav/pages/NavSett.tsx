@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react"
 import { Theme } from "../../Page.js"
-import { useGetUserQuery } from "../../../../store/api/endpoints.js"
+import { useGetUserQuery } from "../../../../store/api/endpoints/UserEndpoints.js"
 import { Loader, Error } from "../../../ui/Loader.js"
 import { Context, SettProps, data, query } from "../../../../types/type.js"
 import UpdateCard from "../../../ui/cards/navcards/UpdateCard.js"

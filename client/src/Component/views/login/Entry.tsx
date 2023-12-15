@@ -4,7 +4,7 @@ import { useNavigate,NavigateFunction } from "react-router-dom";
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
 import { Error, Loader } from "../../ui/Loader.js";
 import {Type,data, query, stateUser} from "../../../types/type.js";
-import { useGetUsersQuery } from "../../../store/api/endpoints.js";
+import { useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js";
 import { Link } from "react-router-dom";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";

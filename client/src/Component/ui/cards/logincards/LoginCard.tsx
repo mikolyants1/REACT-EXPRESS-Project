@@ -3,7 +3,7 @@ import { EntryInput, EntrySub, InputBlock } from "../../../../style/style"
 import { useFormContext,Controller } from "react-hook-form"
 
 
-function RegistCard():JSX.Element{
+function LoginCard():JSX.Element{
 const {control} = useFormContext();
     return (
         <>
@@ -41,4 +41,4 @@ const {control} = useFormContext();
     )
 }
 
-export default memo(RegistCard)
+export default memo(LoginCard)
