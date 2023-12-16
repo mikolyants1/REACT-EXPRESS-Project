@@ -2,11 +2,11 @@ import { useContext, useReducer, useState,Suspense,
 LazyExoticComponent,ComponentType,lazy} from "react";
 import { NavBar, NavMain, NavMainWrapper, NavMenu, NavMenuBlock,
  NavTitle } from "../../../style/style.js";
-import { Theme } from "../Page.js";
 import { Loader } from "../../ui/Loader.js";
 import { Context, Null, SettProps,action2,
 chatProps } from "../../../types/type.js";
 import {useTranslation} from 'react-i18next'
+import Theme from "../../helpers/Context.js";
 
 const NavChats:LazyExoticComponent<
 ComponentType<chatProps>> = lazy(()=>import("./pages/NavChats.js"));

@@ -2,9 +2,9 @@ import { memo, useContext } from "react"
 import { Link } from "react-router-dom"
 import { ContactBlock, ContactLogo, ContactName,
  ContactText, ContactTime, avatar, styleObj } from "../../../../style/style"
-import { Theme } from "../../../views/Page"
 import { Context } from "../../../../types/type"
 import { Error } from "../../Loader"
+import Theme from "../../../helpers/Context"
 
 interface props {
   navigate:()=>void,

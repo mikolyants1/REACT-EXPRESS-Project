@@ -2,7 +2,7 @@ import { ProfileName, ProfilePass,ThemeBlock,
  ThemeInput, ThemeText } from "../../../style/style.js"
 import { Context, EvtC} from "../../../types/type.js"
 import { FC, useContext} from 'react'
-import { Theme } from "../../views/Page.js";
+import Theme from "../../helpers/Context.js";
   
   interface themeProp{
     change:(e:EvtC)=>void,

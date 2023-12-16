@@ -104,13 +104,18 @@ export interface Context{
     translate:Null<TFunction<"translation",string>>,
     hide:()=>void
   };
-  export interface state{
+  export interface st{
     data:unknown,
     err:boolean,
     load:boolean
   }
- export type action1 = Record<string,unknown|boolean>
- 
+ export interface st1{
+    now:number,
+    text:string,
+    status:boolean
+  }
+ export type act1 = Record<string,string|boolean|number>
+ export type act = Record<string,unknown|boolean>
  export type query3 = Omit<query2,"day"|"date"|"month">
  export type query4 = Omit<query3,"text">
  export interface action2{

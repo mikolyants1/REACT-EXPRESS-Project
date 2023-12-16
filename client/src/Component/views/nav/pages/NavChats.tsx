@@ -1,12 +1,13 @@
 import { BlockInput, ContactInput, ContactTime} from "../../../../style/style.js"
 import { useCallback, useContext, useEffect, useReducer, useState } from "react"
 import axios, { AxiosResponse } from "axios"
-import { Theme } from "../../Page.js"
-import { Context, EvtC, EvtK, Null, Type,action1,
-chatProps,data, message, state } from "../../../../types/type.js"
+import { Context, EvtC, EvtK, Null, Type,act,chatProps,
+data, message, st, } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
 import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io} from 'socket.io-client';
+import { defaultState1, reducer } from "../../../helpers/Reducer.js"
+import Theme from "../../../helpers/Context.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
@@ -16,10 +17,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const [text,setText] = useState<string>('');
     const [socket,setSocket] = useState<any>(null);
     const [online,setOnline] = useState<number[]>();
-    const [state,dispatch] = useReducer(
-    (prev:state,next:action1)=>({...prev,...next}),
-    {data:null,err:false,load:true}
-    );
+    const [state,dispatch] = useReducer(reducer<st,act>,defaultState1);
       const change=(e:EvtC):void=>{
         setText(e.target.value);
       };

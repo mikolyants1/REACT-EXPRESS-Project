@@ -3,13 +3,11 @@ import NavBlock from "./nav/NavBlock.js";
 import { Wrapper,MainContent } from "../../style/style.js";
 import { getCurrent, getLang, getTheme,
 useAppSelector } from "../../store/store.js";
-import { useState,createContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Context } from "../../types/type.js";
 import i18n from "../../translate/Translate.js";
 import {useTranslation} from 'react-i18next'
-
-export const Theme = createContext<Context>(
-{val:'',user:0,translate:null,hide:()=>{}});
+import Theme from "../helpers/Context.js";
 
 export default function Page():JSX.Element{
  const theme:string = useAppSelector(getTheme);

@@ -5,22 +5,17 @@ import { Container, FootBlock, HeaderBlock, Logo,
 import { useOutletContext, useParams } from 'react-router-dom'
 import { useChanMessMutation, useDelMessMutation, 
  useSetMessMutation } from '../../../store/api/endpoints/DialogEndpoints.js'
-import { EvtC, EvtK, Null, Type, data, mess, message,
- newMess, outlet, query } from '../../../types/type.js';
+import { EvtC, EvtK, Null, Type, act1, data, mess, message,
+ newMess, outlet, query, st1 } from '../../../types/type.js';
 import MessageCard from '../../ui/cards/maincards/MessageCard.js'
-import Month from './helpers/Month.js'
+import Month from '../../helpers/Month.js'
 import { Error, Loader } from '../../ui/Loader.js'
 import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
+import { defaultState2, reducer } from '../../helpers/Reducer.js';
 
 interface props{
   children:JSX.Element
 }
-interface state{
-  now:number,
-  text:string,
-  status:boolean
-}
-type action = Record<string,string|boolean|number>
 
 export default function Main({children}:props):JSX.Element {
  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
@@ -31,10 +26,7 @@ export default function Main({children}:props):JSX.Element {
  const ref = useRef<HTMLInputElement>(null!);
  const {val,user,translate} = useOutletContext<outlet>();
  if (!id) return <Error back={val} />
- const [state,dispatch] = useReducer(
-  (prv:state,nxt:action)=>({...prv,...nxt}),
-  {now:0,text:"",status:false}
- )
+ const [state,dispatch] = useReducer(reducer<st1,act1>,defaultState2)
  const result:query<data>[] = [
   useGetUserQuery<query<data>>(id),
   useGetUserQuery<query<data>>(user),
