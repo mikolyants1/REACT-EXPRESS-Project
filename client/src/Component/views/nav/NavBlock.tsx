@@ -1,12 +1,13 @@
 import { useContext, useReducer, useState,Suspense,
 LazyExoticComponent,ComponentType,lazy} from "react";
-import { NavBar, NavMain, NavMainWrapper, NavMenu, NavMenuBlock,
- NavTitle } from "../../../style/style.js";
+import { NavBar, NavMain, NavMainWrapper, NavMenu,
+ NavMenuBlock,NavTitle } from "../../../style/style.js";
 import { Loader } from "../../ui/Loader.js";
-import { Context, Null, SettProps,action2,
-chatProps } from "../../../types/type.js";
+import { Context, Null, SettProps,chatProps,
+st2} from "../../../types/type.js";
 import {useTranslation} from 'react-i18next'
 import Theme from "../../helpers/Context.js";
+import { defaultState3, reducer } from "../../helpers/Reducer.js";
 
 const NavChats:LazyExoticComponent<
 ComponentType<chatProps>> = lazy(()=>import("./pages/NavChats.js"));
@@ -16,42 +17,19 @@ ComponentType<SettProps>> = lazy(()=>import("./pages/NavSett.js"));
 interface prop{
  show:boolean
 }
-type state = Record<string,boolean>
 
 export default function NavBlock({show}:prop):JSX.Element{
  const {val} = useContext<Context>(Theme);
  const [call,setCall] = useState<Null<number>>(null);
  const [translate] = useTranslation();
  const arr:string[] = ['Contacts','Chats','Settings'];
- const [title,setTitle] = useState<string>(translate('Contacts'));
- const [state,dispatch] = useReducer(reducer, 
- {Contacts:true,Chats:false,Settings:false});
- function reducer(state:state,action:action2):state{
-  setTitle(arr[action.type]);
-   switch (action.type){
-    case 0:
-      return {
-        Contacts:true,
-        Chats:false,
-        Settings:false
-      };
-    case 1:
-      return {
-        Contacts:false,
-        Chats:true,
-        Settings:false
-      };
-    case 2:
-      return {
-        Contacts:false,
-        Chats:false,
-        Settings:true
-      };
-    default:
-      return state;
-   };
+ const [title,setTitle] = useState<string>('Contacts');
+ const [state,dispatch] = useReducer(reducer,defaultState3);
+ const press = (i:number)=> ():void => {
+  setTitle(arr[i]);
+  dispatch({type:i});
  };
- const {Contacts,Chats,Settings}:state = state;
+ const {Contacts,Chats,Settings}:st2 = state;
     return (
        <NavBar back={val}
         show={`${show}`}>
@@ -93,7 +71,7 @@ export default function NavBlock({show}:prop):JSX.Element{
          <NavMenu>
           {arr.map((item:string,i:number):JSX.Element=>(
            <NavMenuBlock key={i} press={`${state[item]}`}
-             onClick={()=>dispatch({type:i})}>
+             onClick={press(i)}>
               {translate(item)}
            </NavMenuBlock>
            ))}

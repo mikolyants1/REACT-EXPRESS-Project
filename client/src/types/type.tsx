@@ -113,11 +113,20 @@ export interface Context{
     now:number,
     text:string,
     status:boolean
-  }
+ }
+
+ export type StArr = [string,boolean]
+ 
+ export type st2 = Record<string,boolean>
+
  export type act1 = Record<string,string|boolean|number>
+
  export type act = Record<string,unknown|boolean>
+
  export type query3 = Omit<query2,"day"|"date"|"month">
+
  export type query4 = Omit<query3,"text">
+
  export interface action2{
     type:number
   }

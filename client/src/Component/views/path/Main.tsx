@@ -11,7 +11,7 @@ import MessageCard from '../../ui/cards/maincards/MessageCard.js'
 import Month from '../../helpers/Month.js'
 import { Error, Loader } from '../../ui/Loader.js'
 import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
-import { defaultState2, reducer } from '../../helpers/Reducer.js';
+import { defaultState2, reduce } from '../../helpers/Reducer.js';
 
 interface props{
   children:JSX.Element
@@ -26,7 +26,7 @@ export default function Main({children}:props):JSX.Element {
  const ref = useRef<HTMLInputElement>(null!);
  const {val,user,translate} = useOutletContext<outlet>();
  if (!id) return <Error back={val} />
- const [state,dispatch] = useReducer(reducer<st1,act1>,defaultState2)
+ const [state,dispatch] = useReducer(reduce<st1,act1>,defaultState2)
  const result:query<data>[] = [
   useGetUserQuery<query<data>>(id),
   useGetUserQuery<query<data>>(user),

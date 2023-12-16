@@ -6,7 +6,7 @@ data, message, st, } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
 import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io} from 'socket.io-client';
-import { defaultState1, reducer } from "../../../helpers/Reducer.js"
+import { defaultState1,reduce } from "../../../helpers/Reducer.js"
 import Theme from "../../../helpers/Context.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
@@ -17,7 +17,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const [text,setText] = useState<string>('');
     const [socket,setSocket] = useState<any>(null);
     const [online,setOnline] = useState<number[]>();
-    const [state,dispatch] = useReducer(reducer<st,act>,defaultState1);
+    const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
       const change=(e:EvtC):void=>{
         setText(e.target.value);
       };
