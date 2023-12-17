@@ -117,7 +117,7 @@ export default function Main({children}:props):JSX.Element {
               const {id:userId,day,month,now,text,date}:newMess = item;
               const right:Null<boolean> = i==0 ? null : showTime(mess,i);
                return (
-                 <>
+                 <div key={`${i}`}>
                   {(right||i==0)&&(
                    <MessDate>
                      {translate(Month(month))} {day}
@@ -132,7 +132,7 @@ export default function Main({children}:props):JSX.Element {
                    update={updateDioalog}
                    del={deleteMess}
                    />
-                </>
+                </div>
                )})}
             </Message>
           </MainBlock>

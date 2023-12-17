@@ -13,10 +13,15 @@ export default function Entry():JSX.Element{
   const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('');
   const current:number = useAppSelector(getCurrent);
   const navigate:NavigateFunction = useNavigate();
-  const methods = useForm<stateUser>();
+  const methods = useForm<stateUser>({
+    defaultValues:{
+    name:"",
+    pass:""
+    }
+  });
   const [error,setError] = useState<boolean>(false);
   const { setId }:bind = useAction();
-  const {handleSubmit} = methods;
+  const {handleSubmit,reset} = methods;
   const check:SubmitHandler<stateUser>=(date):void=>{
    if (typeof data !== "undefined"){
     const {name,pass}:stateUser = date;
@@ -28,6 +33,7 @@ export default function Entry():JSX.Element{
       navigate(`/page/main/${current}`);
      }else{
       setError(true);
+      reset();
       };
     };
   };

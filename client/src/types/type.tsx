@@ -106,6 +106,7 @@ export interface Context{
   };
   export interface st{
     data:unknown,
+    base:unknown,
     err:boolean,
     load:boolean
   }
@@ -115,8 +116,14 @@ export interface Context{
     status:boolean
  }
 
+ export interface error {
+   type:string,
+   name:string,
+   message:string
+ }
+
  export type StArr = [string,boolean]
- 
+
  export type st2 = Record<string,boolean>
 
  export type act1 = Record<string,string|boolean|number>

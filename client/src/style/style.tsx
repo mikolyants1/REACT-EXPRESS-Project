@@ -61,7 +61,8 @@ export const InputBlock:IStyledComponent<'web',BaseObject> = styled.div({
 })
 export const EntryInput:IStyledComponent<'web',{
   onChange:(e:EvtC)=>void,
-  name:string
+  name:string,
+  value:string
 }> = styled.input({
  width:260,
  height:40,
@@ -196,7 +197,7 @@ border-color:rgb(240, 240, 240);
     opacity:1;
   }
  `
-export const NavMainWrapper:IStyledComponent<"web",BaseObject> = styled.div`
+export const NavWrapper:IStyledComponent<"web",BaseObject> = styled.div`
     width:100%;
     height:100%;
     animation:${show} 0.3s linear;

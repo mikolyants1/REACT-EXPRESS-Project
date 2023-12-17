@@ -15,8 +15,13 @@ interface err{
 export default function Regist():JSX.Element{
   const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('')
   const current:number = useAppSelector(getCurrent);
-  const methods = useForm<stateUser>();
-  const {handleSubmit} = methods;
+  const methods = useForm<stateUser>({
+    defaultValues:{
+      name:"",
+      pass:""
+    }
+  });
+  const {handleSubmit,reset} = methods;
   const navigate:NavigateFunction = useNavigate();
   const [error,setError] = useState<err>({show:false,mess:""});
   const {setId}:bind = useAction();
@@ -30,6 +35,7 @@ export default function Regist():JSX.Element{
    if (name&&pass){
     if (already){
      setError({show:true,mess:"user is already exists"});
+      reset();
       return;
     }
     const sortId:number = [...data].sort(
@@ -40,6 +46,7 @@ export default function Regist():JSX.Element{
       navigate(`/page/main/${current}`);
     } else {
       setError({show:true,mess:"no correct"});
+      reset();
     };
   };
 

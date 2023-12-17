@@ -28,9 +28,9 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
      const setIndex=useCallback((i:number):void=>setIdx(i),[])
      
      const sort=(e:EvtK):void=>{
-      if (e.key==='Enter'&&Array.isArray(state.data)){
+      if (e.key==='Enter'&&Array.isArray(state.base)){
       const val:string = text.trim().toLocaleLowerCase()
-      const newData:data[] = state.data.filter((i:data):Type<data>=>{
+      const newData:data[] = state.base.filter((i:data):Type<data>=>{
        if (i.name.toLocaleLowerCase().indexOf(val)!==-1) return i;
        });
        dispatch({data:newData});
@@ -50,7 +50,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         .then(({data}:AxiosResponse<data[]>):void=>{
         if (Array.isArray(data)){
           const date:Type<data> = data.find((i:data)=>i.id==user);
-          dispatch({data:data});
+          dispatch({data:data,base:data});
           setData(date);
           }
         })

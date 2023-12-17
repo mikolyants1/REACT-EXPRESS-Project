@@ -14,10 +14,11 @@ const {control} = useFormContext();
             <Controller
              name="name"
              control={control}
-             render={({field:{onChange,name}})=>(
+             render={({field:{onChange,value,name}})=>(
               <EntryInput
                onChange={onChange}
                name={name}
+               value={value}
               />
             )}
             />
@@ -29,10 +30,11 @@ const {control} = useFormContext();
             <Controller
              name="pass"
              control={control}
-             render={({field:{onChange,name}})=>(
+             render={({field:{onChange,value,name}})=>(
               <EntryInput
                onChange={onChange}
                name={name}
+               value={value}
               />
             )}
             />          
