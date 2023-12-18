@@ -1,6 +1,7 @@
 import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction} from 'react'
 import {TFunction} from 'i18next'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
+import { ControllerRenderProps, FieldValues } from 'react-hook-form'
 
 export type Type<T> = undefined|T
 export type Str<T> = string|T
@@ -133,6 +134,8 @@ export interface Context{
  export type query3 = Omit<query2,"day"|"date"|"month">
 
  export type query4 = Omit<query3,"text">
+
+export type Control<T extends string> = ControllerRenderProps<FieldValues,T>;
 
  export interface action2{
     type:number

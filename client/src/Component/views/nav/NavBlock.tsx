@@ -37,7 +37,8 @@ export default function NavBlock({show}:prop):JSX.Element{
            {translate(title)}
          </NavTitle>
          <NavMain>
-           <Suspense fallback={<Loader back={val} />}>
+           <Suspense
+            fallback={<Loader back={val} />}>
             {Contacts&&(
               <NavWrapper>
                 <NavChats

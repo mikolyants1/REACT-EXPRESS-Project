@@ -11,7 +11,7 @@ export function reducer(state:st2,action:action2):st2{
  const newState:StArr[] = entries.map((item:StArr,i:number)=>(
     i == action.type ? [item[0],true] : [item[0],false]
     ));
-   return Object.fromEntries(newState);
+  return Object.fromEntries(newState);
 };
 
 export const defaultState1:st = {
