@@ -5,7 +5,7 @@ import { Context, EvtC, EvtK, Null, Type,act,chatProps,
 data, message, st, } from "../../../../types/type.js"
 import { Loader, Error } from "../../../ui/Loader.js"
 import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
-import {io} from 'socket.io-client';
+import {io,Socket} from 'socket.io-client';
 import { defaultState1,reduce } from "../../../helpers/Reducer.js"
 import Theme from "../../../helpers/Context.js"
 
@@ -15,7 +15,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call?call:null);
     const [text,setText] = useState<string>('');
-    const [socket,setSocket] = useState<any>(null);
+    const [socket,setSocket] = useState<Socket>(null);
     const [online,setOnline] = useState<number[]>();
     const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
       const change=(e:EvtC):void=>{

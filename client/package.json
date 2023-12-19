@@ -20,6 +20,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^5.1.30",
+    "@types/socket.io-client": "^3.0.0",
     "i18next": "^23.7.6",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.2",
