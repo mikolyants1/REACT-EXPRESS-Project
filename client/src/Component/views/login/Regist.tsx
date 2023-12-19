@@ -40,8 +40,8 @@ export default function Regist():JSX.Element{
       return;
     }
     if (typeof data == "undefined") return;
-    const sortId:data[] = [...data].sort(
-    (x:data,y:data)=>y.id-x.id);
+    const sortId:data[] = [...data]
+    .sort((x:data,y:data)=>y.id-x.id);
     const userId:number = data.length !== 0 ? sortId[0].id : 0;
       setId(userId+1);
       setPass(pass);

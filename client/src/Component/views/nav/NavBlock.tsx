@@ -1,5 +1,5 @@
 import { useContext, useReducer, useState,Suspense,
-LazyExoticComponent,ComponentType,lazy} from "react";
+LazyExoticComponent,ComponentType,lazy, startTransition} from "react";
 import { NavBar, NavMain, NavWrapper, NavMenu,
  NavMenuBlock,NavTitle } from "../../../style/style.js";
 import { Loader } from "../../ui/Loader.js";
@@ -21,13 +21,15 @@ interface prop{
 export default function NavBlock({show}:prop):JSX.Element{
  const {val} = useContext<Context>(Theme);
  const [call,setCall] = useState<Null<number>>(null);
- const [translate] = useTranslation();
+ const [translate] = useTranslation<"translation",string>();
  const arr:string[] = ['Contacts','Chats','Settings'];
  const [title,setTitle] = useState<string>('Contacts');
  const [state,dispatch] = useReducer(reducer,defaultState3);
  const press = (i:number)=> ():void => {
+ startTransition(():void=>{
   setTitle(arr[i]);
   dispatch({type:i});
+  });
  };
  const {Contacts,Chats,Settings}:st2 = state;
     return (
