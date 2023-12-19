@@ -3,7 +3,7 @@ import { Navigate, Params, useOutletContext,
 import {  HeaderBlock,SetContain, SetMain,
 SetTitle} from "../../../style/style.js";
 import { useCallback,useState} from "react";
-import { bind, useAction } from "../../../store/store.js";
+import { bind, getPass, useAction, useAppSelector } from "../../../store/store.js";
 import {  EvtC, EvtK, data, outlet, query,
  union } from "../../../types/type.js";
 import { Error, Loader } from "../../ui/Loader.js";
@@ -30,6 +30,7 @@ export default function Setting({children}:Props):JSX.Element{
  const [auth,setAuth] = useState<boolean>(false);
  const [state,setState] = useState<state>({name:'',pass:''});
 const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
+const password:string = useAppSelector(getPass);
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
  const {setLang,setTheme}:bind = useAction();
@@ -92,7 +93,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
          />
          <PassCard
           name={translate("password")}
-          value={data.pass}
+          value={password}
          />
          <UserSetBlock
           set={change}
@@ -102,7 +103,7 @@ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
           />
          <UserSetBlock
           set={change}
-          val={data?.pass}
+          val={password}
           click={press}
           name='pass'
           />

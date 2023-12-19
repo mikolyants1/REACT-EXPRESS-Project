@@ -145,6 +145,10 @@ export type Control<T extends string> = ControllerRenderProps<FieldValues,T>;
     isError:boolean,
     isLoading:boolean
   }
+  export interface has {
+    id:number,
+    has:boolean
+  }
   export interface chatProps{
     set:Dispatch<action2>,
     id:boolean,

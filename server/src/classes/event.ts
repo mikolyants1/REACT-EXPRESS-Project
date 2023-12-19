@@ -4,10 +4,10 @@ import { EventEmitter } from 'events'
   private evt:string
     constructor(evt:string){
       super();
-      this.evt = evt
+      this.evt = evt;
     }
     test(data?:string):void{
-     this.on(this.evt,()=>{
+     this.on(this.evt,():void=>{
       console.error(`${this.evt} error : ${data}`);
       });
      this.emit(this.evt);

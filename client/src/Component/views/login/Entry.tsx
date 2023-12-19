@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useNavigate,NavigateFunction } from "react-router-dom";
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
 import { Error, Loader } from "../../ui/Loader.js";
-import {Type,data, query, stateUser} from "../../../types/type.js";
+import {data, has, query, stateUser} from "../../../types/type.js";
 import { useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js";
 import { Link } from "react-router-dom";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";
+import axios, { AxiosResponse } from "axios";
 
 export default function Entry():JSX.Element{
   const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('');
@@ -20,16 +21,17 @@ export default function Entry():JSX.Element{
     }
   });
   const [error,setError] = useState<boolean>(false);
-  const { setId }:bind = useAction();
+  const { setId,setPass }:bind = useAction();
   const {handleSubmit,reset} = methods;
-  const check:SubmitHandler<stateUser>=(date):void=>{
+  const check:SubmitHandler<stateUser>= async (date):Promise<void>=>{
    if (typeof data !== "undefined"){
     const {name,pass}:stateUser = date;
-    const user:Type<data> = data.find((i:data)=>(
-      i.name == name && i.pass == pass
-    ));
-    if (user){
+    const user = await axios
+    .get(`http://localhost:5000/pass/?name=${name}&pass=${pass}`)
+     .then(({data}:AxiosResponse<has>)=>data);
+    if (user.has){
       setId(user.id);
+      setPass(pass);
       navigate(`/page/main/${current}`);
      }else{
       setError(true);

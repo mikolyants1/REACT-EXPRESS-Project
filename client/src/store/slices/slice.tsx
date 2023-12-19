@@ -5,7 +5,8 @@ import { bind } from '../store'
 export interface Redux{
     current:number,
     theme:string,
-    lang:string
+    lang:string,
+    pass:string
 }
 export type Pay<T> = PayloadAction<T>
 export type actions = CaseReducerActions<{
@@ -17,13 +18,15 @@ export type actions = CaseReducerActions<{
 const initialState:Redux = {
     current:0,
     theme:'white',
-    lang:"en"
+    lang:"en",
+    pass:""
 };
 
 const slice:Slice<Redux,{
     setTheme:(state:Redux,action:Pay<string>)=>void,
     setId:(state:Redux,action:Pay<number>)=>void,
-    setLang:(state:Redux,actopn:Pay<string>)=>void
+    setLang:(state:Redux,actopn:Pay<string>)=>void,
+    setPass:(state:Redux,actopn:Pay<string>)=>void
 },'messanger'> = createSlice({
     name:'messanger',
     initialState,
@@ -36,7 +39,10 @@ const slice:Slice<Redux,{
        },
        setLang:(state:Redux,action:Pay<string>):void=>{
          state.lang = action.payload
-       }
+       },
+       setPass:(state:Redux,action:Pay<string>):void=>{
+        state.pass = action.payload
+      }
     }
 });
 export const action:bind = slice.actions;
