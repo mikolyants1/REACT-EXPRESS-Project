@@ -2,14 +2,14 @@ import { EntryBlock, EntryBut,EntryTitle, LoginError, RegistLink } from "../../.
 import { useState } from "react";
 import { useNavigate,NavigateFunction } from "react-router-dom";
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
-import {data, has, query, stateUser} from "../../../types/type.js";
+import {data, query, stateUser} from "../../../types/type.js";
 import { useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js";
 import { Link } from "react-router-dom";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";
-import axios, { AxiosResponse } from "axios";
 import Loader from "../../ui/blocks/Loader.js";
 import Error from "../../ui/blocks/Error.js";
+import GetSuccess from "../../helpers/GetSuccess.js";
 
 export default function Entry():JSX.Element{
   const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('');
@@ -24,9 +24,7 @@ export default function Entry():JSX.Element{
   const check:SubmitHandler<stateUser>= async (date):Promise<void>=>{
    if (typeof data !== "undefined"){
     const {name,pass}:stateUser = date;
-    const user = await axios
-    .get(`http://localhost:5000/pass/?name=${name}&pass=${pass}`)
-    .then(({data}:AxiosResponse<has>)=>data);
+    const user = await GetSuccess(name,pass);
     if (user.has){
       setId(user.id);
       setPass(pass);

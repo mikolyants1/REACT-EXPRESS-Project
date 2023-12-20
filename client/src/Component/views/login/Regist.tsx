@@ -3,12 +3,12 @@ import {  useState } from "react"
 import { EntryBlock,EntryTitle,EntryBut,LoginError } from '../../../style/style.js'
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js"
 import { useAddUserMutation, useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js"
-import { data, has, query, stateUser } from "../../../types/type.js"
+import { data,query, stateUser } from "../../../types/type.js"
 import {useForm,FormProvider,SubmitHandler} from 'react-hook-form';
 import LoginCard from "../../ui/cards/logincards/LoginCard.js"
-import axios, { AxiosResponse } from "axios"
 import Loader from "../../ui/blocks/Loader.js"
 import Error from "../../ui/blocks/Error.js"
+import GetSuccess from "../../helpers/GetSuccess.js"
 
 interface err{
    show:boolean,
@@ -28,11 +28,9 @@ export default function Regist():JSX.Element{
 
   const check:SubmitHandler<stateUser>=async (date):Promise<void>=>{
     const {name,pass}:stateUser = date;
-    const already = await axios
-    .get(`http://localhost:5000/pass?name=${name}&pass=${pass}`)
-    .then(({data}:AxiosResponse<has>)=>data.has);
+    const already = await GetSuccess(name,pass);
    if (name&&pass){
-    if (already){
+    if (already.has){
      setError({show:true,mess:"user is already exists"});
       reset();
       return;
