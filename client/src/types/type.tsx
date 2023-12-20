@@ -149,6 +149,9 @@ export type Control<T extends string> = ControllerRenderProps<FieldValues,T>;
     id:number,
     has:boolean
   }
+  export interface load {
+    back:string
+  }
   export interface chatProps{
     set:Dispatch<action2>,
     id:boolean,

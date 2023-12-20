@@ -1,10 +1,10 @@
 import { memo, useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import { ContactBlock, ContactLogo, ContactName,
- ContactText, ContactTime, avatar, styleObj } from "../../../../style/style"
+ContactText, ContactTime, avatar, styleObj } from "../../../../style/style"
 import { Context } from "../../../../types/type"
-import { Error } from "../../Loader"
 import Theme from "../../../helpers/Context"
+import Error from "../../blocks/Error"
 
 interface props {
   navigate:()=>void,

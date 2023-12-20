@@ -1,10 +1,11 @@
 import { useCallback, useContext, useState } from "react"
 import { useGetUserQuery } from "../../../../store/api/endpoints/UserEndpoints.js"
-import { Loader, Error } from "../../../ui/Loader.js"
 import { Context, SettProps, data, query } from "../../../../types/type.js"
 import UpdateCard from "../../../ui/cards/navcards/UpdateCard.js"
 import LinkCard from "../../../ui/cards/navcards/LinkCard.js"
 import Theme from "../../../helpers/Context.js"
+import Loader from "../../../ui/blocks/Loader.js"
+import Error from "../../../ui/blocks/Error.js"
 
 export default function NavSett({set,call}:SettProps):JSX.Element{
   const {user,val} = useContext<Context>(Theme);

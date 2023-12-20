@@ -5,7 +5,6 @@ import { useCallback,useState} from "react";
 import { bind, getPass, useAction, useAppSelector } from "../../../store/store.js";
 import {  EvtC, EvtK, data, outlet, query,
  union } from "../../../types/type.js";
-import { Error, Loader } from "../../ui/Loader.js";
 import { useChanUserMutation, useDelUserMutation,
  useGetUserQuery } from "../../../store/api/endpoints/UserEndpoints.js";
 import UserSetBlock from "../../ui/inputs/User.js";
@@ -13,6 +12,8 @@ import ThemeSetBlock from "../../ui/inputs/Theme.js";
 import ProfileLogoCard from "../../ui/cards/setcards/ProfileLogoCard.js";
 import PassCard from "../../ui/cards/setcards/PassCard.js";
 import AccButton from "../../ui/buttons/Account.js";
+import Loader from "../../ui/blocks/Loader.js";
+import Error from "../../ui/blocks/Error.js";
 
 interface state{
   name:string,

@@ -2,23 +2,21 @@ import { EntryBlock, EntryBut,EntryTitle, LoginError, RegistLink } from "../../.
 import { useState } from "react";
 import { useNavigate,NavigateFunction } from "react-router-dom";
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
-import { Error, Loader } from "../../ui/Loader.js";
 import {data, has, query, stateUser} from "../../../types/type.js";
 import { useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js";
 import { Link } from "react-router-dom";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";
 import axios, { AxiosResponse } from "axios";
+import Loader from "../../ui/blocks/Loader.js";
+import Error from "../../ui/blocks/Error.js";
 
 export default function Entry():JSX.Element{
   const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('');
   const current:number = useAppSelector(getCurrent);
   const navigate:NavigateFunction = useNavigate();
   const methods = useForm<stateUser>({
-    defaultValues:{
-    name:"",
-    pass:""
-    }
+    defaultValues:{name:"",pass:""}
   });
   const [error,setError] = useState<boolean>(false);
   const { setId,setPass }:bind = useAction();
@@ -46,7 +44,7 @@ export default function Entry():JSX.Element{
             {isLoading ? (
               <Loader back="white" />
             ) : isError ? (
-             <Error back="white" />
+              <Error back="white" />
             ) : (
          <>
           <EntryTitle>
@@ -61,7 +59,7 @@ export default function Entry():JSX.Element{
             login
           </EntryBut>
           <RegistLink>
-            <Link to={`/reg`}>
+            <Link to="/reg">
               registration
             </Link>
           </RegistLink>

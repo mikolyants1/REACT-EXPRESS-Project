@@ -3,11 +3,12 @@ import { useCallback, useContext, useEffect, useReducer, useState } from "react"
 import axios, { AxiosResponse } from "axios"
 import { Context, EvtC, EvtK, Null, Type,act,chatProps,
 data, message, st, } from "../../../../types/type.js"
-import { Loader, Error } from "../../../ui/Loader.js"
 import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io,Socket} from 'socket.io-client';
 import { defaultState1,reduce } from "../../../helpers/Reducer.js"
 import Theme from "../../../helpers/Context.js"
+import Loader from "../../../ui/blocks/Loader.js"
+import Error from "../../../ui/blocks/Error.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
