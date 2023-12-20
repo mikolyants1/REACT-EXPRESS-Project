@@ -32,7 +32,7 @@ export default function Entry():JSX.Element{
     if (user.has){
       setId(user.id);
       setPass(pass);
-      navigate(`/page/main/${current}`,{state:{color:"red"}});
+      navigate(`/page/main/${current}`);
      }else{
       setError(true);
       reset();
