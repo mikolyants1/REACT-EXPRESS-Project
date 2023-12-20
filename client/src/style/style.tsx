@@ -290,9 +290,9 @@ width:'100%',
 height:'50px',
 borderTop:'1px solid rgb(240, 240, 240)'
 })
-type mess1= {
+type mess1 = {
     press:string,
-    key:number,
+    key:string,
     onClick:()=>void,
     children:string
 }

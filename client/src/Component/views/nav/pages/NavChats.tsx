@@ -13,9 +13,9 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
     if (!translate) return <Error back={val} />;
     const [data,setData] = useState<Type<data>>(null!);
-    const [idx,setIdx] = useState<Null<number>>(call?call:null);
+    const [idx,setIdx] = useState<Null<number>>(call??null);
     const [text,setText] = useState<string>('');
-    const [socket,setSocket] = useState<Socket>(null);
+    const [socket,setSocket] = useState<Socket>(null!);
     const [online,setOnline] = useState<number[]>();
     const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
       const change=(e:EvtC):void=>{

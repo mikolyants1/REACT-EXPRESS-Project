@@ -1,5 +1,5 @@
 import { memo, useContext } from "react"
-import { Link } from "react-router-dom"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 import { ContactBlock, ContactLogo, ContactName,
  ContactText, ContactTime, avatar, styleObj } from "../../../../style/style"
 import { Context } from "../../../../types/type"
@@ -15,11 +15,16 @@ interface props {
 function UpdateCard({name,navigate,fill}:props):JSX.Element{
 const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
 const {hide,translate,val} = useContext<Context>(Theme);
+const nav:NavigateFunction = useNavigate();
+const linkNavigate = ():void => {
+   hide();
+   navigate();
+   nav("set",{state:"Profile"});
+ };
  if (!translate) return <Error back={val} />
     return (
-      <Link to={`/page/set/Profile`} onClick={hide}>
-        <ContactBlock fill={`${fill}`} back={val}
-         onClick={navigate}>
+        <ContactBlock fill={`${fill}`}
+         back={val} onClick={linkNavigate}>
           <ContactLogo left={one} right={two}>
             {name.slice(0,1).toUpperCase()}
           </ContactLogo>
@@ -32,7 +37,6 @@ const {hide,translate,val} = useContext<Context>(Theme);
             </ContactTime>
           </ContactText>
         </ContactBlock>
-      </Link>
     )
 }
 

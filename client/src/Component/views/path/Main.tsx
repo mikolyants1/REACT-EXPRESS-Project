@@ -25,7 +25,6 @@ export default function Main({children}:props):JSX.Element {
  const [delMess] = useDelMessMutation();
  const ref = useRef<HTMLInputElement>(null!);
  const {val,user,translate} = useOutletContext<outlet>();
- if (!id) return <Error back={val} />
  const [state,dispatch] = useReducer(reduce<st1,act1>,defaultState2)
  const result:query<data>[] = [
   useGetUserQuery<query<data>>(id),
@@ -82,6 +81,7 @@ export default function Main({children}:props):JSX.Element {
     delMess({id1:id,id2:user,now:now});
    };
  },[]);
+
  const updateDioalog=useCallback((time:number):void=>{
     dispatch({status:true,now:time});
     ref.current.focus();
@@ -90,9 +90,11 @@ export default function Main({children}:props):JSX.Element {
  if (result.some(({isLoading})=>isLoading)){
    return <Loader back={val} />;
  };
+
  if (result.some(({isError})=>isError)){
    return <Error back={val} />;
  };
+
  const [{data:d1},{data:d2}]:query<data>[] = result;
  if (!d1||!d2) return <Error back={val} />;
  const mess:newMess[] = getMessage(d1,d2);

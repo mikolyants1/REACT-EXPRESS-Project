@@ -54,10 +54,6 @@ const router = createBrowserRouter([
             children:[
               {
                 index:true,
-                element:<Navigate to=':id' />
-              },
-              {
-                path:':id',
                 element:<SettRout />
               }
             ]

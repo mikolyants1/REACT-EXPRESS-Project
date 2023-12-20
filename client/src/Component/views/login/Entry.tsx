@@ -28,11 +28,11 @@ export default function Entry():JSX.Element{
     const {name,pass}:stateUser = date;
     const user = await axios
     .get(`http://localhost:5000/pass/?name=${name}&pass=${pass}`)
-     .then(({data}:AxiosResponse<has>)=>data);
+    .then(({data}:AxiosResponse<has>)=>data);
     if (user.has){
       setId(user.id);
       setPass(pass);
-      navigate(`/page/main/${current}`);
+      navigate(`/page/main/${current}`,{state:{color:"red"}});
      }else{
       setError(true);
       reset();

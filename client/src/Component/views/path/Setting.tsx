@@ -1,5 +1,4 @@
-import { Navigate, Params, useOutletContext,
- useParams } from "react-router-dom";
+import { Location, Navigate, useLocation, useOutletContext,} from "react-router-dom";
 import {  HeaderBlock,SetContain, SetMain,
 SetTitle} from "../../../style/style.js";
 import { useCallback,useState} from "react";
@@ -26,11 +25,11 @@ interface Props{
 
 export default function Setting({children}:Props):JSX.Element{
  const {val,user,lang,translate} = useOutletContext<outlet>();
- const {id}:Readonly<Params<string>> = useParams();
- const [auth,setAuth] = useState<boolean>(false);
+ const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
  const [state,setState] = useState<state>({name:'',pass:''});
-const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
-const password:string = useAppSelector(getPass);
+ const {state:id}:Location<string> = useLocation();
+ const [auth,setAuth] = useState<boolean>(false);
+ const password:string = useAppSelector(getPass);
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
  const {setLang,setTheme}:bind = useAction();
@@ -38,18 +37,22 @@ const password:string = useAppSelector(getPass);
  const toogle=(set:union)=>(e:EvtC)=>{
    set(e.target.value);
  };
+
  const change=useCallback((e:EvtC):void=>{
   setState((prv:state)=>({
    ...prv,[e.target.name]:e.target.value
     }));
  },[data]);
+
  const deleteUser=useCallback(():void=>{
   delData(data?.id);
   setAuth(true);
  },[]);
+
  const exit=useCallback(():void=>{
    setAuth(true);
- },[])
+ },[]);
+
  const press=useCallback((e:EvtK):void=>{
    if (e.key==='Enter'){
     const {name,pass}:state = state;
@@ -73,9 +76,9 @@ const password:string = useAppSelector(getPass);
   };
   },[data]);
   
- if (auth) return <Navigate to='/' />
- if (isLoading) return <Loader back={val} />
- if (isError) return <Error back={val} />
+ if (auth) return <Navigate to='/' />;
+ if (isLoading) return <Loader back={val} />;
+ if (isError) return <Error back={val} />;
     return (
       <SetContain val={val}>
         <HeaderBlock back={val}>

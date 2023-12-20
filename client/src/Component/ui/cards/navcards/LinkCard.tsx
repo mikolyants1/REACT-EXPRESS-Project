@@ -1,5 +1,5 @@
 import { memo, useContext } from "react"
-import { Link } from "react-router-dom"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 import { SetBlock, SetLogo, SetText, ThemeLogo } from "../../../../style/style"
 import { Context } from "../../../../types/type"
 import { Error } from "../../Loader"
@@ -15,12 +15,21 @@ interface props {
 
 function LinkCard({navigate,path,fill = false,children,text}:props):JSX.Element{
  const {val,hide,translate} = useContext<Context>(Theme);
+ const nav:NavigateFunction = useNavigate();
+
+ const linkNavigate = ():void => {
+   hide();
+   navigate();
+   path !== "set"
+   ? nav(`/page/${path}`)
+   : nav("set",{state:"Theme"});
+ };
+
  if (!translate) return <Error back={val} />
     return (
-      <Link to={`/page/${path}`} onClick={hide}>
-        <SetBlock fill={`${fill}`} back={val}
-         onClick={navigate}>
-        {path == "set/Theme" ? ( 
+        <SetBlock onClick={linkNavigate}
+         fill={`${fill}`}back={val}>
+        {path == "set" ? ( 
           <ThemeLogo>
             {children}
           </ThemeLogo>
@@ -33,7 +42,6 @@ function LinkCard({navigate,path,fill = false,children,text}:props):JSX.Element{
             {translate(text)}  
           </SetText>
         </SetBlock>
-      </Link>
     )
 };
 

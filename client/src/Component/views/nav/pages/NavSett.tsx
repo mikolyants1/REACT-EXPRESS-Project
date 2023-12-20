@@ -36,7 +36,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
            children={<>&#9733;</>}
             />   
           <LinkCard
-           path="set/Theme"
+           path="set"
            fill={idx==1}
            navigate={navigate(1)}
            text="Theme"
