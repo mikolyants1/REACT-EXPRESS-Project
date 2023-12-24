@@ -6,7 +6,7 @@ import Auth from '../miidlewares/Auth.js';
 
 const router:Router = express.Router();
  
- router.put('/:id',Auth,validUser,check,chanUser);
+ router.put('/:id',validUser,check,Auth,chanUser);
 
  router.delete('/:id',delUser);
  
