@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
 import { readFileSync } from "fs";
-import { Base } from "../server.js";
-import { Type, data, has} from "../types.js";
 import bc from 'bcrypt';
 import jwt from 'jsonwebtoken'
-import Emitter from "../classes/event.js";
+import { emitPass } from "../../classes/event.js";
+import { Type, data, has } from "../../types.js";
+import { Base } from "../../server.js";
 
-const emitter:Emitter = new Emitter("pass");
 
 export function getPass({body}: Request, res: Response): void {
    const data: string = readFileSync(Base, "utf-8");
    const users: data[] = JSON.parse(data);
    if (!body) {
      res.sendStatus(404);
-     emitter.test("getPass");
+     emitPass.test("getPass");
      return;
    }
    const user: Type<data> = users.find((i: data) => (

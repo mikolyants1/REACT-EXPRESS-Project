@@ -13,4 +13,8 @@ import { EventEmitter } from 'events'
      this.emit(this.evt);
     };
 };
-export default Emitter
+export const emitPass:Emitter = new Emitter("passCheck");
+
+export const emitUser:Emitter = new Emitter("userCheck");
+
+export const emitMess:Emitter = new Emitter("messCheck");

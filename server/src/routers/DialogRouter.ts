@@ -1,7 +1,9 @@
 import express, { Router } from 'express'
-import {addMess,chanMess,delMess,getMess
-} from '../controllers/DialogControl.js'
 import { check,validMess } from '../middlewares/valid.js'
+import addMess from '../controllers/dialog/addMess.js';
+import chanMess from '../controllers/dialog/chanMess.js';
+import delMess from '../controllers/dialog/delMess.js';
+import getMess from '../controllers/dialog/getMess.js';
 
 const router:Router = express.Router();
 

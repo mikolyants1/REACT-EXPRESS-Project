@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Type } from "../types";
+import { Type } from "../types.js";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export default (req:Request,res:Response,next:NextFunction):void=>{
