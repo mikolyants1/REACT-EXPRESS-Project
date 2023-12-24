@@ -448,8 +448,7 @@ margin-top:-1px
 interface inputProp{
     back:string,
     type:string,
-    onChange:(e:ChangeEvent<HTMLInputElement>)=>void
-    onKeyUp:(e:KeyboardEvent<HTMLInputElement>)=>void
+    onChange:(e:EvtC)=>void,
     placeholder:string
 }
 export const BlockInput:IStyledComponent<'web',BaseObject> = styled.div({
@@ -553,7 +552,7 @@ export const ProfilePass:IStyledComponent<'web',BaseObject> = styled(ProfileBloc
 export const ProfileChan:IStyledComponent<'web',BaseObject> = styled.div({
  display:'flex',
  justifyContent:'space-between',
- width:200
+ width:270
 })
 export const ProfileBut:IStyledComponent<'web',{
     children:string[]|string,
@@ -574,7 +573,7 @@ interface ProfileProp {
 }
 export const ProfileInput:IStyledComponent<'web',Partial<ProfileProp>> = styled.input({
  marginTop:5,
- width:200,
+ width:270,
  backgroundColor:'rgb(240,240,240)',
  border:'none',
  height:35,

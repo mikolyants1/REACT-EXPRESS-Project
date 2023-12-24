@@ -39,7 +39,12 @@ export interface mess{
   }
  export interface has {
     id:number,
-    has:boolean
+    has:boolean,
+    auth:string
+  }
+
+  export type auth = {
+    id:number
   }
   export type Type<T> = undefined|T
 

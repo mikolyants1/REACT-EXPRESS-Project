@@ -1,7 +1,7 @@
 import { BlockInput, ContactInput, ContactTime} from "../../../../style/style.js"
-import { useCallback, useContext, useEffect, useReducer, useState } from "react"
+import { useCallback, useContext, useEffect, useReducer, useState} from "react"
 import axios, { AxiosResponse } from "axios"
-import { Context, EvtC, EvtK, Null, Type,act,chatProps,
+import { Context, EvtC, Null, Type,act,chatProps,
 data, message, st, } from "../../../../types/type.js"
 import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io,Socket} from 'socket.io-client';
@@ -15,26 +15,23 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     if (!translate) return <Error back={val} />;
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call??null);
-    const [text,setText] = useState<string>('');
     const [socket,setSocket] = useState<Socket>(null!);
     const [online,setOnline] = useState<number[]>();
     const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
-      const change=(e:EvtC):void=>{
-        setText(e.target.value);
-      };
+  
       const toggle=useCallback((i:number):void=>{
         caller(i);
         set({type:1});
       },[]);
      const setIndex=useCallback((i:number):void=>setIdx(i),[])
      
-     const sort=(e:EvtK):void=>{
-      if (e.key==='Enter'&&Array.isArray(state.base)){
-      const val:string = text.trim().toLocaleLowerCase()
+     const change=({target}:EvtC):void=>{
+      if (Array.isArray(state.base)){
+      const val:string = target.value.trim().toLocaleLowerCase()
       const newData:data[] = state.base.filter((i:data):Type<data>=>{
        if (i.name.toLocaleLowerCase().indexOf(val)!==-1) return i;
        });
-       dispatch({data:newData});
+        dispatch({data:newData});
       };
      };
      const getUser=(arg:number):Type<message>=>{
@@ -61,7 +58,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        Prom();
       },[]);
 
-      useEffect(():void=>{
+      useEffect(():void=>{ 
         socket?.emit("join",user);
         socket?.on("online",(users:number[]):void=>{
           setOnline(users);
@@ -77,7 +74,6 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
            back={val}
            type="text"
            onChange={change}
-           onKeyUp={sort}
            placeholder={translate('search')}
             />
         </BlockInput>

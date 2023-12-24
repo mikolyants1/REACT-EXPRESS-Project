@@ -37,7 +37,8 @@ export type bind=CaseReducerActions<{
     setTheme:(state:Redux,action:Pay<string>)=>void,
     setId:(state:Redux,action:Pay<number>)=>void,
     setLang:(state:Redux,action:Pay<string>)=>void,
-    setPass:(state:Redux,action:Pay<string>)=>void
+    setPass:(state:Redux,action:Pay<string>)=>void,
+    setAuthToken:(state:Redux,actopn:Pay<string>)=>void
 },"messanger">;
 
 type RootState = ReturnType<typeof store.getState>;
@@ -56,6 +57,7 @@ export const getLang=({mess}:state)=>mess.lang;
 
 export const getPass=({mess}:state)=>mess.pass;
 
+export type get = ({mess}:state)=>Redux;
 setupListeners(store.dispatch);
 
 export const useAction=():bind=>bindActionCreators(action,useAppDispatch());

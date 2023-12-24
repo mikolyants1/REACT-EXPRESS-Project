@@ -17,7 +17,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
       set({type:1});
     },[]);
 
-   const navigate=useCallback((id:number)=>():void=>{
+   const nav=useCallback((id:number)=>():void=>{
     setIdx(id);
     },[]);
 
@@ -26,7 +26,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
     return (
          <>
           <UpdateCard
-           navigate={navigate(0)}
+           navigate={nav(0)}
            fill={idx==0}
            name={data.name}
             />
@@ -39,7 +39,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
           <LinkCard
            path="set"
            fill={idx==1}
-           navigate={navigate(1)}
+           navigate={nav(1)}
            text="Theme"
            children={<>&diams;</>}
            />

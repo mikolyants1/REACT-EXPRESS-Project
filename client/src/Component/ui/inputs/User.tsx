@@ -14,15 +14,33 @@ interface props {
 const UserSetBlock:NamedExoticComponent<props> = memo(
  ({name,set,val,click}:props):Null<JSX.Element>=>{
    const [show,setShow] = useState<boolean>(false);
+   const [open,setOpen] = useState<string>("password");
    const {translate} = useOutletContext<outlet>();
+
+   const openPass = ():void => {
+    setOpen((prv:string)=>(
+      prv == "text" ? "password" : "text"
+    ))
+   }
+   const close = ():void => {
+    setShow(false);
+    setOpen("password");
+   };
       return (
          <ProfilePass>
            <ProfileChan>
              <ProfileBut onClick={()=>setShow(true)}>
                 {translate('change')} {translate(name)}
              </ProfileBut>
+             {(name=="pass")&&show&&(
+             <ProfileBut onClick={openPass}>
+                {open == "text"
+                 ? translate("hide")
+                 : translate('show')}
+             </ProfileBut>
+             )}
             {show&&(
-             <ProfileBut onClick={()=>setShow(false)}>
+             <ProfileBut onClick={close}>
                 {translate('close')}
              </ProfileBut>
              )}
@@ -30,6 +48,7 @@ const UserSetBlock:NamedExoticComponent<props> = memo(
            {show&&(
            <ProfileInput
             name={name}
+            type={`${name == "name"?"text":open}`}
             onChange={set}
             defaultValue={val}
             onKeyUp={click}

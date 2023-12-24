@@ -1,21 +1,25 @@
 import { useNavigate,NavigateFunction } from "react-router-dom"
-import {  useState } from "react"
+import { useState } from "react"
 import { EntryBlock,EntryTitle,EntryBut,LoginError } from '../../../style/style.js'
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js"
-import { useAddUserMutation, useGetUsersQuery } from "../../../store/api/endpoints/UserEndpoints.js"
-import { data,query, stateUser } from "../../../types/type.js"
+import { useAddUserMutation } from "../../../store/api/endpoints/UserEndpoints.js"
+import { data, stateUser } from "../../../types/type.js"
 import {useForm,FormProvider,SubmitHandler} from 'react-hook-form';
 import LoginCard from "../../ui/cards/logincards/LoginCard.js"
 import Loader from "../../ui/blocks/Loader.js"
 import Error from "../../ui/blocks/Error.js"
-import GetSuccess from "../../helpers/GetSuccess.js"
+import GetSuccess from "../../helpers/functions/GetSuccess.js"
 
 interface err{
    show:boolean,
    mess:string
 }
+interface Datas {
+  data:Omit<data,"pass">,
+  isError:boolean;
+  isLoading:boolean
+}
 export default function Regist():JSX.Element{
-  const {data,isError,isLoading} = useGetUsersQuery<query<data[]>>('')
   const current:number = useAppSelector(getCurrent);
   const methods = useForm<stateUser>({
     defaultValues:{name:"",pass:""}
@@ -24,7 +28,7 @@ export default function Regist():JSX.Element{
   const navigate:NavigateFunction = useNavigate();
   const [error,setError] = useState<err>({show:false,mess:""});
   const {setId,setPass}:bind = useAction();
-  const [addUser] = useAddUserMutation();
+  const [addUser,{data,isError,isLoading}] = useAddUserMutation<Datas>();
 
   const check:SubmitHandler<stateUser>=async (date):Promise<void>=>{
     const {name,pass}:stateUser = date;
@@ -35,11 +39,8 @@ export default function Regist():JSX.Element{
       reset();
       return;
     }
-    if (typeof data == "undefined") return;
-    const sortId:data[] = [...data]
-    .sort((x:data,y:data)=>y.id-x.id);
-    const userId:number = data.length !== 0 ? sortId[0].id : 0;
-      setId(userId+1);
+    if (!data) return;
+      setId(data.id);
       setPass(pass);
       addUser(date);
       navigate(`/page/main/${current}`);
@@ -62,7 +63,8 @@ export default function Regist():JSX.Element{
           <LoginError>
              {error.mess}
           </LoginError>}
-          <EntryBut onClick={handleSubmit(check)}>
+          <EntryBut
+           onClick={handleSubmit(check)}>
              regist
           </EntryBut>
         </EntryBlock>

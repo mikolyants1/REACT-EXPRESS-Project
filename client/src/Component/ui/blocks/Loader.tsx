@@ -19,4 +19,4 @@ function Loader({back}:load):JSX.Element{
        );
      };
 
-     export default memo(Loader);
+export default memo(Loader);

@@ -2,6 +2,7 @@ import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction} from 'react'
 import {TFunction} from 'i18next'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
 import { ControllerRenderProps, FieldValues } from 'react-hook-form'
+import { BaseQueryApi } from '@reduxjs/toolkit/query'
 
 export type Type<T> = undefined|T
 export type Str<T> = string|T
@@ -14,7 +15,7 @@ export interface stateUser {
     name:string,
     pass:string,
    }
-export interface mess{
+export interface mess {
     text:string,
     date:string,
     now:number,
@@ -122,7 +123,9 @@ export interface Context{
    name:string,
    message:string
  }
-
+ export interface Token {
+  token:string
+ }
  export type StArr = [string,boolean]
 
  export type st2 = Record<string,boolean>
@@ -147,11 +150,14 @@ export type Control<T extends string> = ControllerRenderProps<FieldValues,T>;
   }
   export interface has {
     id:number,
-    has:boolean
+    has:boolean,
+    auth:string
   }
   export interface load {
     back:string
   }
+
+  export type api = Pick<BaseQueryApi,'getState'>
   export interface chatProps{
     set:Dispatch<action2>,
     id:boolean,

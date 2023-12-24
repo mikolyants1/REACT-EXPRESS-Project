@@ -8,7 +8,7 @@ import { useChanMessMutation, useDelMessMutation,
 import { EvtC, EvtK, Null, Type, act1, data, mess, message,
  newMess, outlet, query, st1 } from '../../../types/type.js';
 import MessageCard from '../../ui/cards/maincards/MessageCard.js'
-import Month from '../../helpers/Month.js'
+import Month from '../../helpers/functions/Month.js'
 import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
 import { defaultState2, reduce } from '../../helpers/Reducer.js';
 import Loader from '../../ui/blocks/Loader.js';

@@ -2,7 +2,7 @@ import { Location, Navigate, useLocation, useOutletContext,} from "react-router-
 import {  HeaderBlock,SetContain, SetMain,
 SetTitle} from "../../../style/style.js";
 import { useCallback,useState} from "react";
-import { bind, getPass, useAction, useAppSelector } from "../../../store/store.js";
+import { bind, getPass,useAction, useAppSelector } from "../../../store/store.js";
 import {  EvtC, EvtK, data, outlet, query,
  union } from "../../../types/type.js";
 import { useChanUserMutation, useDelUserMutation,
@@ -10,7 +10,6 @@ import { useChanUserMutation, useDelUserMutation,
 import UserSetBlock from "../../ui/inputs/User.js";
 import ThemeSetBlock from "../../ui/inputs/Theme.js";
 import ProfileLogoCard from "../../ui/cards/setcards/ProfileLogoCard.js";
-import PassCard from "../../ui/cards/setcards/PassCard.js";
 import AccButton from "../../ui/buttons/Account.js";
 import Loader from "../../ui/blocks/Loader.js";
 import Error from "../../ui/blocks/Error.js";
@@ -34,11 +33,9 @@ export default function Setting({children}:Props):JSX.Element{
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
  const {setLang,setTheme}:bind = useAction();
-
  const toogle=(set:union)=>(e:EvtC)=>{
    set(e.target.value);
  };
-
  const change=useCallback((e:EvtC):void=>{
   setState((prv:state)=>({
    ...prv,[e.target.name]:e.target.value
@@ -59,6 +56,7 @@ export default function Setting({children}:Props):JSX.Element{
     const {name,pass}:state = state;
     if (typeof data!=='undefined'){
     if (e.currentTarget.name=='name'&&name!==''){
+      console.log("work")
         chanData({
           id:data.id,
           name:name,
@@ -75,7 +73,7 @@ export default function Setting({children}:Props):JSX.Element{
     };
     setAuth(true);
   };
-  },[data]);
+  },[state]);
   
  if (auth) return <Navigate to='/' />;
  if (isLoading) return <Loader back={val} />;
@@ -94,10 +92,6 @@ export default function Setting({children}:Props):JSX.Element{
          <ProfileLogoCard
           name={data.name}
           logoText={translate("name")}
-         />
-         <PassCard
-          name={translate("password")}
-          value={password}
          />
          <UserSetBlock
           set={change}

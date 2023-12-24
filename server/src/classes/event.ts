@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events'
 
  class Emitter extends EventEmitter {
-  private evt:string
+  private evt:string;
     constructor(evt:string){
       super();
       this.evt = evt;

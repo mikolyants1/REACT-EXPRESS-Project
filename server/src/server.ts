@@ -18,11 +18,11 @@ app.get('/error',(_:Request,res:Response):void=>{
   res.sendStatus(404);
 });
 
-app.use('/dialog',DialogRouter)
+app.use('/dialog',DialogRouter);
 
-app.use('/user',UserRouter)
+app.use('/user',UserRouter);
 
-app.use("/pass",PassRouter)
+app.use("/pass",PassRouter);
 
 app.use((_:Request,res:Response):void=>{
   res.redirect("/error")
@@ -30,7 +30,9 @@ app.use((_:Request,res:Response):void=>{
 const server = createServer(app);
 
 const io = new Server(server,{cors:{origin:"*"}});
+
 const socketIo = new Socket();
+
 io.on("connection",(socket):void=>{
   socket.on("join",(id:number):void=>{
      socketIo.addUser(id);
