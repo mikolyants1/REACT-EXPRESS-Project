@@ -1,8 +1,8 @@
 import express, { Router } from 'express'
 import {getUser,getUsers,addUser,
 chanUser, delUser} from '../controllers/UserControl.js'
-import  {validUser,check } from '../miidlewares/valid.js'
-import Auth from '../miidlewares/Auth.js';
+import  {validUser,check } from '../middlewares/valid.js'
+import Auth from '../middlewares/Auth.js';
 
 const router:Router = express.Router();
  

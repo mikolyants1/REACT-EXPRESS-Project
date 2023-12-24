@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 import { getPass } from "../controllers/PassControl.js";
-import { validUser,check } from "../miidlewares/valid.js";
+import { validUser,check } from "../middlewares/valid.js";
 
 const router:Router = express.Router();
 
