@@ -11,7 +11,7 @@ const router:Router = express.Router();
  
  router.put('/:id',validUser,check,Auth,chanUser);
 
- router.delete('/:id',delUser);
+ router.delete('/:id',Auth,delUser);
  
  router.get('/:id',getUser);
 
