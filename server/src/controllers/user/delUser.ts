@@ -1,23 +1,20 @@
 import { Request, Response } from "express";
-import { readFileSync, writeFileSync } from "fs";
 import { data } from "../../types.js";
-import { Base } from "../../server.js";
 import { emitUser } from "../../classes/event.js";
+import { User } from "../../mongo.js";
 
-export default (req:Request,res:Response):void=>{
+export default async (req:Request,res:Response):Promise<void>=>{
     const id:number = Number(req.params.id);
-    const data:string = readFileSync(Base,'utf-8');
-    const users:data[] = JSON.parse(data);
-    const idx:number = users.findIndex((i:data)=>i.id==id);
-    if (!idx){
+    const users:data[] = await User.find();
+    const index:number = users.findIndex((i:data)=>i.id==id);
+    if (!index) {
       emitUser.test('delUser');
       res.status(404).json({
         message:"user not found"
       });
       return;
-      };
-    users.splice(idx,1);
-    const newJson:string = JSON.stringify(users);
-    writeFileSync(Base,newJson);
-    res.status(200).json(newJson);
+    };
+    await User.findOneAndDelete({id:id});
+    users.splice(index,1);
+    res.status(200).json(users);
     };

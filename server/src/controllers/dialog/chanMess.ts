@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
-import { readFileSync, writeFileSync } from "fs";
-import { Base } from "../../server.js";
 import { emitMess } from "../../classes/event.js";
-import { Type, body, data, mess, message } from "../../types.js";
+import { Null, Type, body, data, mess, message } from "../../types.js";
+import { User } from "../../mongo.js";
 
-export default (req:Request,res:Response):void=>{
+export default async (req:Request,res:Response):Promise<void>=>{
     if (!req.body){
      emitMess.test("chanMess");
      res.status(400).json({
@@ -12,13 +11,11 @@ export default (req:Request,res:Response):void=>{
      });
      return;
     };
-    const data:string = readFileSync(Base,"utf-8");
     const {now,text}:body = req.body;
     const id1:number = Number(req.params.id);
     const id2:number = req.body.id;
-    const users:data[] = JSON.parse(data);
-    const item:Type<data> = users.find((i:data)=>i.id==id2);
-    const mess:Type<data> = users.find((i:data)=>i.id==id1);
+    const item:Null<data> = await User.findOne({id:id2});
+    const mess:Null<data> = await User.findOne({id:id1});
     if (!item||!mess){
      emitMess.test("chanMess");
      res.status(404).json({
@@ -29,13 +26,14 @@ export default (req:Request,res:Response):void=>{
     const dialog:Type<message> = mess.message
     .find((i:message)=>i.id==item.id);
     if (!dialog){
-        emitMess.test("chanMess");
-        res.status(404).json({
-          message:"dialog not found"
-        });
-        return;
-       };
-    const message = dialog.mess.find((i:mess)=>i.now == now);
+     emitMess.test("chanMess");
+     res.status(404).json({
+       message:"dialog not found"
+     });
+     return;
+    };
+    const message:Type<mess> = dialog.mess
+    .find((i:mess)=>i.now == now);
     if (!message){
      emitMess.test("chanMess");
      res.status(404).json({
@@ -44,7 +42,6 @@ export default (req:Request,res:Response):void=>{
      return;
     };
     message.text = text;
-    const newJson:string = JSON.stringify(users);
-    writeFileSync(Base,newJson);
-    res.status(200).json(newJson);
+    await User.findOneAndUpdate({id:id1},mess,{new:true})
+    res.status(200).json(mess);
    };

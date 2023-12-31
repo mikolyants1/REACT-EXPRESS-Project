@@ -14,7 +14,9 @@ export const validMess:ValidationChain[] = [
 export function check(req:Request,res:Response,next:NextFunction){
  const err:Result<ValidationError> = validationResult(req);
  if (!err.isEmpty()){
-  return res.status(404).json({err:err.array()});
+  return res.status(404).json({
+    error:err.array()
+  });
  }; 
  next()
 }

@@ -48,4 +48,6 @@ export interface mess{
   }
   export type Type<T> = undefined|T
 
-  export type union = string|number
+  export type Str<T> = T|string;
+
+  export type Null<T> = T|null;

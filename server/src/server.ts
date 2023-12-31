@@ -6,17 +6,17 @@ import PassRouter from './routers/PassRouter.js'
 import { createServer } from 'http'
 import { Server }  from 'socket.io'
 import Socket from './classes/socket.js'
-import { union } from './types.js'
+import { Str } from './types.js'
 
-export const Base:string = 'users.json';
-
-const PORT:union = process.env.PORT || 5000 ;
+const PORT:Str<number> = process.env.PORT || 5000 ;
 const app:Express = express() ;
 app.use(express.json()) ;
 app.use(cors());
 
 app.get('/error',(_:Request,res:Response):void=>{
-  res.sendStatus(404);
+  res.status(404).json({
+    message:"path not found"
+  });
 });
 
 app.use('/dialog',DialogRouter);
@@ -26,13 +26,14 @@ app.use('/user',UserRouter);
 app.use("/pass",PassRouter);
 
 app.use((_:Request,res:Response):void=>{
-  res.redirect("/error")
-})
+  res.redirect("/error");
+});
+
 const server = createServer(app);
 
 const io = new Server(server,{cors:{origin:"*"}});
 
-const socketIo = new Socket();
+const socketIo:Socket = new Socket();
 
 io.on("connection",(socket):void=>{
   socket.on("join",(id:number):void=>{

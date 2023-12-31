@@ -1,14 +1,11 @@
-import { readFileSync } from "fs";
-import { Base } from "../../server.js";
+
 import { data } from "../../types.js";
 import { emitUser } from "../../classes/event.js";
 import { Request, Response } from "express";
+import { User } from "../../mongo.js";
 
-
-
-export default (_:Request,res:Response):void=>{
-    const data:string = readFileSync(Base,'utf-8');
-    const newData:data[] = JSON.parse(data);
+export default async (_:Request,res:Response):Promise<void>=>{
+    const data:data[] = await User.find();
     if (!data){
       emitUser.test('getUsers');
       res.status(404).json({
@@ -16,5 +13,5 @@ export default (_:Request,res:Response):void=>{
       });
       return;
       };
-    res.status(200).json(newData);
+    res.status(200).json(data);
     };

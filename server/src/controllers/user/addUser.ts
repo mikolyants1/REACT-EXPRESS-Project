@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { emitUser } from "../../classes/event.js";
 import { data } from "../../types.js";
-import { readFileSync, writeFileSync } from "fs";
-import { Base } from "../../server.js";
+import { User } from "../../mongo.js";
 import bc from 'bcrypt'
 
 export default async (req:Request,res:Response):Promise<void>=>{
@@ -13,23 +12,25 @@ export default async (req:Request,res:Response):Promise<void>=>{
       });
      return;
     };
-    const data:string = readFileSync(Base,'utf-8');
     const name:string = req.body.name;
     const pass:string = req.body.pass;
-    const users:data[] = JSON.parse(data);
-    const sortId:data[] = users.sort((x:data,y:data)=>y.id-x.id);
-    const id:number = users.length !== 0 ? sortId[0].id : 0;
+    const users:data[] = await User.find();
     const salt:string = await bc.genSalt(10);
     const crypt:string = await bc.hash(pass,salt);
+    const userId:number = users.length ? users
+    .sort((x:data,y:data)=>y.id - x.id)[0].id+1 : 0;
     const user:data = {
-      id:id+1,
+      id:userId,
       name:name,
       pass:crypt,
       message:[]
     }
-    users.push(user); 
-    const newJson:string = JSON.stringify(users);
-    const {pass:p,...info}:data = user;
-    writeFileSync(Base,newJson);
-    res.status(200).json(info);
+    const newUser = new User(user);
+    await newUser.save();
+    const data:Omit<data,"pass"> = {
+      id:newUser.id,
+      name:name,
+      message:[]
+    };
+    res.status(200).json(data);
     };

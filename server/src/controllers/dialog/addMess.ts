@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import { emitMess } from "../../classes/event.js";
-import { readFileSync, writeFileSync } from "fs";
-import { Base } from "../../server.js";
-import { Type, body, data, message } from "../../types.js";
+import { Null, Type, body, data, message } from "../../types.js";
+import { User } from "../../mongo.js";
 
-export default (req:Request,res:Response):void=>{
+export default async (req:Request,res:Response):Promise<void>=>{
     if (!req.body){
       emitMess.test("addMess");
       res.status(400).json({
@@ -12,13 +11,11 @@ export default (req:Request,res:Response):void=>{
       });
       return;
     };
-    const data:string = readFileSync(Base,'utf-8');
     const {text,date,now,day,month}:body = req.body;
     const id1:number = Number(req.params.id);
     const id2:number = req.body.id;
-    const users:data[] = JSON.parse(data);
-    const item:Type<data> = users.find((i:data)=>i.id==id2);
-    const mess:Type<data> = users.find((i:data)=>i.id==id1);
+    const item:Null<data> = await User.findOne({id:id2});
+    const mess:Null<data> = await User.findOne({id:id1});
     if (!item||!mess){
       emitMess.test("addMess");
       res.status(404).json({
@@ -37,7 +34,6 @@ export default (req:Request,res:Response):void=>{
     };
     dialog ? dialog.mess.push(newMess) : mess
     .message.push({id:item.id,mess:[newMess]});
-    const newJson:string = JSON.stringify(users);
-    writeFileSync(Base,newJson);
-    res.status(201).json(newJson);
+    await User.findOneAndUpdate({id:id1},mess,{new:true});
+    res.status(201).json(mess);
   };

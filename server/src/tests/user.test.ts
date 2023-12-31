@@ -5,8 +5,7 @@ describe("run user router",()=>{
     test("GET users",async () => {
       const data = await request(app).get('/user/');
       expect(data.status).not.toBe(404);
-    });
-    
+    });  
     test("GET user",async () => {
       const data = await request(app).get('/user/1');
       expect(data.body.id).toBeDefined();

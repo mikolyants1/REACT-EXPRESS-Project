@@ -5,11 +5,11 @@ import jwt from 'jsonwebtoken'
 import { emitPass } from "../../classes/event.js";
 import { Type, data, has } from "../../types.js";
 import { Base } from "../../server.js";
+import { User } from "../../mongo.js";
 
 
-export function getPass({body}: Request, res: Response): void {
-   const data: string = readFileSync(Base, "utf-8");
-   const users: data[] = JSON.parse(data);
+export async function getPass({body}: Request, res: Response): Promise<void> {
+   const users: data[] = await User.find();
    if (!body) {
      res.sendStatus(404);
      emitPass.test("getPass");
@@ -17,14 +17,13 @@ export function getPass({body}: Request, res: Response): void {
    }
    const user: Type<data> = users.find((i: data) => (
     i.name == body.name && bc.compare(body.pass, i.pass)
-  ));
+   ));
    let token:string = "";
    if (user){
-     token = jwt.sign({id:user.id},"secret_key_1",{expiresIn:"3d"});
-   };
-  
+    token = jwt.sign({id:user.id},"secret_key_1",{expiresIn:"3d"});
+   }; 
    const has: has = {
-     id: typeof user !== "undefined" ? user.id : -1,
+     id: user ? user.id : -1,
      has: Boolean(user),
      auth: token
    };
