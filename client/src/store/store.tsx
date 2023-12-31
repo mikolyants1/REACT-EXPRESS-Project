@@ -58,6 +58,7 @@ export const getLang=({mess}:state)=>mess.lang;
 export const getPass=({mess}:state)=>mess.pass;
 
 export type get = ({mess}:state)=>Redux;
+
 setupListeners(store.dispatch);
 
 export const useAction=():bind=>bindActionCreators(action,useAppDispatch());

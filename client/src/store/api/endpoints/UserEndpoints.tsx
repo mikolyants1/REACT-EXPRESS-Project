@@ -20,7 +20,7 @@ const UserEndpoints = MessApi.injectEndpoints({
             query:(body):res<user>=>({
               url:'user',
               method:'POST',
-              body:body
+              body
               }),
             invalidatesTags:['user']
           }),
@@ -30,13 +30,13 @@ const UserEndpoints = MessApi.injectEndpoints({
             return {
              url:`user/${id}`, 
              method:'PUT',
-             body:body,
-              }
-            },
-            invalidatesTags:['user']
+             body
+            }
+          },
+          invalidatesTags:['user']
           })
-    })
-});
+       })
+    });
 
 export const {
   useGetUserQuery,

@@ -8,7 +8,8 @@ interface props {
     delText:string
 }
 
-function AccButton({exit,del,exitText,delText}:props):JSX.Element{
+function AccButton(props:props):JSX.Element{
+  const {exit,exitText,del,delText}:props = props;
     return (
       <ProfilePass>
         <ProfileChan>

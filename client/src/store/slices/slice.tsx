@@ -1,5 +1,5 @@
 import {createSlice,Slice,PayloadAction,CaseReducerActions,
-ActionCreatorWithPayload} from '@reduxjs/toolkit'
+ActionCreatorWithPayload,} from '@reduxjs/toolkit'
 import { bind } from '../store'
 
 export interface Redux{
@@ -13,7 +13,9 @@ export type Pay<T> = PayloadAction<T>
 export type actions = CaseReducerActions<{
   setTheme:ActionCreatorWithPayload<string,`messanger/setTheme`>,
   setId:ActionCreatorWithPayload<string,`messanger/setId`>,
-  setLang:ActionCreatorWithPayload<string,`messanger/setLang`>
+  setLang:ActionCreatorWithPayload<string,`messanger/setLang`>,
+  setPass:ActionCreatorWithPayload<string,"messanger/setPass">,
+  setAuthToken:ActionCreatorWithPayload<string,"messanger/setAuthToken">
 },'messanger'>
 
 const initialState:Redux = {

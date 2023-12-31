@@ -1,6 +1,6 @@
 import { useState,useEffect, memo } from 'react';
-import { Block } from '../../../style/style';
-import { load } from '../../../types/type';
+import { Block } from '../../../../style/style';
+import { load } from '../../../../types/type';
 
 function Error({back}:load):JSX.Element{
 const [err,setErr]=useState<string>('');

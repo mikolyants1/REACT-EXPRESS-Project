@@ -6,10 +6,6 @@ import { body, body1, data, query2,
 
 const DialogEndpoints = MessApi.injectEndpoints({
     endpoints:(build:EndpointBuilder<BaseQueryFn,string,string>)=>({
-      getMess:build.query<data,string>({
-        query:(id):string=>`dialog/${id}`,
-        providesTags:['dialog']
-       }),
       setMess:build.mutation<data[],query2>({
         query:(obj):res<body>=>{
          const {id1,id2,...body}:query2 = obj;
@@ -46,7 +42,6 @@ const DialogEndpoints = MessApi.injectEndpoints({
        })
     })
   export const {
-    useGetMessQuery,
     useSetMessMutation,
     useChanMessMutation,
     useDelMessMutation

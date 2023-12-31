@@ -4,7 +4,7 @@ import { ContactBlock, ContactLogo, ContactName,
 ContactText, ContactTime, avatar, styleObj } from "../../../../style/style"
 import { Context } from "../../../../types/type"
 import Theme from "../../../helpers/Context"
-import Error from "../../blocks/Error"
+import Error from "../../blocks/load/Error"
 
 interface props {
   navigate:()=>void,
@@ -21,7 +21,7 @@ const linkNavigate = ():void => {
    navigate();
    nav("set",{state:"Profile"});
  };
- if (!translate) return <Error back={val} />
+ if (!translate) return <Error back={val} />;
     return (
         <ContactBlock fill={`${fill}`}
          back={val} onClick={linkNavigate}>
@@ -37,7 +37,7 @@ const linkNavigate = ():void => {
             </ContactTime>
           </ContactText>
         </ContactBlock>
-    )
-}
+    );
+};
 
 export default memo(UpdateCard)

@@ -8,8 +8,8 @@ Outlet,Navigate} from 'react-router-dom'
 import Page from './Component/views/Page.js'
 import { catched, store} from './store/store.js'
 import WrapRout from './Component/routes/WrapRout.js'
-import MainRout from './Component/routes/MainRout.js'
 import SettRout from './Component/routes/SettRout.js'
+import Main from './Component/views/path/Main.js'
 
 const router = createBrowserRouter([
   {
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
               },
               {
                 path:':id',
-                element:<MainRout />
+                element:<Main />
               }
             ]
           },

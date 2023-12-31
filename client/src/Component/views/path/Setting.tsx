@@ -11,8 +11,8 @@ import UserSetBlock from "../../ui/inputs/User.js";
 import ThemeSetBlock from "../../ui/inputs/Theme.js";
 import ProfileLogoCard from "../../ui/cards/setcards/ProfileLogoCard.js";
 import AccButton from "../../ui/buttons/Account.js";
-import Loader from "../../ui/blocks/Loader.js";
-import Error from "../../ui/blocks/Error.js";
+import Loader from "../../ui/blocks/load/Loader.js";
+import Error from "../../ui/blocks/load/Error.js";
 
 interface state{
   name:string,

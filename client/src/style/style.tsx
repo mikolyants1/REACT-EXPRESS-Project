@@ -140,7 +140,7 @@ type back1 = {
     children:JSX.Element[]
 }
 
-export const NavBar:IStyledComponent<'web',back1> = styled.div`
+export const NavBarBlock:IStyledComponent<'web',back1> = styled.div`
 min-width:280px;
 height:100%;
 display:grid;

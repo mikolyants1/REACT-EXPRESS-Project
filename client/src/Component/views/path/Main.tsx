@@ -1,29 +1,21 @@
 import { useRef,useReducer, useCallback } from 'react'
-import { Container, FootBlock, HeaderBlock, Logo,
- MainBlock,MainInput,MessDate,Message,Name,Span,
- avatar,styleObj} from '../../../style/style.js'
+import { Container, FootBlock,MainInput} from '../../../style/style.js'
 import { useOutletContext, useParams } from 'react-router-dom'
-import { useChanMessMutation, useDelMessMutation, 
- useSetMessMutation } from '../../../store/api/endpoints/DialogEndpoints.js'
-import { EvtC, EvtK, Null, Type, act1, data, mess, message,
- newMess, outlet, query, st1 } from '../../../types/type.js';
-import MessageCard from '../../ui/cards/maincards/MessageCard.js'
-import Month from '../../helpers/functions/Month.js'
+import { useChanMessMutation,useSetMessMutation
+} from '../../../store/api/endpoints/DialogEndpoints.js'
+import { EvtC, EvtK, Type, act1, data, mess, message,
+newMess, outlet, query, st1 } from '../../../types/type.js';
 import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
 import { defaultState2, reduce } from '../../helpers/Reducer.js';
-import Loader from '../../ui/blocks/Loader.js';
-import Error from '../../ui/blocks/Error.js';
+import Loader from '../../ui/blocks/load/Loader.js';
+import Error from '../../ui/blocks/load/Error.js';
+import Header from '../../ui/blocks/Header.js';
+import MessageList from '../../ui/blocks/MessageList.js';
 
-interface props{
-  children:JSX.Element
-}
-
-export default function Main({children}:props):JSX.Element {
- const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
+export default function Main():JSX.Element {
  const id:number = Number(useParams().id);
  const [addMess] = useSetMessMutation();
  const [chanMess] = useChanMessMutation();
- const [delMess] = useDelMessMutation();
  const ref = useRef<HTMLInputElement>(null!);
  const {val,user,translate} = useOutletContext<outlet>();
  const [state,dispatch] = useReducer(reduce<st1,act1>,defaultState2)
@@ -41,9 +33,7 @@ export default function Main({children}:props):JSX.Element {
   const arr:newMess[] = d2.id==d1.id ? [...item1] : [...item1,...item2];
   return arr.sort((x:newMess,y:newMess)=>x.now-y.now);
   }
- const showTime=(arg:mess[],i:number):boolean=>{
-  return arg[i].day!==arg[i-1].day;
- };
+ 
  const change=(e:EvtC):void=>{
    dispatch({text:e.target.value});
  };
@@ -77,12 +67,7 @@ export default function Main({children}:props):JSX.Element {
      ref.current.blur();
    };
  };
- const deleteMess=useCallback((now:number):void=>{
-  if (typeof id!=="undefined"){
-    delMess({id1:id,id2:user,now:now});
-   };
- },[]);
-
+ 
  const updateDioalog=useCallback((time:number):void=>{
     dispatch({status:true,now:time});
     ref.current.focus();
@@ -99,46 +84,17 @@ export default function Main({children}:props):JSX.Element {
  const [{data:d1},{data:d2}]:query<data>[] = result;
  if (!d1||!d2) return <Error back={val} />;
  const mess:newMess[] = getMessage(d1,d2);
- const isMine:boolean = d1.id == d2.id;
- const color1:string = isMine ? 'rgb(56, 231, 120)' : one;
- const color2:string = isMine ? 'rgb(177, 248, 177)' : two;
    return (
         <Container back={val}>
-          <HeaderBlock back={val}>
-            <Logo start={color1} two={color2}>
-              {!isMine&&<>{d1.name.slice(0,1).toUpperCase()}</>} 	
-              {isMine&&<Span>&#9733;</Span>}
-            </Logo>
-            <Name>
-             {translate(isMine ? 'Main' : d1.name)}
-            </Name>
-            {children}
-          </HeaderBlock>
-          <MainBlock>
-            <Message>
-             {mess.map((item:newMess,i:number):JSX.Element=>{
-              const {id:userId,day,month,now,text,date}:newMess = item;
-              const right:Null<boolean> = i==0 ? null : showTime(mess,i);
-               return (
-                 <div key={`${i}`}>
-                  {(right||i==0)&&(
-                   <MessDate>
-                     {translate(Month(month))} {day}
-                   </MessDate>
-                  )}
-                  <MessageCard
-                   key={`${now}`}
-                   now={now}
-                   text={text}
-                   date={date}
-                   col={`${userId!==user}`}
-                   update={updateDioalog}
-                   del={deleteMess}
-                   />
-                </div>
-               )})}
-            </Message>
-          </MainBlock>
+          <Header
+           name={d1.name}
+           isMine={d1.id == d2.id}
+           />
+          <MessageList
+           update={updateDioalog}
+           mess={mess}
+           id={id}
+           />
           <FootBlock>
             <MainInput 
              back={val}

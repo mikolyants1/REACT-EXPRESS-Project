@@ -17,7 +17,7 @@ export default function Entry():JSX.Element{
   const [error,setError] = useState<boolean>(false);
   const { setId,setPass,setAuthToken }:bind = useAction();
   const {handleSubmit,reset} = methods;
-  const check:SubmitHandler<stateUser> = async (date):Promise<void>=>{
+  const check:SubmitHandler<stateUser>= async (date):Promise<void>=>{
     const {name,pass}:stateUser = date;
     const user = await GetSuccess(name,pass);
     if (user.has){

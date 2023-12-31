@@ -7,8 +7,8 @@ import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io,Socket} from 'socket.io-client';
 import { defaultState1,reduce } from "../../../helpers/Reducer.js"
 import Theme from "../../../helpers/Context.js"
-import Loader from "../../../ui/blocks/Loader.js"
-import Error from "../../../ui/blocks/Error.js"
+import Loader from "../../../ui/blocks/load/Loader.js"
+import Error from "../../../ui/blocks/load/Error.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
@@ -23,7 +23,8 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         caller(i);
         set({type:1});
       },[]);
-     const setIndex=useCallback((i:number):void=>setIdx(i),[])
+
+     const setIndex=useCallback((i:number):void=>setIdx(i),[]);
      
      const change=({target}:EvtC):void=>{
       if (Array.isArray(state.base)){
@@ -49,8 +50,9 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         if (Array.isArray(data)){
           const date:Type<data> = data.find((i:data)=>i.id==user);
           dispatch({data:data,base:data});
+          console.log(data)
           setData(date);
-          }
+          };
         })
         .catch(()=>dispatch({err:true}))
         .finally(()=>dispatch({load:false}))

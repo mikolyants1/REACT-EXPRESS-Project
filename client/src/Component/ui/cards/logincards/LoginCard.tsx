@@ -1,6 +1,6 @@
 import { memo } from "react"
 import { EntryInput, EntrySub, InputBlock } from "../../../../style/style"
-import { useFormContext,Controller, } from "react-hook-form"
+import { useFormContext,Controller } from "react-hook-form"
 import { Control } from "../../../../types/type";
 
 function LoginCard():JSX.Element{
