@@ -34,8 +34,8 @@ export default function Main():JSX.Element {
   return arr.sort((x:newMess,y:newMess)=>x.now-y.now);
   }
  
- const change=(e:EvtC):void=>{
-   dispatch({text:e.target.value});
+ const change=({target}:EvtC):void=>{
+   dispatch({text:target.value});
  };
  const press=(e:EvtK):void=>{
   if (e.key==='Enter'&&typeof id!=='undefined'){
@@ -52,7 +52,7 @@ export default function Main():JSX.Element {
       date:`${Our}:${Min}`,
       now:Date.now(),
       day:date.getDate(),
-      month:date.toLocaleString('default',{month:'long'})
+      month:date.toLocaleString('en-EN',{month:'long'})
      });
     } else {
       chanMess({

@@ -3,7 +3,6 @@ import {memo, useCallback} from 'react'
 import { Context, Null, mess, newMess } from '../../../types/type';
 import { MainBlock, MessDate, Message } from '../../../style/style';
 import MessageCard from '../cards/maincards/MessageCard';
-import Month from '../../helpers/functions/Month';
 import { useOutletContext } from 'react-router-dom';
 import Error from './load/Error';
 import { useDelMessMutation } from '../../../store/api/endpoints/DialogEndpoints';
@@ -37,7 +36,7 @@ function MessageList({mess,id,update}:props):JSX.Element {
           <div key={`${i}`}>
            {(right||i==0)&&(
              <MessDate>
-               {translate(Month(month))} {day}
+               {translate(month)} {day}
              </MessDate>
            )}
             <MessageCard

@@ -33,7 +33,7 @@ export default function Setting({children}:Props):JSX.Element{
  const [chanData] = useChanUserMutation();
  const [delData] = useDelUserMutation();
  const {setLang,setTheme}:bind = useAction();
- const toogle=(set:union)=>(e:EvtC)=>{
+ const toogle=(set:union)=>(e:EvtC):void=>{
    set(e.target.value);
  };
  const change=useCallback((e:EvtC):void=>{
