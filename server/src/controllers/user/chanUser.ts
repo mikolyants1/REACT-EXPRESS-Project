@@ -4,7 +4,7 @@ import bc from 'bcrypt'
 import { Null,data } from "../../types.js";
 import { User } from "../../mongo.js";
 
-export default async (req:Request,res:Response):Promise<void>=>{
+export async function chanUser(req:Request,res:Response):Promise<void>{
     if (!req.body){
       emitUser.test("chanUser");
       res.status(400).json({

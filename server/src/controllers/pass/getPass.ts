@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { readFileSync } from "fs";
 import bc from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import { emitPass } from "../../classes/event.js";
 import { Type, data, has } from "../../types.js";
-import { Base } from "../../server.js";
 import { User } from "../../mongo.js";
 
 

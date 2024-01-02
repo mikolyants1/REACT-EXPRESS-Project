@@ -15,7 +15,5 @@ import { EventEmitter } from 'events'
 };
 
 export const emitPass:Emitter = new Emitter("passCheck");
-
 export const emitUser:Emitter = new Emitter("userCheck");
-
 export const emitMess:Emitter = new Emitter("messCheck");

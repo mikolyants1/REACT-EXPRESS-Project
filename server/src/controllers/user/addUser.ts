@@ -4,7 +4,7 @@ import { data } from "../../types.js";
 import { User } from "../../mongo.js";
 import bc from 'bcrypt'
 
-export default async (req:Request,res:Response):Promise<void>=>{
+export async function addUser(req:Request,res:Response):Promise<void>{
     if (!req.body){
       emitUser.test("addUser");
       res.status(400).json({

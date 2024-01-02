@@ -3,7 +3,7 @@ import { data } from "../../types.js";
 import { emitUser } from "../../classes/event.js";
 import { User } from "../../mongo.js";
 
-export default async (req:Request,res:Response):Promise<void>=>{
+export async function delUser(req:Request,res:Response):Promise<void>{
     const id:number = Number(req.params.id);
     const users:data[] = await User.find();
     const index:number = users.findIndex((i:data)=>i.id==id);

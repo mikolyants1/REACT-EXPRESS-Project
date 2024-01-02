@@ -3,7 +3,7 @@ import { emitMess } from "../../classes/event.js";
 import { Null, Type, body, data, message } from "../../types.js";
 import { User } from "../../mongo.js";
 
-export default async (req:Request,res:Response):Promise<void>=>{
+export async function addMess(req:Request,res:Response):Promise<void>{
     if (!req.body){
       emitMess.test("addMess");
       res.status(400).json({
@@ -34,6 +34,7 @@ export default async (req:Request,res:Response):Promise<void>=>{
     };
     dialog ? dialog.mess.push(newMess) : mess
     .message.push({id:item.id,mess:[newMess]});
-    await User.findOneAndUpdate({id:id1},mess,{new:true});
+    await User.findOneAndUpdate({id:id1},
+    {message:mess.message},{new:true});
     res.status(201).json(mess);
   };

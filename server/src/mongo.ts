@@ -19,7 +19,10 @@ const MessageSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-    id:Number,
+    id:{
+     type:Number,
+     required:true
+    },
     name:{
      type:String,
      required:true

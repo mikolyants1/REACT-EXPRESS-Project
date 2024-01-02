@@ -4,7 +4,7 @@ import { emitUser } from "../../classes/event.js";
 import { Request, Response } from "express";
 import { User } from "../../mongo.js";
 
-export default async (_:Request,res:Response):Promise<void>=>{
+export async function getUsers(_:Request,res:Response):Promise<void>{
     const data:data[] = await User.find();
     if (!data){
       emitUser.test('getUsers');

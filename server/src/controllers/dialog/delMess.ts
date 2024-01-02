@@ -3,7 +3,7 @@ import { emitMess } from "../../classes/event.js";
 import { Null, Type, body, data, mess, message } from "../../types.js";
 import { User } from "../../mongo.js";
 
-export default async (req:Request,res:Response):Promise<void>=>{
+export async function delMess(req:Request,res:Response):Promise<void>{
     if (!req.body){
       emitMess.test("delMess");
       res.status(400).json({
@@ -24,13 +24,13 @@ export default async (req:Request,res:Response):Promise<void>=>{
       return;
      };
     const dialog:Type<message> = mess.message
-    .find((i:message)=>i.id==item.id);
+    .find((i:message)=>i.id == item.id);
     if (!dialog){
-        res.status(404).json({
-         message:"dialog not found"
-        });
-        return;
-       }
+     res.status(404).json({
+       message:"dialog not found"
+      });
+      return;
+    };
     const idx:number = dialog.mess
     .findIndex((i:mess)=>i.now == now);
     if (idx==-1){
