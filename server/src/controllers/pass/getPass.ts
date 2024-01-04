@@ -17,7 +17,7 @@ export async function getPass({body}: Request, res: Response): Promise<void> {
     i.name == body.name && bc.compare(body.pass, i.pass)
    ));
    let token:string = "";
-   if (user){
+   if (user&&!body.regist){
     token = jwt.sign({id:user.id},"secret_key_1",{expiresIn:"3d"});
    }; 
    const has: has = {

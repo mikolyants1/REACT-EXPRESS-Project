@@ -19,7 +19,7 @@ export default function Entry():JSX.Element{
   const {handleSubmit,reset} = methods;
   const check:SubmitHandler<stateUser>= async (date):Promise<void>=>{
     const {name,pass}:stateUser = date;
-    const user = await GetSuccess(name,pass);
+    const user = await GetSuccess(name,pass,false);
     if (user.has){
       setId(user.id);
       setPass(pass);

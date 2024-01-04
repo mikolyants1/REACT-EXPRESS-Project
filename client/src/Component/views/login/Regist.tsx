@@ -27,7 +27,7 @@ export default function Regist():JSX.Element{
 
   const check:SubmitHandler<stateUser>=async (date):Promise<void>=>{
     const {name,pass}:stateUser = date;
-    const already = await GetSuccess(name,pass);
+    const already = await GetSuccess(name,pass,true);
    if (name&&pass){
     if (already.has){
      setError({show:true,mess:"user is already exists"});
