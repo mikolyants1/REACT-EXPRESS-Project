@@ -100,6 +100,10 @@ export interface outlet{
   translate:TFunction<"translation",string>,
   show:Dispatch<SetStateAction<boolean>>
 }
+export interface UserContext {
+  change:(e:EvtC)=>void,
+  click:(E:EvtK)=>void
+}
 export interface Context{
     val:string,
     user:number,
@@ -132,9 +136,9 @@ export interface Context{
 
  export type st2 = Record<string,boolean>
 
- export type act1 = Record<keyof st1,string|boolean|number>
+ export type act1 = Record<string,st1[keyof st1]>
 
- export type act = Record<string,unknown|boolean>
+ export type act = Record<string,st[keyof st]>
 
  export type query3 = Omit<query2,"day"|"date"|"month">
 

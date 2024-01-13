@@ -25,15 +25,15 @@ export default function Regist():JSX.Element{
   const [error,setError] = useState<err>({show:false,mess:""});
   const [addUser] = useAddUserMutation<Datas>();
 
-  const check:Sub<stateUser>=async (date):Promise<void>=>{
+  const check:Sub<stateUser> = async (date):Promise<void>=>{
     const body:SubProps = {...date,regist:true};
     const already:has = await GetSuccess(body);
-   if (date.name&&date.pass){
-    if (already.has){
-     setError({show:true,mess:"user is already exists"});
-      reset();
-      return;
-    }
+    if (date.name&&date.pass){
+     if (already.has){
+      setError({show:true,mess:"user is already exists"});
+       reset();
+       return;
+     };
       addUser(date);
       navigate('/');
     } else {

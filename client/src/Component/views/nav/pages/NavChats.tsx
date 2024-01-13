@@ -16,7 +16,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const [data,setData] = useState<Type<data>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call??null);
     const [socket,setSocket] = useState<Socket>(null!);
-    const [online,setOnline] = useState<number[]>();
+    const [online,setOnline] = useState<number[]>([]);
     const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
   
       const toggle=useCallback((i:number):void=>{

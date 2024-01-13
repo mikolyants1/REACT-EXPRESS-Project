@@ -5,7 +5,7 @@ NavMenuBlock,NavTitle } from "../../../style/style.js";
 import { Context, Null,st2} from "../../../types/type.js";
 import Theme from "../../helpers/Context.js";
 import { defaultState3, reducer } from "../../helpers/Reducer.js";
-import NavBar from "../../ui/blocks/NavBar.js";
+import NavBar from "../../ui/blocks/nav/NavBar.js";
 import Error from "../../ui/blocks/load/Error.js";
 
 interface prop{

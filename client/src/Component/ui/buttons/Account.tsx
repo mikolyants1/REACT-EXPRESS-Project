@@ -1,24 +1,34 @@
-import { memo } from "react"
-import { ProfileChan, ProfileDel,
- ProfilePass } from "../../../style/style";
+import { Dispatch, SetStateAction, memo } from "react"
+import { ProfileChan, ProfileDel,ProfilePass } from "../../../style/style";
+import { useOutletContext } from "react-router-dom";
+import { Context } from "../../../types/type";
+import Error from "../blocks/load/Error";
+import { useDelUserMutation } from "../../../store/api/endpoints/UserEndpoints";
 
 interface props {
-    exit:()=>void,
-    del:()=>void,
-    exitText:string,
-    delText:string
+    set:Dispatch<SetStateAction<boolean>>
+    id:number
 }
 
-function AccButton(props:props):JSX.Element{
-  const {exit,exitText,del,delText}:props = props;
+function AccButton({set,id}:props):JSX.Element{
+  const {translate,val} = useOutletContext<Context>();
+  const [delData] = useDelUserMutation();
+  const exit = ():void => {
+    set(true);
+  }
+  const deleteUser =():void=>{
+    delData(id);
+    set(true);
+   };
+  if (!translate) return <Error back={val} />;
     return (
       <ProfilePass>
         <ProfileChan>
           <ProfileDel onClick={exit}>
-            {exitText}
+            {translate("Exit")}
           </ProfileDel>
-          <ProfileDel onClick={del}>
-            {delText}
+          <ProfileDel onClick={deleteUser}>
+            {translate("Delete accoutn")}
           </ProfileDel>
         </ProfileChan>
       </ProfilePass>

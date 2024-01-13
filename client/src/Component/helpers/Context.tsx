@@ -1,11 +1,16 @@
 import { createContext } from "react";
-import { Context } from "../../types/type";
+import { Context, UserContext } from "../../types/type";
 
- const Theme = createContext<Context>({
+ const AppTheme = createContext<Context>({
     val:'',
     user:0,
     translate:null,
     hide(){}
  });
-    
- export default Theme
+ 
+ export const UserTheme = createContext<UserContext>({
+    change(_){},
+    click(_){},
+ })
+
+ export default AppTheme

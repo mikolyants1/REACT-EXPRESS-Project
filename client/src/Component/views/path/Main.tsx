@@ -9,8 +9,8 @@ import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
 import { defaultState2, reduce } from '../../helpers/Reducer.js';
 import Loader from '../../ui/blocks/load/Loader.js';
 import Error from '../../ui/blocks/load/Error.js';
-import Header from '../../ui/blocks/Header.js';
-import MessageList from '../../ui/blocks/MessageList.js';
+import Header from '../../ui/blocks/main/Header.js';
+import MessageList from '../../ui/blocks/main/MessageList.js';
 
 export default function Main():JSX.Element {
  const id:number = Number(useParams().id);

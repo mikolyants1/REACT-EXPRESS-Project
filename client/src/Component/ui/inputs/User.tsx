@@ -1,18 +1,18 @@
-import { NamedExoticComponent, memo, useState } from "react";
-import { EvtC, EvtK, Type, outlet } from "../../../types/type";
+import { NamedExoticComponent, memo, useContext, useState } from "react";
+import { Type, UserContext, outlet } from "../../../types/type";
 import { useOutletContext } from "react-router-dom";
 import { ProfileBut, ProfileChan, ProfileInput,
  ProfilePass } from "../../../style/style";
+import { UserTheme } from "../../helpers/Context";
 
 interface props {
-    set:(e:EvtC)=>void,
     name:string,
     val?:Type<string>,
-    click:(e:EvtK)=>void
   };
   
 const UserSetBlock:NamedExoticComponent<props> = memo(
- ({name,set,val,click}:props):JSX.Element=>{
+ ({name,val}:props):JSX.Element=>{
+   const {change,click} = useContext<UserContext>(UserTheme);
    const [show,setShow] = useState<boolean>(false);
    const [open,setOpen] = useState<string>("password");
    const {translate} = useOutletContext<outlet>();
@@ -49,7 +49,7 @@ const UserSetBlock:NamedExoticComponent<props> = memo(
            <ProfileInput
             name={name}
             type={`${name == "name" ? "text" :open}`}
-            onChange={set}
+            onChange={change}
             defaultValue={val}
             onKeyUp={click}
             />

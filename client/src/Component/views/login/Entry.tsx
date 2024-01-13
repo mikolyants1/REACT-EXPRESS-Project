@@ -17,7 +17,7 @@ export default function Entry():JSX.Element{
   const [error,setError] = useState<boolean>(false);
   const { setId,setPass,setAuthToken }:bind = useAction();
   const {handleSubmit,reset} = methods;
-  const check:Sub<stateUser>= async (date):Promise<void>=>{
+  const check:Sub<stateUser> = async (date):Promise<void>=>{
     const body:SubProps = {...date,regist:false};
     const user:has = await GetSuccess(body);
     if (user.has){
