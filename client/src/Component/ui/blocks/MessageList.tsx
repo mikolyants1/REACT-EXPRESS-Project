@@ -1,6 +1,6 @@
 
 import {memo, useCallback} from 'react'
-import { Context, Null, mess, newMess } from '../../../types/type';
+import { Context, mess, newMess } from '../../../types/type';
 import { MainBlock, MessDate, Message } from '../../../style/style';
 import MessageCard from '../cards/maincards/MessageCard';
 import { useOutletContext } from 'react-router-dom';
@@ -31,10 +31,10 @@ function MessageList({mess,id,update}:props):JSX.Element {
       <Message>
         {mess.map((item:newMess,i:number):JSX.Element=>{
          const {id:userId,day,month,now,text,date}:newMess = item;
-         const right:Null<boolean> = i==0 ? null : showTime(mess,i);
+         const right:boolean = i==0 || showTime(mess,i);
          return (
           <div key={`${i}`}>
-           {(right||i==0)&&(
+           {right&&(
              <MessDate>
                {translate(month)} {day}
              </MessDate>

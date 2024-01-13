@@ -1,7 +1,7 @@
-import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction} from 'react'
+import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction, LazyExoticComponent, ComponentType} from 'react'
 import {TFunction} from 'i18next'
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
-import { ControllerRenderProps, FieldValues } from 'react-hook-form'
+import { ControllerRenderProps, FieldValues, SubmitHandler } from 'react-hook-form'
 import { BaseQueryApi } from '@reduxjs/toolkit/query'
 
 export type Type<T> = undefined|T
@@ -116,21 +116,23 @@ export interface Context{
     now:number,
     text:string,
     status:boolean
- }
+ };
 
  export interface error {
    type:string,
    name:string,
    message:string
- }
+ };
+
  export interface Token {
   token:string
- }
+ };
+ 
  export type StArr = [string,boolean]
 
  export type st2 = Record<string,boolean>
 
- export type act1 = Record<string,string|boolean|number>
+ export type act1 = Record<keyof st1,string|boolean|number>
 
  export type act = Record<string,unknown|boolean>
 
@@ -138,8 +140,22 @@ export interface Context{
 
  export type query4 = Omit<query3,"text">
 
-export type Control<T extends string> = ControllerRenderProps<FieldValues,T>;
+export type Control<T extends 'pass'|'name'> = ControllerRenderProps<FieldValues,T>;
 
+export type Lazy<T> = LazyExoticComponent<ComponentType<T>>;
+
+export type Sub<T extends FieldValues> = SubmitHandler<T>;
+
+export interface SubProps {
+    name:string,
+    pass:string,
+    regist:boolean
+};
+
+export interface InputProps {
+  title:string,
+  Name:'pass'|'name'
+}
  export interface action2{
     type:number
   }

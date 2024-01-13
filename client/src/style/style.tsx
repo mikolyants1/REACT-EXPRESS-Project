@@ -535,18 +535,24 @@ background:${({start,two}:logoProf)=>(
  `linear-gradient(90deg,${start},${two})`
 )}
 `
-export const ProfileText:IStyledComponent<'web',BaseObject> = styled.div({marginLeft:"10px"})
+export const ProfileText:IStyledComponent<'web',BaseObject> = styled.div({
+    marginLeft:"10px"
+})
 
 export const ProfileName:IStyledComponent<'web',BaseObject> = styled.div({
 fontSize:20,
 marginTop:-7
 })
-export const LogoText:IStyledComponent<'web',BaseObject> = styled.div({marginTop:"10px"})
+export const LogoText:IStyledComponent<'web',BaseObject> = styled.div({
+ marginTop:"10px"
+})
 
-export const ProfileDis:IStyledComponent<'web',BaseObject> = styled.div({color:"grey"})
+export const ProfileDis:IStyledComponent<'web',BaseObject> = styled.div({
+  color:"grey"
+})
 
 export const ProfilePass:IStyledComponent<'web',BaseObject> = styled(ProfileBlock)({
-    display:"block"
+ display:"block"
 })
 
 export const ProfileChan:IStyledComponent<'web',BaseObject> = styled.div({
@@ -554,6 +560,7 @@ export const ProfileChan:IStyledComponent<'web',BaseObject> = styled.div({
  justifyContent:'space-between',
  width:270
 })
+
 export const ProfileBut:IStyledComponent<'web',{
     children:string[]|string,
     onClick:()=>void
@@ -584,7 +591,8 @@ export const ProfileInput:IStyledComponent<'web',Partial<ProfileProp>> = styled.
 export const ProfileDel:IStyledComponent<'web',{
     children:string,
     onClick:()=>void
-}> = styled(ProfileBut)({color:'red'})
+}> = styled(ProfileBut)({color:'red'});
+
 export const ThemeInput:IStyledComponent<'web',{
     key:string,
     onChange:(e:EvtC)=>void,
@@ -603,7 +611,9 @@ alignItems:'center',
  width:'100%',
  fontSize:20
 })
-export const ThemeText:IStyledComponent<'web',BaseObject> = styled.div({marginLeft:10})
+export const ThemeText:IStyledComponent<'web',BaseObject> = styled.div({
+  marginLeft:10
+})
 interface MenuProp{
     children:JSX.Element,
     back:string
@@ -622,7 +632,10 @@ width:90%;
 export const MenuButton:IStyledComponent<'web',{
     onClick:()=>void,
     children:string
-}> = styled.div({fontSize:20,fontWeight:600})
+}> = styled.div({
+  fontSize:20,
+  fontWeight:600
+})
 
 interface LoadProp{
     spin:number,

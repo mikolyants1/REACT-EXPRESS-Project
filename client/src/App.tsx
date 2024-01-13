@@ -22,13 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path:'reg',
-        element:<Outlet />,
-        children:[
-          {
-            index:true,
-            element:<Regist />
-          }
-        ]
+        element:<Regist />,
       },
       {
         path:'page',

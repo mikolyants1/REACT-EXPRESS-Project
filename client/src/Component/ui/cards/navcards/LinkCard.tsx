@@ -28,7 +28,7 @@ function LinkCard({navigate,path,fill = false,children,text}:props):JSX.Element{
  if (!translate) return <Error back={val} />;
     return (
         <SetBlock onClick={linkNavigate}
-         fill={`${fill}`}back={val}>
+         fill={`${fill}`} back={val}>
           {path == "set" ? ( 
             <ThemeLogo>
              {children}

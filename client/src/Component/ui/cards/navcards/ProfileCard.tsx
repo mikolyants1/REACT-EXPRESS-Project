@@ -15,10 +15,10 @@ import Theme from "../../../helpers/Context";
     children?:JSX.Element
  }
 
-function ProfileCard({fill,name,click,children,logo,path}:props):JSX.Element {
- const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)] ;
- const left:string = name == "Main" ? 'rgb(56, 231, 120)' : one ;
- const right:string = name == "Main" ? 'rgb(177, 248, 177)' : two ;
+function ProfileCard({fill = "false",name,click,children,logo,path}:props):JSX.Element {
+ const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
+ const left:string = name == "Main" ? 'rgb(56, 231, 120)' : one;
+ const right:string = name == "Main" ? 'rgb(177, 248, 177)' : two;
  const {val,hide} = useContext<Context>(Theme);
     return (
       <Link to={`/page/main/${path}`} onClick={hide}>

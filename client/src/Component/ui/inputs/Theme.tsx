@@ -33,7 +33,7 @@ const ThemeSetBlock:FC<themeProp>=({idx,change,back,name}):JSX.Element=>{
                name={name} 
                 />
               <ThemeText>
-                 {i}
+                {i}
              </ThemeText>
            </ThemeBlock>
             ))}

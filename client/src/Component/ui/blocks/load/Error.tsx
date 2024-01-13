@@ -3,7 +3,7 @@ import { Block } from '../../../../style/style';
 import { load } from '../../../../types/type';
 
 function Error({back}:load):JSX.Element{
-const [err,setErr]=useState<string>('');
+const [err,setErr] = useState<string>('');
  useEffect(():void=>{
   setInterval(():void => {
    setTimeout(():void=>setErr(''),0);

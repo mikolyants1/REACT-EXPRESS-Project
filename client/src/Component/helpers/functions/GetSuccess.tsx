@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import { has } from "../../../types/type";
+import { SubProps, has } from "../../../types/type";
 
-async function GetSuccess(name:string,pass:string,regist:boolean):Promise<has> {   
+async function GetSuccess(args:SubProps):Promise<has> {   
    return axios
-    .post(`http://localhost:5000/pass`,{name,pass,regist})
+    .post(`http://localhost:5000/pass`,args)
     .then(({data}:AxiosResponse<has>)=>data);
 }
 

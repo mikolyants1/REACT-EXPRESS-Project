@@ -2,8 +2,8 @@ import { useNavigate,NavigateFunction } from "react-router-dom"
 import { useState } from "react"
 import { EntryBlock,EntryTitle,EntryBut,LoginError } from '../../../style/style.js'
 import { useAddUserMutation } from "../../../store/api/endpoints/UserEndpoints.js"
-import { data, stateUser } from "../../../types/type.js"
-import {useForm,FormProvider,SubmitHandler} from 'react-hook-form';
+import { Sub, SubProps, data, has, stateUser } from "../../../types/type.js"
+import {useForm,FormProvider} from 'react-hook-form';
 import LoginCard from "../../ui/cards/logincards/LoginCard.js"
 import GetSuccess from "../../helpers/functions/GetSuccess.js"
 
@@ -25,10 +25,10 @@ export default function Regist():JSX.Element{
   const [error,setError] = useState<err>({show:false,mess:""});
   const [addUser] = useAddUserMutation<Datas>();
 
-  const check:SubmitHandler<stateUser>=async (date):Promise<void>=>{
-    const {name,pass}:stateUser = date;
-    const already = await GetSuccess(name,pass,true);
-   if (name&&pass){
+  const check:Sub<stateUser>=async (date):Promise<void>=>{
+    const body:SubProps = {...date,regist:true};
+    const already:has = await GetSuccess(body);
+   if (date.name&&date.pass){
     if (already.has){
      setError({show:true,mess:"user is already exists"});
       reset();

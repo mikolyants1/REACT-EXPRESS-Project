@@ -1,5 +1,6 @@
 import { memo } from "react"
-import { ProfileChan, ProfileDel, ProfilePass } from "../../../style/style";
+import { ProfileChan, ProfileDel,
+ ProfilePass } from "../../../style/style";
 
 interface props {
     exit:()=>void,

@@ -2,9 +2,9 @@ import { EntryBlock, EntryBut,EntryTitle, LoginError, RegistLink } from "../../.
 import { useState } from "react";
 import { useNavigate,NavigateFunction } from "react-router-dom";
 import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
-import { stateUser} from "../../../types/type.js";
+import { Sub, SubProps, has, stateUser} from "../../../types/type.js";
 import { Link } from "react-router-dom";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";
 import GetSuccess from "../../helpers/functions/GetSuccess.js";
 
@@ -17,12 +17,12 @@ export default function Entry():JSX.Element{
   const [error,setError] = useState<boolean>(false);
   const { setId,setPass,setAuthToken }:bind = useAction();
   const {handleSubmit,reset} = methods;
-  const check:SubmitHandler<stateUser>= async (date):Promise<void>=>{
-    const {name,pass}:stateUser = date;
-    const user = await GetSuccess(name,pass,false);
+  const check:Sub<stateUser>= async (date):Promise<void>=>{
+    const body:SubProps = {...date,regist:false};
+    const user:has = await GetSuccess(body);
     if (user.has){
       setId(user.id);
-      setPass(pass);
+      setPass(date.pass);
       setAuthToken(user.auth);
       navigate(`/page/main/${current}`);
      }else{

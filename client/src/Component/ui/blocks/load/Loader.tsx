@@ -3,7 +3,7 @@ import { Block, Spin } from '../../../../style/style';
 import { load } from '../../../../types/type';
 
 function Loader({back}:load):JSX.Element{
- const [spin,setSpin]=useState<number>(0);
+ const [spin,setSpin] = useState<number>(0);
   useEffect(():void=>{
    setInterval(():void=>{
     setSpin((x:number)=>x==360?0:x+10);

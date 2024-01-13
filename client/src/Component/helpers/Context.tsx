@@ -5,7 +5,7 @@ import { Context } from "../../types/type";
     val:'',
     user:0,
     translate:null,
-    hide:()=>{}
+    hide(){}
  });
     
  export default Theme
