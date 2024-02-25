@@ -8,7 +8,7 @@ import { defaultState3, reducer } from "../../helpers/Reducer.js";
 import NavBar from "../../ui/blocks/nav/NavBar.js";
 import Error from "../../ui/blocks/load/Error.js";
 
-interface prop{
+interface prop {
  show:boolean
 };
 
@@ -19,6 +19,7 @@ export default function NavBlock({show}:prop):JSX.Element{
  const [title,setTitle] = useState<string>('Contacts');
  const [state,dispatch] = useReducer(reducer,defaultState3);
  const memoState:st2 = useMemo(()=>state,[state]);
+ 
  const press = (i:number)=> ():void => {
   startTransition(():void=>{
    setTitle(arr[i]);

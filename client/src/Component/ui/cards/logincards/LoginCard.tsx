@@ -1,18 +1,17 @@
 import { memo } from "react"
 import LoginInput from "../../inputs/Login";
 import { InputProps } from "../../../../types/type";
+import CreateFields from "../../../helpers/functions/login/CreateFields";
 
 function LoginCard():JSX.Element{
-  const props:InputProps[] = [
-   {Name:'name',title:'username'},
-   {Name:'pass',title:"password"}
-  ]
+  const fileds:InputProps[] = CreateFields();
   return (
     <>
-     {props.map(({Name,title}:InputProps):JSX.Element=>(
+     {fileds.map((i:InputProps):JSX.Element=>(
        <LoginInput
-        Name={Name}
-        title={title}
+        key={i.title}
+        Name={i.Name}
+        title={i.title}
        />
       ))}
     </>

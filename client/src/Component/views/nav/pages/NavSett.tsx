@@ -17,7 +17,7 @@ export default function NavSett({set,call}:SettProps):JSX.Element{
       set({type:1});
     },[]);
 
-   const nav=useCallback((id:number)=>():void=>setIdx(id),[]);
+   const nav = useCallback((id:number)=>():void=>setIdx(id),[]);
 
     if (isLoading) return <Loader back={val} />;
     if (isError) return <Error back={val} />;

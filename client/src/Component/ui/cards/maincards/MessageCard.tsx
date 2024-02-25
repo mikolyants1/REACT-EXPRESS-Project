@@ -5,23 +5,23 @@ import { outlet } from "../../../../types/type";
 import { useState,memo} from 'react';
 
 interface props {
-    key:string,
-    col:string,
-    now:number,
-    text:string,
-    date:string
-    update:(i:number)=>void,
-    del:(now:number)=>void
+  col:string,
+  now:number,
+  text:string,
+  date:string
+  update:(i:number)=>void,
+  del:(now:number)=>void
 }
 
-function MessageCard(props:props):JSX.Element {
+function MessageCard({update,del,date,now,text,col}:props):JSX.Element {
   const {val,translate} = useOutletContext<outlet>();
-  const {update,del,now,date,text,col}:props = props;
   const [show,setShow] = useState<boolean>(false);
-  const showUpdate=():void=>{
+
+  const showUpdate = ():void =>{
     setShow((prev:boolean)=>!prev);
   };
-  const remove=():void=>{
+  
+  const remove = ():void =>{
     del(now);
     setShow(false);
   };

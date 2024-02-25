@@ -17,7 +17,7 @@ function MessageList({mess,id,update}:props):JSX.Element {
  if (!translate) return <Error back={val} />
  const [delMess] = useDelMessMutation();
 
- const deleteMess=useCallback((now:number):void=>{
+ const deleteMess = useCallback((now:number):void=>{
     if (typeof id!=="undefined"){
       delMess({id1:id,id2:user,now:now});
     };
@@ -40,7 +40,6 @@ function MessageList({mess,id,update}:props):JSX.Element {
              </MessDate>
            )}
             <MessageCard
-             key={`${now}`}
              now={now}
              text={text}
              date={date}

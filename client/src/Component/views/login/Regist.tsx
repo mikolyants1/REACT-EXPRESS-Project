@@ -5,7 +5,7 @@ import { useAddUserMutation } from "../../../store/api/endpoints/UserEndpoints.j
 import { Sub, SubProps, data, has, stateUser } from "../../../types/type.js"
 import {useForm,FormProvider} from 'react-hook-form';
 import LoginCard from "../../ui/cards/logincards/LoginCard.js"
-import GetSuccess from "../../helpers/functions/GetSuccess.js"
+import GetSuccess from "../../helpers/functions/login/GetSuccess.js"
 
 interface err{
    show:boolean,
@@ -16,6 +16,7 @@ interface Datas {
   isError:boolean;
   isLoading:boolean
 }
+
 export default function Regist():JSX.Element{
   const methods = useForm<stateUser>({
     defaultValues:{name:"",pass:""}

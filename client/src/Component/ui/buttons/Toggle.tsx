@@ -5,12 +5,11 @@ import { memo } from "react";
 
 function ToogleMenu():JSX.Element{
  const {val,show,translate} = useOutletContext<outlet>();
-    const press=():void=>{
-      show(true);
-    };
+ 
     return (
         <HeaderMenu back={val}>
-          <MenuButton onClick={press}>
+          <MenuButton
+           onClick={()=>show(true)}>
             {translate("Menu")}
           </MenuButton>
         </HeaderMenu>

@@ -13,10 +13,8 @@ interface props {
 function AccButton({set,id}:props):JSX.Element{
   const {translate,val} = useOutletContext<Context>();
   const [delData] = useDelUserMutation();
-  const exit = ():void => {
-    set(true);
-  }
-  const deleteUser =():void=>{
+
+  const deleteUser = ():void => {
     delData(id);
     set(true);
    };
@@ -24,7 +22,8 @@ function AccButton({set,id}:props):JSX.Element{
     return (
       <ProfilePass>
         <ProfileChan>
-          <ProfileDel onClick={exit}>
+          <ProfileDel
+           onClick={()=>set(true)}>
             {translate("Exit")}
           </ProfileDel>
           <ProfileDel onClick={deleteUser}>

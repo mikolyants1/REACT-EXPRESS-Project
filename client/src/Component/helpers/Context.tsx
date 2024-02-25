@@ -1,16 +1,8 @@
 import { createContext } from "react";
 import { Context, UserContext } from "../../types/type";
 
- const AppTheme = createContext<Context>({
-    val:'',
-    user:0,
-    translate:null,
-    hide(){}
- });
+ const AppTheme = createContext<Context>({} as Context);
  
- export const UserTheme = createContext<UserContext>({
-    change(_){},
-    click(_){},
- })
+ export const UserTheme = createContext<UserContext>({} as UserContext)
 
  export default AppTheme

@@ -9,25 +9,26 @@ import { defaultState1,reduce } from "../../../helpers/Reducer.js"
 import Theme from "../../../helpers/Context.js"
 import Loader from "../../../ui/blocks/load/Loader.js"
 import Error from "../../../ui/blocks/load/Error.js"
+import getUser from "../../../helpers/functions/main/GetUser.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<Context>(Theme);
     if (!translate) return <Error back={val} />;
     const [data,setData] = useState<Type<data>>(null!);
-    const [idx,setIdx] = useState<Null<number>>(call??null);
+    const [idx,setIdx] = useState<Null<number>>(call ?? null);
     const [socket,setSocket] = useState<Socket>(null!);
     const [online,setOnline] = useState<number[]>([]);
     const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
   
-      const toggle=useCallback((i:number):void=>{
+      const toggle = useCallback((i:number)=>():void=>{
         caller(i);
         set({type:1});
       },[]);
 
-     const setIndex=useCallback((i:number):void=>setIdx(i),[]);
+     const setIndex=useCallback((i:number)=>():void=>setIdx(i),[]);
      
-     const change=({target}:EvtC):void=>{
-      if (Array.isArray(state.base)){
+     const change = ({target}:EvtC):void => {
+      if (Array.isArray(state.base)){ 
       const val:string = target.value.trim().toLocaleLowerCase()
       const newData:data[] = state.base.filter((i:data):Type<data>=>{
        if (i.name.toLocaleLowerCase().indexOf(val)!==-1) return i;
@@ -35,13 +36,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         dispatch({data:newData});
       };
      };
-     const getUser=(arg:number):Type<message>=>{
-      if (!data||!Array.isArray(state.data)) return undefined;
-      const {id,message}:data = state.data.find((i:data)=>i.id==arg);
-      const item1:Type<message> = data.message.find((i:message)=>i.id==id);
-      const item2:Type<message> = message.find((i:message)=>i.id==data.id);
-      return item1||item2;
-     }
+
       useEffect(():void=>{
        setSocket(io("http://localhost:5000"));
        async function Prom():Promise<void>{
@@ -84,7 +79,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
             <ProfileCard
              path={user}
              fill={`${idx==user}`}
-             click={()=>setIndex(user)}
+             click={setIndex(user)}
              name={translate("Main")}
             />
            )}
@@ -94,7 +89,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         if (id) {
         const isOnline:Type<number> = online?.find((i:number)=>i==userId);
         return userId!==user ? (   
-            <ProfileCard click={()=>toggle(userId)}
+            <ProfileCard click={toggle(userId)}
              name={name} path={userId} key={userId}
              logo={name.slice(0,1).toUpperCase()}>
               <ContactTime online={`${isOnline}`}>
@@ -103,13 +98,13 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
             </ProfileCard>
           ) : null
          } else {
-           const show:Type<message> = getUser(userId);
+           const show:Type<message> = getUser(userId,data,state.data);
             return show&&(userId!==user) ? (
               <ProfileCard
                key={userId}
                path={userId}
                fill={`${idx==userId}`}
-               click={()=>setIndex(userId)}
+               click={setIndex(userId)}
                logo={name.slice(0,1).toUpperCase()}
                name={name}
                 />

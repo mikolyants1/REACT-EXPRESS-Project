@@ -1,10 +1,10 @@
 import { memo } from "react"
 import { useOutletContext } from "react-router-dom"
 import { Context } from "../../../../types/type.js"
-import { HeaderBlock, Logo, Name, Span,
-avatar, styleObj } from "../../../../style/style.js";
+import { HeaderBlock, Logo, Name, Span, styleObj } from "../../../../style/style.js";
 import ToogleMenu from "../../buttons/Toggle.js"
 import Error from "../load/Error.js";
+import CreateLogo from "../../../helpers/functions/CreateLogo.js";
 
 interface props {
     name:string,
@@ -12,7 +12,7 @@ interface props {
 }
 
 function Header({name,isMine}:props):JSX.Element {
-  const {one,two}:styleObj = avatar[Math.floor(Math.random()*3)];
+  const {one,two}:styleObj = CreateLogo();
   const {val,translate} = useOutletContext<Context>();
   const color1:string = isMine ? 'rgb(56, 231, 120)' : one;
   const color2:string = isMine ? 'rgb(177, 248, 177)' : two;

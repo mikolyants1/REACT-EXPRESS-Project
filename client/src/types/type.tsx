@@ -14,7 +14,18 @@ export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
 export interface stateUser {
     name:string,
     pass:string,
-   }
+  }
+export interface sets {
+  val:string,
+  name:string
+ };
+
+ export interface ITime {
+  date:string,
+  day:number,
+  month:string
+ };
+
 export interface mess {
     text:string,
     date:string,
@@ -22,11 +33,16 @@ export interface mess {
     day:number,
     month:string
   }
+export interface themes {
+  set:union,
+  back:string,
+  name:string
+}
  export interface query1{
     id:number,
     name:string,
     pass:string,
-  }
+ }
  export interface query2{
     id1:number,
     id2:number,

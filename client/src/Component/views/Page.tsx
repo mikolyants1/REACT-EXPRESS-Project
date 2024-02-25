@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import NavBlock from "./nav/NavBlock.js";
 import { Wrapper,MainContent } from "../../style/style.js";
 import { getCurrent, getLang, getTheme,
-useAppSelector } from "../../store/store.js";
+useAppSelector } from "../../store/store/store.js";
 import { useState, useEffect } from "react";
 import { Context } from "../../types/type.js";
 import i18n from "../../translate/Translate.js";
@@ -29,20 +29,20 @@ export default function Page():JSX.Element{
   user:current,
   translate:translate,
   hide:hideMenu
-   };
+ };
 
-    return (
-      <Theme.Provider value={context}>
-        <Wrapper back={theme}>
-          <MainContent>
-            <NavBlock
-             show={show}
-             />
-            <Outlet
-             context={setShow}
-            />
-          </MainContent>
-        </Wrapper>
-      </Theme.Provider>
-       )
+  return (
+    <Theme.Provider value={context}>
+      <Wrapper back={theme}>
+        <MainContent>
+          <NavBlock
+            show={show}
+           />
+          <Outlet
+            context={setShow}
+           />
+        </MainContent>
+      </Wrapper>
+    </Theme.Provider>
+  )
 }

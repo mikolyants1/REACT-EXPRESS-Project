@@ -2,8 +2,7 @@ import { Location, Navigate, useLocation, useOutletContext,} from "react-router-
 import {  HeaderBlock,SetContain, SetMain,SetTitle} from "../../../style/style.js";
 import { useCallback,useState} from "react";
 import {  EvtC, EvtK, data, outlet, query} from "../../../types/type.js";
-import { useChanUserMutation,useGetUserQuery
- } from "../../../store/api/endpoints/UserEndpoints.js";
+import { useChanUserMutation,useGetUserQuery} from "../../../store/api/endpoints/UserEndpoints.js";
 import ProfileLogoCard from "../../ui/cards/setcards/ProfileLogoCard.js";
 import AccButton from "../../ui/buttons/Account.js";
 import Loader from "../../ui/blocks/load/Loader.js";
@@ -24,14 +23,14 @@ interface Props{
 export default function Setting({children}:Props):JSX.Element{
  const {val,user,translate} = useOutletContext<outlet>();
  const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
- const [state,setState] = useState<state>({name:'',pass:''});
+ const [state,setState] = useState<state>({} as state);
  const {state:id}:Location<string> = useLocation();
  const [auth,setAuth] = useState<boolean>(false);
- const [chanData] = useChanUserMutation();
+ const [chanData] = useChanUserMutation<data[]>();
 
- const change=useCallback((e:EvtC):void=>{
+ const change = useCallback(({target}:EvtC):void=>{
   setState((prv:state)=>({
-   ...prv,[e.target.name]:e.target.value
+   ...prv,[target.name]:target.value
     }));
  },[data]);
 
@@ -39,7 +38,7 @@ export default function Setting({children}:Props):JSX.Element{
    if (e.key==='Enter'){
     const {name,pass}:state = state;
     if (typeof data!=='undefined'){
-    if (e.currentTarget.name=='name'&&name!==''){
+    if (e.currentTarget.name == 'name' && name !== ""){
       console.log("work")
         chanData({
           id:data.id,
@@ -47,7 +46,7 @@ export default function Setting({children}:Props):JSX.Element{
           pass:data.pass
         });
      };
-    if (e.currentTarget.name=='pass'&&pass!==''){
+    if (e.currentTarget.name=='pass' && pass !== ""){
         chanData({
           id:data.id,
           name:data.name,
@@ -63,8 +62,9 @@ export default function Setting({children}:Props):JSX.Element{
  if (isLoading) return <Loader back={val} />;
  if (isError) return <Error back={val} />;
 
-    return (
-    <UserTheme.Provider value={{change,click}}>
+  return (
+    <UserTheme.Provider
+     value={{change,click}}>
       <SetContain val={val}>
         <HeaderBlock back={val}>
           <SetTitle>

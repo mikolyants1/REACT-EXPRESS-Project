@@ -6,7 +6,7 @@ import './index.css'
 import {createBrowserRouter,RouterProvider,
 Outlet,Navigate} from 'react-router-dom'
 import Page from './Component/views/Page.js'
-import { catched, store} from './store/store.js'
+import { catched, store} from './store/store/store.js'
 import WrapRout from './Component/routes/WrapRout.js'
 import SettRout from './Component/routes/SettRout.js'
 import Main from './Component/views/path/Main.js'

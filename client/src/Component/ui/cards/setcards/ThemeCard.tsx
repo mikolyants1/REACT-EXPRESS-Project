@@ -1,30 +1,33 @@
 import {memo} from 'react'
 import ThemeSetBlock from '../../inputs/Theme'
-import { Context, EvtC, union } from '../../../../types/type'
-import { bind, getLang, useAction, useAppSelector } from '../../../../store/store';
+import { EvtC, outlet, themes, union } from '../../../../types/type'
+import { bind, getLang, useAction, useAppSelector } from '../../../../store/store/store';
 import { useOutletContext } from 'react-router-dom';
+import MakeThemes from '../../../helpers/functions/set/MakeThemes';
 
 function ThemeCard():JSX.Element {
-  const {val} = useOutletContext<Context>();
-  const {setLang,setTheme}:bind = useAction();
+  const {val} = useOutletContext<outlet>();
+  const actions:bind = useAction();
   const lang:string = useAppSelector(getLang);
+  const themes:themes[] = MakeThemes(val,lang,actions);
+
   const toogle=(set:union)=>(e:EvtC):void=>{
     set(e.target.value);
   };
+  
   return (
     <>
-      <ThemeSetBlock
-        idx={0}
-        change={toogle(setTheme)}
-        back={val}
-        name="theme"
-       />  
-      <ThemeSetBlock
-        idx={1}
-        change={toogle(setLang)}
-        back={lang}
-        name="language"
-       />
+      {themes.map((item:themes,i:number):JSX.Element=>{
+        const {set,back,name}:themes = item;
+        return (
+        <ThemeSetBlock
+         key={name}
+         idx={i}
+         change={toogle(set)}
+         back={back}
+         name={name}
+        />
+      )})}
     </>
   )
 }

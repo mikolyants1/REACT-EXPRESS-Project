@@ -13,20 +13,7 @@ type back = {
     back:string,
     children:JSX.Element
 }
-export const avatar:styleObj[]=[
-    {
-        one:'rgb(14, 191, 61)',
-        two:'rgb(52, 52, 247)'
-    },
-    {
-        one:'red',
-        two:'blue'
-    },
-    {
-        one:'rgb(129, 20, 232)',
-        two:'rgb(254, 149, 1)'
-    }
-]
+
 export const EntryBlock:IStyledComponent<'web',BaseObject> = styled.div({
 margin:'200px auto',
 width:300,
@@ -104,6 +91,7 @@ color:${({back}:back)=>back=='black'
 width:100%;
 height:700px;
 min-width:300px;
+ 
 @media(max-width:600px){
     height:600px
 }

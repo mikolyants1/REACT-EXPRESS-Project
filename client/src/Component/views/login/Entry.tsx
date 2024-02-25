@@ -1,12 +1,12 @@
 import { EntryBlock, EntryBut,EntryTitle, LoginError, RegistLink } from "../../../style/style.js";
 import { useState } from "react";
 import { useNavigate,NavigateFunction } from "react-router-dom";
-import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store.js";
+import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store/store.js";
 import { Sub, SubProps, has, stateUser} from "../../../types/type.js";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";
-import GetSuccess from "../../helpers/functions/GetSuccess.js";
+import GetSuccess from "../../helpers/functions/login/GetSuccess.js";
 
 export default function Entry():JSX.Element{
   const current:number = useAppSelector(getCurrent);

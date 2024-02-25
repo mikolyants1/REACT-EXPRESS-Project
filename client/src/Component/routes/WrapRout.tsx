@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from "react"
 import { getCurrent, getLang, getTheme,
- useAppSelector } from "../../store/store.js"
+ useAppSelector } from "../../store/store/store.js"
 import { Outlet, useOutletContext } from "react-router-dom"
 import {useTranslation} from 'react-i18next'
 

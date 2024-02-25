@@ -1,17 +1,18 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import { api } from '../../types/type';
+import { RootState } from '../store/store';
 
 const MessApi = createApi({
   reducerPath:'Mess',
   refetchOnFocus:true,
-  tagTypes:['dialog','user'],
+  tagTypes:['user'],
   baseQuery:fetchBaseQuery({
     baseUrl:'http://localhost:5000/',
     prepareHeaders:(headers:Headers,{getState}:api):Headers=>{
-      const get:any = getState();
+      const get:RootState = getState();
       const token:string = get.mess.authToken;
-      if (token){
-      headers.set("authorization",`Bearer ${token}`);
+      if (token) {
+       headers.set("authorization",`Bearer ${token}`);
       };
       return headers;
     },

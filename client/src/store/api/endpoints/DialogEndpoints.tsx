@@ -15,7 +15,7 @@ const DialogEndpoints = MessApi.injectEndpoints({
               body: {id:id2,...body}
                }    
             },
-           invalidatesTags:['dialog'] 
+           invalidatesTags:['user'] 
         }),
         chanMess:build.mutation<data[],query3>({
           query:(obj):res<body1>=>{
@@ -26,7 +26,7 @@ const DialogEndpoints = MessApi.injectEndpoints({
                 body: {id:id2,...body}
                  }    
               },
-            invalidatesTags:['dialog'] 
+            invalidatesTags:['user'] 
           }),
         delMess:build.mutation<data[],query4>({
           query:(obj):res<body1>=>{
@@ -37,7 +37,7 @@ const DialogEndpoints = MessApi.injectEndpoints({
                 body: {id:id2,...body}
                 }    
               },
-            invalidatesTags:['dialog'] 
+            invalidatesTags:['user'] 
           }),
        })
     })
