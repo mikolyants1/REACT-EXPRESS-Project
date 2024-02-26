@@ -1,8 +1,8 @@
 import { useState,useEffect, memo } from 'react';
 import { Block, Spin } from '../../../../style/style';
-import { load } from '../../../../types/type';
+import { ILoad } from '../../../../types/type';
 
-function Loader({back}:load):JSX.Element{
+function Loader({back}:ILoad):JSX.Element{
  const [spin,setSpin] = useState<number>(0);
   useEffect(():void=>{
    setInterval(():void=>{

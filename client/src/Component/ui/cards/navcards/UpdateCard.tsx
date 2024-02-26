@@ -1,8 +1,8 @@
 import { memo, useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import { ContactBlock, ContactLogo, ContactName,
-ContactText, ContactTime,styleObj } from "../../../../style/style"
-import { Context } from "../../../../types/type"
+ContactText, ContactTime} from "../../../../style/style"
+import { IContext, IStyleObj } from "../../../../types/type"
 import Theme from "../../../helpers/Context"
 import Error from "../../blocks/load/Error"
 import CreateLogo from "../../../helpers/functions/CreateLogo"
@@ -14,8 +14,8 @@ interface props {
 }
 
 function UpdateCard({name,navigate,fill}:props):JSX.Element{
-const {one,two}:styleObj = CreateLogo();
-const {hide,translate,val} = useContext<Context>(Theme);
+const {one,two}:IStyleObj = CreateLogo();
+const {hide,translate,val} = useContext<IContext>(Theme);
 const nav:NavigateFunction = useNavigate();
 
 const linkNavigate = ():void => {

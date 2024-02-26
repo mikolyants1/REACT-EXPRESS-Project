@@ -1,11 +1,11 @@
 import {FC, memo} from 'react'
 import { Controller, useFormContext } from 'react-hook-form';
 import { EntryInput, EntrySub, InputBlock } from '../../../style/style';
-import { Control, InputProps, stateUser } from '../../../types/type';
+import { Control, InputProps, IStateUser } from '../../../types/type';
 
 
 const LoginInput:FC<InputProps> = ({title,Name}):JSX.Element => {
-  const {control} = useFormContext<stateUser>();
+  const {control} = useFormContext<IStateUser>();
   
   return (
     <>

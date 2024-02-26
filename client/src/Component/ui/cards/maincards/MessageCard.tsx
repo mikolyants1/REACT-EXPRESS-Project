@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { ChanButton, DelButton, MessAction, MessBlock, MessContent,
  MessSpan,MessText, MessTime } from "../../../../style/style";
-import { outlet } from "../../../../types/type";
+import { IOutlet } from "../../../../types/type";
 import { useState,memo} from 'react';
 
 interface props {
@@ -14,7 +14,7 @@ interface props {
 }
 
 function MessageCard({update,del,date,now,text,col}:props):JSX.Element {
-  const {val,translate} = useOutletContext<outlet>();
+  const {val,translate} = useOutletContext<IOutlet>();
   const [show,setShow] = useState<boolean>(false);
 
   const showUpdate = ():void =>{

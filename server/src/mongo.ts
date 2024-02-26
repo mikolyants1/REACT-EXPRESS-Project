@@ -1,9 +1,9 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose,{Error, Schema} from "mongoose";
 import env from './env.js'
 
  mongoose.connect(`${env}`)
  .then(()=>console.log("connect db"))
- .catch((err)=>console.log(err));
+ .catch((err:Error)=>console.log(err));
 
 const MessSchema = new Schema({
     text:String,
@@ -31,7 +31,10 @@ const UserSchema = new Schema({
      type:String,
      required:true
     },
-    message:[MessageSchema]
+    message:{
+    type:[MessageSchema],
+    required:true
+    } 
 });
 
 export const User = mongoose.model("User",UserSchema);

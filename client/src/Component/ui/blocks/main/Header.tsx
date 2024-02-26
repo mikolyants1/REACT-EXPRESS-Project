@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { useOutletContext } from "react-router-dom"
-import { Context } from "../../../../types/type.js"
-import { HeaderBlock, Logo, Name, Span, styleObj } from "../../../../style/style.js";
+import { IContext, IStyleObj } from "../../../../types/type.js"
+import { HeaderBlock, Logo, Name, Span } from "../../../../style/style.js";
 import ToogleMenu from "../../buttons/Toggle.js"
 import Error from "../load/Error.js";
 import CreateLogo from "../../../helpers/functions/CreateLogo.js";
@@ -12,8 +12,8 @@ interface props {
 }
 
 function Header({name,isMine}:props):JSX.Element {
-  const {one,two}:styleObj = CreateLogo();
-  const {val,translate} = useOutletContext<Context>();
+  const {one,two}:IStyleObj = CreateLogo();
+  const {val,translate} = useOutletContext<IContext>();
   const color1:string = isMine ? 'rgb(56, 231, 120)' : one;
   const color2:string = isMine ? 'rgb(177, 248, 177)' : two;
   if (!translate) return <Error back={val} />;

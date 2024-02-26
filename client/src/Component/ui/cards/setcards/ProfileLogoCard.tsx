@@ -1,7 +1,8 @@
 import { LogoText, ProfileBlock, ProfileDis,ProfileLogo,
-ProfileName,ProfileText,styleObj } from "../../../../style/style";
+ProfileName,ProfileText } from "../../../../style/style";
 import { memo } from "react";
 import CreateLogo from "../../../helpers/functions/CreateLogo";
+import { IStyleObj } from "../../../../types/type";
 
 interface props {
     name:string,
@@ -9,7 +10,7 @@ interface props {
 }
 
 function ProfileLogoCard({name,logoText}:props):JSX.Element{
- const {one,two}:styleObj = CreateLogo();
+ const {one,two}:IStyleObj = CreateLogo();
     return (
         <ProfileBlock>
           <ProfileLogo two={two} start={one}>

@@ -1,7 +1,7 @@
 import {memo} from 'react'
 import UserSetBlock from '../../inputs/User'
 import { getPass, useAppSelector } from '../../../../store/store/store'
-import { sets } from '../../../../types/type';
+import { ISets } from '../../../../types/type';
 import MakeSets from '../../../helpers/functions/set/MakeSets';
 
 interface props {
@@ -10,10 +10,10 @@ interface props {
 
 function UserSetCard({name}:props):JSX.Element {
   const pass:string = useAppSelector(getPass);
-  const sets:sets[] = MakeSets(name,pass);
+  const sets:ISets[] = MakeSets(name,pass);
   return (
     <>
-      {sets.map(({name,val}:sets):JSX.Element=>(
+      {sets.map(({name,val}:ISets):JSX.Element=>(
         <UserSetBlock
          key={name}
          val={val}

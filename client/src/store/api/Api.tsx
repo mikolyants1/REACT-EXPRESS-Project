@@ -1,5 +1,5 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { api } from '../../types/type';
+import { IApi } from '../../types/type';
 import { RootState } from '../store/store';
 
 const MessApi = createApi({
@@ -8,7 +8,7 @@ const MessApi = createApi({
   tagTypes:['user'],
   baseQuery:fetchBaseQuery({
     baseUrl:'http://localhost:5000/',
-    prepareHeaders:(headers:Headers,{getState}:api):Headers=>{
+    prepareHeaders:(headers:Headers,{getState}:IApi):Headers=>{
       const get:RootState = getState();
       const token:string = get.mess.authToken;
       if (token) {

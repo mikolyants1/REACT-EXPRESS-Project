@@ -11,11 +11,11 @@ export type EvtC = ChangeEvent<HTMLInputElement>
 export type EvtK = KeyboardEvent<HTMLInputElement>
 export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
 
-export interface stateUser {
+export interface IStateUser {
     name:string,
     pass:string,
   }
-export interface sets {
+export interface ISets {
   val:string,
   name:string
  };
@@ -26,24 +26,17 @@ export interface sets {
   month:string
  };
 
-export interface mess {
-    text:string,
-    date:string,
-    now:number,
-    day:number,
-    month:string
-  }
-export interface themes {
+export interface IThemes {
   set:union,
   back:string,
   name:string
 }
- export interface query1{
+ export interface IQuery1{
     id:number,
     name:string,
     pass:string,
  }
- export interface query2{
+ export interface IQuery2{
     id1:number,
     id2:number,
     text:string,
@@ -52,21 +45,15 @@ export interface themes {
     day:number,
     month:string
   }
- export interface user{
+ export interface IUser{
    name:string,
    pass:string,
   }
-  export interface message{
+  export interface IMessage{
     id:number,
-    mess:mess[]
+    mess:IMess[]
   }
-  export interface data{
-    id:number,
-    name:string,
-    pass:string,
-    message:message[]
-  }
- export interface body{
+ export interface IBody{
     text:string,
     date:string,
     now:number,
@@ -74,24 +61,24 @@ export interface themes {
     month:string,
     id:number
   }
-  export interface body1{
+  export interface IBody1{
     text?:string,
     id:number,
     now:number
   }
- export interface res<T> {
+ export interface IRes<T> {
     url:string,
     method:string,
     body?:T
   }
-export interface mess{
+export interface IMess{
   text:string,
   date:string,
   now:number,
   day:number,
   month:string
 }
-export interface newMess{
+export interface INewMess{
   id:number,
   text:string,
   date:string,
@@ -99,66 +86,78 @@ export interface newMess{
   day:number,
   month:string
 }
-export interface message{
-  id:number,
-  mess:mess[]
+
+export interface IStyleObj{
+  one:string,
+  two:string
 }
-export interface data{
+
+export interface IMessage{
+  id:number,
+  mess:IMess[]
+}
+
+export interface IData{
   id:number,
   name:string,
   pass:string,
-  message:message[]
+  message:IMessage[]
 }
-export interface outlet{
+
+export interface IOutlet{
   val:string,
   user:number,
   lang:string,
   translate:TFunction<"translation",string>,
   show:Dispatch<SetStateAction<boolean>>
 }
-export interface UserContext {
+
+export interface IUserContext {
   change:(e:EvtC)=>void,
   click:(E:EvtK)=>void
 }
-export interface Context{
+
+export interface IContext{
     val:string,
     user:number,
     translate:Null<TFunction<"translation",string>>,
     hide:()=>void
   };
-  export interface st{
+
+  export interface ISt{
     data:unknown,
     base:unknown,
     err:boolean,
     load:boolean
-  }
- export interface st1{
+  };
+
+ export interface ISt1{
     now:number,
     text:string,
     status:boolean
  };
 
- export interface error {
+ export interface IError {
    type:string,
    name:string,
    message:string
  };
 
- export interface Token {
+ export interface IToken {
   token:string
  };
  
  export type StArr = [string,boolean]
 
- export type st2 = Record<string,boolean>
+ export type St2 = Record<string,boolean>
 
- export type act1 = Record<string,st1[keyof st1]>
+ export type Act1 = Record<string,ISt1[keyof ISt1]>
 
- export type act = Record<string,st[keyof st]>
+ export type Act = Record<string,ISt[keyof ISt]>
 
- export type query3 = Omit<query2,"day"|"date"|"month">
+ export type Query3 = Omit<IQuery2,"day"|"date"|"month">
 
- export type query4 = Omit<query3,"text">
+ export type Query4 = Omit<Query3,"text">
 
 export type Control<T extends 'pass'|'name'> = ControllerRenderProps<FieldValues,T>;
 
@@ -166,7 +165,7 @@ export type Lazy<T> = LazyExoticComponent<ComponentType<T>>;
 
 export type Sub<T extends FieldValues> = SubmitHandler<T>;
 
-export interface SubProps {
+export interface ISubProps {
     name:string,
     pass:string,
     regist:boolean
@@ -176,32 +175,32 @@ export interface InputProps {
   title:string,
   Name:'pass'|'name'
 }
- export interface action2{
+ export interface IAction2{
     type:number
   }
-  export interface query<T>{
+  export interface IQuery<T>{
     data:T,
     isError:boolean,
     isLoading:boolean
   }
-  export interface has {
+  export interface IHas {
     id:number,
     has:boolean,
     auth:string
   }
-  export interface load {
+  export interface ILoad {
     back:string
   }
 
-  export type api = Pick<BaseQueryApi,'getState'>
+  export type IApi = Pick<BaseQueryApi,'getState'>
   export interface chatProps{
-    set:Dispatch<action2>,
+    set:Dispatch<IAction2>,
     id:boolean,
     call:Null<number>,
     caller:Dispatch<SetStateAction<Null<number>>>
   }
-  export interface SettProps{
-    set:Dispatch<action2>,
+  export interface ISettProps{
+    set:Dispatch<IAction2>,
     call:Dispatch<SetStateAction<Null<number>>>
   }
   

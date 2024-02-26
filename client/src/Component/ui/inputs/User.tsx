@@ -1,5 +1,5 @@
 import { FC, memo, useContext, useState } from "react";
-import { Type, UserContext } from "../../../types/type";
+import { Type, IUserContext } from "../../../types/type";
 import { ProfileInput,ProfilePass } from "../../../style/style";
 import { UserTheme } from "../../helpers/Context";
 import ShowButtons from "../buttons/Show";
@@ -10,7 +10,7 @@ interface props {
   };
   
 const UserSetBlock:FC<props> = ({name,val}):JSX.Element=>{
-   const {change,click} = useContext<UserContext>(UserTheme);
+   const {change,click} = useContext<IUserContext>(UserTheme);
    const [open,setOpen] = useState<string>("password");
    const [show,setShow] = useState<boolean>(false);
 

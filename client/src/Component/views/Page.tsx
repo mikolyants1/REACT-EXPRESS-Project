@@ -4,7 +4,7 @@ import { Wrapper,MainContent } from "../../style/style.js";
 import { getCurrent, getLang, getTheme,
 useAppSelector } from "../../store/store/store.js";
 import { useState, useEffect } from "react";
-import { Context } from "../../types/type.js";
+import { IContext } from "../../types/type.js";
 import i18n from "../../translate/Translate.js";
 import {useTranslation} from 'react-i18next'
 import Theme from "../helpers/Context.js";
@@ -20,11 +20,11 @@ export default function Page():JSX.Element{
   i18n.changeLanguage(lang);
  },[lang]);
  
- const hideMenu=():void=>{
+ const hideMenu = ():void =>{
    setShow(false);
   };
 
- const context:Context = {
+ const context:IContext = {
   val:theme,
   user:current,
   translate:translate,

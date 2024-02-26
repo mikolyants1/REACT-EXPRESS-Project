@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from "axios";
-import { SubProps, has } from "../../../../types/type";
+import { ISubProps, IHas } from "../../../../types/type";
 
-async function GetSuccess(args:SubProps):Promise<has> {   
+async function GetSuccess(args:ISubProps):Promise<IHas> {   
    return axios
     .post(`http://localhost:5000/pass`,args)
-    .then(({data}:AxiosResponse<has>)=>data);
+    .then(({data}:AxiosResponse<IHas>)=>data);
 }
 
 export default GetSuccess

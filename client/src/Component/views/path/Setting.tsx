@@ -1,7 +1,7 @@
 import { Location, Navigate, useLocation, useOutletContext,} from "react-router-dom";
 import {  HeaderBlock,SetContain, SetMain,SetTitle} from "../../../style/style.js";
 import { useCallback,useState} from "react";
-import {  EvtC, EvtK, data, outlet, query} from "../../../types/type.js";
+import {  EvtC, EvtK, IData, IOutlet, IQuery} from "../../../types/type.js";
 import { useChanUserMutation,useGetUserQuery} from "../../../store/api/endpoints/UserEndpoints.js";
 import ProfileLogoCard from "../../ui/cards/setcards/ProfileLogoCard.js";
 import AccButton from "../../ui/buttons/Account.js";
@@ -21,12 +21,12 @@ interface Props{
 }
 
 export default function Setting({children}:Props):JSX.Element{
- const {val,user,translate} = useOutletContext<outlet>();
- const {data,isError,isLoading} = useGetUserQuery<query<data>>(user);
+ const {val,user,translate} = useOutletContext<IOutlet>();
+ const {data,isError,isLoading} = useGetUserQuery<IQuery<IData>>(user);
  const [state,setState] = useState<state>({} as state);
  const {state:id}:Location<string> = useLocation();
  const [auth,setAuth] = useState<boolean>(false);
- const [chanData] = useChanUserMutation<data[]>();
+ const [chanData] = useChanUserMutation<IData[]>();
 
  const change = useCallback(({target}:EvtC):void=>{
   setState((prv:state)=>({

@@ -1,7 +1,7 @@
 import { bind } from "../../../../store/store/store";
-import { themes } from "../../../../types/type";
+import { IThemes } from "../../../../types/type";
 
-export default (val:string,lang:string,actions:bind):themes[]=>{
+export default (val:string,lang:string,actions:bind):IThemes[]=>{
     const {setTheme,setLang}:bind = actions;
     return [
         {

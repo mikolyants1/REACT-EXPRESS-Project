@@ -10,7 +10,9 @@ import { Str } from './types.js'
 
 const PORT:Str<number> = process.env.PORT || 5000 ;
 const app:Express = express() ;
+
 app.use(express.json()) ;
+
 app.use(cors());
 
 app.get('/error',(_:Request,res:Response):void=>{
@@ -26,7 +28,7 @@ app.use('/user',UserRouter);
 app.use("/pass",PassRouter);
 
 app.use((_:Request,res:Response):void=>{
-  res.redirect("/error");
+  res.status(300).redirect("/error");
 });
 
 const server = createServer(app);

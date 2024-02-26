@@ -1,6 +1,6 @@
-import { sets } from "../../../../types/type"
+import { ISets } from "../../../../types/type"
 
-export default (name:string,pass:string):sets[] => {
+export default (name:string,pass:string):ISets[] => {
      return [
         {
             name:"name",

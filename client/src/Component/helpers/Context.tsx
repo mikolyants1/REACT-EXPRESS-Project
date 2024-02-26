@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import { Context, UserContext } from "../../types/type";
+import { IContext, IUserContext } from "../../types/type";
 
- const AppTheme = createContext<Context>({} as Context);
+ const AppTheme = createContext<IContext>({} as IContext);
  
- export const UserTheme = createContext<UserContext>({} as UserContext)
+ export const UserTheme = createContext<IUserContext>({} as IUserContext)
 
  export default AppTheme

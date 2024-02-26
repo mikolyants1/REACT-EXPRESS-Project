@@ -1,4 +1,4 @@
-export interface mess{
+export interface IMess{
     text:string,
     date:string,
     now:number,
@@ -6,7 +6,7 @@ export interface mess{
     month:string
   }
 
- export interface body{
+ export interface IBody{
   id1:string,
   id2:string,
   text:string,
@@ -16,7 +16,7 @@ export interface mess{
   month:string
 }
 
- export interface newMess{
+ export interface INewMess{
     id:number,
     text:string,
     date:string,
@@ -24,26 +24,36 @@ export interface mess{
     day:number,
     month:string
   }
-  export interface message{
+  export interface IMessage{
     id:number,
-    mess:mess[]
+    mess:IMess[]
   }
-  export interface data{
+  export interface IData{
     id:number,
     name:string,
     pass:string,
-    message:message[]
+    message:IMessage[]
   }
- export interface socket {
+ export interface ISocket {
     id:number
   }
- export interface has {
+ export interface IHas {
     id:number,
     has:boolean,
     auth:string
   }
+export interface ImploySocket {
+  current:number,
+  users:number[],
+  addUser:(id:number)=>void,
+  delUser:()=>void
+}
 
-  export type auth = {
+export interface ImployEmit {
+   evt:string,
+   test:(data:string)=>void
+}
+  export type Auth = {
     id:number
   }
   export type Type<T> = undefined|T

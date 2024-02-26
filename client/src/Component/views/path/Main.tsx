@@ -2,7 +2,7 @@ import { useRef,useReducer, useCallback } from 'react'
 import { Container, FootBlock,MainInput} from '../../../style/style.js'
 import { useOutletContext, useParams } from 'react-router-dom'
 import { useChanMessMutation,useSetMessMutation} from '../../../store/api/endpoints/DialogEndpoints.js'
-import { EvtC, EvtK, ITime, act1, data,newMess, outlet, query, st1 } from '../../../types/type.js';
+import { EvtC, EvtK, ITime, Act1, IData,INewMess, IOutlet, IQuery, ISt1 } from '../../../types/type.js';
 import { useGetUserQuery } from '../../../store/api/endpoints/UserEndpoints.js';
 import { defaultState2, reduce } from '../../helpers/Reducer.js';
 import Loader from '../../ui/blocks/load/Loader.js';
@@ -14,14 +14,14 @@ import createTime from '../../helpers/functions/time/createTime.js';
 
 export default function Main():JSX.Element {
  const id:number = Number(useParams().id);
- const [addMess] = useSetMessMutation<data[]>();
- const [chanMess] = useChanMessMutation<data[]>();
+ const [addMess] = useSetMessMutation<IData[]>();
+ const [chanMess] = useChanMessMutation<IData[]>();
  const ref = useRef<HTMLInputElement>(null!);
- const {val,user,translate} = useOutletContext<outlet>();
- const [state,dispatch] = useReducer(reduce<st1,act1>,defaultState2)
- const result:query<data>[] = [
-  useGetUserQuery<query<data>>(id),
-  useGetUserQuery<query<data>>(user),
+ const {val,user,translate} = useOutletContext<IOutlet>();
+ const [state,dispatch] = useReducer(reduce<ISt1,Act1>,defaultState2)
+ const result:IQuery<IData>[] = [
+  useGetUserQuery<IQuery<IData>>(id),
+  useGetUserQuery<IQuery<IData>>(user),
   ];
  
  const change = ({target}:EvtC):void =>{
@@ -65,9 +65,9 @@ export default function Main():JSX.Element {
    return <Error back={val} />;
  };
 
- const [{data:d1},{data:d2}]:query<data>[] = result;
+ const [{data:d1},{data:d2}]:IQuery<IData>[] = result;
  if (!d1||!d2) return <Error back={val} />;
- const mess:newMess[] = getMessage(d1,d2);
+ const mess:INewMess[] = getMessage(d1,d2);
    return (
         <Container back={val}>
           <Header

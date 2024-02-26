@@ -4,11 +4,6 @@ import { BaseObject } from 'styled-components/dist/types'
 import { EvtC, EvtK, Type } from '../types/type'
 import Keyframes from 'styled-components/dist/models/Keyframes'
 
-export interface styleObj{
-    one:string,
-    two:string
-}
-
 type back = {
     back:string,
     children:JSX.Element

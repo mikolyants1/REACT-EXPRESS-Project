@@ -1,7 +1,7 @@
 import { ContactBlock, ContactLogo, ContactName,
-ContactText, styleObj } from "../../../../style/style";
+ContactText} from "../../../../style/style";
 import {memo,useContext} from 'react'
-import { Context } from "../../../../types/type";
+import { IContext, IStyleObj } from "../../../../types/type";
 import { Link } from "react-router-dom";
 import Theme from "../../../helpers/Context";
 import CreateLogo from "../../../helpers/functions/CreateLogo";
@@ -17,8 +17,8 @@ import CreateLogo from "../../../helpers/functions/CreateLogo";
  }
 
 function ProfileCard({fill = "false",name,click,children,logo,path}:props):JSX.Element {
- const {one,two}:styleObj = CreateLogo();
- const {val,hide} = useContext<Context>(Theme);
+ const {one,two}:IStyleObj = CreateLogo();
+ const {val,hide} = useContext<IContext>(Theme);
  const left:string = name == "Main" ? 'rgb(56, 231, 120)' : one;
  const right:string = name == "Main" ? 'rgb(177, 248, 177)' : two;
  

@@ -1,7 +1,8 @@
 import { EventEmitter } from 'events'
+import { ImployEmit } from '../types';
 
- class Emitter extends EventEmitter {
-  private evt:string;
+ class Emitter extends EventEmitter implements ImployEmit {
+    evt:string;
     constructor(evt:string){
       super();
       this.evt = evt;
@@ -13,7 +14,4 @@ import { EventEmitter } from 'events'
      this.emit(this.evt);
     };
 };
-
-export const emitPass:Emitter = new Emitter("passCheck");
-export const emitUser:Emitter = new Emitter("userCheck");
-export const emitMess:Emitter = new Emitter("messCheck");
+export default Emitter

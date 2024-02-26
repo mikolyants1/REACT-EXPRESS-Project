@@ -1,8 +1,7 @@
 import { BlockInput, ContactInput, ContactTime} from "../../../../style/style.js"
 import { useCallback, useContext, useEffect, useReducer, useState} from "react"
 import axios, { AxiosResponse } from "axios"
-import { Context, EvtC, Null, Type,act,chatProps,
-data, message, st, } from "../../../../types/type.js"
+import { IContext, EvtC, Null, Type,Act,chatProps,IData, IMessage, ISt} from "../../../../types/type.js"
 import ProfileCard from "../../../ui/cards/navcards/ProfileCard.js"
 import {io,Socket} from 'socket.io-client';
 import { defaultState1,reduce } from "../../../helpers/Reducer.js"
@@ -12,13 +11,13 @@ import Error from "../../../ui/blocks/load/Error.js"
 import getUser from "../../../helpers/functions/main/GetUser.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
-    const {user,val,translate} = useContext<Context>(Theme);
+    const {user,val,translate} = useContext<IContext>(Theme);
     if (!translate) return <Error back={val} />;
-    const [data,setData] = useState<Type<data>>(null!);
+    const [data,setData] = useState<Type<IData>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call ?? null);
     const [socket,setSocket] = useState<Socket>(null!);
     const [online,setOnline] = useState<number[]>([]);
-    const [state,dispatch] = useReducer(reduce<st,act>,defaultState1);
+    const [state,dispatch] = useReducer(reduce<ISt,Act>,defaultState1);
   
       const toggle = useCallback((i:number)=>():void=>{
         caller(i);
@@ -30,7 +29,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
      const change = ({target}:EvtC):void => {
       if (Array.isArray(state.base)){ 
       const val:string = target.value.trim().toLocaleLowerCase()
-      const newData:data[] = state.base.filter((i:data):Type<data>=>{
+      const newData:IData[] = state.base.filter((i:IData):Type<IData>=>{
        if (i.name.toLocaleLowerCase().indexOf(val)!==-1) return i;
        });
         dispatch({data:newData});
@@ -41,9 +40,9 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
        setSocket(io("http://localhost:5000"));
        async function Prom():Promise<void>{
         return await axios.get('http://localhost:5000/user')
-        .then(({data}:AxiosResponse<data[]>):void=>{
+        .then(({data}:AxiosResponse<IData[]>):void=>{
         if (Array.isArray(data)){
-          const date:Type<data> = data.find((i:data)=>i.id==user);
+          const date:Type<IData> = data.find((i:IData)=>i.id==user);
           dispatch({data:data,base:data});
           console.log(data)
           setData(date);
@@ -85,7 +84,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
            )}
          </>
         {Array.isArray(state.data)&&state.data.map(
-        ({name,id:userId}:data):Null<JSX.Element>=>{
+        ({name,id:userId}:IData):Null<JSX.Element>=>{
         if (id) {
         const isOnline:Type<number> = online?.find((i:number)=>i==userId);
         return userId!==user ? (   
@@ -98,7 +97,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
             </ProfileCard>
           ) : null
          } else {
-           const show:Type<message> = getUser(userId,data,state.data);
+           const show:Type<IMessage> = getUser(userId,data,state.data);
             return show&&(userId!==user) ? (
               <ProfileCard
                key={userId}

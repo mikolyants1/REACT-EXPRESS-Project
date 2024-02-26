@@ -1,7 +1,7 @@
-import { styleObj } from "../../../style/style"
+import { IStyleObj } from "../../../types/type";
 
-export default ():styleObj => {
- const avatar:styleObj[] = [
+export default ():IStyleObj => {
+ const avatar:IStyleObj[] = [
         {
             one:'rgb(14, 191, 61)',
             two:'rgb(52, 52, 247)'

@@ -1,14 +1,14 @@
 import { EndpointBuilder } from "@reduxjs/toolkit/dist/query/endpointDefinitions"
 import { BaseQueryFn } from "@reduxjs/toolkit/query"
 import MessApi from "../Api"
-import { body, body1, data, query2,
- query3, query4, res } from "../../../types/type"
+import { IBody, IBody1, IData, IQuery2,
+ Query3, Query4, IRes } from "../../../types/type"
 
 const DialogEndpoints = MessApi.injectEndpoints({
     endpoints:(build:EndpointBuilder<BaseQueryFn,string,string>)=>({
-      setMess:build.mutation<data[],query2>({
-        query:(obj):res<body>=>{
-         const {id1,id2,...body}:query2 = obj;
+      setMess:build.mutation<IData[],IQuery2>({
+        query:(obj):IRes<IBody>=>{
+         const {id1,id2,...body}:IQuery2 = obj;
             return {
               url:`dialog/${id1}`,
               method:'POST',
@@ -17,9 +17,9 @@ const DialogEndpoints = MessApi.injectEndpoints({
             },
            invalidatesTags:['user'] 
         }),
-        chanMess:build.mutation<data[],query3>({
-          query:(obj):res<body1>=>{
-           const {id1,id2,...body}:query3 = obj;
+        chanMess:build.mutation<IData[],Query3>({
+          query:(obj):IRes<IBody1>=>{
+           const {id1,id2,...body}:Query3 = obj;
               return {
                 url:`dialog/${id1}`,
                 method:'PUT',
@@ -28,9 +28,9 @@ const DialogEndpoints = MessApi.injectEndpoints({
               },
             invalidatesTags:['user'] 
           }),
-        delMess:build.mutation<data[],query4>({
-          query:(obj):res<body1>=>{
-           const {id1,id2,...body}:query4 = obj;
+        delMess:build.mutation<IData[],Query4>({
+          query:(obj):IRes<IBody1>=>{
+           const {id1,id2,...body}:Query4 = obj;
               return {
                 url:`dialog/${id1}`,
                 method:'DELETE',

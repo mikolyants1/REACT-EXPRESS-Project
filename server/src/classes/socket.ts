@@ -1,4 +1,6 @@
-class Socket {
+import { ImploySocket } from "../types";
+
+class Socket implements ImploySocket {
   
   current:number;
   users:number[];
@@ -11,12 +13,12 @@ class Socket {
   addUser(id:number):void{
     this.current = id;
     const array:number[] = [...this.users,id]; 
-    const set:Set<number> = new Set(array);
+    const set:ReadonlySet<number> = new Set(array);
     this.users = Array.from(set);
   };
       
   delUser():void{
-    const {users,current} = this;
+    const {users,current}:ImploySocket = this;
     const newUsers:number[] = users
     .filter((i:number)=>i!==current);
     this.users = newUsers;

@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction, memo} from 'react'
 import { ProfileBut, ProfileChan } from '../../../style/style'
 import { useOutletContext } from 'react-router-dom'
-import { outlet } from '../../../types/type'
+import { IOutlet } from '../../../types/type'
 import Error from '../blocks/load/Error'
 
 interface props {
@@ -14,7 +14,7 @@ interface props {
 
 function Show(props:props):JSX.Element {
  const {setOpen,setShow,show,open,name}:props = props;
- const {translate,val} = useOutletContext<outlet>();
+ const {translate,val} = useOutletContext<IOutlet>();
 
  const openPass = ():void => {
     setOpen((prv:string)=>(
