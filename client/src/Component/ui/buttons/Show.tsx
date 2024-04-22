@@ -1,8 +1,10 @@
 import {Dispatch, SetStateAction, memo} from 'react'
 import { ProfileBut, ProfileChan } from '../../../style/style'
-import { useOutletContext } from 'react-router-dom'
-import { IOutlet } from '../../../types/type'
+import { NavigateFunction, useNavigate, useOutletContext } from 'react-router-dom'
+import { ICheck, IOutlet } from '../../../types/type'
 import Error from '../blocks/load/Error'
+import { getCurrent, getToken, useAppSelector } from '../../../store/store/store'
+import CheckToken from '../../helpers/functions/login/CheckToken'
 
 interface props {
     open:string,
@@ -15,17 +17,30 @@ interface props {
 function Show(props:props):JSX.Element {
  const {setOpen,setShow,show,open,name}:props = props;
  const {translate,val} = useOutletContext<IOutlet>();
+ const userId:number = useAppSelector(getCurrent);
+ const token:string = useAppSelector(getToken);
+ const navigate:NavigateFunction = useNavigate();
 
- const openPass = ():void => {
-    setOpen((prv:string)=>(
-      prv == "text" ? "password" : "text"
-    ))
-   };
+  const openPass = async ():Promise<void> => {
+    try {
+      const data:ICheck = await CheckToken(token,userId);
+      console.log(data)
+      if (data.isValid){
+        setOpen((prv:string)=>(
+          prv == "text" ? "password" : "text"
+        ));
+      } else navigate("/");
+    } catch {
+      navigate("/");
+    };
+  };
    const close = ():void => {
     setShow(false);
     setOpen("password");
    };
+   
  if (!translate) return <Error back={val} />;
+
   return (
     <ProfileChan>
       <ProfileBut onClick={()=>setShow(true)}>

@@ -17,6 +17,7 @@ const ThemeSetBlock:FC<themeProp>=({idx,change,back,name}):JSX.Element=>{
     const first:string = name.slice(0,1).toUpperCase();
     const second:string = name.slice(1);
     const Name:string = `${first}${second}`;
+    
     return (
         <ProfilePass>
           <ProfileName>

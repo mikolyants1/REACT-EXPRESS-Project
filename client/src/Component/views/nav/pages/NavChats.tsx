@@ -12,19 +12,18 @@ import getUser from "../../../helpers/functions/main/GetUser.js"
 
 export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
     const {user,val,translate} = useContext<IContext>(Theme);
-    if (!translate) return <Error back={val} />;
     const [data,setData] = useState<Type<IData>>(null!);
     const [idx,setIdx] = useState<Null<number>>(call ?? null);
     const [socket,setSocket] = useState<Socket>(null!);
     const [online,setOnline] = useState<number[]>([]);
     const [state,dispatch] = useReducer(reduce<ISt,Act>,defaultState1);
   
-      const toggle = useCallback((i:number)=>():void=>{
+    const toggle = useCallback((i:number)=>():void=>{
         caller(i);
         set({type:1});
       },[]);
 
-     const setIndex=useCallback((i:number)=>():void=>setIdx(i),[]);
+     const setIndex = useCallback((i:number)=>():void=>setIdx(i),[]);
      
      const change = ({target}:EvtC):void => {
       if (Array.isArray(state.base)){ 
@@ -62,7 +61,7 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
       },[socket])
 
   if (state.load) return <Loader back={val} />;
-  if (state.err) return <Error back={val} />;
+  if (state.err ||!translate) return <Error back={val} />;
     return (
         <>
         <BlockInput>
@@ -86,8 +85,9 @@ export default function NavChats({set,id,call,caller}:chatProps):JSX.Element{
         {Array.isArray(state.data)&&state.data.map(
         ({name,id:userId}:IData):Null<JSX.Element>=>{
         if (id) {
-        const isOnline:Type<number> = online?.find((i:number)=>i==userId);
-        return userId!==user ? (   
+        const isOnline:Type<number> = online?.find((i:number)=>i == userId);
+        console.log(state.data)
+        return userId !== user ? (   
             <ProfileCard click={toggle(userId)}
              name={name} path={userId} key={userId}
              logo={name.slice(0,1).toUpperCase()}>

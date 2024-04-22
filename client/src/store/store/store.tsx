@@ -59,6 +59,7 @@ export const getLang = ({mess}:state) => mess.lang;
 
 export const getPass = ({mess}:state) => mess.pass;
 
+export const getToken = ({mess}:state) => mess.authToken;
 export type get = ({mess}:state)=>Redux;
 
 setupListeners(store.dispatch);

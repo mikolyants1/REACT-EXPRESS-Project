@@ -11,6 +11,9 @@ export type EvtC = ChangeEvent<HTMLInputElement>
 export type EvtK = KeyboardEvent<HTMLInputElement>
 export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
 
+export interface ICheck {
+   isValid:boolean
+}
 export interface IStateUser {
     name:string,
     pass:string,
@@ -67,10 +70,11 @@ export interface IThemes {
     now:number
   }
  export interface IRes<T> {
-    url:string,
-    method:string,
-    body?:T
-  }
+  url:string,
+  method:string,
+  body?:T
+ }
+
 export interface IMess{
   text:string,
   date:string,

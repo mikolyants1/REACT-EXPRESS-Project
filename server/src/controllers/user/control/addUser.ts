@@ -17,8 +17,8 @@ export async function addUser(req:Request,res:Response):Promise<void>{
     const users:IData[] = await User.find();
     const salt:string = await bc.genSalt(10);
     const crypt:string = await bc.hash(pass,salt);
-    const userId:number = users.length ? users.sort(
-    (x:IData,y:IData)=>y.id - x.id)[0].id + 1 : 0;
+    const userId:number = users.length ? users
+    .sort((x:IData,y:IData)=>y.id - x.id)[0].id + 1 : 0;
     const user:IData = {
       id:userId,
       name:name,
