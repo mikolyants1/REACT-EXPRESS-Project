@@ -4,14 +4,13 @@ import { Wrapper,MainContent } from "../../style/style.js";
 import { getCurrent, getLang, getTheme,
 useAppSelector } from "../../store/store/store.js";
 import { useState, useEffect } from "react";
-import { IContext } from "../../types/type.js";
 import i18n from "../../translate/Translate.js";
 import {useTranslation} from 'react-i18next'
 import Theme from "../helpers/Context.js";
 
 export default function Page():JSX.Element{
- const theme:string = useAppSelector(getTheme);
- const current:number = useAppSelector(getCurrent);
+ const val:string = useAppSelector(getTheme);
+ const user:number = useAppSelector(getCurrent);
  const lang:string = useAppSelector(getLang);
  const [translate] = useTranslation<"translation",string>();
  const [show,setShow] = useState<boolean>(true);
@@ -20,20 +19,14 @@ export default function Page():JSX.Element{
   i18n.changeLanguage(lang);
  },[lang]);
  
- const hideMenu = ():void =>{
-   setShow(false);
-  };
-
- const context:IContext = {
-  val:theme,
-  user:current,
-  translate:translate,
-  hide:hideMenu
- };
+ const hide = ():void => setShow(false);
+  
 
   return (
-    <Theme.Provider value={context}>
-      <Wrapper back={theme}>
+    <Theme.Provider value={{
+      val,user,translate,hide
+    }}>
+      <Wrapper back={val}>
         <MainContent>
           <NavBlock
             show={show}

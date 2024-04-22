@@ -1,8 +1,7 @@
 import { EndpointBuilder } from "@reduxjs/toolkit/dist/query/endpointDefinitions"
 import { BaseQueryFn } from "@reduxjs/toolkit/query"
 import MessApi from "../Api"
-import { IBody, IBody1, IData, IQuery2,
- Query3, Query4, IRes } from "../../../types/type"
+import { IBody, IBody1, IData, IQuery2, Query3, Query4, IRes } from "@/types/type"
 
 const DialogEndpoints = MessApi.injectEndpoints({
     endpoints:(build:EndpointBuilder<BaseQueryFn,string,string>)=>({

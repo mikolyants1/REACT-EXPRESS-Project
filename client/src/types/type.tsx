@@ -4,30 +4,36 @@ import { ActionCreatorWithPayload } from '@reduxjs/toolkit'
 import { ControllerRenderProps, FieldValues, SubmitHandler } from 'react-hook-form'
 import { BaseQueryApi } from '@reduxjs/toolkit/query'
 
-export type Type<T> = undefined|T
-export type Str<T> = string|T
-export type Null<T> = null|T
-export type EvtC = ChangeEvent<HTMLInputElement>
-export type EvtK = KeyboardEvent<HTMLInputElement>
-export type union = ActionCreatorWithPayload<string,`messanger/${string}`>
+export type Type<T> = undefined|T;
+
+export type Str<T> = string|T;
+
+export type Null<T> = null|T;
+export type EvtC = ChangeEvent<HTMLInputElement>;
+
+export type EvtK = KeyboardEvent<HTMLInputElement>;
+
+export type union = ActionCreatorWithPayload<string,`messanger/${string}`>;
 
 export interface ICheck {
-   isValid:boolean
+  isValid:boolean
 }
+
 export interface IStateUser {
-    name:string,
-    pass:string,
-  }
+  name:string,
+  pass:string
+}
+
 export interface ISets {
   val:string,
   name:string
- };
+ }
 
  export interface ITime {
   date:string,
   day:number,
   month:string
- };
+ }
 
 export interface IThemes {
   set:union,
@@ -126,30 +132,30 @@ export interface IContext{
     user:number,
     translate:Null<TFunction<"translation",string>>,
     hide:()=>void
-  };
+  }
 
   export interface ISt{
     data:unknown,
     base:unknown,
     err:boolean,
     load:boolean
-  };
+  }
 
  export interface ISt1{
     now:number,
     text:string,
     status:boolean
- };
+ }
 
  export interface IError {
    type:string,
    name:string,
    message:string
- };
+ }
 
  export interface IToken {
   token:string
- };
+ }
  
  export type StArr = [string,boolean]
 
@@ -173,7 +179,7 @@ export interface ISubProps {
     name:string,
     pass:string,
     regist:boolean
-};
+}
 
 export interface InputProps {
   title:string,

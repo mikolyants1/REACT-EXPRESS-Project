@@ -13,7 +13,7 @@ const MessApi = createApi({
       const token:string = get.mess.authToken;
       if (token) {
        headers.set("authorization",`Bearer ${token}`);
-      };
+      }
       return headers;
     },
   }),

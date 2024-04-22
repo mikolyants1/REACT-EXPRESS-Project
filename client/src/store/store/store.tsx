@@ -10,16 +10,16 @@ import MessApi from "../api/Api";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
 
- interface state {
+ interface IStore {
     mess:Redux
-  };
+  }
 
-interface store {
+interface IConfig {
     key:string,
     storage:WebStorage
-};
+}
 
-const config:store={
+const config:IConfig = {
     key:'message',
     storage
 }
@@ -51,16 +51,17 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const getTheme = ({mess}:state) => mess.theme;
+export const getTheme = ({mess}:IStore) => mess.theme;
 
-export const getCurrent = ({mess}:state) => mess.current;
+export const getCurrent = ({mess}:IStore) => mess.current;
 
-export const getLang = ({mess}:state) => mess.lang;
+export const getLang = ({mess}:IStore) => mess.lang;
 
-export const getPass = ({mess}:state) => mess.pass;
+export const getPass = ({mess}:IStore) => mess.pass;
 
-export const getToken = ({mess}:state) => mess.authToken;
-export type get = ({mess}:state)=>Redux;
+export const getToken = ({mess}:IStore) => mess.authToken;
+
+export type TGet = ({mess}:IStore)=>Redux;
 
 setupListeners(store.dispatch);
 

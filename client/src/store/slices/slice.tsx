@@ -3,11 +3,11 @@ ActionCreatorWithPayload,} from '@reduxjs/toolkit'
 import { bind } from '../store/store'
 
 export interface Redux{
-    current:number,
-    theme:string,
-    lang:string,
-    pass:string,
-    authToken:string
+  current:number,
+  theme:string,
+  lang:string,
+  pass:string,
+  authToken:string
 }
 export type Pay<T> = PayloadAction<T>;
 
@@ -20,12 +20,12 @@ export type actions = CaseReducerActions<{
 },'messanger'>
 
 const initialState:Redux = {
-    current:0,
-    theme:'white',
-    lang:"en",
-    pass:"",
-    authToken:""
-};
+  current:0,
+  theme:'white',
+  lang:"en",
+  pass:"",
+  authToken:""
+}
 
 const slice:Slice<Redux,{
     setTheme:(state:Redux,action:Pay<string>)=>void,
