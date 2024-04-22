@@ -45,17 +45,17 @@ export default function Setting({children}:Props):JSX.Element{
           name:name,
           pass:data.pass
         });
-     };
+     }
     if (e.currentTarget.name=='pass' && pass !== ""){
         chanData({
           id:data.id,
           name:data.name,
           pass:pass
         });
-      };
-    };
+      }
+    }
     setAuth(true);
-  };
+  }
   },[state]);
   
  if (auth) return <Navigate to='/' />;

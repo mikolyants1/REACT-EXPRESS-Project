@@ -66,6 +66,6 @@ function App():JSX.Element{
       </PersistGate>
     </Provider>
     );
-  };
+  }
 
 export default App
