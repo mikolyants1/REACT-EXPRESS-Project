@@ -1,6 +1,6 @@
 import { memo } from "react"
 import LoginInput from "../../inputs/Login";
-import { InputProps } from "../../../../types/type";
+import { InputProps } from "@/types/type";
 import CreateFields from "../../../helpers/functions/login/CreateFields";
 
 function LoginCard():JSX.Element{

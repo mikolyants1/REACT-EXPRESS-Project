@@ -1,8 +1,8 @@
-import { EntryBlock, EntryBut,EntryTitle, LoginError, RegistLink } from "../../../style/style.js";
+import { EntryBlock, EntryBut,EntryTitle, LoginError, RegistLink } from "@/style/style.js";
 import { useState } from "react";
 import { useNavigate,NavigateFunction } from "react-router-dom";
-import { bind, getCurrent, useAction, useAppSelector } from "../../../store/store/store.js";
-import { Sub, ISubProps, IHas, IStateUser} from "../../../types/type.js";
+import { bind, getCurrent, useAction, useAppSelector } from "@/store/store/store.js";
+import { Sub, ISubProps, IHas, IStateUser} from "@/types/type.js";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import LoginCard from "../../ui/cards/logincards/LoginCard.js";
@@ -17,7 +17,7 @@ export default function Entry():JSX.Element{
   const [error,setError] = useState<boolean>(false);
   const { setId,setPass,setAuthToken }:bind = useAction();
   const {handleSubmit,reset} = methods;
-  const check:Sub<IStateUser> = async (date):Promise<void>=>{
+  const check:Sub<IStateUser> = async (date:IStateUser):Promise<void>=>{
     const body:ISubProps = {...date,regist:false};
     const user:IHas = await GetSuccess(body);
     if (user.has){
@@ -28,8 +28,9 @@ export default function Entry():JSX.Element{
      }else{
       setError(true);
       reset();
-      };
-  };
+      }
+  }
+
     return (
       <FormProvider {...methods}>
         <EntryBlock>
@@ -54,5 +55,5 @@ export default function Entry():JSX.Element{
         </>
       </EntryBlock>
     </FormProvider>
-       );
-};
+    );
+}

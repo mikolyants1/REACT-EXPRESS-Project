@@ -1,6 +1,6 @@
 import { useState,useEffect, memo } from 'react';
-import { Block, Spin } from '../../../../style/style';
-import { ILoad } from '../../../../types/type';
+import { Block, Spin } from '@/style/style';
+import { ILoad } from '@/types/type';
 
 function Loader({back}:ILoad):JSX.Element{
  const [spin,setSpin] = useState<number>(0);
@@ -17,6 +17,6 @@ function Loader({back}:ILoad):JSX.Element{
           />
       </Block>
        );
-     };
+     }
 
 export default memo(Loader);

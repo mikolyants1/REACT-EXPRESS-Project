@@ -1,5 +1,5 @@
-import { bind } from "../../../../store/store/store";
-import { IThemes } from "../../../../types/type";
+import { bind } from "@/store/store/store";
+import { IThemes } from "@/types/type";
 
 export default (val:string,lang:string,actions:bind):IThemes[]=>{
     const {setTheme,setLang}:bind = actions;

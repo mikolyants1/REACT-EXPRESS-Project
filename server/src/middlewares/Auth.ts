@@ -9,26 +9,26 @@ export function Auth(req:Request,res:Response,next:NextFunction):void{
       message:"incorrect header"
     });
     return;
-  };
+  }
   const token:string = header.replace("Bearer","").trim();
   if (!token){
     res.status(401).json({
      message:"token not found"
     });
     return;
-  }; 
+  }
   const decoded:Str<JwtPayload> = jwt.verify(token,"secret_key_1");
   if (typeof decoded == "string"){
     res.status(401).json({
       message:"inccorect verify"
     });
     return;
-  };
+  }
   if (!Number(req.params.id) === decoded.id){
     res.status(401).json({
       message:"different id"
     });
     return;
-  };
+  }
   next();
 }

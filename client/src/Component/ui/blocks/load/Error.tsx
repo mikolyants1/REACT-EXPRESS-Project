@@ -1,6 +1,6 @@
 import { useState,useEffect, memo } from 'react';
-import { Block } from '../../../../style/style';
-import { ILoad } from '../../../../types/type';
+import { Block } from '@/style/style';
+import { ILoad } from '@/types/type';
 
 function Error({back}:ILoad):JSX.Element{
 const [err,setErr] = useState<string>('');
@@ -13,10 +13,10 @@ const [err,setErr] = useState<string>('');
    }, 800);
   },[]);
     return (
-         <Block back={back}>
-             error {err}
-         </Block>
-       );
-};
+      <Block back={back}>
+        error {err}
+      </Block>
+    );
+}
 
 export default memo(Error)

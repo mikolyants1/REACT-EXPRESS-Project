@@ -1,4 +1,4 @@
-import { InputProps } from "../../../../types/type";
+import { InputProps } from "@/types/type";
 
 export default ():InputProps[] => {
     return [

@@ -1,14 +1,14 @@
 import {memo} from 'react'
 import UserSetBlock from '../../inputs/User'
-import { getPass, useAppSelector } from '../../../../store/store/store'
-import { ISets } from '../../../../types/type';
-import MakeSets from '../../../helpers/functions/set/MakeSets';
+import { getPass, useAppSelector } from '@/store/store/store'
+import { ISets } from '@/types/type';
+import MakeSets from '@/Component/helpers/functions/set/MakeSets';
 
-interface props {
+interface IProps {
   name:string
 }
 
-function UserSetCard({name}:props):JSX.Element {
+function UserSetCard({name}:IProps):JSX.Element {
   const pass:string = useAppSelector(getPass);
   const sets:ISets[] = MakeSets(name,pass);
   return (

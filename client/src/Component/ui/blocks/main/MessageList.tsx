@@ -1,11 +1,11 @@
 
 import {memo, useCallback} from 'react'
-import { IContext, IMess, INewMess } from '../../../../types/type';
-import { MainBlock, MessDate, Message } from '../../../../style/style';
+import { IContext, IMess, INewMess } from '@/types/type';
+import { MainBlock, MessDate, Message } from '@/style/style';
 import MessageCard from '../../cards/maincards/MessageCard';
 import { useOutletContext } from 'react-router-dom';
 import Error from '../load/Error';
-import { useDelMessMutation } from '../../../../store/api/endpoints/DialogEndpoints';
+import { useDelMessMutation } from '@/store/api/endpoints/DialogEndpoints';
 
 interface props {
     mess:INewMess[],
@@ -14,18 +14,19 @@ interface props {
 }
 function MessageList({mess,id,update}:props):JSX.Element {
  const {val,user,translate} = useOutletContext<IContext>();
- if (!translate) return <Error back={val} />
  const [delMess] = useDelMessMutation();
 
  const deleteMess = useCallback((now:number):void=>{
     if (typeof id!=="undefined"){
       delMess({id1:id,id2:user,now:now});
-    };
+    }
  },[]);
 
  const showTime=(arg:IMess[],i:number):boolean=>{
     return arg[i].day!==arg[i-1].day;
    };
+   
+  if (!translate) return <Error back={val} />;
   return (
     <MainBlock>
       <Message>

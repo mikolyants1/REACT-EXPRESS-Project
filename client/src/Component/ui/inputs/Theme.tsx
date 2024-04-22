@@ -1,17 +1,17 @@
 import { ProfileName, ProfilePass,ThemeBlock,
- ThemeInput, ThemeText } from "../../../style/style.js"
-import { IContext, EvtC} from "../../../types/type.js"
+ ThemeInput, ThemeText } from "@/style/style.js"
+import { IContext, EvtC} from "@/types/type.js"
 import { FC, useContext} from 'react'
 import Theme from "../../helpers/Context.js";
   
-  interface themeProp{
+  interface IThemeProp{
     change:(e:EvtC)=>void,
     back:string,
     idx:number,
     name:string
-  };
+  }
   
-const ThemeSetBlock:FC<themeProp>=({idx,change,back,name}):JSX.Element=>{
+const ThemeSetBlock:FC<IThemeProp> = ({idx,change,back,name}):JSX.Element => {
     const arrays:string[][] =[['white','black'],["en","ru"]]
     const {translate} = useContext<IContext>(Theme);
     const first:string = name.slice(0,1).toUpperCase();
@@ -40,6 +40,6 @@ const ThemeSetBlock:FC<themeProp>=({idx,change,back,name}):JSX.Element=>{
             ))}
         </ProfilePass>
     );
-  };
+  }
   
   export default ThemeSetBlock

@@ -1,11 +1,11 @@
 import { memo, useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
-import { SetBlock, SetLogo, SetText, ThemeLogo } from "../../../../style/style"
-import { IContext } from "../../../../types/type"
-import Theme from "../../../helpers/Context"
+import { SetBlock, SetLogo, SetText, ThemeLogo } from "@/style/style"
+import { IContext } from "@/types/type"
+import Theme from "@/Component/helpers/Context";
 import Error from "../../blocks/load/Error"
 
-interface props {
+interface IProps {
     path:string,
     navigate:()=>void,
     fill?:boolean,
@@ -13,7 +13,7 @@ interface props {
     text:string
 }
 
-function LinkCard({navigate,path,fill = false,children,text}:props):JSX.Element{
+function LinkCard({navigate,path,fill = false,children,text}:IProps):JSX.Element{
  const {val,hide,translate} = useContext<IContext>(Theme);
  const nav:NavigateFunction = useNavigate();
 
@@ -43,6 +43,6 @@ function LinkCard({navigate,path,fill = false,children,text}:props):JSX.Element{
           </SetText>
         </SetBlock>
     );
-};
+}
 
 export default memo(LinkCard)

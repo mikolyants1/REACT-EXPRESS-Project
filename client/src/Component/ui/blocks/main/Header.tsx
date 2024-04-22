@@ -1,10 +1,10 @@
 import { memo } from "react"
 import { useOutletContext } from "react-router-dom"
-import { IContext, IStyleObj } from "../../../../types/type.js"
-import { HeaderBlock, Logo, Name, Span } from "../../../../style/style.js";
+import { IContext, IStyleObj } from "@/types/type.js"
+import { HeaderBlock, Logo, Name, Span } from "@/style/style.js";
 import ToogleMenu from "../../buttons/Toggle.js"
 import Error from "../load/Error.js";
-import CreateLogo from "../../../helpers/functions/CreateLogo.js";
+import CreateLogo from "@/Component/helpers/functions/CreateLogo.js";
 
 interface props {
     name:string,
@@ -29,6 +29,6 @@ function Header({name,isMine}:props):JSX.Element {
       <ToogleMenu />
     </HeaderBlock>
   );
-};
+}
 
 export default memo(Header)

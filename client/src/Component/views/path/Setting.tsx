@@ -94,4 +94,4 @@ export default function Setting({children}:Props):JSX.Element{
       </SetContain>
    </UserTheme.Provider>
   );
-};
+}

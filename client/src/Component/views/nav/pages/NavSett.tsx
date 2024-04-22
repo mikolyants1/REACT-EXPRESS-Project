@@ -1,11 +1,11 @@
 import { useCallback, useContext, useState } from "react"
-import { useGetUserQuery } from "../../../../store/api/endpoints/UserEndpoints.js"
-import { IContext, ISettProps, IData, IQuery } from "../../../../types/type.js"
-import UpdateCard from "../../../ui/cards/navcards/UpdateCard.js"
-import LinkCard from "../../../ui/cards/navcards/LinkCard.js"
-import Theme from "../../../helpers/Context.js"
-import Loader from "../../../ui/blocks/load/Loader.js"
-import Error from "../../../ui/blocks/load/Error.js"
+import { useGetUserQuery } from "@/store/api/endpoints/UserEndpoints.js"
+import { IContext, ISettProps, IData, IQuery } from "@/types/type.js"
+import UpdateCard from "@/Component/ui/cards/navcards/UpdateCard.js"
+import LinkCard from "@/Component/ui/cards/navcards/LinkCard.js"
+import Theme from "@/Component/helpers/Context.js"
+import Loader from "@/Component/ui/blocks/load/Loader.js"
+import Error from "@/Component/ui/blocks/load/Error.js"
 
 export default function NavSett({set,call}:ISettProps):JSX.Element{
   const {user,val} = useContext<IContext>(Theme);
@@ -43,4 +43,4 @@ export default function NavSett({set,call}:ISettProps):JSX.Element{
            />
         </>
     );
-};
+}

@@ -1,4 +1,4 @@
-import { Type, IData, IMessage } from "../../../../types/type";
+import { Type, IData, IMessage } from "@/types/type";
 
 const getUser=(arg:number,data1:Type<IData>,data2:unknown):Type<IMessage>=>{
   if (!data1||!Array.isArray(data2)) return undefined;

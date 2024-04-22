@@ -20,8 +20,8 @@ export default function Main():JSX.Element {
  const {val,user,translate} = useOutletContext<IOutlet>();
  const [state,dispatch] = useReducer(reduce<ISt1,Act1>,defaultState2)
  const result:IQuery<IData>[] = [
-  useGetUserQuery<IQuery<IData>>(id),
-  useGetUserQuery<IQuery<IData>>(user),
+   useGetUserQuery<IQuery<IData>>(id),
+   useGetUserQuery<IQuery<IData>>(user),
   ];
  
  const change = ({target}:EvtC):void =>{
@@ -46,10 +46,10 @@ export default function Main():JSX.Element {
         now:state.now,
        });
       dispatch({status:false});
-    };
+    }
      ref.current.value = "";
      ref.current.blur();
-   };
+   }
  };
  
  const updateDioalog = useCallback((time:number):void=>{
@@ -59,11 +59,11 @@ export default function Main():JSX.Element {
  
  if (result.some(({isLoading})=>isLoading)){
    return <Loader back={val} />;
- };
+ }
 
  if (result.some(({isError})=>isError)){
    return <Error back={val} />;
- };
+ }
 
  const [{data:d1},{data:d2}]:IQuery<IData>[] = result;
  if (!d1||!d2) return <Error back={val} />;
@@ -90,4 +90,4 @@ export default function Main():JSX.Element {
           </FootBlock>
         </Container>
   );
-};
+}

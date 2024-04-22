@@ -1,13 +1,13 @@
 import {Dispatch,memo, SetStateAction,
  Suspense, lazy, useContext } from "react"
-import { NavMain, NavWrapper } from "../../../../style/style.js"
+import { NavMain, NavWrapper } from "@/style/style.js"
 import Loader from "../load/Loader.js"
 import { IContext, Lazy, Null, ISettProps, IAction2,
-chatProps, St2 } from "../../../../types/type.js";
-import Theme from "../../../helpers/Context.js";
+chatProps, St2 } from "@/types/type.js";
+import Theme from "@/Component/helpers/Context.js";
 
-const NavChats:Lazy<chatProps> = lazy(()=>import("../../../views/nav/pages/NavChats.js"));
-const NavSett:Lazy<ISettProps> = lazy(()=>import("../../../views/nav/pages/NavSett.js"));
+const NavChats:Lazy<chatProps> = lazy(()=>import("@/Component/views/nav/pages/NavChats.js"));
+const NavSett:Lazy<ISettProps> = lazy(()=>import("@/Component/views/nav/pages/NavSett.js"));
 
 interface props {
     call:Null<number>,
@@ -54,6 +54,6 @@ const {Contacts,Chats,Settings}:St2 = state;
       </Suspense>
     </NavMain>
   );
-};
+}
 
 export default memo(NavBar);

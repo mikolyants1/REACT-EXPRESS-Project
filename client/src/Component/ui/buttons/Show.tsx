@@ -1,12 +1,12 @@
 import {Dispatch, SetStateAction, memo} from 'react'
-import { ProfileBut, ProfileChan } from '../../../style/style'
+import { ProfileBut, ProfileChan } from '@/style/style'
 import { NavigateFunction, useNavigate, useOutletContext } from 'react-router-dom'
-import { ICheck, IOutlet } from '../../../types/type'
+import { ICheck, IOutlet } from '@/types/type'
 import Error from '../blocks/load/Error'
-import { getCurrent, getToken, useAppSelector } from '../../../store/store/store'
+import { getCurrent, getToken, useAppSelector } from '@/store/store/store'
 import CheckToken from '../../helpers/functions/login/CheckToken'
 
-interface props {
+interface IProps {
     open:string,
     setShow:Dispatch<SetStateAction<boolean>>,
     setOpen:Dispatch<SetStateAction<string>>,
@@ -14,8 +14,8 @@ interface props {
     name:string
 }
 
-function Show(props:props):JSX.Element {
- const {setOpen,setShow,show,open,name}:props = props;
+function Show(props:IProps):JSX.Element {
+ const {setOpen,setShow,show,open,name}:IProps = props;
  const {translate,val} = useOutletContext<IOutlet>();
  const userId:number = useAppSelector(getCurrent);
  const token:string = useAppSelector(getToken);
@@ -32,7 +32,7 @@ function Show(props:props):JSX.Element {
       } else navigate("/");
     } catch {
       navigate("/");
-    };
+    }
   };
    const close = ():void => {
     setShow(false);

@@ -1,4 +1,4 @@
-import { IStyleObj } from "../../../types/type";
+import { IStyleObj } from "@/types/type";
 
 export default ():IStyleObj => {
  const avatar:IStyleObj[] = [

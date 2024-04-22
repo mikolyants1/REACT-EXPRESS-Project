@@ -12,6 +12,6 @@ export async function getUser(req:Request,res:Response):Promise<void>{
         message:"user not found"
       });
       return;
-    };
+    }
     res.status(200).json(user);
- };
+ }

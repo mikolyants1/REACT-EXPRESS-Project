@@ -1,18 +1,18 @@
 import { useContext, useReducer, useState,
 startTransition, useMemo} from "react";
 import { NavBarBlock, NavMain, NavMenu,
-NavMenuBlock,NavTitle } from "../../../style/style.js";
-import { IContext, Null,St2} from "../../../types/type.js";
+NavMenuBlock,NavTitle } from "@/style/style.js";
+import { IContext, Null,St2} from "@/types/type.js";
 import Theme from "../../helpers/Context.js";
 import { defaultState3, reducer } from "../../helpers/Reducer.js";
 import NavBar from "../../ui/blocks/nav/NavBar.js";
 import Error from "../../ui/blocks/load/Error.js";
 
-interface prop {
+interface IProps {
  show:boolean
-};
+}
 
-export default function NavBlock({show}:prop):JSX.Element{
+export default function NavBlock({show}:IProps):JSX.Element{
  const {val,translate} = useContext<IContext>(Theme);
  const [call,setCall] = useState<Null<number>>(null);
  const arr:string[] = ['Contacts','Chats','Settings'];
@@ -52,4 +52,4 @@ export default function NavBlock({show}:prop):JSX.Element{
          </NavMenu>
        </NavBarBlock>
     );
-};
+}

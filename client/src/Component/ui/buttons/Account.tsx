@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, memo } from "react"
-import { ProfileChan, ProfileDel,ProfilePass } from "../../../style/style";
+import { ProfileChan, ProfileDel,ProfilePass } from "@/style/style";
 import { useOutletContext } from "react-router-dom";
-import { Context } from "../../../types/type";
+import { IContext } from "@/types/type";
 import Error from "../blocks/load/Error";
-import { useDelUserMutation } from "../../../store/api/endpoints/UserEndpoints";
+import { useDelUserMutation } from "@/store/api/endpoints/UserEndpoints";
 
 interface props {
     set:Dispatch<SetStateAction<boolean>>
@@ -11,7 +11,7 @@ interface props {
 }
 
 function AccButton({set,id}:props):JSX.Element{
-  const {translate,val} = useOutletContext<Context>();
+  const {translate,val} = useOutletContext<IContext>();
   const [delData] = useDelUserMutation();
 
   const deleteUser = ():void => {
@@ -32,6 +32,6 @@ function AccButton({set,id}:props):JSX.Element{
         </ProfileChan>
       </ProfilePass>
     )
-};
+}
 
 export default memo(AccButton);

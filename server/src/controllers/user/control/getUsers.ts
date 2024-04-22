@@ -11,6 +11,6 @@ export async function getUsers(_:Request,res:Response):Promise<void>{
         message:"data not found"
       });
       return;
-      };
+    }
     res.status(200).json(data);
-    };
+}

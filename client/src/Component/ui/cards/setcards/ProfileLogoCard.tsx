@@ -1,15 +1,15 @@
 import { LogoText, ProfileBlock, ProfileDis,ProfileLogo,
-ProfileName,ProfileText } from "../../../../style/style";
+ProfileName,ProfileText } from "@/style/style";
 import { memo } from "react";
-import CreateLogo from "../../../helpers/functions/CreateLogo";
-import { IStyleObj } from "../../../../types/type";
+import CreateLogo from "@/Component/helpers/functions/CreateLogo";
+import { IStyleObj } from "@/types/type";
 
-interface props {
-    name:string,
-    logoText:string
+interface IProps {
+  name:string,
+  logoText:string
 }
 
-function ProfileLogoCard({name,logoText}:props):JSX.Element{
+function ProfileLogoCard({name,logoText}:IProps):JSX.Element{
  const {one,two}:IStyleObj = CreateLogo();
     return (
         <ProfileBlock>
@@ -28,6 +28,6 @@ function ProfileLogoCard({name,logoText}:props):JSX.Element{
          </ProfileText>
        </ProfileBlock> 
     );
-};
+}
 
 export default memo(ProfileLogoCard)

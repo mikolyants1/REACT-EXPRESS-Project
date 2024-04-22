@@ -1,4 +1,4 @@
-import { ISets } from "../../../../types/type"
+import { ISets } from "@/types/type"
 
 export default (name:string,pass:string):ISets[] => {
      return [

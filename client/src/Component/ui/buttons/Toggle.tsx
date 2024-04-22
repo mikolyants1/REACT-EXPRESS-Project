@@ -1,6 +1,6 @@
-import { HeaderMenu, MenuButton } from "../../../style/style.js";
+import { HeaderMenu, MenuButton } from "@/style/style.js";
 import { useOutletContext } from "react-router-dom";
-import { IOutlet } from "../../../types/type.js";
+import { IOutlet } from "@/types/type.js";
 import { memo } from "react";
 
 function ToogleMenu():JSX.Element{
@@ -14,6 +14,6 @@ function ToogleMenu():JSX.Element{
           </MenuButton>
         </HeaderMenu>
     );
-};
+}
 
 export default memo(ToogleMenu)

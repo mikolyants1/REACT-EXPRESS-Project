@@ -1,10 +1,10 @@
 import { useOutletContext } from "react-router-dom";
 import { ChanButton, DelButton, MessAction, MessBlock, MessContent,
- MessSpan,MessText, MessTime } from "../../../../style/style";
-import { IOutlet } from "../../../../types/type";
+ MessSpan,MessText, MessTime } from "@/style/style";
+import { IOutlet } from "@/types/type";
 import { useState,memo} from 'react';
 
-interface props {
+interface IProps {
   col:string,
   now:number,
   text:string,
@@ -13,7 +13,7 @@ interface props {
   del:(now:number)=>void
 }
 
-function MessageCard({update,del,date,now,text,col}:props):JSX.Element {
+function MessageCard({update,del,date,now,text,col}:IProps):JSX.Element {
   const {val,translate} = useOutletContext<IOutlet>();
   const [show,setShow] = useState<boolean>(false);
 
