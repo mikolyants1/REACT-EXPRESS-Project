@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { User } from "../../../mongo.js";
+import { User } from "../../../db/mongo.js";
 import emitUser from "../emit.js";
-import { IData, Null } from "../../../types.js";
+import { IData, Null } from "../../../types/types.js";
 
 export async function getUser(req:Request,res:Response):Promise<void>{
     const id:number = Number(req.params.id);

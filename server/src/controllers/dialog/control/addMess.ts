@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Null, Type, IData, IMessage, INewMess } from "../../../types.js";
-import { User } from "../../../mongo.js";
+import { Null, Type, IData, IMessage, INewMess } from "../../../types/types.js";
+import { User } from "../../../db/mongo.js";
 import emitMess from "../emit.js";
 
 export async function addMess(req:Request,res:Response):Promise<void>{
@@ -10,7 +10,7 @@ export async function addMess(req:Request,res:Response):Promise<void>{
         message:"bad request"
       });
       return;
-    };
+    }
     const {text,date,now,day,month}:INewMess = req.body;
     const id1:number = Number(req.params.id);
     const id2:number = req.body.id;
@@ -30,7 +30,8 @@ export async function addMess(req:Request,res:Response):Promise<void>{
     };
     dialog ? dialog.mess.push(newMess) : mess
     .message.push({id:item.id,mess:[newMess]});
-    await User.findOneAndUpdate({id:id1},
-    {message:mess.message},{new:true});
+    await User.findOneAndUpdate({id:id1},{
+      message:mess.message
+    },{new:true});
     res.status(201).json(mess);
-  };
+  }

@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { ImployEmit } from '../types';
+import { ImployEmit } from '../types/types';
 
  class Emitter extends EventEmitter implements ImployEmit {
     evt:string;
@@ -12,6 +12,7 @@ import { ImployEmit } from '../types';
       console.error(`${this.evt} error : ${data}`);
       });
      this.emit(this.evt);
-    };
-};
+    }
+}
+
 export default Emitter

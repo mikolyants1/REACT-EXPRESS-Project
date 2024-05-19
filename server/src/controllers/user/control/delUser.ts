@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IData } from "../../../types.js";
-import { User } from "../../../mongo.js";
+import { IData } from "../../../types/types.js";
+import { User } from "../../../db/mongo.js";
 import emitUser from "../emit.js";
 
 export async function delUser(req:Request,res:Response):Promise<void>{
@@ -13,9 +13,9 @@ export async function delUser(req:Request,res:Response):Promise<void>{
         message:"user not found"
       });
       return;
-    };
+    }
     await User.findOneAndDelete({id:id});
     const newUsers:IData[] = users
     .filter((_:IData,i:number)=>i !== idx);
     res.status(200).json(newUsers);
-    };
+  }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IData } from "../../../types.js";
-import { User } from "../../../mongo.js";
+import { IData } from "../../../types/types.js";
+import { User } from "../../../db/mongo.js";
 import bc from 'bcrypt'
 import emitUser from "../emit.js";
 
@@ -11,7 +11,7 @@ export async function addUser(req:Request,res:Response):Promise<void>{
        message:"bad request"
       });
      return;
-    };
+    }
     const name:string = req.body.name;
     const pass:string = req.body.pass;
     const users:IData[] = await User.find();
@@ -31,6 +31,6 @@ export async function addUser(req:Request,res:Response):Promise<void>{
       id:newUser.id,
       name:name,
       message:[]
-    };
+    }
     res.status(201).json(data);
-    };
+  }

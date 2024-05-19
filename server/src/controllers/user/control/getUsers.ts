@@ -1,6 +1,6 @@
-import { IData } from "../../../types.js";
+import { IData } from "../../../types/types.js";
 import { Request, Response } from "express";
-import { User } from "../../../mongo.js";
+import { User } from "../../../db/mongo.js";
 import emitUser from "../emit.js";
 
 export async function getUsers(_:Request,res:Response):Promise<void>{
@@ -11,6 +11,6 @@ export async function getUsers(_:Request,res:Response):Promise<void>{
         message:"data not found"
       });
       return;
-    }
+      }
     res.status(200).json(data);
-}
+    }

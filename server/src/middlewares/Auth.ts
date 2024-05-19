@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Str, Type } from "../types.js";
+import { Str, Type } from "../types/types.js";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export function Auth(req:Request,res:Response,next:NextFunction):void{
@@ -16,7 +16,7 @@ export function Auth(req:Request,res:Response,next:NextFunction):void{
      message:"token not found"
     });
     return;
-  }
+  } 
   const decoded:Str<JwtPayload> = jwt.verify(token,"secret_key_1");
   if (typeof decoded == "string"){
     res.status(401).json({

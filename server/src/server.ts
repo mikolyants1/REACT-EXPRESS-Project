@@ -2,11 +2,11 @@ import express, { Request,Response,Express } from 'express'
 import cors from 'cors'
 import UserRouter from './routers/UserRouter.js'
 import DialogRouter from './routers/DialogRouter.js'
-import PassRouter from './routers/PassRouter.js'
+import AuthRouter from './routers/AuthRouter.js'
 import { createServer } from 'http'
 import { Server }  from 'socket.io'
 import Socket from './classes/socket.js'
-import { Str } from './types.js'
+import { Str } from './types/types.js'
 
 const PORT:Str<number> = process.env.PORT || 5000 ;
 const app:Express = express() ;
@@ -25,7 +25,7 @@ app.use('/dialog',DialogRouter);
 
 app.use('/user',UserRouter);
 
-app.use("/pass",PassRouter);
+app.use("/auth",AuthRouter);
 
 app.use((_:Request,res:Response):void=>{
   res.status(300).redirect("/error");
