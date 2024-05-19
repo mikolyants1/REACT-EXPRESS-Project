@@ -1,15 +1,14 @@
-import Entry from './Component/views/login/Entry.js'
-import Regist from './Component/views/login/Regist.js'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import './index.css'
-import {createBrowserRouter,RouterProvider,
-Outlet,Navigate} from 'react-router-dom'
-import Page from './Component/views/Page.js'
-import { catched, store} from './store/store/store.js'
-import WrapRout from './Component/routes/WrapRout.js'
-import SettRout from './Component/routes/SettRout.js'
-import Main from './Component/views/path/Main.js'
+import {createBrowserRouter,RouterProvider,Outlet,Navigate} from 'react-router-dom'
+import { catched, store } from './model/store/store/store.js'
+import Home from './ui/views/home/Home.js'
+import Entry from './ui/views/login/entry/Entry.js'
+import Regist from './ui/views/login/regist/Regist.js'
+import { HomeRout } from './ui/routes/HomeRout.js'
+import { SettingRoute } from './ui/routes/SettingRoute.js'
+import Main from './ui/views/home/main/Main.js'
 
 const router = createBrowserRouter([
   {
@@ -21,16 +20,16 @@ const router = createBrowserRouter([
         element:<Entry />
       },
       {
-        path:'reg',
+        path:'regist',
         element:<Regist />,
       },
       {
-        path:'page',
-        element:<Page />,
+        path:'home',
+        element:<Home />,
         children:[
           {
             path:'main',
-            element:<WrapRout />,
+            element:<HomeRout />,
             children:[
               {
                 index:true,
@@ -43,12 +42,12 @@ const router = createBrowserRouter([
             ]
           },
           {
-            path:'set',
-            element:<WrapRout />,
+            path:'setting',
+            element:<HomeRout />,
             children:[
               {
                 index:true,
-                element:<SettRout />
+                element:<SettingRoute />
               }
             ]
           }
