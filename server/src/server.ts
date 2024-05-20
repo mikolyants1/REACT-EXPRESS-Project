@@ -4,8 +4,7 @@ import UserRouter from './routers/UserRouter.js'
 import DialogRouter from './routers/DialogRouter.js'
 import AuthRouter from './routers/AuthRouter.js'
 import { createServer } from 'http'
-import { Server }  from 'socket.io'
-import Socket from './classes/socket.js'
+import { Socket } from './classes/socket.js'
 import { Str } from './types/types.js'
 
 const PORT:Str<number> = process.env.PORT || 5000 ;
@@ -33,22 +32,9 @@ app.use((_:Request,res:Response):void=>{
 
 const server = createServer(app);
 
-const io = new Server(server,{cors:{origin:"*"}});
+const socketIo:Socket = new Socket(server);
 
-const socketIo:Socket = new Socket();
-
-io.on("connection",(socket):void=>{
-  socket.on("join",(id:number):void=>{
-     socketIo.addUser(id);
-     socket.emit("online",socketIo.users);
-   });
-
-  socket.on("disconnect",():void=>{
-     socketIo.delUser();
-     socket.emit("online",socketIo.users);
-   });
-
- });
+socketIo.start();
 
 server.listen(PORT,():void=>{
  console.log(`server works ,PORT ${PORT}`)
