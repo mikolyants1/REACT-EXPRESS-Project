@@ -1,7 +1,7 @@
 import { EndpointBuilder } from "@reduxjs/toolkit/dist/query/endpointDefinitions";
 import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
 import { IToken, Type, IData, IQuery1, IRes, IUser } from "../../../../libs/types/type";
-import { UserApi } from "./userApi";
+import { UserApi } from "../user/userApi";
 
 const UserEndpoints = UserApi.injectEndpoints({
   endpoints:(build:EndpointBuilder<BaseQueryFn,string,string>)=>({

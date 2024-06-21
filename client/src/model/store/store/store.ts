@@ -15,12 +15,16 @@ import { IRedux, IStoreState, TPay } from "../../../libs/types/type";
 
 interface IStore {
     key:string,
-    storage:WebStorage
+    storage:WebStorage,
+    whitelist:string[],
+    blacklist:string[]
 }
 
 const config:IStore = {
     key:'message',
-    storage
+    storage,
+    whitelist:["messanger"],
+    blacklist:["MessangerApi"]
 }
 const combine = combineReducers({
     mess:slice,

@@ -2,7 +2,7 @@ import { Location, Navigate, useLocation, useOutletContext,} from "react-router-
 import {  HeaderBlock,SetContain, SetMain,SetTitle} from "../../../../libs/style/style.js";
 import { useCallback,useState} from "react";
 import {  TEvtC, TEvtK, IData, IOutlet, IQuery} from "../../../../libs/types/type.js";
-import { useChanUserMutation,useGetUserQuery} from "../../../../model/store/api/user/userEndpoints.js";
+import { useChanUserMutation,useGetUserQuery} from "../../../../model/store/api/endpoints/userEndpoints.js";
 import Loader from "../../../../ui/cards/loading/Loader";
 import Error from "../../../../ui/cards/loading/Error";
 import { UserContext } from "../../../../model/context/UserContext";

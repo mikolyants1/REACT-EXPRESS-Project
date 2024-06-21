@@ -1,5 +1,5 @@
 import { EndpointBuilder } from "@reduxjs/toolkit/dist/query/endpointDefinitions";
-import { DialogApi } from "./dialogApi";
+import { DialogApi } from "../dialog/dialogApi";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import { IBody, IBody1, IData, IQuery2, IRes, TQuery3, TQuery4 } from "../../../../libs/types/type";
 

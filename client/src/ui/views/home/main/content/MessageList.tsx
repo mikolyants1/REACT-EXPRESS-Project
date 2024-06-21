@@ -4,7 +4,7 @@ import { IContext, INewMess } from '../../../../../libs/types/type';
 import { MainBlock, MessDate, Message } from '../../../../../libs/style/style';
 import MessageCard from './cards/MessageCard';
 import { useOutletContext } from 'react-router-dom';
-import { useDelMessMutation } from '../../../../../model/store/api/dialog/dialogEndpoints';
+import { useDelMessMutation } from '../../../../../model/store/api/endpoints/dialogEndpoints';
 import showTime from '../../../../../model/functions/time/showTime';
 import Error from '../../../../../ui/cards/loading/Error';
 

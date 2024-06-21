@@ -2,8 +2,8 @@ import { useRef,useReducer, useCallback } from 'react'
 import { Container, FootBlock,MainInput} from '../../../../libs/style/style.js'
 import { useOutletContext, useParams } from 'react-router-dom'
 import { TEvtC, TEvtK, ITime, IData,INewMess, IOutlet, IQuery, IHomeState, THomeAction } from '../../../../libs/types/type.js';
-import { useGetUserQuery } from '../../../../model/store/api/user/userEndpoints.js';
-import { useChanMessMutation, useSetMessMutation } from '../../../../model/store/api/dialog/dialogEndpoints.js';
+import { useGetUserQuery } from '../../../../model/store/api/endpoints/userEndpoints.js';
+import { useChanMessMutation, useSetMessMutation } from '../../../../model/store/api/endpoints/dialogEndpoints.js';
 import { HomeReducer } from '../../../../model/reducers/home';
 import createTime from '../../../../model/functions/time/createTime';
 import Loader from '../../../../ui/cards/loading/Loader';
