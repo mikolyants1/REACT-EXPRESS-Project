@@ -1,4 +1,4 @@
-import { IStyleObj } from "../../../libs/types/type";
+import { IStyleObj } from "../../../libs/types";
 
 export const createLogo = ():IStyleObj => {
  const avatar:IStyleObj[] = [

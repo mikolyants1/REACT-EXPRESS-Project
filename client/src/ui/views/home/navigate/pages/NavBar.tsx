@@ -2,7 +2,7 @@ import {Dispatch,memo, SetStateAction,
  Suspense, lazy, useContext } from "react"
 import { NavMain, NavWrapper } from "../../../../../libs/style/style.js"
 import { IContext, TLazy, TNull, ISettProps, INavAction,
-IChatProps, TNavState} from "../../../../../libs/types/type.js";
+IChatProps, TNavState} from "../../../../../libs/types/index.js";
 import Loader from "../../../../../ui/cards/loading/Loader.js";
 import { AppContext } from "../../../../../model/context/AppContext.js";
 

@@ -1,5 +1,5 @@
 import { HeaderMenu, MenuButton } from "../../../libs/style/style";
-import { IOutlet } from "../../../libs/types/type";
+import { IOutlet } from "../../../libs/types";
 import { memo } from "react";
 import { useOutletContext } from "react-router-dom";
 

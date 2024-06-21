@@ -1,5 +1,5 @@
 import { FC, memo, useContext, useState } from "react";
-import { Type, IUserContext } from "../../../../../../../libs/types/type";
+import { Type, IUserContext } from "../../../../../../../libs/types";
 import { ProfileInput,ProfilePass } from "../../../../../../../libs/style/style";
 import { UserContext } from "../../../../../../../model/context/UserContext";
 import ShowButton from "./buttons/ShowButton";

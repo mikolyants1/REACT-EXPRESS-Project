@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react"
 import { useGetUserQuery } from "../../../../../../model/store/api/endpoints/userEndpoints.js"
-import { IContext, ISettProps, IData, IQuery } from "../../../../../../libs/types/type.js"
+import { IContext, ISettProps, IData, IQuery } from "../../../../../../libs/types/index.js"
 import { AppContext } from "../../../../../../model/context/AppContext.js"
 import Loader from "../../../../../../ui/cards/loading/Loader.js"
 import Error from "../../../../../../ui/cards/loading/Error.js"

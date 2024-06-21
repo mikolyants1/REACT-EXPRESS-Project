@@ -1,4 +1,4 @@
-import { IMess } from "../../../libs/types/type";
+import { IMess } from "../../../libs/types";
 
 export default (arg:IMess[],i:number):boolean=>{
     if (i == 0) return true;

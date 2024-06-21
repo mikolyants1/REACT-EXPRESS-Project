@@ -1,6 +1,6 @@
 import { useState,useEffect, memo } from 'react';
 import { Block } from '../../../libs/style/style';
-import { ILoad } from '../../../libs/types/type';
+import { ILoad } from '../../../libs/types';
 
 function Error({back}:ILoad):JSX.Element{
 const [err,setErr] = useState<string>('');

@@ -1,6 +1,6 @@
 import {memo} from 'react'
 import { getPass, useAppSelector } from '../../../../../../model/store/store/store'
-import { ISets } from '../../../../../../libs/types/type';
+import { ISets } from '../../../../../../libs/types';
 import { createProfileField } from '../../../../../../model/functions/create/createProfileFields';
 import UserInputCard from './cards/UserInputCard';
 

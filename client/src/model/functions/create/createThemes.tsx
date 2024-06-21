@@ -1,5 +1,5 @@
 import { IBind } from "../../../model/store/store/store";
-import { IThemes } from "../../../libs/types/type";
+import { IThemes } from "../../../libs/types";
 
 export const createThemes = (val:string,lang:string,actions:IBind):IThemes[]=>{
     const {setTheme,setLang}:IBind = actions;

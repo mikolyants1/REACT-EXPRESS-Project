@@ -1,4 +1,4 @@
-import { Type, IData, IMess, IMessage, INewMess } from "../../../libs/types/type";
+import { Type, IData, IMess, IMessage, INewMess } from "../../../libs/types";
 
 const getMessage = (d1:IData,d2:IData):INewMess[] => {
   const user1:Type<IMessage> = d1.message.find((i:IMessage)=>i.id==d2.id);

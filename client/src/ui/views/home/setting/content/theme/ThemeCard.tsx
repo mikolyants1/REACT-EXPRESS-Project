@@ -1,5 +1,5 @@
 import {memo} from 'react'
-import { TEvtC, IOutlet, IThemes, TUnion } from '../../../../../../libs/types/type'
+import { TEvtC, IOutlet, IThemes, TUnion } from '../../../../../../libs/types'
 import { IBind, getLang, useAction, useAppSelector } from '../../../../../../model/store/store/store';
 import { useOutletContext } from 'react-router-dom';
 import { createThemes } from '../../../../../../model/functions/create/createThemes';

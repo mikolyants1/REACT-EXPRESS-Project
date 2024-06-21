@@ -1,6 +1,6 @@
 
 import {memo, useCallback} from 'react'
-import { IContext, INewMess } from '../../../../../libs/types/type';
+import { IContext, INewMess } from '../../../../../libs/types';
 import { MainBlock, MessDate, Message } from '../../../../../libs/style/style';
 import MessageCard from './cards/MessageCard';
 import { useOutletContext } from 'react-router-dom';

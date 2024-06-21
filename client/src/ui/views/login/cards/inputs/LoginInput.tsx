@@ -2,7 +2,7 @@
 import {FC, memo} from 'react'
 import { Controller, useFormContext } from 'react-hook-form';
 import { EntryInput, EntrySub, InputBlock } from '../../../../../libs/style/style';
-import { InputProps, IStateUser } from '../../../../../libs/types/type';
+import { InputProps, IStateUser } from '../../../../../libs/types';
 
 
 const LoginInput:FC<InputProps> = ({title,name}):JSX.Element => {

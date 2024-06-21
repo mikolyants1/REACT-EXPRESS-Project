@@ -4,7 +4,7 @@ import { useNavigate,NavigateFunction } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { IBind, getCurrent, useAction, useAppSelector } from "../../../../model/store/store/store";
-import { IHas, IStateUser, ISubProps, TSub } from "../../../../libs/types/type";
+import { IHas, IStateUser, ISubProps, TSub } from "../../../../libs/types/index.js";
 import GetSuccess from "../../../../api/auth/GetSuccess";
 import LoginCard from "../cards/LoginCard";
 

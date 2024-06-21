@@ -1,7 +1,7 @@
 import { ContactBlock, ContactLogo, ContactName,
 ContactText} from "../../../../../../../libs/style/style";
 import {memo,useContext} from 'react'
-import { IContext, IStyleObj } from "../../../../../../../libs/types/type";
+import { IContext, IStyleObj } from "../../../../../../../libs/types";
 import { Link } from "react-router-dom";
 import { createLogo } from "../../../../../../../model/functions/create/CreateLogo";
 import { AppContext } from "../../../../../../../model/context/AppContext";

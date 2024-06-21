@@ -1,20 +1,20 @@
 import { EndpointBuilder } from "@reduxjs/toolkit/dist/query/endpointDefinitions";
 import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
-import { IToken, Type, IData, IQuery1, IRes, IUser } from "../../../../libs/types/type";
-import { UserApi } from "../user/userApi";
+import { IToken, Type, IData, IQuery1, IRes, IUser } from "../../../../libs/types";
+import { MessangerApi } from "../MessangerApi";
 
-const UserEndpoints = UserApi.injectEndpoints({
+const UserEndpoints = MessangerApi.injectEndpoints({
   endpoints:(build:EndpointBuilder<BaseQueryFn,string,string>)=>({
     getUser:build.query<IData,number>({
-      query:(id:number):string=>`/${id}`,
-      providesTags:['user']
+      query:(id:number) => `/${id}`,
+      providesTags:["messanger"]
     }),
     delUser:build.mutation<IData[],Type<number>>({
       query:(id:Type<number>):IRes<unknown>=>({
         url:`/${id}`,
         method:'DELETE'
       }),
-      invalidatesTags:['user']
+      invalidatesTags:["messanger"]
     }),
     addUser:build.mutation<IToken,IUser>({
       query:(body:IUser):IRes<IUser>=>({
@@ -22,7 +22,7 @@ const UserEndpoints = UserApi.injectEndpoints({
         method:'POST',
         body
       }),
-      invalidatesTags:['user']
+      invalidatesTags:["messanger"]
     }),
     chanUser:build.mutation<IData[],IQuery1>({
       query:({id,...body}:IQuery1):IRes<IUser>=>({
@@ -30,7 +30,7 @@ const UserEndpoints = UserApi.injectEndpoints({
         method:'PUT',
         body
       }),
-      invalidatesTags:['user']
+      invalidatesTags:["messanger"]
     }),
   })
 });

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 import { ProfileChan, ProfileDel,ProfilePass } from "../../../../../libs/style/style";
 import { useOutletContext } from "react-router-dom";
-import { IContext } from "../../../../../libs/types/type";
+import { IContext } from "../../../../../libs/types";
 import { useDelUserMutation } from "../../../../../model/store/api/endpoints/userEndpoints";
 import Error from "../../../../../ui/cards/loading/Error";
 

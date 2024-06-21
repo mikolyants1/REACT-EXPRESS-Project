@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { InputProps } from "../../../../libs/types/type";
+import { InputProps } from "../../../../libs/types";
 import { createLoginField } from "../../../../model/functions/create/CreateLoginFields";
 import LoginInput from "./inputs/LoginInput";
 

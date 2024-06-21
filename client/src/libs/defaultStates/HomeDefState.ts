@@ -1,4 +1,4 @@
-import { IHomeState } from "../types/type";
+import { IHomeState } from "../types";
 
 export const HomeDefState:IHomeState = {
     now:0,

@@ -2,7 +2,7 @@ import { useContext, useReducer, useState,
 startTransition, useMemo} from "react";
 import { NavBarBlock, NavMain, NavMenu,
 NavMenuBlock,NavTitle } from "../../../../libs/style/style.js";
-import { IContext, TNull,TNavState} from "../../../../libs/types/type.js";
+import { IContext, TNull,TNavState} from "../../../../libs/types/index.js";
 import { NavReducer } from "../../../../model/reducers/nav.js";
 import { navDefState } from "../../../../libs/defaultStates/NavDefState.js";
 import { AppContext } from "../../../../model/context/AppContext.js";

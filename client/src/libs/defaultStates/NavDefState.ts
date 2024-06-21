@@ -1,4 +1,4 @@
-import { TNavState } from "../types/type";
+import { TNavState } from "../types";
 
 export const navDefState:TNavState = {
     Contacts:true,

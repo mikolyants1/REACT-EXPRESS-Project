@@ -1,7 +1,7 @@
 import { Location, Navigate, useLocation, useOutletContext,} from "react-router-dom";
 import {  HeaderBlock,SetContain, SetMain,SetTitle} from "../../../../libs/style/style.js";
 import { useCallback,useState} from "react";
-import {  TEvtC, TEvtK, IData, IOutlet, IQuery} from "../../../../libs/types/type.js";
+import {  TEvtC, TEvtK, IData, IOutlet, IQuery} from "../../../../libs/types/index.js";
 import { useChanUserMutation,useGetUserQuery} from "../../../../model/store/api/endpoints/userEndpoints.js";
 import Loader from "../../../../ui/cards/loading/Loader";
 import Error from "../../../../ui/cards/loading/Error";

@@ -1,7 +1,7 @@
 import { memo, useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import { SetBlock, SetLogo, SetText, ThemeLogo } from "../../../../../../../libs/style/style"
-import { IContext } from "../../../../../../../libs/types/type"
+import { IContext } from "../../../../../../../libs/types"
 import { AppContext } from "../../../../../../../model/context/AppContext"
 import Error from "../../../../../../../ui/cards/loading/Error"
 

@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction, memo} from 'react'
 import { ProfileBut, ProfileChan } from '../../../../../../../../libs/style/style'
 import { NavigateFunction, useNavigate, useOutletContext } from 'react-router-dom'
-import { ICheck, IOutlet } from '../../../../../../../../libs/types/type'
+import { ICheck, IOutlet } from '../../../../../../../../libs/types'
 import { getCurrent, getToken, useAppSelector } from '../../../../../../../../model/store/store/store'
 import CheckToken from '../../../../../../../../api/auth/CheckToken'
 import Error from '../../../../../../../../ui/cards/loading/Error'

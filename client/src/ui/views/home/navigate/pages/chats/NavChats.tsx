@@ -1,7 +1,7 @@
 import { BlockInput, ContactInput, ContactTime} from "../../../../../../libs/style/style.js"
 import { useCallback, useContext, useEffect, useReducer, useState} from "react"
 import axios, { AxiosResponse } from "axios"
-import { IContext, TEvtC, TNull, Type,TChatAction,IChatProps,IData, IMessage, IChatState} from "../../../../../../libs/types/type.js"
+import { IContext, TEvtC, TNull, Type,TChatAction,IChatProps,IData, IMessage, IChatState} from "../../../../../../libs/types/index.js"
 import ProfileCard from "./cards/ProfileCard.js"
 import {io,Socket} from 'socket.io-client';
 import Loader from "../../../../../../ui/cards/loading/Loader.js"

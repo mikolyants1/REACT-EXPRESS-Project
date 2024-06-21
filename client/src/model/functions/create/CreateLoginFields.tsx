@@ -1,4 +1,4 @@
-import { InputProps } from "../../../libs/types/type";
+import { InputProps } from "../../../libs/types";
 
 export const createLoginField = ():InputProps[] => {
     return [

@@ -1,4 +1,4 @@
-import { ITime } from "../../../libs/types/type";
+import { ITime } from "../../../libs/types";
 
 function createTime():ITime {
   const date:Date = new Date();

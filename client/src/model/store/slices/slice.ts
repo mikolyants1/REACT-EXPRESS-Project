@@ -1,6 +1,6 @@
 import {createSlice,Slice} from '@reduxjs/toolkit'
 import { IBind } from '../store/store'
-import { IRedux, TPay } from '../../../libs/types/type';
+import { IRedux, TPay } from '../../../libs/types';
 
 const initialState:IRedux = {
     current:0,

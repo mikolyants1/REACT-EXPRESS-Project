@@ -1,4 +1,4 @@
-import { ISets } from "../../../libs/types/type"
+import { ISets } from "../../../libs/types"
 
 export const createProfileField = (name:string,pass:string):ISets[] => {
      return [

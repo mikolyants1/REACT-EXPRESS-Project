@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { baseUrl } from "../baseUrl";
-import { IHas, ISubProps } from "../../libs/types/type";
+import { IHas, ISubProps } from "../../libs/types";
 
 async function GetSuccess(args:ISubProps):Promise<IHas> {   
    return baseUrl.post<IHas>(`/auth`,args)

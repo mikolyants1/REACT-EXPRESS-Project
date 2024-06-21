@@ -1,6 +1,6 @@
 import { useState,useEffect, memo } from 'react';
 import { Block, Spin } from '../../../libs/style/style';
-import { ILoad } from '../../../libs/types/type';
+import { ILoad } from '../../../libs/types';
 
 function Loader({back}:ILoad):JSX.Element{
  const [spin,setSpin] = useState<number>(0);

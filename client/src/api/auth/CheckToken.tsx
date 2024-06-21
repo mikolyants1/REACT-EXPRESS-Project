@@ -1,4 +1,4 @@
-import { ICheck } from '../../libs/types/type'
+import { ICheck } from '../../libs/types'
 import { AxiosResponse } from 'axios'
 import { baseUrl } from '../baseUrl'
 

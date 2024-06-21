@@ -2,7 +2,7 @@ import { useNavigate,NavigateFunction } from "react-router-dom"
 import { useState } from "react"
 import { EntryBlock,EntryTitle,EntryBut,LoginError } from '../../../../libs/style/style.js'
 import { useAddUserMutation } from "../../../../model/store/api/endpoints/userEndpoints.js"
-import { TSub, ISubProps, IData, IHas, IStateUser } from "../../../../libs/types/type.js"
+import { TSub, ISubProps, IData, IHas, IStateUser } from "../../../../libs/types/index.js"
 import {useForm,FormProvider} from 'react-hook-form';
 import LoginCard from "../cards/LoginCard.js"
 import GetSuccess from "../../../../api/auth/GetSuccess.js"

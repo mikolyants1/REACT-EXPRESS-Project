@@ -1,4 +1,4 @@
-import { IChatState } from "../types/type";
+import { IChatState } from "../types";
 
 export const ChatDefState:IChatState = {
     data:null,

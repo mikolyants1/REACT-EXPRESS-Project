@@ -1,4 +1,4 @@
-import { INavAction, TNavState, TNavStateArr } from "../../libs/types/type";
+import { INavAction, TNavState, TNavStateArr } from "../../libs/types";
 
 export function NavReducer(state:TNavState,action:INavAction):TNavState{
     const entries:TNavStateArr[] = Object.entries(state);

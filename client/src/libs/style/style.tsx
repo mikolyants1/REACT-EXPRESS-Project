@@ -1,7 +1,7 @@
 import { ChangeEvent,KeyboardEvent,MutableRefObject } from 'react'
 import styled, { IStyledComponent,keyframes } from 'styled-components'
 import { BaseObject } from 'styled-components/dist/types'
-import { TEvtC, TEvtK, Type } from '../types/type'
+import { TEvtC, TEvtK, Type } from '../types'
 import Keyframes from 'styled-components/dist/models/Keyframes'
 
 type back = {

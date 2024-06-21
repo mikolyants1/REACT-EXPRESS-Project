@@ -1,7 +1,7 @@
 import { LogoText, ProfileBlock, ProfileDis,ProfileLogo,
 ProfileName,ProfileText } from "../../../../../../libs/style/style";
 import { memo } from "react";
-import { IStyleObj } from "../../../../../../libs/types/type";
+import { IStyleObj } from "../../../../../../libs/types";
 import { createLogo } from "../../../../../../model/functions/create/CreateLogo";
 
 interface props {

@@ -2,7 +2,7 @@ import { memo, useContext } from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import { ContactBlock, ContactLogo, ContactName,
 ContactText, ContactTime} from "../../../../../../../libs/style/style"
-import { IContext, IStyleObj } from "../../../../../../..//libs/types/type"
+import { IContext, IStyleObj } from "../../../../../../../libs/types"
 import { AppContext } from "../../../../../../..//model/context/AppContext"
 import { createLogo } from "../.../../../../../../../../model/functions/create/CreateLogo"
 import Error from "../../../../../../../ui/cards/loading/Error"

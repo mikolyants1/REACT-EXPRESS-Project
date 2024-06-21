@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { ChanButton, DelButton, MessAction, MessBlock, MessContent,
  MessSpan,MessText, MessTime } from "../../../../../../libs/style/style";
-import { IOutlet } from "../../../../../../libs/types/type";
+import { IOutlet } from "../../../../../../libs/types";
 import { useState,memo} from 'react';
 
 interface IProps {

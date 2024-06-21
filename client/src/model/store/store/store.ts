@@ -9,9 +9,8 @@ import {useDispatch,useSelector,TypedUseSelectorHook} from 'react-redux'
 import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore'
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
-import { UserApi } from "../api/user/userApi";
-import { DialogApi } from "../api/dialog/dialogApi";
-import { IRedux, IStoreState, TPay } from "../../../libs/types/type";
+import { IRedux, IStoreState, TPay } from "../../../libs/types";
+import { MessangerApi } from "../api/MessangerApi";
 
 interface IStore {
     key:string,
@@ -28,8 +27,7 @@ const config:IStore = {
 }
 const combine = combineReducers({
     mess:slice,
-    [UserApi.reducerPath]:UserApi.reducer,
-    [DialogApi.reducerPath]:DialogApi.reducer
+    [MessangerApi.reducerPath]:MessangerApi.reducer
 })
 
 const persist = persistReducer(config,combine);
@@ -37,10 +35,7 @@ const persist = persistReducer(config,combine);
 export const store:ToolkitStore = configureStore({
     reducer:persist,
     middleware:(get:CurriedGetDefaultMiddleware)=>
-    get().concat([
-      UserApi.middleware,
-      DialogApi.middleware
-    ])
+    get().concat([MessangerApi.middleware])
 }) ;
 
 export type IBind = CaseReducerActions<{

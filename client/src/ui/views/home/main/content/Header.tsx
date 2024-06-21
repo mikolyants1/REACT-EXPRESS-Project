@@ -1,6 +1,6 @@
 import { memo } from "react"
 import { useOutletContext } from "react-router-dom"
-import { IContext, IStyleObj } from "../../../../../libs/types/type.js"
+import { IContext, IStyleObj } from "../../../../../libs/types/index.js"
 import { HeaderBlock, Logo, Name, Span } from "../../../../../libs/style/style.js";
 import { createLogo } from "../../../../../model/functions/create/CreateLogo";
 import Error from "../../../../../ui/cards/loading/Error";

@@ -1,6 +1,6 @@
 import { ProfileName, ProfilePass,ThemeBlock,
 ThemeInput, ThemeText } from "../../../../../../../libs/style/style.js"
-import { IContext, TEvtC} from "../../../../../../../libs/types/type.js"
+import { IContext, TEvtC} from "../../../../../../../libs/types/index.js"
 import { AppContext } from "../../../../../../../model/context/AppContext"
 import { FC, useContext} from 'react'
    
