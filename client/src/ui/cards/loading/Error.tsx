@@ -4,12 +4,12 @@ import { ILoad } from '../../../libs/types';
 
 function Error({back}:ILoad):JSX.Element{
 const [err,setErr] = useState<string>('');
-  useEffect(():void=>{
-    setInterval(():void => {
-     setTimeout(():void=>setErr(''),0);
-     setTimeout(():void=>setErr('.'),200);
-     setTimeout(():void=>setErr('..'),400);
-     setTimeout(():void=>setErr('...'),600);
+  useEffect(() => {
+    setInterval(() => {
+     setTimeout(() => setErr(''), 0);
+     setTimeout(() => setErr('.'), 200);
+     setTimeout(() => setErr('..'), 400);
+     setTimeout(() => setErr('...'), 600);
     }, 800);
   },[]);
 

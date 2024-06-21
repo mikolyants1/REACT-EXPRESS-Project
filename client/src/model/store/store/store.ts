@@ -1,4 +1,3 @@
-import slice,{action} from "../slices/slice";
 import storage from 'redux-persist/lib/storage'
 import {Persistor, WebStorage, persistReducer,
 persistStore } from 'redux-persist'
@@ -11,6 +10,7 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware"
 import { IRedux, IStoreState, TPay } from "../../../libs/types";
 import { MessangerApi } from "../api/MessangerApi";
+import { messSlice } from '../slices/slice'
 
 interface IStore {
     key:string,
@@ -25,10 +25,11 @@ const config:IStore = {
     whitelist:["messanger"],
     blacklist:["MessangerApi"]
 }
+
 const combine = combineReducers({
-    mess:slice,
+    mess:messSlice.reducer,
     [MessangerApi.reducerPath]:MessangerApi.reducer
-})
+});
 
 const persist = persistReducer(config,combine);
 
@@ -39,11 +40,11 @@ export const store:ToolkitStore = configureStore({
 }) ;
 
 export type IBind = CaseReducerActions<{
-    setTheme:(state:IRedux,action:TPay<string>)=>void,
-    setId:(state:IRedux,action:TPay<number>)=>void,
-    setLang:(state:IRedux,action:TPay<string>)=>void,
-    setPass:(state:IRedux,action:TPay<string>)=>void,
-    setAuthToken:(state:IRedux,actopn:TPay<string>)=>void
+  setTheme:(state:IRedux,action:TPay<string>)=>void,
+  setId:(state:IRedux,action:TPay<number>)=>void,
+  setLang:(state:IRedux,action:TPay<string>)=>void,
+  setPass:(state:IRedux,action:TPay<string>)=>void,
+  setAuthToken:(state:IRedux,actopn:TPay<string>)=>void
 },"messanger">;
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -68,7 +69,7 @@ setupListeners(store.dispatch);
 
 export const useAction = ():IBind => {
    const dispacth:Dispatch = useAppDispatch();
-   return bindActionCreators(action,dispacth);
-};
+   return bindActionCreators(messSlice.actions,dispacth);
+}
 
-export const catched:Persistor = persistStore(store);
+export const catchedStore:Persistor = persistStore(store);

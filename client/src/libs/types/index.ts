@@ -1,6 +1,6 @@
 import {ChangeEvent,KeyboardEvent,Dispatch,SetStateAction, LazyExoticComponent, ComponentType} from 'react'
 import {TFunction} from 'i18next'
-import { ActionCreatorWithPayload, CaseReducerActions, PayloadAction } from '@reduxjs/toolkit'
+import { ActionCreatorWithPayload, CaseReducerActions, PayloadAction, Slice } from '@reduxjs/toolkit'
 import { ControllerRenderProps, FieldValues, SubmitHandler } from 'react-hook-form'
 import { BaseQueryApi } from '@reduxjs/toolkit/query'
 
@@ -14,6 +14,15 @@ export type TUnion = ActionCreatorWithPayload<string,`messanger/${string}`>
 export interface ICheck {
    isValid:boolean
 }
+
+export type TSlice = Slice<IRedux,{
+  setTheme:(state:IRedux,action:TPay<string>)=>void,
+  setId:(state:IRedux,action:TPay<number>)=>void,
+  setLang:(state:IRedux,actopn:TPay<string>)=>void,
+  setPass:(state:IRedux,actopn:TPay<string>)=>void,
+  setAuthToken:(state:IRedux,actopn:TPay<string>)=>void
+},'messanger'>;
+
 export interface IStateUser {
     name:string,
     pass:string,

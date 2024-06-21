@@ -1,6 +1,6 @@
 import { BlockInput, ContactInput, ContactTime} from "../../../../../../libs/style/style.js"
 import { useCallback, useContext, useEffect, useReducer, useState} from "react"
-import axios, { AxiosResponse } from "axios"
+import { AxiosResponse } from "axios"
 import { IContext, TEvtC, TNull, Type,TChatAction,IChatProps,IData, IMessage, IChatState} from "../../../../../../libs/types/index.js"
 import ProfileCard from "./cards/ProfileCard.js"
 import {io,Socket} from 'socket.io-client';
@@ -10,55 +10,54 @@ import getUser from "../../../../../../model/functions/get/GetUser.js"
 import { HomeReducer } from "../../../../../../model/reducers/home.js"
 import { ChatDefState } from "../../../../../../libs/defaultStates/ChatDefState.js"
 import { AppContext } from "../../../../../../model/context/AppContext.js"
+import { baseUrl } from "@/api/baseUrl.js"
 
 export default function NavChats({set,id,call,caller}:IChatProps):JSX.Element{
-    const {user,theme,translate} = useContext<IContext>(AppContext);
-    const [data,setData] = useState<Type<IData>>(null!);
-    const [idx,setIdx] = useState<TNull<number>>(call ?? null);
-    const [socket,setSocket] = useState<Socket>(null!);
-    const [online,setOnline] = useState<number[]>([]);
-    const [state,dispatch] = useReducer(HomeReducer<IChatState,TChatAction>,ChatDefState);
+  const {user,theme,translate} = useContext<IContext>(AppContext);
+  const [data,setData] = useState<Type<IData>>(null!);
+  const [idx,setIdx] = useState<TNull<number>>(call ?? null);
+  const [socket,setSocket] = useState<Socket>(null!);
+  const [online,setOnline] = useState<number[]>([]);
+  const [state,dispatch] = useReducer(
+    HomeReducer<IChatState,TChatAction>,
+    ChatDefState
+  );
   
-    const toggle = useCallback((i:number)=>():void=>{
-        caller(i);
-        set({type:1});
-      },[]);
+  const toggle = useCallback((i:number)=>():void=>{
+    caller(i);
+    set({type:1});
+  },[]);
 
-     const setIndex = useCallback((i:number)=>():void=>setIdx(i),[]);
+  const setIndex = useCallback((i:number)=>():void=>setIdx(i),[]);
      
-     const change = ({target}:TEvtC):void => {
-       if (Array.isArray(state.base)){ 
-         const val:string = target.value.trim().toLocaleLowerCase()
-         const newData:IData[] = state.base.filter((i:IData)=>(
-          i.name.toLocaleLowerCase().indexOf(val) !== -1
-         ));
-        dispatch({data:newData});
-       }
-     };
+  const change = ({target}:TEvtC):void => {
+    if (Array.isArray(state.base)){ 
+      const val:string = target.value.trim().toLocaleLowerCase();
+      const newData:IData[] = state.base.filter((i:IData) => (
+        i.name.toLocaleLowerCase().indexOf(val) !== -1
+      ));
+      dispatch({data:newData});
+    }
+  };
 
-      useEffect(():void=>{
-        setSocket(io("http://localhost:5000"));
-        (async ():Promise<void> => {
-          await axios.get('http://localhost:5000/user')
-          .then(({data}:AxiosResponse<IData[]>):void=>{
-            if (Array.isArray(data)){
-              const date:Type<IData> = data.find((i:IData)=>i.id==user);
-              dispatch({data:data,base:data});
-              console.log(data)
-              setData(date);
-            }
-          })
-          .catch(()=>dispatch({err:true}))
-          .finally(()=>dispatch({load:false}));
-        })();
-      },[]);
+  useEffect(() => {
+    setSocket(io("http://localhost:5000"));
+    baseUrl.get('/user')
+    .then(({data}:AxiosResponse<IData[]>) => {
+      if (Array.isArray(data)){
+        const date:Type<IData> = data.find(u => u.id == user);
+        dispatch({data,base:data});
+        setData(date);
+      }
+    })
+    .catch(()=>dispatch({err:true}))
+    .finally(()=>dispatch({load:false}));
+  },[user]);
 
-      useEffect(():void=>{ 
-        socket?.emit("join",user);
-        socket?.on("online",(users:number[]):void=>{
-          setOnline(users);
-        });
-      },[socket]);
+  useEffect(():void=>{ 
+    socket?.emit("join",user);
+    socket?.on("online",setOnline);
+  },[socket, user]);
 
   if (state.load) return <Loader back={theme} />;
   if (state.err || !translate) return <Error back={theme} />;

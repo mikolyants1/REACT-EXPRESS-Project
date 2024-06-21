@@ -2,7 +2,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import './index.css'
 import {createBrowserRouter,RouterProvider,Outlet,Navigate} from 'react-router-dom'
-import { catched, store } from './model/store/store/store.js'
+import { catchedStore, store } from './model/store/store/store.js'
 import Home from './ui/views/home/Home.js'
 import Entry from './ui/views/login/entry/Entry.js'
 import Regist from './ui/views/login/regist/Regist.js'
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 function App():JSX.Element{
   return (
     <Provider store={store}>
-      <PersistGate persistor={catched}>
+      <PersistGate persistor={catchedStore}>
         <RouterProvider router={router} />
       </PersistGate>
     </Provider>

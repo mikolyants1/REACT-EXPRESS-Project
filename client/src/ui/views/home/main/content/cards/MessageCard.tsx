@@ -21,7 +21,7 @@ function MessageCard({update,del,date,now,text,col}:IProps):JSX.Element {
     setShow((prev:boolean)=>!prev);
   };
   
-  const remove = ():void =>{
+  const remove = () =>{
     del(now);
     setShow(false);
   };

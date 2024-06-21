@@ -17,7 +17,7 @@ export default function NavSettings({set,call}:ISettProps):JSX.Element{
       set({type:1});
     },[]);
 
-   const nav = useCallback((id:number)=>():void=>setIdx(id),[]);
+   const nav = useCallback((id:number)=> () => setIdx(id),[]);
 
     if (isLoading) return <Loader back={theme} />;
     if (isError) return <Error back={theme} />;
