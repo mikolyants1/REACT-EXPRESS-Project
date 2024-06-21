@@ -3,8 +3,8 @@ ValidationChain} from 'express-validator'
 import { Request,Response,NextFunction } from 'express'
 
 export const validUser:ValidationChain[] = [
-  body('name').notEmpty().isLength({min:2}),
-  body('pass').notEmpty().isLength({min:2})
+  body('name').isString().notEmpty().isLength({min:2}),
+  body('pass').isString().notEmpty().isLength({min:2}),
 ];
 
 export const validMess:ValidationChain[] = [

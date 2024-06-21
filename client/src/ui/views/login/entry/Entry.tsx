@@ -12,12 +12,11 @@ import LoginCard from "../cards/LoginCard";
 export default function Entry():JSX.Element{
   const current:number = useAppSelector(getCurrent);
   const navigate:NavigateFunction = useNavigate();
-  const methods = useForm<IStateUser>({
+  const form = useForm<IStateUser>({
     defaultValues:{name:"",pass:""}
   });
   const [error,setError] = useState<boolean>(false);
   const { setId,setPass,setAuthToken }:IBind = useAction();
-  const {handleSubmit,reset} = methods;
 
   const check:TSub<IStateUser> = async (date):Promise<void>=>{
     const body:ISubProps = {...date,regist:false};
@@ -29,12 +28,12 @@ export default function Entry():JSX.Element{
       navigate(`/home/main/${current}`);
     } else {
       setError(true);
-      reset();
+      form.reset();
     }
   }
   
     return (
-      <FormProvider {...methods}>
+      <FormProvider {...form}>
         <EntryBlock>
          <>
           <EntryTitle>
@@ -46,7 +45,7 @@ export default function Entry():JSX.Element{
             user not found
           </LoginError>}
           <EntryBut
-           onClick={handleSubmit(check)}>
+           onClick={form.handleSubmit(check)}>
             login
           </EntryBut>
           <RegistLink>

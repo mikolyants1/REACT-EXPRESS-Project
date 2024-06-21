@@ -3,6 +3,7 @@ import { DialogApi } from "./dialogApi";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import { IBody, IBody1, IData, IQuery2, IRes, TQuery3, TQuery4 } from "../../../../libs/types/type";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const DialogEndpoints = DialogApi.injectEndpoints({
     endpoints:(build:EndpointBuilder<BaseQueryFn,string,string>)=>({
       setMess:build.mutation<IData[],IQuery2>({

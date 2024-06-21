@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {FC, memo} from 'react'
 import { Controller, useFormContext } from 'react-hook-form';
 import { EntryInput, EntrySub, InputBlock } from '../../../../../libs/style/style';

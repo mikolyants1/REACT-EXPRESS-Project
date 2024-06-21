@@ -9,7 +9,7 @@ export const DialogApi = createApi({
     baseQuery:fetchBaseQuery({
       baseUrl:"http://localhost:5000/dialog",
       prepareHeaders:(headers:Headers,{getState}:TApi) => {
-       const get:RootState = getState();
+       const get = getState() as RootState;
        const token:string = get.mess.authToken;
        if (token){
          headers.set("authorization",`Bearer ${token}`);
